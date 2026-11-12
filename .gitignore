@@ -42,3 +42,8 @@ coverage/
 *.bak
 .DS_Store
 Thumbs.db
+# Local wallet stores (public test receipts are not wallet files)
+wallets/
+wallet.json
+keystore/
+*.keystore

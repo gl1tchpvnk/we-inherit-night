@@ -232,3 +232,11 @@
 - No gameplay/contracts changed. Application tests/build NOT RUN; unchanged prior evidence reused.
 - Baseline scope and scan limits recorded in docs/GIT_BASELINE.md. Requirements/README/hackathon rules reviewed; no product changes needed.
 - Next: verify private GitHub remote and prepare push; no force-push or remote history replacement.
+
+## Public GitHub baseline — user clarification
+- Local baseline commit df1b2a7 preserves the working Pass 3D state and encounter layout correction (236 files).
+- User clarified the existing repository must be PUBLIC for judging and explicitly authorized restoring its visibility and pushing after audit.
+- PASS: all baseline history blobs scanned; no exposed credentials, private keys, wallet files, sensitive environment values or runtime journals found. Two explicit mock test credentials reviewed.
+- Origin is the existing https://github.com/gl1tchpvnk/we-inherit-night.git; remote refs were empty. No replacement repository or force-push.
+- Added explicit local-wallet ignore rules; corrected Git baseline documentation. Gameplay/contracts/artwork/project structure unchanged.
+- Tests/build NOT RUN for repository-hygiene-only changes; previous results remain applicable.
