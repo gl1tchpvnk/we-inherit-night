@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Workspaces supplies wildcard listeners. Keep this disposable node on loopback.
+project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+args=()
+for arg in "$@"; do args+=("${arg/#0.0.0.0:/127.0.0.1:}"); done
+exec "$project_dir/.local/sandbox-2.14.0/near-sandbox" "${args[@]}"

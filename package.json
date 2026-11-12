@@ -1,0 +1,32 @@
+{
+  "name": "we-inherit-night",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --test tests/*.test.mjs",
+    "contract:test": "cargo test --lib",
+    "demo:build": "cargo build --features local-demo --bin local-demo",
+    "contract:wasm": "cargo near build non-reproducible-wasm --manifest-path contract/Cargo.toml --no-abi --locked",
+    "test:sandbox": "node --test --test-concurrency=1 tests/sandbox/*.test.mjs",
+    "test:economy": "node --test tests/sandbox/economy.test.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "near-workspaces": "5.0.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.6"
+  },
+  "overrides": {
+    "near-sandbox": {
+      "tar": "7.5.22"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# Initial Git baseline
+
+Prepared 2026-11-12 from the working Pass 3D state, including the subsequent encounter layout correction. No gameplay, contract, narrative, artwork or test implementation changed during preparation.
+
+- No existing Git repository or remote was present. Initialized local `main`; used the existing configured Git author identity.
+- Preserved source, approved artwork, documentation, lockfiles and complete test suites.
+- Expanded `.gitignore` for credential/key files, private save directories, runtime campaign/transaction journals, dependencies, caches and build outputs. `.env.example` remains tracked and contains only empty values/public configuration.
+- Public Sandbox evidence in `docs/evidence` is retained as documentation and regression input (for example, `tests/pass3c.test.mjs` reads it). These exported public test records are distinct from private runtime saves/journals under `.local`, which are excluded. No files were deleted or reorganized.
+- Pattern scan covers prospective tracked file bytes for private-key blocks, NEAR secret-key encodings, common provider tokens, credential assignments and password-bearing URLs. Two matches were reviewed: explicit mock credentials `unit-test-placeholder` and `mock-only`. No exposed credentials found. Pattern scanning is not a guarantee against every possible secret format.
+- Ignore probes confirm secrets, private runtime state, dependencies and builds are excluded while source/assets/tests and dependency lockfiles remain eligible.
+- Application tests/build were not rerun: only repository hygiene/documentation changed. Existing Pass 3D and encounter-layout verification remains applicable.
+- Intended remote: a new **private** GitHub repository named `we-inherit-night`. No force-push, history replacement or public publication authorized by this preparation step. Push only after remote identity/privacy are verified.

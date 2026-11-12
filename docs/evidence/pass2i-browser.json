@@ -1,0 +1,171 @@
+{
+  "campaignId": "ea971b8c-def8-4189-835a-0f106e4cf037",
+  "night": 7,
+  "status": "concluded",
+  "ending": "unbound",
+  "transactionCount": 25,
+  "uniqueTransactionCount": 25,
+  "npcTurns": 56,
+  "uniqueNpcTurns": 56,
+  "transactions": [
+    {
+      "action": "deploy",
+      "actor": "castle",
+      "hash": "CXq5Bu2gPFMkvnG2ZL4qz2U6RGFUqNdXRHsRZ6vqXTQG",
+      "success": true
+    },
+    {
+      "action": "new_political",
+      "actor": "castle",
+      "hash": "F3PJwkqzH3j7wjsUfxC1UkXNisDPYemVZebdQgjVP5xn",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "vesper",
+      "hash": "DzpCkvnmgwgpRtrf2A455nNGF7eDidnhwd4tp5RWVEbZ",
+      "success": true
+    },
+    {
+      "action": "offer_lease",
+      "actor": "seraphine",
+      "hash": "5yyLsftmTxsqr3N9VEWTpH1jpU83iSWomxfntKWLxMAf",
+      "success": true
+    },
+    {
+      "action": "offer_lease",
+      "actor": "seraphine",
+      "hash": "FHncUaJLuR65GLp6ZHW2nAxhk7A86Vx3czGtNDvt5hXa",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "player",
+      "hash": "54G49fYtJJAJhxKUEhLc4qdAviZh8ftFv43JQuPvj6Fd",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "marius",
+      "hash": "4AARdDZw4BwQ5pAig9P64sZG6v421bSN1YKNPWkKHPLh",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "seraphine",
+      "hash": "8GUjocdWGudsD3hKupLoXyNiYakFrTMsU29S6yBYsBKb",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "DqtmJwLLq4yKPV1g6tUc6bsS9V7zJL7dbcRecdUnoHyw",
+      "success": true
+    },
+    {
+      "action": "accept_lease",
+      "actor": "player",
+      "hash": "5vMmoHzqEqWvGyd4MZGDWKbno3XtHGa2rsRtmKKR9j9a",
+      "success": true
+    },
+    {
+      "action": "claim_rent",
+      "actor": "seraphine",
+      "hash": "GJgXJ7tCpCuvtyrZXYgfH4UtTVCLoJjBWVjjPLZeYewJ",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "sabine",
+      "hash": "DZ8GpCvLwaULka35cGZPvK1Eo8PAhDUam8zP9z9Y9nWf",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "Cs2byewjsyZPSf9FU1YSZ2WvF781snVqAbtQYLXwpMdQ",
+      "success": true
+    },
+    {
+      "action": "revoke_grant",
+      "actor": "vesper",
+      "hash": "4H2hBbBwGD6vXSovkCBvTjXuDrNTpvTZH5ioJfxp61zL",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "marius",
+      "hash": "45GbYguL3Cv7fRzg9vELcw7TDnYnpbiBC6a8onaMyKMn",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "FowyQhXXt3zW6pRrsNiGUfQ36pytDpJYzvbssrQhHS3o",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "player",
+      "hash": "Hq7q3sTz26dtbBMffDbU5PeUvz6b8ChiNttXnjkZR3V2",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "mirelle",
+      "hash": "D1a6WdTewEdtmBGYoet2oaNGtPd5UPquJvYwCQbCFXCX",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "FWNh33sgNtkpCR58L8QAC2yLMhCFyhDaLZFzuQaBmPTD",
+      "success": true
+    },
+    {
+      "action": "enter_room",
+      "actor": "mirelle",
+      "hash": "EqDiv6C73HCVADuABAyBEESTEVMdT3SgVzvRoqVgv5Y2",
+      "success": true
+    },
+    {
+      "action": "grant_access",
+      "actor": "marius",
+      "hash": "8QEKVVmnh8XBqjumxRCWadD75WZ4cNtCvmLfwKV3kwwr",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "BgR113JsHg5MmncyFPYQGmv9rYUkLA9YHdeUJPPJ4FH6",
+      "success": true
+    },
+    {
+      "action": "revoke_grant",
+      "actor": "player",
+      "hash": "Bhq7YLjKc9ptgFbRWJ4WyWaVkYH3X7xFdV4LibtoZrZg",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "2oHuuyLANtkbM6PWJn3Ljyg72jUL2SG2GvE1EUWfcCYU",
+      "success": true
+    },
+    {
+      "action": "advance_night",
+      "actor": "keeper",
+      "hash": "ACtmshuHMhxksq8B748FcyXFsAQX9CxEv4orHtVo5xsC",
+      "success": true
+    }
+  ],
+  "beforeReload": {
+    "campaign.json": "bf3829bdca607f3d7937814c8eb894fe5fc5a5aab4a14dcf93122d076a60378b",
+    "transactions.json": "4b4b7e24e627ba5efbd582e08474a21530aff1dc1a3aceafebd109203090a8ab"
+  },
+  "afterReload": {
+    "campaign.json": "bf3829bdca607f3d7937814c8eb894fe5fc5a5aab4a14dcf93122d076a60378b",
+    "transactions.json": "4b4b7e24e627ba5efbd582e08474a21530aff1dc1a3aceafebd109203090a8ab"
+  },
+  "reloadStable": true
+}

@@ -1,0 +1,44 @@
+node_modules/
+dist/
+target/
+.env
+.env.*
+!.env.example
+*.log
+.local/
+# Credentials and signing material
+.near-credentials/
+.ssh/
+.aws/
+credentials/
+keys/
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+validator_key.json
+node_key.json
+credentials.json
+
+# Private runtime state and transaction journals
+saves/
+.saves/
+save/
+campaign.json
+transactions.json
+*journal.json
+*journal.jsonl
+*.lock.tmp
+
+# Generated outputs and tool caches
+coverage/
+.vite/
+.cache/
+*.tsbuildinfo
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
