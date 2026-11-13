@@ -1,0 +1,11 @@
+{
+  "commit": "b0f96c07032b808886120abc38d4c4f8900d6c85",
+  "deployment": "dep-dbrbtd59fdbs73du1nkg",
+  "status": 200,
+  "asset": "/assets/index-DEDWtISE.js",
+  "sha256": "5e8fbb442c9d161dc177cf08a02c4290751755e998b5a709b70a2a9426407aad",
+  "matchesVerifiedLocalBuild": true,
+  "health": {
+    "ok": true
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "archiveHashValid": true,
+  "history": 2,
+  "states": [
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "night": 7,
+      "status": "concluded",
+      "pending": false
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "night": 2,
+      "status": "playing",
+      "pending": false
+    },
+    {
+      "id": "visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad",
+      "night": 0,
+      "status": "playing",
+      "pending": false
+    }
+  ],
+  "tx": [
+    {
+      "id": "visitor-5eac0ece-5ecc-46d6-a590-82e4a98be21c",
+      "method": "open_campaign",
+      "phase": "rejected",
+      "hash": "9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg",
+      "actor": "provisioner.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "open_campaign",
+      "phase": "final",
+      "hash": "FLT7p9ifoVkN9bPE5QRuDgWZzW8NEGfGu7pvsYdHYpjQ",
+      "actor": "provisioner.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "8QG3mTTfYRwTQsRt6p1aiANozzk5DGb9THyR74paFQRu",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "accept_lease",
+      "phase": "final",
+      "hash": "55r9rvZeYvrJCijnFDQQaG9WMzkj58f47Zu4gujPmQvt",
+      "actor": "player.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "claim_rent",
+      "phase": "final",
+      "hash": "4exBp8ArtCPNrju2zQWFLJKs7HU7CpU8Zjo5LcZCHmvc",
+      "actor": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "BXfJRJrQukk458NAohmAtGXRrfHAfqQmhpvGwfrrK3so",
+      "actor": "marius.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "37MZnXwi4C5bA9fS6JJXGPPreVm4rM2RDmVBbbvfwBiP",
+      "actor": "sabine.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "C5yYp6NjGdezAojmLTfkmzFyYLigLYPy5hmC6AxizyDg",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "revoke_grant",
+      "phase": "final",
+      "hash": "3mwZM4GN3wtgRG1YGCiZg59vpqtbSX8SgCJ4cyWASDfk",
+      "actor": "vesper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "FZqamHPYE2KEdeRakPKp9wMYuZzgE4XdidKwGwy1zpDb",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "9T66RjgmikeiQHFxTmzVCTHK21QfdSWnump4Vo3pnrn6",
+      "actor": "player.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "2e5tQJ8yVF65Mb83WQfUKeSeNNPKnNU9akTTR4NSRiWP",
+      "actor": "dorian.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "9vdvt8T6pQt5afTtK8RfFFvwR21pWiQZ9as9tz1TpwCU",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "enter_room",
+      "phase": "final",
+      "hash": "EHMKhLKQhuJyZM48zdiuwdyxsfjYhYpRJJWWWUsmgw22",
+      "actor": "dorian.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "H3CfpFHWf9mu4TXzjqMEgpnePkHKT6ZUHm1RoW355a3Q",
+      "actor": "lucien.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "rXmyNzjWqLfask1PfWfv1Nsvdt82htoNq7n7DifVbas",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "97rZNbocMJTnd9TZWs5PeKEJPgjFERAs9drKq6biL6ze",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "5rTafvL4NUnPTPWuACuabtruNuqDJhTkpu7xVd8sHfr5",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "refund_passage_budget",
+      "phase": "final",
+      "hash": "qEzhBhaH2qHbsMBLPABg5oJCSvDQyiMfKiEqdT6JDNm",
+      "actor": "cassian.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "complete_campaign",
+      "phase": "final",
+      "hash": "ETvwWiSaaRm1b7kcxLwhjobysYMppmB3RUgHtsQ27erc",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "settlement_dawn",
+      "phase": "final",
+      "hash": "2EmSJAqoCzqL3qq33toAF1b1xqxbobaYtf5cUH5WigeC",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "archive_campaign",
+      "phase": "final",
+      "hash": "78p52yh7CP1ucv5Z1SfnDw8RXeXn3ULRheXiqkSrS5hB",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "method": "reclaim_campaign",
+      "phase": "final",
+      "hash": "E6MVFxNsow4N5eDeoQR9RUwqN25j8wx6orV8MdiexitT",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "open_campaign",
+      "phase": "final",
+      "hash": "BZX2jz4NbjP1FKNAwxC2iWDGZnV7xz4XiUs4RJkBuQos",
+      "actor": "provisioner.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "DXiGnp9McAL54uSn94tDETk91bc8vBBgtV3xFug3T4rY",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "accept_lease",
+      "phase": "final",
+      "hash": "3eEDSmkA7hdVAR7PAfb4ugCxFHQQCLJQwtZkXBex2CLR",
+      "actor": "player.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "claim_rent",
+      "phase": "final",
+      "hash": "29Hzedv5ewaAGCeEX7yd1GawMSor97qeD1q7uwgRja8y",
+      "actor": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "7VPykk7zkqPnwm5JKambrspAqUYEqpLGegM9FwnTBcNF",
+      "actor": "marius.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "7oibc8fYxc16qwfaaLm5RjPh5buTkxiyeFRVVrpPCho",
+      "actor": "sabine.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "n8VHHaM88VUbRvkni4rZu4G3xdTv23V8TSCN9PmXo7y",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "9yn8tZJogPq2VHiA9wrX2cLFB4bvjWUDBvuDfjeBXFjY",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "CjBR2YXwkZLHaHKu1z2gDFmirVN6zCW2toxgv9n2zfT",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "6L5p1hmuMgkzhBe3PMApLMCHSFXUMVthPRvW7vWuenff",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "Hevnqr2mJDi66srjW5q4L6qnrJ9yZ4aRN6Dw9x4eHwbS",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "EarEcyHZHto9V9SQvHCSePv3SBjLt6CFCT7CieuvhU1X",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "refund_passage_budget",
+      "phase": "final",
+      "hash": "66noUTHCkzwUApcx1MseKVBKCh6tZPQeR1o35WsUj7RY",
+      "actor": "cassian.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "complete_campaign",
+      "phase": "final",
+      "hash": "AAyVThxEfP9y7teD8KRT35Jwe9iWxWXW5wQEFjpywhBr",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "settlement_dawn",
+      "phase": "final",
+      "hash": "2dBjkF1eozT3RtokCMhuo4YnpZ38DwrZAcCKEe3mCPuX",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "archive_campaign",
+      "phase": "final",
+      "hash": "BC5ciKpjRsSTaJn5UfE7XPGjHpoNUNXpUg6uStwzDQfs",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "method": "reclaim_campaign",
+      "phase": "final",
+      "hash": "8GLziUSt7TtbQZRrkNrKJSicvySwBBtyVVxepH1dAvhF",
+      "actor": "keeper.we-inherit-night.testnet"
+    },
+    {
+      "id": "visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad",
+      "method": "open_campaign",
+      "phase": "final",
+      "hash": "3FgkhAMJFUQxfqZ7gwFc35T3ZNF7WQHTeHxQ9EGMGhqG",
+      "actor": "provisioner.we-inherit-night.testnet"
+    }
+  ],
+  "quitTransactionsUnchangedAfterReloadAndNewGame": true
+}

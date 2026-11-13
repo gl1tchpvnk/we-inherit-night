@@ -1,0 +1,269 @@
+{
+  "archive": {
+    "commitment": "587d1e249a497fb6633803037202c7ddf11d2e5c0698d199e6a1cfa57d3d8bd2",
+    "complete": true,
+    "night": 2,
+    "status": "playing",
+    "closure": {
+      "reason": "quit",
+      "startedAt": 1794555842931,
+      "complete": false
+    },
+    "settlement": {
+      "campaign_id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "passage_budget": null,
+      "night": 7,
+      "properties": [
+        {
+          "id": "crypt",
+          "owner": "vesper.we-inherit-night.testnet"
+        },
+        {
+          "id": "library",
+          "owner": "player.we-inherit-night.testnet"
+        },
+        {
+          "id": "lounge",
+          "owner": "seraphine.we-inherit-night.testnet"
+        },
+        {
+          "id": "court",
+          "owner": "marius.we-inherit-night.testnet"
+        },
+        {
+          "id": "sanctuary",
+          "owner": "seraphine.we-inherit-night.testnet"
+        },
+        {
+          "id": "passage",
+          "owner": "lucien.we-inherit-night.testnet"
+        }
+      ],
+      "ancestry": [
+        {
+          "sire": "vesper.we-inherit-night.testnet",
+          "descendant": "player.we-inherit-night.testnet"
+        }
+      ],
+      "grants": [
+        {
+          "id": 0,
+          "property_id": "crypt",
+          "scope": "enter",
+          "grantor": "vesper.we-inherit-night.testnet",
+          "grantee": "player.we-inherit-night.testnet",
+          "parent_grant_id": null,
+          "can_delegate": true,
+          "expiry_night": null,
+          "revoked": false
+        },
+        {
+          "id": 1,
+          "property_id": "library",
+          "scope": "enter",
+          "grantor": "player.we-inherit-night.testnet",
+          "grantee": "mirelle.we-inherit-night.testnet",
+          "parent_grant_id": null,
+          "can_delegate": false,
+          "expiry_night": 3,
+          "revoked": false
+        },
+        {
+          "id": 2,
+          "property_id": "court",
+          "scope": "enter",
+          "grantor": "marius.we-inherit-night.testnet",
+          "grantee": "sabine.we-inherit-night.testnet",
+          "parent_grant_id": null,
+          "can_delegate": true,
+          "expiry_night": null,
+          "revoked": false
+        },
+        {
+          "id": 3,
+          "property_id": "lounge",
+          "scope": "enter",
+          "grantor": "seraphine.we-inherit-night.testnet",
+          "grantee": "player.we-inherit-night.testnet",
+          "parent_grant_id": null,
+          "can_delegate": false,
+          "expiry_night": null,
+          "revoked": false
+        },
+        {
+          "id": 4,
+          "property_id": "court",
+          "scope": "enter",
+          "grantor": "marius.we-inherit-night.testnet",
+          "grantee": "cassian.we-inherit-night.testnet",
+          "parent_grant_id": null,
+          "can_delegate": false,
+          "expiry_night": null,
+          "revoked": false
+        },
+        {
+          "id": 5,
+          "property_id": "court",
+          "scope": "enter",
+          "grantor": "sabine.we-inherit-night.testnet",
+          "grantee": "cassian.we-inherit-night.testnet",
+          "parent_grant_id": 2,
+          "can_delegate": false,
+          "expiry_night": null,
+          "revoked": false
+        }
+      ],
+      "grant_validity": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "access": {
+        "court": false,
+        "crypt": true,
+        "library": true,
+        "lounge": true,
+        "passage": false,
+        "sanctuary": true
+      },
+      "next_nonce": 2,
+      "leases": [
+        {
+          "id": 0,
+          "property_id": "lounge",
+          "owner": "seraphine.we-inherit-night.testnet",
+          "buyer": "player.we-inherit-night.testnet",
+          "price_yocto": "20000000000000000000000",
+          "duration_nights": 3,
+          "offer_expiry_night": 2,
+          "status": "offered",
+          "end_night": null,
+          "escrow_yocto": "0",
+          "payout_pending": false,
+          "settled": false
+        },
+        {
+          "id": 1,
+          "property_id": "sanctuary",
+          "owner": "seraphine.we-inherit-night.testnet",
+          "buyer": "player.we-inherit-night.testnet",
+          "price_yocto": "20000000000000000000000",
+          "duration_nights": 7,
+          "offer_expiry_night": 3,
+          "status": "accepted",
+          "end_night": 8,
+          "escrow_yocto": "0",
+          "payout_pending": false,
+          "settled": true
+        }
+      ]
+    }
+  },
+  "tx": [
+    {
+      "actor": "provisioner.we-inherit-night.testnet",
+      "method": "open_campaign",
+      "phase": "final",
+      "hash": "BZX2jz4NbjP1FKNAwxC2iWDGZnV7xz4XiUs4RJkBuQos"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "DXiGnp9McAL54uSn94tDETk91bc8vBBgtV3xFug3T4rY"
+    },
+    {
+      "actor": "player.we-inherit-night.testnet",
+      "method": "accept_lease",
+      "phase": "final",
+      "hash": "3eEDSmkA7hdVAR7PAfb4ugCxFHQQCLJQwtZkXBex2CLR"
+    },
+    {
+      "actor": "seraphine.we-inherit-night.testnet",
+      "method": "claim_rent",
+      "phase": "final",
+      "hash": "29Hzedv5ewaAGCeEX7yd1GawMSor97qeD1q7uwgRja8y"
+    },
+    {
+      "actor": "marius.we-inherit-night.testnet",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "7VPykk7zkqPnwm5JKambrspAqUYEqpLGegM9FwnTBcNF"
+    },
+    {
+      "actor": "sabine.we-inherit-night.testnet",
+      "method": "grant_access",
+      "phase": "final",
+      "hash": "7oibc8fYxc16qwfaaLm5RjPh5buTkxiyeFRVVrpPCho"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "n8VHHaM88VUbRvkni4rZu4G3xdTv23V8TSCN9PmXo7y"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "9yn8tZJogPq2VHiA9wrX2cLFB4bvjWUDBvuDfjeBXFjY"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "CjBR2YXwkZLHaHKu1z2gDFmirVN6zCW2toxgv9n2zfT"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "6L5p1hmuMgkzhBe3PMApLMCHSFXUMVthPRvW7vWuenff"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "Hevnqr2mJDi66srjW5q4L6qnrJ9yZ4aRN6Dw9x4eHwbS"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "phase": "final",
+      "hash": "EarEcyHZHto9V9SQvHCSePv3SBjLt6CFCT7CieuvhU1X"
+    },
+    {
+      "actor": "cassian.we-inherit-night.testnet",
+      "method": "refund_passage_budget",
+      "phase": "final",
+      "hash": "66noUTHCkzwUApcx1MseKVBKCh6tZPQeR1o35WsUj7RY"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "complete_campaign",
+      "phase": "final",
+      "hash": "AAyVThxEfP9y7teD8KRT35Jwe9iWxWXW5wQEFjpywhBr"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "settlement_dawn",
+      "phase": "final",
+      "hash": "2dBjkF1eozT3RtokCMhuo4YnpZ38DwrZAcCKEe3mCPuX"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "archive_campaign",
+      "phase": "final",
+      "hash": "BC5ciKpjRsSTaJn5UfE7XPGjHpoNUNXpUg6uStwzDQfs"
+    },
+    {
+      "actor": "keeper.we-inherit-night.testnet",
+      "method": "reclaim_campaign",
+      "phase": "final",
+      "hash": "8GLziUSt7TtbQZRrkNrKJSicvySwBBtyVVxepH1dAvhF"
+    }
+  ]
+}

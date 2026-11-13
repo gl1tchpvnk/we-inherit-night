@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-11-13T07:45:12.247Z",
+  "network": "testnet",
+  "campaignId": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+  "results": [
+    {
+      "url": "https://test.rpc.fastnear.com",
+      "blockHeight": 277481168,
+      "blockHash": "E9r2RAdzTg4rpCNLjLg2Pgxe4XQt3gidLFBMJ2EuvQP9",
+      "account": {
+        "amount": "10030308464902656700000000",
+        "block_hash": "E9r2RAdzTg4rpCNLjLg2Pgxe4XQt3gidLFBMJ2EuvQP9",
+        "block_height": 277481168,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 585120
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "0",
+        "treasuries": "0",
+        "pool": "1090000000000000000000000",
+        "active": 0
+      },
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "587d1e249a497fb6633803037202c7ddf11d2e5c0698d199e6a1cfa57d3d8bd2",
+        "world_bytes": 0,
+        "storage_usage": 585120,
+        "storage_price": "10000000000000000000",
+        "pool": "1090000000000000000000000",
+        "liabilities": "0",
+        "treasury_total": "0",
+        "active": 0
+      }
+    },
+    {
+      "url": "https://near-testnet.drpc.org",
+      "blockHeight": 277481170,
+      "blockHash": "12cChnFxWKpYwqwxYZEfVcqiodFR1rFJPCjyGEnSZVBW",
+      "account": {
+        "amount": "10030308464902656700000000",
+        "block_hash": "12cChnFxWKpYwqwxYZEfVcqiodFR1rFJPCjyGEnSZVBW",
+        "block_height": 277481170,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 585120
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "0",
+        "treasuries": "0",
+        "pool": "1090000000000000000000000",
+        "active": 0
+      },
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "587d1e249a497fb6633803037202c7ddf11d2e5c0698d199e6a1cfa57d3d8bd2",
+        "world_bytes": 0,
+        "storage_usage": 585120,
+        "storage_price": "10000000000000000000",
+        "pool": "1090000000000000000000000",
+        "liabilities": "0",
+        "treasury_total": "0",
+        "active": 0
+      }
+    }
+  ]
+}

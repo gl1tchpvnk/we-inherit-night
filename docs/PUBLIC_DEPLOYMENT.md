@@ -168,3 +168,45 @@ The local UI fixture verified confirmation/cancel, pending status, single Quit
 submission, title transition and fresh New Game; it is not blockchain evidence.
 No contract changes, broad suites, credentials, funding, Git commit/push or Render
 changes. Hosted Quit acceptance remains **NOT RUN**.
+
+## Quit Campaign — hosted PASS
+
+Deployed application commit `b0f96c07032b808886120abc38d4c4f8900d6c85` in Render
+`dep-dbrbtd59fdbs73du1nkg` (46.3 seconds). HTTPS health returned 200 and the public
+JS asset matched the verified local build byte-for-byte. No contract, service,
+credentials, funding or gameplay configuration changed. The proposed pacing,
+ending and title notice changes are excluded.
+
+Live test campaign: `visitor-45473548-25f8-4b10-8f42-fb51eebe8571`.
+- Opened a fresh campaign, filed the Library claim and accepted the existing
+  0.02 Testnet NEAR prepaid sanctuary. Normal NPC gameplay settled rent once.
+- Opened Quit confirmation, cancelled without abandonment, then explicitly
+  confirmed. Gameplay/duplicate controls were disabled during closure. Returned
+  to title only after reclamation; Continue remained disabled after reload.
+- FastNEAR and dRPC independently verified 17 unique transactions FINAL-success,
+  exact restricted signing identities, receiver/method/campaign and zero deposit;
+  no failed receipts. Exactly one rent claim, passage refund, complete, archive
+  and reclaim. Reload/New Game did not change the old transaction inventory.
+- Before confirmed Quit: active 1, world bytes 2033, total contract storage 587182,
+  treasury 0.02 and remaining passage liability 0.01 Testnet NEAR. After Quit:
+  active 0, world bytes 0, total storage 585120, treasury/liabilities zero; 0.02
+  unspent treasury returned to pool (1.09). Replay tombstone remains intentionally.
+- Archive commitment `587d1e249a497fb6633803037202c7ddf11d2e5c0698d199e6a1cfa57d3d8bd2`
+  matched both the stored serialized archive SHA-256 and finalized chain state.
+  SQLite preserved actual Night 3 (index 2) playing outcome separately from the
+  settlement clock, the earlier completed campaign, transaction evidence and two
+  session-history entries. Neither provider can retrieve the reclaimed world.
+- Reclaim: `8GLziUSt7TtbQZRrkNrKJSicvySwBBtyVVxepH1dAvhF`.
+- Fresh New Game: `visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad`, creation
+  `3FgkhAMJFUQxfqZ7gwFc35T3ZNF7WQHTeHxQ9EGMGhqG`, independently FINAL-success.
+  Left at the first encounter without gameplay choices. Active 1/5, four slots
+  free; pool 1.04, new treasury 0.04 and new passage liability 0.01 Testnet NEAR.
+  These new obligations belong only to the fresh campaign, not the quit campaign.
+
+**Quit Campaign is ready on the public Testnet service.** No live acceptance
+failure or unresolved blocker. Existing 61 focused tests, local Sandbox and build
+results were reused; no broad regression suite. Pre-push history/index/worktree
+secret scans passed. The existing ignore rules already cover credential bundles,
+local configuration, SQLite, journals and private keys. No secrets were exported.
+Public-safe evidence: `evidence/quit-campaign/` (dual-provider snapshots/receipts,
+archive and final SQLite summary, deployed asset digest, and fresh-game screenshot).

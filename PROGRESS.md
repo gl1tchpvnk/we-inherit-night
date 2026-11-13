@@ -473,3 +473,13 @@
 - PASS: local UI fixture confirmation/cancel/pending/title/New Game; no chain claims from this fixture.
 - Reviewed requirements and safety guidance; updated README and deployment notes. No contract, credentials, Testnet, Render, commit or push changes.
 - Next: deploy only with approval and verify hosted Quit; public acceptance is not claimed.
+
+## Quit Campaign — hosted PASS
+- Deployed b0f96c0 via existing Render service; public build digest matches and health is 200.
+- Verified confirmation/cancel, paid campaign Quit, disabled pending controls and persistent closed status after reload.
+- Both Testnet providers verified 17 unique successful finalized transactions; rent/refund/archive/reclaim each occurred once.
+- Reclaimed world bytes 2033 → 0, active slots 1 → 0, liabilities and treasury → 0; original outcome/history retained and archive hash matched.
+- New Game independently FINAL-created visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad; left first encounter ready, four of five slots free.
+- Pool 1.04 Testnet NEAR; fresh campaign alone holds 0.04 treasury and 0.01 passage liability. No funding/configuration changes.
+- Secret scans passed; unrelated earlier provisioning documentation remains unstaged. No pacing/title proposals included.
+- Evidence in evidence/quit-campaign; no live blockers. Stop after this verification.

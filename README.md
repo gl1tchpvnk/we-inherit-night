@@ -5,11 +5,11 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
-Quit Campaign: **IMPLEMENTED locally, not deployed**. The Testnet game menu requires
+Quit Campaign: **IMPLEMENTED and verified on public Testnet**. The Testnet game menu requires
 confirmation, immediately begins existing settlement/archive/reclaim, and returns
 to title only after verified reclamation. Pending closure resumes through Check
 settlement; history and financial obligations remain intact. See
-[local Quit verification](docs/PUBLIC_DEPLOYMENT.md#quit-campaign--local-only).
+[hosted Quit verification](docs/PUBLIC_DEPLOYMENT.md#quit-campaign--hosted-pass).
 
 Campaign capacity fix: **contract upgraded on Testnet; backend prepared locally**. Operator-adjustable
 admission, durable abandoned/early-defeat settlement and reclamation, and bounded
