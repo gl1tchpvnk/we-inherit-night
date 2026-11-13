@@ -55,3 +55,23 @@ was submitted, the browser reloaded while the Sandbox initialized. Verified fres
 metadata was ready in **5.47 s** (warm runner); Continue recovered Night 1 with ten
 FINAL bootstrap transactions and no NPC turns or duplicate reset. Reloading before
 reset submission preserved the old campaign instead of manufacturing a new one.
+
+## Published source and remaining deployment gate
+
+- **GitHub PASS:** implementation commit `1a818df14f8c78766470ab6ed8ab47b90980bb8f`
+  committed and pushed to the existing `main`; `git ls-remote` confirmed that exact
+  remote SHA. Staged index secret scan PASS (682 paths, reviewed public signatures).
+- **Public health PASS:** HTTPS `/healthz` returned 200 and `{"ok":true}`.
+- **Latest Render deployment BLOCKED:** at 2026-11-13 22:37 UTC public JS was still
+  `/assets/index-Crv75b_Z.js`, not verified release `/assets/index-BKnmvBXt.js`.
+  `render.yaml` and the existing deployment record specify manual deployment.
+  This session has no authenticated Render CLI/API or browser-automation session.
+  The user has been asked to choose Manual Deploy → Deploy latest commit on the
+  existing service. No infrastructure, credential or auto-deploy setting was changed.
+- **Live public gameplay acceptance NOT RUN for this release:** no new public
+  campaign or transaction was created. A prepared browser acceptance runner is
+  gated on the public asset matching the verified build, before it can create a
+  real campaign. Prior public checkpoints are not substituted for this release.
+- **SUBMISSION-CRITICAL remaining action:** deploy the pushed main branch, then
+  verify matching assets and one real public seven-night campaign/reload/replay.
+  No further gameplay development is required by the local acceptance results.

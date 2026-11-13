@@ -609,3 +609,10 @@
 - Fresh observed prologue 1.17 s; verified opening 12.18 s. Simulated error/pending UI checks are separate; startup code unchanged.
 - Audited main/origin (no unpushed commits) and all outstanding changes; no secrets found after reviewing public block signatures. Local fixtures and V3 remain excluded.
 - Render manual deployment/latest public acceptance remain pending; see docs/OPENING_CORRECTION_RELEASE.md. No contract, credential, funding or deployment-configuration changes.
+
+## 2026-11-13 — Source release published; manual Render gate
+- Committed/pushed verified implementation `1a818df14f8c78766470ab6ed8ab47b90980bb8f` to main; exact remote SHA confirmed.
+- Staged secret scan PASS (682 paths); public block approvals reviewed as signatures, not private keys. Only unapproved V3 proposal remains outside Git.
+- Actual reload during initialization PASS: one reset, fresh verified metadata in 5.47 s, ten FINAL bootstrap transactions, zero NPC turns.
+- Public HTTPS health PASS, but served JS remains the previous build. Manual Render deployment requested; no authenticated deployment connection is available in this session.
+- Latest public seven-night/reload/replay acceptance NOT RUN; no new live Testnet campaign created. This remains submission-critical, separate from the passing local Sandbox browser run.
