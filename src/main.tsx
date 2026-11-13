@@ -2,7 +2,7 @@ import React, {useEffect,useRef,useState} from 'react';
 
 import {createRoot} from 'react-dom/client';
 
-import {adapter, type Action, type Result} from './chain';
+import {adapter, playableTestnet, type Action, type Result} from './chain';
 
 import './style.css';
 
@@ -38,7 +38,11 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   const [roomId,setRoomId]=useState<RoomId|null>(restored.room),[inspection,setInspection]=useState<Inspection|null>(null);
 
-  const [discovery,setDiscovery]=useState(restored.reason);
+  const [discovery,setDiscovery]=useState(restored.reason);
+  const [menuOpen,setMenuOpen]=useState(false),[confirmQuit,setConfirmQuit]=useState(false),[quitRequested,setQuitRequested]=useState(false);
+  const menuHeading=useRef<HTMLHeadingElement>(null);
+  useEffect(()=>{if(menuOpen)menuHeading.current?.focus();},[menuOpen,confirmQuit]);
+  useEffect(()=>{if(state?.closure?.reason==='quit'&&state.closure.complete&&!state.pending&&state.archiveCommitment)onTitle();},[state,onTitle]);
 
   const pending=useRef(false),sceneHeading=useRef<HTMLHeadingElement>(null);
 
@@ -64,7 +68,8 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
     try{
 
-      const result=await adapter.request({...action,campaign_id:state?.campaign?.id,revision:state?.campaign?.revision});setState(result);
+      const result=await adapter.request({...action,campaign_id:state?.campaign?.id,revision:state?.campaign?.revision});setState(result);
+      if(action.action==='view'&&!result.pending&&!result.closure)setQuitRequested(false);
 
       if(result.error){
 
@@ -76,9 +81,9 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
       }else{
 
-        const messages:Record<Action['action'],string>={agreement_accept:'The bargain stands. Your invitation is ready.',agreement_reject:'Proposal declined. No transaction or relationship penalty.',game:'Your choice is made. The court has answered.',end_night:'Dawn resolves. The reckoning is recorded.',view:'Your castle is ready. Explore a room, then speak with Seraphine in the court.',reset:'A new night begins. Your Crypt privilege and Library are yours; Seraphine awaits your decision.',accept:'The lease is confirmed and your rent is in escrow. The Lounge is open. Vesper has heard of your agreement. She chooses her response at dawn.',reject:'You decline. No rent was paid. Vesper leaves your Crypt privilege intact, but the Lounge remains closed.',continue:'Vesper withdraws your Crypt privilege. Your Lounge lease and Library remain yours.',settle:'Seraphine has received the agreed rent. Your lease rights are unchanged.',enter:'',grant:'Vesper grants you shelter in the Crypt.',revoke:'Vesper has withdrawn your Crypt privilege.'};
+        const messages:Record<Action['action'],string>={quit:'Quit requested. Waiting for verified settlement and reclamation.',agreement_accept:'The bargain stands. Your invitation is ready.',agreement_reject:'Proposal declined. No transaction or relationship penalty.',game:'Your choice is made. The court has answered.',end_night:'Dawn resolves. The reckoning is recorded.',view:'Your castle is ready. Explore a room, then speak with Seraphine in the court.',reset:'A new night begins. Your Crypt privilege and Library are yours; Seraphine awaits your decision.',accept:'The lease is confirmed and your rent is in escrow. The Lounge is open. Vesper has heard of your agreement. She chooses her response at dawn.',reject:'You decline. No rent was paid. Vesper leaves your Crypt privilege intact, but the Lounge remains closed.',continue:'Vesper withdraws your Crypt privilege. Your Lounge lease and Library remain yours.',settle:'Seraphine has received the agreed rent. Your lease rights are unchanged.',enter:'',grant:'Vesper grants you shelter in the Crypt.',revoke:'Vesper has withdrawn your Crypt privilege.'};
 
-        setMessage(messages[action.action]);
+        setMessage(result.closure&&!result.closure.complete?'Settlement and slot reclamation are still pending. Check settlement to resume safely.':messages[action.action]);
 
         if(action.action==='enter'){
 
@@ -112,7 +117,8 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
 
 
-  const disabled=!!busy||!world||!!state?.pending||!!state?.closure;
+  const settling=quitRequested||!!state?.closure&&!state.closure.complete;
+  const disabled=!!busy||!world||!!state?.pending||!!state?.closure||settling||menuOpen;
 
   const guidance=state?navigationGuidance(state):{situation:'Recover the current castle state before choosing.',leads:[]};
 
@@ -122,8 +128,10 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   const exploration=<SceneSurface>
 
-    <header className="game-hud"><button disabled={!!busy} onClick={onTitle}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><span>Blood {campaign.resources.blood}/12</span><span>Exposure {campaign.resources.exposure}/10</span><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span><button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button></>}</header>
-    {state?.closure&&<p role="status" className="notice">This campaign is closed{state.closure.reason==='abandoned'?' after its inactivity deadline':' after defeat'}. The original gameplay record is preserved. Return to the main menu to start another campaign.</p>}
+    <header className="game-hud"><button disabled={!!busy||settling} onClick={()=>playableTestnet?setMenuOpen(true):onTitle()}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><span>Blood {campaign.resources.blood}/12</span><span>Exposure {campaign.resources.exposure}/10</span><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span><button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button></>}</header>
+    {menuOpen&&<section className="notice" aria-label="Game menu"><h2 ref={menuHeading} tabIndex={-1}>{confirmQuit?'Quit this campaign?':'Game menu'}</h2>{confirmQuit?<><p>This permanently ends this campaign. Your history is kept. Existing payments and obligations must settle before its slot is released. You cannot resume after confirming.</p><button disabled={!!busy||settling||!!state?.pending||!!state?.error} onClick={()=>{setQuitRequested(true);setMenuOpen(false);setConfirmQuit(false);void act({action:'quit'});}}>Confirm Quit Campaign</button><button onClick={()=>setConfirmQuit(false)}>Keep playing</button></>:<><button onClick={onTitle}>Save and return to title</button><button disabled={!!busy||settling||!campaign||campaign.status!=='playing'||!!state?.pending||!!state?.error||!!state?.closure} onClick={()=>setConfirmQuit(true)}>Quit Campaign</button><button onClick={()=>setMenuOpen(false)}>Back to game</button></>}</section>}
+    {settling&&<section role="status" className="notice"><p>{state?.closure?'Campaign closure is recorded. Settlement and slot reclamation are not yet confirmed.':'Quit outcome is not yet confirmed. Gameplay is paused while you check its status.'} Your history and financial obligations are preserved.</p><button disabled={!!busy} onClick={()=>void act({action:'view'})}>{busy?'Checking settlement…':'Check settlement'}</button></section>}
+    {state?.closure?.complete&&<p role="status" className="notice">This campaign is closed{state.closure.reason==='quit'?' at your request':state.closure.reason==='abandoned'?' after its inactivity deadline':' after defeat'}. Its active slot has been reclaimed and the original gameplay record is preserved.</p>}
 
     {campaign?.politics&&campaign.status==='playing'&&<nav className="story-nav" aria-label="Nightly phases"><button disabled={disabled} onClick={()=>openScene(`discovery:${campaign.night}`)}>Hear the court</button><button className="binding-choice" disabled={disabled} onClick={()=>openScene(`decision:${campaign.night}`)}>Choose this night</button></nav>}
 
@@ -165,7 +173,7 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   </SceneSurface>;
 
-  return state?.campaign?<EncounterDirector key={state.campaign.id} result={state} busy={!!busy} request={sceneRequest} room={roomId} onAction={act}>{exploration}</EncounterDirector>:exploration;
+  return state?.campaign&&!state.closure&&!quitRequested&&!menuOpen?<EncounterDirector key={state.campaign.id} result={state} busy={!!busy} request={sceneRequest} room={roomId} onAction={act}>{exploration}</EncounterDirector>:exploration;
 
 }
 

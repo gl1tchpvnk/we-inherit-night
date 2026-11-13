@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import {Store} from '../scripts/testnet/store.mjs';
-import {campaignLifecycle} from '../scripts/testnet/lifecycle.mjs';
+import {campaignLifecycle,closingSnapshot} from '../scripts/testnet/lifecycle.mjs';
 import {servicePolicy} from '../scripts/testnet/config.mjs';
 import {newCampaign} from '../src/game.ts';
 import {createGameServer} from '../scripts/testnet/server.mjs';
@@ -27,7 +27,7 @@ test('configured HTTP admission is durable; closed playing campaigns can be repl
 
 async function fixture(reason='defeat'){
  const dir=await mkdtemp(resolve('.local/capacity-test-'));let store=new Store(join(dir,'game.sqlite'));
- store.register({campaignId:'one'});store.allocate();
+ store.register({campaignId:'one'});const allocation=store.allocate();
  const campaign=newCampaign('one',{living:true,dangerous:true});campaign.night=2;
  if(reason==='defeat'){campaign.status='defeat';campaign.ending='failure';campaign.reason='Blood exhausted';campaign.resources.blood=0;}
  const world={night:2,leases:[{id:0,owner:'seraphine',status:'accepted',settled:false,payout_pending:false,end_night:8,escrow_yocto:'20'}]};
@@ -52,10 +52,10 @@ async function fixture(reason='defeat'){
    if(method==='refund_passage_budget'){assert.equal(role,'cassian');assert(world.night>=5);assert.equal(refunded,0);refunded=budget;budget=0;}
    if(failAfter===method){failAfter=null;throw new Error('Lost response');}return {succeeded:true,receiptFailures:[]};
   }};
- return {dir,get store(){return store;},scenario,snapshot,world,sends,fail:method=>{failAfter=method;},unknown:value=>{uncertain=value;},pendingRefund:value=>{refundPending=value;},finances:()=>({paid,refunded,pool,treasury}),reopen:()=>{store.close();store=new Store(join(dir,'game.sqlite'));},clean:async()=>{store.close();await rm(dir,{recursive:true,force:true});}};
+ return {dir,allocation,get store(){return store;},scenario,snapshot,world,sends,fail:method=>{failAfter=method;},unknown:value=>{uncertain=value;},pendingRefund:value=>{refundPending=value;},finances:()=>({paid,refunded,pool,treasury}),reopen:()=>{store.close();store=new Store(join(dir,'game.sqlite'));},clean:async()=>{store.close();await rm(dir,{recursive:true,force:true});}};
 }
 
-for(const reason of ['defeat','abandoned'])for(const failure of ['advance_night','claim_rent','refund_passage_budget','complete_campaign','settlement_dawn','archive_campaign','reclaim_campaign'])test(`${reason}: recover ${failure} without duplicate payments or fabricated gameplay`,async()=>{
+for(const reason of ['defeat','abandoned','quit'])for(const failure of ['advance_night','claim_rent','refund_passage_budget','complete_campaign','settlement_dawn','archive_campaign','reclaim_campaign'])test(`${reason}: recover ${failure} without duplicate payments or fabricated gameplay`,async()=>{
  const f=await fixture(reason);try{
   const original=structuredClone(f.snapshot);f.fail(failure);
   await assert.rejects(campaignLifecycle(f.store,{},null).close(f.scenario,f.snapshot,reason),/Lost response/);
@@ -69,6 +69,43 @@ for(const reason of ['defeat','abandoned'])for(const failure of ['advance_night'
   assert.equal(f.store.archive('one').state.campaign.night,2);assert.equal(f.store.archive('one').settlement.world.night,7);
   assert.throws(()=>f.store.register({campaignId:'one'}));assert.equal(f.store.cleanupCandidate(86400000),undefined);
  }finally{await f.clean();}
+});
+
+test('Quit HTTP admission isolates sessions, checks revision/pending work, retains history and permits New Game only after reclamation',async()=>{
+ const f=await fixture('quit');let server;
+ try{
+  const life=campaignLifecycle(f.store,{},null),origin='http://127.0.0.1:5227';
+  const loadSession=async id=>({request:async request=>{
+   if(id!=='one')return {campaign:{id,revision:0,status:'playing'},world:{},pending:false};
+   if(request.action!=='quit'&&!f.store.closing(id))return f.snapshot;
+   try{return await life.close(f.scenario,f.snapshot,'quit');}catch(e){if(!f.store.closing(id))throw e;return closingSnapshot(f.store.closing(id));}
+  }});
+  server=createGameServer({store:f.store,origin,requireCompletion:true,loadSession,ensureCapacity:async()=>{assert.equal((await f.scenario.resourceView()).status,'reclaimed');f.store.register({campaignId:'fresh'});},creation:{perMinute:4,perDay:24,cooldownMs:1000}});
+  await new Promise(r=>server.listen(5227,'127.0.0.1',r));
+  let cookie='night_session='+f.allocation.token;
+  const send=(body,session=cookie,source=origin)=>fetch(origin+'/api/game',{method:'POST',headers:{Origin:source,'Content-Type':'application/json',Cookie:session},body:JSON.stringify(body)});
+  const command={action:'quit',campaign_id:'one',revision:f.snapshot.campaign.revision};
+  assert.equal((await send(command,'')).status,403);
+  assert.equal((await send({...command,campaign_id:'another'})).status,403);
+  assert.equal((await send(command,cookie,'https://foreign.invalid')).status,403);
+  assert.equal((await send({...command,revision:command.revision+1})).status,409);
+  await f.store.saveJson('one',{campaign:f.snapshot.campaign,pending:{kind:'player'}});
+  assert.equal((await send(command)).status,409);assert.equal(f.sends.length,0);assert.equal(f.store.closing('one'),null);
+  await f.store.saveJson('one',{campaign:f.snapshot.campaign,pending:null});
+  f.unknown(true);assert.equal((await send(command)).status,503);assert.equal(f.store.closing('one'),null);f.unknown(false);
+  f.fail('claim_rent');const pending=await (await send(command)).json();assert.equal(pending.closure.reason,'quit');assert.equal(pending.closure.complete,false);assert.equal(pending.pending,true);assert.equal(pending.archiveCommitment,undefined);
+  f.unknown(true);const count=f.sends.length;
+  assert.equal((await (await send(command)).json()).pending,true);assert.equal(f.sends.length,count);
+  assert.equal((await send({...command,action:'reset'})).status,409);
+  const meta=await (await fetch(origin+'/api/save',{headers:{Cookie:cookie}})).json();assert.equal(meta.closing,true);assert.equal(meta.closed,false);
+  f.unknown(false);const done=await (await send({action:'view'})).json();assert.equal(done.closure.complete,true);assert.equal(done.pending,false);assert(done.archiveCommitment);
+  assert.deepEqual(f.finances(),{paid:20,refunded:10,pool:40,treasury:0});const completed=f.sends.length;
+  await send(command);assert.equal(f.sends.length,completed);
+  const closed=await (await fetch(origin+'/api/save',{headers:{Cookie:cookie}})).json();assert.equal(closed.closed,true);assert.equal(closed.valid,false);
+  const fresh=await send({...command,action:'reset'});assert.equal(fresh.status,200);cookie=fresh.headers.get('set-cookie').split(';')[0];assert.equal((await fresh.json()).campaign.id,'fresh');
+  const history=await (await fetch(origin+'/api/history',{headers:{Cookie:cookie}})).json();assert.equal(history.length,1);assert.equal(history[0].snapshot.campaign.id,'one');assert.equal(history[0].snapshot.closure.reason,'quit');
+  assert.equal((await send(command)).status,403);assert.equal(f.sends.length,completed);
+ }finally{if(server)await new Promise(r=>server.close(r));await f.clean();}
 });
 
 test('pending gameplay, unknown finality and pending callbacks block cleanup',async()=>{

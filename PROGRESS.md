@@ -462,3 +462,14 @@
 - Other uncertain transactions and payments remain blocked/reconciled by existing rules; no schema, contract, gameplay, funding or credential changes.
 - PASS: one focused regression including fail-closed uncertainty/tombstone/provider cases and fresh nonce, 47 affected backend checks total; production Testnet frontend build.
 - Next: secret scan, push reviewed correction, deploy existing Render service, verify one fresh New Game and independent FINAL receipt. No broad suite requested or run.
+
+## Quit Campaign — local PASS, not deployed
+- Added owned-session/revision-checked Quit and confirmation in the playable Testnet game menu.
+- Explicit Quit bypasses inactivity delay only; existing settlement, archive and reclaim preserve the original outcome, obligations and history.
+- Durable pending closure resumes safely through Check settlement, including cached sessions and reload; duplicate Quit controls stay disabled.
+- Title returns only after verified reclamation; existing reset/session rotation permits fresh New Game subject to admission quotas.
+- PASS: 32 focused cleanup/entry tests, 29 backend/security/startup tests, Testnet production build.
+- PASS: one real local Sandbox test — paid lease, immediate quit, lost finalized reclaim response, SQLite reopen, zero obligations, replay rejection and fresh campaign in the freed slot.
+- PASS: local UI fixture confirmation/cancel/pending/title/New Game; no chain claims from this fixture.
+- Reviewed requirements and safety guidance; updated README and deployment notes. No contract, credentials, Testnet, Render, commit or push changes.
+- Next: deploy only with approval and verify hosted Quit; public acceptance is not claimed.

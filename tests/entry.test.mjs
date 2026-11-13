@@ -42,6 +42,18 @@ test('stale save, missing Continue and uncertain recovery never reset',async()=>
  await assert.rejects(loadEntryCampaign(false,{exists:false,valid:false},async()=>{assert.fail('must not create a campaign');}));
 });
 
+test('Quit settlement can resume on Continue but cannot reset until confirmed; archived history permits New Game',async()=>{
+ const pending={campaign:{id:'old',revision:4},closure:{reason:'quit',complete:false},pending:true,error:null};
+ const save={exists:true,valid:true,closing:true,id:'old'},calls=[];
+ const request=async a=>{calls.push(a);return pending;};
+ assert.equal(await loadEntryCampaign(false,save,request),pending);
+ await assert.rejects(loadEntryCampaign(true,save,request));assert(calls.every(a=>a.action==='view'));
+ const closed={...save,valid:false,closing:false,closed:true};assert.equal(requiresReplacementConfirmation(closed),false);
+ calls.length=0;
+ const fresh=await loadEntryCampaign(true,closed,async a=>{calls.push(a);return a.action==='view'?{...pending,pending:false,closure:{reason:'quit',complete:true},archiveCommitment:'verified'}:{campaign:{id:'fresh'},error:null};});
+ assert.equal(fresh.campaign.id,'fresh');assert.deepEqual(calls,[{action:'view'},{action:'reset',campaign_id:'old',revision:4}]);
+});
+
 test('four prologue passages advance, skip and resume without modifying campaign or skipping Vesper',()=>{
  assert.equal(PROLOGUE.length,4);let progress={line:0,done:false};
  for(let i=0;i<3;i++){progress=advanceIntro(progress);assert.equal(progress.line,i+1);assert.equal(progress.done,false);assert.deepEqual(readIntro(JSON.stringify(progress)),progress);}

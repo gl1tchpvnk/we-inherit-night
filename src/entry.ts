@@ -13,12 +13,12 @@ export function readIntro(raw:string|null):IntroProgress|null{
 export function advanceIntro(progress:IntroProgress,skip=false):IntroProgress{
   return {...progress,line:Math.min(PROLOGUE.length-1,progress.line+1),done:skip||progress.line===PROLOGUE.length-1};
 }
-export type SaveStatus={exists:boolean;valid:boolean;id?:string;night?:number;error?:string;inactivityMs?:number};
-export function requiresReplacementConfirmation(save:SaveStatus|null){return !!save?.exists;}
+export type SaveStatus={exists:boolean;valid:boolean;closed?:boolean;closing?:boolean;id?:string;night?:number;error?:string;inactivityMs?:number};
+export function requiresReplacementConfirmation(save:SaveStatus|null){return !!save?.exists&&!save.closed;}
 export async function loadEntryCampaign(fresh:boolean,save:SaveStatus,request:(action:Action)=>Promise<Result>):Promise<Result>{
   if(save.error||(!fresh&&!save.valid))throw new Error('No readable saved campaign is available. Nothing was replaced.');
   let result=await request({action:'view'});
-  if(result.error||result.pending)throw new Error('Campaign recovery is not yet confirmed. Continue again to recover; no replacement was attempted.');
+  if(result.error||result.pending&&(fresh||!result.closure))throw new Error('Campaign recovery is not yet confirmed. Continue again to recover; no replacement was attempted.');
   if(save.exists&&result.campaign?.id!==save.id)throw new Error('The saved campaign changed. Return to the title screen before choosing again.');
   if(fresh&&save.exists){
     result=await request({action:'reset',campaign_id:result.campaign?.id,revision:result.campaign?.revision});

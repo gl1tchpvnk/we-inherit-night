@@ -8,8 +8,8 @@ export function TitleScreen({save,busy,error,confirm,onNew,onContinue,onCancel,o
   useEffect(()=>{title.current?.focus();},[confirm]);
   return <main className="game-entry"><div className="cover-art" aria-hidden="true"/><section className="entry-copy"><p className="eyebrow">A gothic political graphic novel</p><h1 ref={title} tabIndex={-1}>We Inherit<br/>Night</h1><p className="entry-motto">The night belongs to those who survive it.</p>
     {playableTestnet&&save?.inactivityMs&&<p className="notice">Inactive campaigns close after {save.inactivityMs/3600000} hours without gameplay activity. Your recorded outcome is retained; closed campaigns cannot resume.</p>}
-    {confirm?<section className="notice" aria-label="Confirm new campaign"><h2>Begin another seven nights?</h2><p>{playableTestnet?'This assigns a new unused campaign. Your previous campaign remains on-chain but cannot be resumed through this session. If capacity is full, your current campaign is preserved.':'This replaces the current local campaign. Its progress cannot be continued afterward. No public account is affected.'}</p><div className="controls"><button disabled={busy} onClick={onConfirm}>Replace save · New Game</button><button disabled={busy} onClick={onCancel}>Keep existing save</button></div></section>:<div className="entry-controls"><button disabled={busy||!save||!!save.error} onClick={onNew}>{(adapter.mode==='sandbox'||playableTestnet)?'New Game':'Open contract inspection'}</button><button disabled={busy||!save?.valid} onClick={onContinue}>Continue</button></div>}
-    <p role="status" className={busy||error||save?.error?'entry-alert':undefined}>{busy?'Opening the court. Waiting for the saved state…':error||save?.error||(!save?'Checking for a saved campaign…':save.valid?`Saved campaign · Night ${Math.min(7,(save.night??0)+1)}`:'No saved campaign.')}</p><small>Local development preview · deterministic vampires · no live AI</small></section></main>;
+    {confirm?<section className="notice" aria-label="Confirm new campaign"><h2>Begin another seven nights?</h2><p>{playableTestnet?'This assigns a new unused campaign. Your previous campaign remains on-chain but cannot be resumed through this session. If capacity is full, your current campaign is preserved.':'This replaces the current local campaign. Its progress cannot be continued afterward. No public account is affected.'}</p><div className="controls"><button disabled={busy} onClick={onConfirm}>Replace save · New Game</button><button disabled={busy} onClick={onCancel}>Keep existing save</button></div></section>:<div className="entry-controls"><button disabled={busy||!save||!!save.error||!!save.closing} onClick={onNew}>{(adapter.mode==='sandbox'||playableTestnet)?'New Game':'Open contract inspection'}</button><button disabled={busy||!save?.valid} onClick={onContinue}>{save?.closing?'Check settlement':'Continue'}</button></div>}
+    <p role="status" className={busy||error||save?.error?'entry-alert':undefined}>{busy?'Opening the court. Waiting for the saved state…':error||save?.error||(!save?'Checking for a saved campaign…':save.closed?'Campaign archived. Begin a new game when ready.':save.closing?'Campaign settlement is pending. Check settlement to resume safely.':save.valid?`Saved campaign · Night ${Math.min(7,(save.night??0)+1)}`:'No saved campaign.')}</p><small>Local development preview · deterministic vampires · no live AI</small></section></main>;
 }
 export function Prologue({progress,onAdvance,waiting=false}:{progress:IntroProgress;onAdvance:(skip:boolean)=>void;waiting?:boolean}){
   const heading=useRef<HTMLHeadingElement>(null),passage=PROLOGUE[progress.line];
@@ -36,14 +36,14 @@ export function GameEntry({children}:{children:(result:Result,onTitle:()=>void)=
       if(adapter.mode==='sandbox'||playableTestnet){
         const response=await fetch('/api/save',{cache:'no-store'});if(!response.ok)throw new Error('Saved campaign could not be checked.');
         current=await response.json();
-        if(fresh&&current.exists&&(!confirm||current.id!==save?.id)){setSave(current);setConfirm(true);return;}
+        if(fresh&&current.exists&&!current.closed&&(!confirm||current.id!==save?.id)){setSave(current);setConfirm(true);return;}
       }
       performance.mark('night:metadata-ready');performance.measure('night:metadata','night:entry-start','night:metadata-ready');
       if(fresh){pendingIntro.current={line:0,done:false};setIntro(pendingIntro.current);}
       const next=await loadEntryCampaign(fresh,current,async action=>{const start=performance.now();const response=await adapter.request(action);performance.measure(`night:request:${action.action}`,{start,end:performance.now()});return response;});
       performance.mark('night:state-ready');
       let progress:IntroProgress|null=null;
-      if(next.campaign){
+      if(next.campaign&&!next.closure){
         if(fresh){progress=pendingIntro.current??{line:0,done:false};store(next.campaign.id,progress);}
         else{try{progress=readIntro(localStorage.getItem(`night-intro:v1:${next.campaign.id}`));}catch{}}
       }

@@ -5,7 +5,7 @@ import {createReadStream} from 'node:fs';
 import {pipeline} from 'node:stream/promises';
 import {resolve,sep,extname} from 'node:path';
 
-const ACTIONS=new Set(['view','reset','game','enter','end_night','accept','reject','agreement_accept','agreement_reject']);
+const ACTIONS=new Set(['view','reset','quit','game','enter','end_night','accept','reject','agreement_accept','agreement_reject']);
 const FIELDS=new Set(['action','choice','property_id','campaign_id','revision','agreement_id']);
 const COOKIE='night_session';
 function tokenOf(req){return req.headers.cookie?.split(';').map(s=>s.trim()).find(s=>s.startsWith(COOKIE+'='))?.slice(COOKIE.length+1)??null;}
@@ -44,7 +44,8 @@ export function createGameServer({store,loadSession,origin='http://localhost:519
     if(path==='/api/save'&&req.method==='GET'){
       if(!owned)return json(res,200,{exists:false,valid:false,inactivityMs:policy.cleanup.inactivityMs,...(token?{error:'This session has expired. Clear its cookie to start a new campaign.'}:{})});
       const saved=await store.readJson(owned.id);
-      return json(res,200,{exists:true,valid:true,inactivityMs:policy.cleanup.inactivityMs,id:owned.id,night:saved?.campaign?.night??0});
+      const closed=!!store.archive(owned.id)?.complete,closing=!!store.closing(owned.id)&&!closed;
+      return json(res,200,{exists:true,valid:!closed,closed,closing,inactivityMs:policy.cleanup.inactivityMs,id:owned.id,night:saved?.campaign?.night??0});
     }
     if(path!=='/api/game'||req.method!=='POST')return json(res,404,{error:'Not found.'});
     if(req.headers.origin!==base.origin||req.headers['content-type']!=='application/json')return json(res,403,{error:'Same-origin JSON request required.'});
@@ -62,6 +63,12 @@ export function createGameServer({store,loadSession,origin='http://localhost:519
     }
     return serial(owned.id,async()=>{
       if(store.lookup(token)?.id!==owned.id)return json(res,401,{error:'Session changed. Reload before continuing.'});
+      if(request.action==='quit'){
+        const saved=await store.readJson(owned.id);
+        if(!requireCompletion)return json(res,400,{error:'Quit is unavailable for this campaign runtime.'});
+        if(request.campaign_id!==owned.id||!Number.isSafeInteger(request.revision)||request.revision!==saved?.campaign?.revision)return json(res,409,{error:'Campaign changed. Refresh before confirming Quit.'});
+        if(saved.pending)return json(res,409,{error:'A previous action is pending. Recover its outcome before quitting.'});
+      }
       const session=await load(owned.id);
       store.touch(owned.id);
       if(request.action==='reset'){

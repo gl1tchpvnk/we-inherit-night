@@ -134,3 +134,37 @@ save/resume, seven-night completion, financial settlement/archive/reclaim/replay
 and observed hosted memory/funding. Local tests and funding verification do not
 substitute for this hosted acceptance. No repeated broad regression suite is
 required unless a deployment defect changes shared code.
+
+# Quit Campaign — local only
+
+Implemented locally; no deployment or live Testnet transaction was performed for
+this change. In the playable Testnet frontend, choose **Main menu → Quit Campaign
+→ Confirm Quit Campaign**. Keep playing cancels without submitting Quit. Save and
+return to title remains a separate operation that does not abandon the campaign.
+
+The owned-session POST command `quit` requires the current campaign ID/revision,
+same-origin JSON, and no pending gameplay transaction. The existing per-campaign
+queue and exclusive SQLite writer serialize it. Explicit Quit bypasses only the
+inactivity eligibility deadline; existing reconciliation, restricted signing,
+financial settlement, archive commitment, reclamation and replay checks remain.
+The original outcome is frozen before maintenance clock advances; no NPC turns or
+fictional gameplay results are generated. SQLite history is retained.
+
+A durable closure that cannot finish returns a pending status. Gameplay and
+duplicate Quit controls are disabled; **Check settlement** resumes the same
+lifecycle. After reload, the title exposes Check settlement and blocks New Game
+until completion. A confirmed quit returns to title only with a completed closure
+and archive commitment. New Game uses the existing revision-checked reset and
+session rotation; normal admission quotas still apply.
+
+Local verification: **PASS** — 32 cleanup/entry tests (including interruption at
+each settlement stage), 29 affected backend security/startup tests, one real local
+NEAR Sandbox integration, and the Testnet-configured production frontend build.
+The Sandbox test paid an existing lease, quit at night zero, recovered a lost
+finalized reclaim response after SQLite reopen, verified zero liabilities and
+active slots, rejected replay/reused identity, then finalized a fresh campaign
+under a one-slot capacity. See `tests/sandbox/quit-campaign.test.mjs`.
+The local UI fixture verified confirmation/cancel, pending status, single Quit
+submission, title transition and fresh New Game; it is not blockchain evidence.
+No contract changes, broad suites, credentials, funding, Git commit/push or Render
+changes. Hosted Quit acceptance remains **NOT RUN**.

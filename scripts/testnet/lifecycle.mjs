@@ -3,6 +3,7 @@ import {servicePolicy} from './config.mjs';
 import {createTestnetScenario,proveUnexecutedProvision} from './scenario.mjs';
 
 export const archivedSnapshot=record=>({...record.snapshot,...(record.snapshot.closure?{closure:{...record.snapshot.closure,complete:!!record.complete},pending:!record.complete,actions:[]}:{}),proof:'Archived campaign: verified historical state; on-chain world reclaimed',archiveCommitment:record.commitment});
+export const closingSnapshot=record=>({...record.snapshot,closure:{reason:record.reason,startedAt:record.startedAt,complete:false},pending:true,actions:[],error:null});
 
 // Both paths use the same durable signing/finality adapter as gameplay. No
 // provisioning FullAccess credential or arbitrary method enters the service.
@@ -59,7 +60,8 @@ export function campaignLifecycle(store,config,sign,createScenario=createTestnet
     if(!store.closing(id)){
       if(snapshot.pending||snapshot.error||(await store.readJson(id))?.pending)return snapshot;
       if(snapshot.campaign?.status==='concluded')return archive(scenario,snapshot);
-      if(!['defeat','abandoned'].includes(reason)||cleanupReason(id,snapshot.campaign)!==reason)throw new Error('Campaign is not eligible for cleanup');
+      // Explicit quit arrives only through the session/revision-checked command.
+      if(reason!=='quit'&&(!['defeat','abandoned'].includes(reason)||cleanupReason(id,snapshot.campaign)!==reason))throw new Error('Campaign is not eligible for cleanup');
       await scenario.reconcile();
       // Freeze the real gameplay snapshot before any maintenance-only clock calls.
       store.beginClosing(id,{reason,startedAt:Date.now(),complete:false,snapshot:structuredClone(snapshot)});

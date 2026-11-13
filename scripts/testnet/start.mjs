@@ -1,6 +1,6 @@
 import {runtimeConfig,acquireWriter} from './config.mjs';
 import {Store} from './store.mjs';
-import {campaignLifecycle,archivedSnapshot} from './lifecycle.mjs';
+import {campaignLifecycle,archivedSnapshot,closingSnapshot} from './lifecycle.mjs';
 import {createGameServer} from './server.mjs';
 import {createTestnetScenario,verifyRuntimeRoster} from './scenario.mjs';
 import {createKeychainSigner,createEnvironmentSigner} from './signing.mjs';
@@ -22,28 +22,46 @@ try{
 }
 catch{store.close();release();throw new Error('Restricted signer configuration invalid');}
 const lifecycle=campaignLifecycle(store,config,sign);
+async function closeCampaign(scenario,snapshot,reason){
+  try{return await lifecycle.close(scenario,snapshot,reason);}
+  catch(error){
+    const closing=store.closing(scenario.campaignId);
+    if(!closing)throw error;
+    // A durable closure is resumable, not a verified reclamation.
+    return closingSnapshot(closing);
+  }
+}
 async function loadSession(id){
   const archived=store.archive(id);
   if(archived?.complete){store.finishClosing(id);return {request:async()=>archivedSnapshot(archived)};}
   sign??=signer();
   const scenario=await createTestnetScenario(store.config(id),store,sign);
   const closing=store.closing(id);
-  if(closing)return {request:async()=>lifecycle.close(scenario,closing.snapshot,closing.reason)};
+  if(closing)return {request:async()=>closeCampaign(scenario,closing.snapshot,closing.reason)};
   if(archived)return {request:async()=>lifecycle.archive(scenario,archived.snapshot)};
   const session=await createCampaignSession(scenario,id,id,undefined,null,store);
   const saved=await store.readJson(id),reason=config.lifecycle?lifecycle.cleanupReason(id,saved.campaign):null;
   if(reason){
     // Finish recovery of already-admitted gameplay before freezing its outcome.
     const snapshot=await session.request({action:'view'});
-    await lifecycle.close(scenario,snapshot,reason);
+    await closeCampaign(scenario,snapshot,reason);
     return {request:async()=>{
-      const done=store.archive(id);return done?.complete?archivedSnapshot(done):lifecycle.close(scenario,snapshot,reason);
+      const done=store.archive(id);return done?.complete?archivedSnapshot(done):closeCampaign(scenario,snapshot,reason);
     }};
   }
   return {request:async request=>{
+    const closing=store.closing(id);
+    if(closing)return closeCampaign(scenario,closing.snapshot,closing.reason);
+    if(request.action==='quit'){
+      if(!config.lifecycle)throw new Error('Campaign closure unavailable');
+      const snapshot=await session.request({action:'view'});
+      if(snapshot.pending||snapshot.error)return snapshot;
+      if(request.campaign_id!==snapshot.campaign?.id||request.revision!==snapshot.campaign?.revision)throw new Error('Campaign changed before quit');
+      return closeCampaign(scenario,snapshot,'quit');
+    }
     const snapshot=await session.request(request);
     if(!config.lifecycle)return snapshot;
-    return snapshot.campaign?.status==='defeat'?lifecycle.close(scenario,snapshot,'defeat'):lifecycle.archive(scenario,snapshot);
+    return snapshot.campaign?.status==='defeat'?closeCampaign(scenario,snapshot,'defeat'):lifecycle.archive(scenario,snapshot);
   }};
 }
 const server=createGameServer({store,loadSession,creation:config.creation,cleanup:config.cleanup,ensureCapacity:lifecycle.ensureCapacity,requireCompletion:!!config.provisioning,origin:config.origin,dist:config.dist,secureCookies:config.secureCookies!==false});
