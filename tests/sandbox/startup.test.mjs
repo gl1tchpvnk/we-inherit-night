@@ -10,7 +10,9 @@ test('Windows-to-WSL bundled startup preserves finalized bootstrap, scheduled ag
   const fresh=await bridge.request({action:'view'});
   assert.equal(fresh.error,null);assert.equal(fresh.pending,false);
   assert.equal(fresh.campaign.agentHistory.length,0);
-  assert.equal(fresh.transactions.length,9);
+  assert.equal(fresh.transactions.length,10);
+  assert.equal(fresh.world.campaign_id,'default');
+  assert.equal(fresh.transactions.filter(t=>t.action==='create_campaign').length,1);
   assert.ok(fresh.campaign.politics.finalCourt);
   assert.equal(fresh.transactions.filter(t=>t.action==='fund_passage'&&t.actor==='cassian'&&t.success).length,1);
   assert.ok(fresh.transactions.every(t=>t.success&&t.executionStatus==='FINAL'));

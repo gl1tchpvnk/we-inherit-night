@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    castle.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  new_registry
+│                       args:         {}
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW
+│    Signature:  ed25519:44q2wwb2PbqJRMz9zMrM6dnQX9gDduYRSFu67dg6usHLSdfUnWJJTbB2uVP4CG8XZLunbNCjnWxig79YrkWdYVjX
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.2 Tgas
+│    Transaction fee: 0.0001931724501821 NEAR
+│    Transaction ID: H7yMcS72iDg7GyrrktyrtLacKq1v4q6DJnj9FbTYcZg8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/H7yMcS72iDg7GyrrktyrtLacKq1v4q6DJnj9FbTYcZg8
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:   No logs
+│    Logs [castle.we-inherit-night.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "new_registry" call to <castle.we-inherit-night.testnet> on behalf of <castle.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet new_registry json-args {} prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as castle.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

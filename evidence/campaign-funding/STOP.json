@@ -1,0 +1,9 @@
+{
+  "accountId": "win-funding-20261113-a.testnet",
+  "exitStatus": 0,
+  "reason": "Creation hash unavailable; uncertain outcome; no retry",
+  "rateLimitMentioned": false,
+  "publicTransactionHashes": [],
+  "resolved": true,
+  "resolution": "Read-only block/chunk discovery and independent FINAL transaction verification; no repeated faucet request"
+}

@@ -1,0 +1,65 @@
+{
+  "castle.we-inherit-night.testnet": {
+    "amount": "11135777804636618100000000",
+    "block_hash": "FwZyJJdZUxBW5xxsAoxAm3wQRqTqhZkjUk6P88iYNV6t",
+    "block_height": 277442667,
+    "code_hash": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 496223
+  },
+  "we-inherit-night.testnet": {
+    "amount": "2421735115087500000000000",
+    "block_hash": "J73stR8L3TaBiVDbpD9H39anBcXv4Xfyz3UJSybGS5yu",
+    "block_height": 277442670,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "vesper.we-inherit-night.testnet": {
+    "amount": "243382353289208900000000",
+    "block_hash": "DrHgFLyoBAoeceuRgAPuRwiNc3ha6WkJ2PqHhYkLpfdm",
+    "block_height": 277442674,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 336
+  },
+  "player.we-inherit-night.testnet": {
+    "amount": "248782507812257900000000",
+    "block_hash": "EiN2aehFui8HuqsbaSb9BbbTBiWfQWEkXjB9MhEd7hss",
+    "block_height": 277442678,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "seraphine.we-inherit-night.testnet": {
+    "amount": "248384948331407500000000",
+    "block_hash": "Gw9huMTJgX5W3DKezS6NiPcsX8MxzS85VszuHtsv521h",
+    "block_height": 277442683,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "cassian.we-inherit-night.testnet": {
+    "amount": "229504529883011500000000",
+    "block_hash": "5uQy9qcZFfXniCNaYYRHYVUuRpmjdbwAFcVhzEaTyFyx",
+    "block_height": 277442686,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "win-funding-20261112-a.testnet": {
+    "amount": "3884426153891269300000000",
+    "block_hash": "B8katmKRzM6FoDR87PwQfeNd3HwmYpWNB4yF6vDugXpE",
+    "block_height": 277442691,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  }
+}

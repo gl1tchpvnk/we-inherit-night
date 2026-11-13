@@ -1,0 +1,1 @@
+["contract", "call-function", "as-transaction", "castle.we-inherit-night.testnet", "accept_lease", "json-args", "{\"lease_id\": 1, \"campaign_id\": \"verification-b\", \"nonce\": 1}", "prepaid-gas", "100 Tgas", "attached-deposit", "0.02 NEAR", "sign-as", "win-funding-20261112-a.testnet", "network-config", "testnet", "sign-with-keychain", "send"]

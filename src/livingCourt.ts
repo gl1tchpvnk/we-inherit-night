@@ -1,3 +1,4 @@
+import {expiryDescription} from './leaseNarrative.ts';
 import {finalDemand,counterAccepted,FINAL_ACTIONS,isFinalAction} from './finalCourt.ts';
 import type {Result} from './chain';
 
@@ -43,9 +44,12 @@ export function endingSummary(r:Result):string{
 
   if(c.ending==='unbound'){
 
-    const lease=r.world.leases.find(l=>l.property_id==='sanctuary'&&l.status==='accepted');
+    const lease=r.world.leases.find(l=>l.property_id==='sanctuary'&&l.buyer===c.politics?.accounts.player&&l.status==='accepted');
 
-    return `Your Library is still yours. Seraphine’s paid sanctuary cannot be withdrawn${lease?.end_night!=null?`, but ends at the start of Night ${lease.end_night+1}`:''}. It is shelter, not ownership.`;
+    const title=r.world.properties.some(p=>p.id==='library'&&p.owner===c.politics?.accounts.player)?'Your Library is still yours. ':'';
+    if(lease?.end_night!=null&&lease.end_night>r.world.night&&lease.end_night>=7)return `${title}Seraphine cannot withdraw her protection, and it will last through the final night. But sanctuary is not ownership.`;
+    if(lease)return `${title}Your sanctuary ${expiryDescription(lease.end_night,r.world.night)}. It grants no ownership${lease.end_night!==null&&lease.end_night>r.world.night?'; Seraphine cannot withdraw it before that deadline':''}.`;
+    return `${title}No accepted sanctuary agreement is confirmed in the current record. Sanctuary is not ownership.`;
 
   }
 
@@ -81,8 +85,8 @@ export function endingConsequences(r:Result):string[]{
 
   for(const [property,name] of patrons)if(r.world.grants.some(g=>g.property_id===property&&g.grantee===p.accounts.player&&g.expiry_night===null&&effectiveGrant(r.world,g)))lines.push(`${name}’s separate protection still stands. It depends on that patron, not on the investigator keeping your key.`);
 
-  if(p.finalCourt?.result)lines.push(p.finalCourt.result==='accepted'?(p.finalCourt.response==='counter'?'Your published account supported a narrower bargain. Marius kept his protection; your limited Library invitation ends at the start of Night Nine.':'You kept Marius’s protection by giving him a continuing, non-delegable Library invitation.'):'Marius withdrew his protection at the final confrontation. Your refusal or rejected proposal did not cancel independent shelter.');
-  if(p.finalCourt?.result==='rejected'&&p.finalCourt.response==='counter'&&r.world.grants.some(g=>g.property_id==='library'&&g.grantee===p.accounts.marius&&g.expiry_night===8&&effectiveGrant(r.world,g)))lines.push('The limited invitation you offered Marius still stands until Night Nine, although he rejected the bargain.');
+  if(p.finalCourt?.result)lines.push(p.finalCourt.result==='accepted'?(p.finalCourt.response==='counter'?'Your published account supported a narrower bargain. Marius kept his protection; you gave him a two-night Library invitation, not permanent access.':'You kept Marius’s protection by giving him a continuing, non-delegable Library invitation.'):'Marius withdrew his protection at the final confrontation. Your refusal or rejected proposal did not cancel independent shelter.');
+  if(p.finalCourt?.result==='rejected'&&p.finalCourt.response==='counter'&&r.world.grants.some(g=>g.property_id==='library'&&g.grantee===p.accounts.marius&&g.expiry_night===8&&effectiveGrant(r.world,g)))lines.push('The two-night invitation you offered Marius still stands, although he rejected the bargain. It is temporary access, not ownership.');
 
   return lines;
 
@@ -358,7 +362,7 @@ function reckoningLines(r:Result,night:number):DialogueLine[]{
 
   }
 
-  for(const l of r.world.leases.filter(l=>l.buyer===c.politics?.accounts.player&&['sanctuary','lounge'].includes(l.property_id)&&l.status==='accepted'&&l.end_night!==null&&l.end_night-l.duration_nights===night))lines.unshift({speaker:'seraphine',text:`We have a bargain. Your ${l.property_id==='sanctuary'?'sanctuary':'place in the Lounge'} lasts until the start of Night ${l.end_night!+1}. Neither gratitude nor argument will change that date.`});
+  for(const l of r.world.leases.filter(l=>l.buyer===c.politics?.accounts.player&&['sanctuary','lounge'].includes(l.property_id)&&l.status==='accepted'&&l.end_night!==null&&l.end_night-l.duration_nights===night))lines.unshift({speaker:'seraphine',text:`We have a bargain. Your ${l.property_id==='sanctuary'?'sanctuary':'place in the Lounge'} ${expiryDescription(l.end_night,r.world.night)}. Neither gratitude nor argument will change that date.`});
 
   if(night===4&&r.world.grants.some(g=>g.property_id==='passage'&&g.grantee===c.politics?.accounts.player&&g.expiry_night===5))lines.push({speaker:'narrator',text:`The temporary passage has reached its deadline. ${r.world.access.passage?'A separate right still keeps the passage open to you.':'That route is now closed to you.'}`});
 

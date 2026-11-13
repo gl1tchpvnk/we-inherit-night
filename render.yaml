@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: we-inherit-night
+    runtime: node
+    plan: starter
+    numInstances: 1
+    autoDeployTrigger: "off"
+    buildCommand: npm ci --include=dev --ignore-scripts && npm run build
+    startCommand: node --max-old-space-size=256 scripts/testnet/start.mjs
+    healthCheckPath: /healthz
+    disk:
+      name: night-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.13.0
+      - key: NODE_ENV
+        value: production
+      - key: NIGHT_DATA_DIR
+        value: /var/data/night
+      - key: NIGHT_CONFIG_JSON
+        sync: false
+      - key: NIGHT_RUNTIME_KEYS
+        sync: false
+      - key: NIGHT_LLM_ENABLED
+        value: "0"
+      - key: VITE_MODE
+        value: testnet
+      - key: VITE_TESTNET_BACKEND
+        value: "1"
+      - key: VITE_NETWORK
+        value: testnet
+      - key: VITE_CONTRACT_ID
+        value: night.we-inherit-night.testnet

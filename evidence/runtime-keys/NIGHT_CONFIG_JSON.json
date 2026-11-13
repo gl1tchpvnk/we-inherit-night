@@ -1,0 +1,52 @@
+{
+  "lifecycle": true,
+  "provisioning": {
+    "contractId": "night.we-inherit-night.testnet",
+    "actors": {
+      "provisioner": {
+        "accountId": "provisioner.we-inherit-night.testnet",
+        "publicKey": "ed25519:8QdPoPsxMoF6i4fpKHnmw3dTKnHMZiT4ESmxuoVuxGgF"
+      },
+      "player": {
+        "accountId": "player.we-inherit-night.testnet",
+        "publicKey": "ed25519:7S7CZjHkHz91coykg7vSeRpaH6WCm81qryFGxnufHdNv"
+      },
+      "vesper": {
+        "accountId": "vesper.we-inherit-night.testnet",
+        "publicKey": "ed25519:6f6KH1ub8739NakytBYzkubGX9RDWNNjeczdpdBMgiPj"
+      },
+      "seraphine": {
+        "accountId": "seraphine.we-inherit-night.testnet",
+        "publicKey": "ed25519:5yFPoCyzWFr9LiF72XGf9JsQS3QR6cJ2hxX8CvQN5Sxy"
+      },
+      "keeper": {
+        "accountId": "keeper.we-inherit-night.testnet",
+        "publicKey": "ed25519:7fJGW1whUCPU8aZQvkT7zdB7RCFSFf8sm2ztfjuGXXNU"
+      },
+      "marius": {
+        "accountId": "marius.we-inherit-night.testnet",
+        "publicKey": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2"
+      },
+      "lucien": {
+        "accountId": "lucien.we-inherit-night.testnet",
+        "publicKey": "ed25519:8X8JpTLPgMVeM6jgiDfvnP4s4FD67EVHiaHrw79g9iNY"
+      },
+      "mirelle": {
+        "accountId": "mirelle.we-inherit-night.testnet",
+        "publicKey": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM"
+      },
+      "dorian": {
+        "accountId": "dorian.we-inherit-night.testnet",
+        "publicKey": "ed25519:CyZzDYyZTWCCcktGdyorvQTdTai3PhCEA7kLawzbbYfu"
+      },
+      "cassian": {
+        "accountId": "cassian.we-inherit-night.testnet",
+        "publicKey": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2"
+      },
+      "sabine": {
+        "accountId": "sabine.we-inherit-night.testnet",
+        "publicKey": "ed25519:4hEvFx5QpHBGeW3y2cyeM4A6bojnvkHjm8BA9qyi4xXa"
+      }
+    }
+  }
+}

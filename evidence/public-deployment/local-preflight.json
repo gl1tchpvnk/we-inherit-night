@@ -1,0 +1,19 @@
+{
+  "status": "PASS-local",
+  "windowsProductionBuild": "PASS",
+  "freshLinuxExactRenderBuild": "PASS",
+  "linuxNode": "24.13.0",
+  "linuxStartupHealthStaticSQLiteWAL": "PASS",
+  "credentialsUsed": false,
+  "chainTransactions": false,
+  "audit": {
+    "info": 0,
+    "low": 13,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 13
+  },
+  "advisory": "https://github.com/advisories/GHSA-848j-6mx2-7j84",
+  "broadRegressions": "Not repeated; prior 141 Node / 24 Rust / 5 focused Sandbox results retained"
+}

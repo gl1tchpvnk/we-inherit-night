@@ -1,0 +1,43 @@
+├  Unsigned transaction:
+│    signer_id:    win-funding-20261112-a.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  accept_lease
+│                       args:         {
+│                                       "campaign_id": "verification-b",
+│                                       "lease_id": 1,
+│                                       "nonce": 1
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0.02 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1
+│    Signature:  ed25519:5iYtwQuxLr5cpeTk5MiAxmApBTBMLTq762UM8PU7qNdKFS6CqxTm7PvdcdLBdW3E2gYKDU9ckHDuYpjtuW8SbiHg
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002630811788401 NEAR
+│    Transaction ID: 7iLD814gQUxn3LEfjyD7Tq7mZ9xh8bctSWuZXtXurukq
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7iLD814gQUxn3LEfjyD7Tq7mZ9xh8bctSWuZXtXurukq
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:
+│      EVENT_JSON:{"standard":"we_inherit_night","version":"1.0.0","event":"accept_lease","campaign_id":"verification-b","data":[{"lease_id":1,"actor":"win-funding-20261112-a.testnet","end_night":7}]}
+│    Logs [win-funding-20261112-a.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "accept_lease" call to <castle.we-inherit-night.testnet> on behalf of <win-funding-20261112-a.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet accept_lease json-args '{"lease_id": 1, "campaign_id": "verification-b", "nonce": 1}' prepaid-gas '100.0 Tgas' attached-deposit '0.02 NEAR' sign-as win-funding-20261112-a.testnet network-config testnet sign-with-keychain send
+

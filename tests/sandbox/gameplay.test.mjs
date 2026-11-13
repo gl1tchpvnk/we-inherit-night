@@ -11,7 +11,7 @@ test('play runner: decisions wait for player; rejection, separate retaliation, i
   let current;
   const command=action=>({...action,campaign_id:current?.campaign.id,revision:current?.campaign.revision});
   async function request(action){const r=await bridge.request(command(action));assert.equal(r.error,null);current=r;snapshots.push({action:action.action,phase:r.phase,access:r.world.access,escrow:r.escrowYocto,transactions:r.transactions});return r;}
-  function fresh(r){assert.equal(r.phase,'offered');assert.equal(r.escrowYocto,'0');assert.deepEqual(r.world.access,{crypt:true,library:true,lounge:false});assert.deepEqual(r.transactions.map(t=>t.action),['deploy','new_economy','grant_access','offer_lease']);}
+  function fresh(r){assert.equal(r.phase,'offered');assert.equal(r.escrowYocto,'0');assert.deepEqual(r.world.access,{crypt:true,library:true,lounge:false});assert.deepEqual(r.transactions.map(t=>t.action),['deploy','new_registry','create_campaign','grant_access','offer_lease']);}
   try{
     const start=await request({action:'view'});fresh(start);
     const untouched=await request({action:'view'});assert.deepEqual(untouched.transactions,start.transactions);

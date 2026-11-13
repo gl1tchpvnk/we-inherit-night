@@ -1,0 +1,18 @@
+{
+  "block_hash": "AKQkvW62nU5cLyAuGV6CQ3joVzuYkJdTEcgm662Ta8pN",
+  "block_height": 277462405,
+  "nonce": 277462393000000,
+  "permission": {
+    "FunctionCall": {
+      "allowance": "50000000000000000000000",
+      "method_names": [
+        "advance_night",
+        "complete_campaign",
+        "settlement_dawn",
+        "archive_campaign",
+        "reclaim_campaign"
+      ],
+      "receiver_id": "night.we-inherit-night.testnet"
+    }
+  }
+}

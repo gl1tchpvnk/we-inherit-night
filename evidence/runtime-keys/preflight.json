@@ -1,0 +1,523 @@
+{
+  "checkedAt": "2026-11-13T04:35:11.051Z",
+  "network": "testnet",
+  "registry": {
+    "block_hash": "HHQsNnvsse5UzTpgezeMLfi4Ct9XXCWCMJSAjUyQQne8",
+    "block_height": 277461921,
+    "values": [
+      {
+        "key": "U1RBVEU=",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBx8NErhMMfAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQEAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+      }
+    ]
+  },
+  "rows": [
+    {
+      "role": "provisioner",
+      "accountId": "provisioner.we-inherit-night.testnet",
+      "account": {
+        "amount": "50000000000000000000000",
+        "block_hash": "NHt74EMcMVuG5V3TNyAqGvmPZCtRzXq3DNS6f9bdDSC",
+        "block_height": 277461922,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "HuES7UqsmgJoXYzAoBnYx3q5HsYfQiNfCEFd5Gop3pyV",
+        "block_height": 277461923,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277455924000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CPKB3yezj2baAgwkdqLoM544a3NTgbdz17p25UMB7WnK"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "Cigy6JYq4A3LCSQE7F2R92SfgB4Wq8rMWd3tscbMK9Jo",
+        "block_height": 277461928,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277455924000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CPKB3yezj2baAgwkdqLoM544a3NTgbdz17p25UMB7WnK"
+          }
+        ]
+      },
+      "methods": [
+        "open_campaign"
+      ]
+    },
+    {
+      "role": "player",
+      "accountId": "player.we-inherit-night.testnet",
+      "account": {
+        "amount": "248782507812257900000000",
+        "block_hash": "9Q4fMCJYYJEP7QcR9JQKyHnLkbKNvm4TVBMraMKZrqVj",
+        "block_height": 277461929,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "9Q4fMCJYYJEP7QcR9JQKyHnLkbKNvm4TVBMraMKZrqVj",
+        "block_height": 277461929,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434038000005,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "4vJGUzMbdqVYvyka7RiKccBxKXkW4pyf6LjEXKvmVGat",
+        "block_height": 277461934,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434038000005,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY"
+          }
+        ]
+      },
+      "methods": [
+        "grant_access",
+        "revoke_grant",
+        "enter_room",
+        "accept_lease",
+        "reject_lease"
+      ]
+    },
+    {
+      "role": "vesper",
+      "accountId": "vesper.we-inherit-night.testnet",
+      "account": {
+        "amount": "242842755213231700000000",
+        "block_hash": "AZ4aY78nbLMRzRKGhmaG5PviTj3FWeuhSee7QYWds5p2",
+        "block_height": 277461935,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 336
+      },
+      "keys": {
+        "block_hash": "3RHjELFCsbeULoGcPj4pLQb2saWYoSbKc1jfrW9z6DM8",
+        "block_height": 277461936,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277442391000001,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "49736352778516100000000",
+                  "method_names": [
+                    "revoke_grant"
+                  ],
+                  "receiver_id": "castle.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD"
+          },
+          {
+            "access_key": {
+              "nonce": 277434053000007,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "DiJNb71a8tCKw5VBmG1hWrZ14z156X8EDUcSBHhiRJH6",
+        "block_height": 277461941,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277442391000001,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "49736352778516100000000",
+                  "method_names": [
+                    "revoke_grant"
+                  ],
+                  "receiver_id": "castle.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD"
+          },
+          {
+            "access_key": {
+              "nonce": 277434053000007,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo"
+          }
+        ]
+      },
+      "methods": [
+        "revoke_grant"
+      ]
+    },
+    {
+      "role": "seraphine",
+      "accountId": "seraphine.we-inherit-night.testnet",
+      "account": {
+        "amount": "248384948331407500000000",
+        "block_hash": "DiJNb71a8tCKw5VBmG1hWrZ14z156X8EDUcSBHhiRJH6",
+        "block_height": 277461941,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "8SBrmySYJfvDHhfLbJxh2MfCYDSxcsDkeuRYo6HdYRQg",
+        "block_height": 277461942,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434067000006,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "8bHT256FH6UNNDGNnquGUHZbzK2DAYQm1CcoKsVvLXAc",
+        "block_height": 277461947,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434067000006,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL"
+          }
+        ]
+      },
+      "methods": [
+        "claim_rent"
+      ]
+    },
+    {
+      "role": "keeper",
+      "accountId": "keeper.we-inherit-night.testnet",
+      "account": {
+        "amount": "250000000000000000000000",
+        "block_hash": "8bHT256FH6UNNDGNnquGUHZbzK2DAYQm1CcoKsVvLXAc",
+        "block_height": 277461947,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "4qpfDx7nPCkRAX4fyP1hnuetmEfurrVvN8BDqEJLzpzu",
+        "block_height": 277461948,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434024000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:3CKR8uJWvKjbECXMxXimoE61XRMmoc2Yusz1hYPxyPzB"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "mJggZnLLfFQYtyLzYAKQj9xPvgYAtVzKrJ34FkMkWy4",
+        "block_height": 277461953,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434024000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:3CKR8uJWvKjbECXMxXimoE61XRMmoc2Yusz1hYPxyPzB"
+          }
+        ]
+      },
+      "methods": [
+        "advance_night",
+        "complete_campaign",
+        "settlement_dawn",
+        "archive_campaign",
+        "reclaim_campaign"
+      ]
+    },
+    {
+      "role": "marius",
+      "accountId": "marius.we-inherit-night.testnet",
+      "account": {
+        "amount": "249462385375740200000000",
+        "block_hash": "mJggZnLLfFQYtyLzYAKQj9xPvgYAtVzKrJ34FkMkWy4",
+        "block_height": 277461953,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "6mkfFsJCamTU5RmkJ538hpcXjT58UusYhavqYm2bwygY",
+        "block_height": 277461954,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434081000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "64MNeDJ33gGXjgEfBmXaYojLhKzKuispgDuzcWHJP69y",
+        "block_height": 277461959,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434081000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr"
+          }
+        ]
+      },
+      "methods": [
+        "grant_access",
+        "revoke_grant"
+      ]
+    },
+    {
+      "role": "lucien",
+      "accountId": "lucien.we-inherit-night.testnet",
+      "account": {
+        "amount": "250000000000000000000000",
+        "block_hash": "64MNeDJ33gGXjgEfBmXaYojLhKzKuispgDuzcWHJP69y",
+        "block_height": 277461959,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "BdN9CwWn44mhrtPHez49i5af9eNxh8ZwBcrfQZZEiKjz",
+        "block_height": 277461960,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434095000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6oP1s5fkWLqPG1VKcxU6CLRQzXtCHNRBP8BaaYh324Bw"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "AF1ceLzUEoCvWnUmavfFvgyq6t2mLAqBByTC6UyQ2g9x",
+        "block_height": 277461965,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434095000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6oP1s5fkWLqPG1VKcxU6CLRQzXtCHNRBP8BaaYh324Bw"
+          }
+        ]
+      },
+      "methods": [
+        "grant_access",
+        "offer_lease",
+        "claim_rent"
+      ]
+    },
+    {
+      "role": "mirelle",
+      "accountId": "mirelle.we-inherit-night.testnet",
+      "account": {
+        "amount": "250000000000000000000000",
+        "block_hash": "7eYuVV3zeMmRUHicGdfNgjtpRUd16qH7teS7BwP8Q9Gf",
+        "block_height": 277461966,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "7eYuVV3zeMmRUHicGdfNgjtpRUd16qH7teS7BwP8Q9Gf",
+        "block_height": 277461966,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434109000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "8py7c1zYxoQbRKGD5pzn7R6FXY1QGzSS9cu2EMni3wsi",
+        "block_height": 277461971,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434109000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr"
+          }
+        ]
+      },
+      "methods": [
+        "enter_room",
+        "grant_access"
+      ]
+    },
+    {
+      "role": "dorian",
+      "accountId": "dorian.we-inherit-night.testnet",
+      "account": {
+        "amount": "250000000000000000000000",
+        "block_hash": "8py7c1zYxoQbRKGD5pzn7R6FXY1QGzSS9cu2EMni3wsi",
+        "block_height": 277461971,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "5KNEhwtXwvu3swYvdZBAwFLHCYCYAdSaS8ruHkSiMpu2",
+        "block_height": 277461972,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434122000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:81aDBUVCuJ4FLyaX8JxPfGKFgvRYRbA3UszgTKhvpTdw"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "9fkzGMhHYPaM1QK47uJP3Y3zr6BS8cJmKfCAFVJNJMfW",
+        "block_height": 277461977,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434122000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:81aDBUVCuJ4FLyaX8JxPfGKFgvRYRbA3UszgTKhvpTdw"
+          }
+        ]
+      },
+      "methods": [
+        "enter_room",
+        "grant_access"
+      ]
+    },
+    {
+      "role": "cassian",
+      "accountId": "cassian.we-inherit-night.testnet",
+      "account": {
+        "amount": "229504529883011500000000",
+        "block_hash": "9fkzGMhHYPaM1QK47uJP3Y3zr6BS8cJmKfCAFVJNJMfW",
+        "block_height": 277461977,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "AfFt2FLQR7krrEygGds3EVrTndMDWdjT6qpqpdwyRctc",
+        "block_height": 277461978,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434136000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "C7Zaf9A7X7FdvuU4SsdTNyUmi7PV8q6jqkbNrehfoAd2",
+        "block_height": 277461983,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434136000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx"
+          }
+        ]
+      },
+      "methods": [
+        "enter_room",
+        "accept_funded_passage",
+        "refund_passage_budget"
+      ]
+    },
+    {
+      "role": "sabine",
+      "accountId": "sabine.we-inherit-night.testnet",
+      "account": {
+        "amount": "250000000000000000000000",
+        "block_hash": "Eh1tHBkPim6ADUaa3xcTocxBBNpNRY5M1QgCbigijHWS",
+        "block_height": 277461984,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "Eh1tHBkPim6ADUaa3xcTocxBBNpNRY5M1QgCbigijHWS",
+        "block_height": 277461984,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434149000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6qSL5BNQ6DB2zwQHcV2XZjSUy6GgioVwBcWGy4VEpUk6"
+          }
+        ]
+      },
+      "independentKeys": {
+        "block_hash": "3b5qfo58BeyQpJJtUDp5P7y5uW6xpZ9gBaQiVAEECrTE",
+        "block_height": 277461989,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277434149000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6qSL5BNQ6DB2zwQHcV2XZjSUy6GgioVwBcWGy4VEpUk6"
+          }
+        ]
+      },
+      "methods": [
+        "grant_access"
+      ]
+    }
+  ]
+}

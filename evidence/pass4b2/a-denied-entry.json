@@ -1,0 +1,210 @@
+{
+  "final_execution_status": "FINAL",
+  "receipts_outcome": [
+    {
+      "block_hash": "CUNogPCoGfWcRkcQdhy3GAd5uddkM5NRYwSadqKeMc55",
+      "id": "2oWmQpTuwGodg8ub3gdUCXYv6Puuofi3Tny9uvYiYHx8",
+      "outcome": {
+        "executor_id": "castle.we-inherit-night.testnet",
+        "gas_burnt": 1787509091277,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            {
+              "local": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg"
+            }
+          ],
+          "gas_profile": [
+            {
+              "cost": "BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "3706753554"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "35445963"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BYTES",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "536266464270"
+            },
+            {
+              "cost": "READ_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "7829589600"
+            },
+            {
+              "cost": "READ_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "315510639"
+            },
+            {
+              "cost": "READ_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "10068660744"
+            },
+            {
+              "cost": "READ_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "186873552"
+            },
+            {
+              "cost": "STORAGE_READ_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "112713691498"
+            },
+            {
+              "cost": "STORAGE_READ_KEY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "959528523"
+            },
+            {
+              "cost": "STORAGE_READ_VALUE_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "10105418204"
+            },
+            {
+              "cost": "UTF8_DECODING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "3111779061"
+            },
+            {
+              "cost": "UTF8_DECODING_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "15162184908"
+            },
+            {
+              "cost": "WASM_INSTRUCTION",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "161168850084"
+            },
+            {
+              "cost": "WRITE_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "14018974305"
+            },
+            {
+              "cost": "WRITE_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "5207852064"
+            },
+            {
+              "cost": "WRITE_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "11462089944"
+            },
+            {
+              "cost": "WRITE_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "6964465248"
+            }
+          ],
+          "version": 4
+        },
+        "receipt_ids": [
+          "Ai9heqVUFPqXtdaG6g18sdjjprs1dGc8wttgMfG1UGa2"
+        ],
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:567:9:\naccess denied"
+                }
+              }
+            }
+          }
+        },
+        "tokens_burnt": "178750909127700000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "D75VE4cLaauRvFb2o77tWjE6qD6RGWNaW6XMppq3Sbdm"
+        }
+      ]
+    },
+    {
+      "block_hash": "AQVsSLDryZkJZTSPvCpUKV5uZGQ7jjQHuLXcapMhy7UD",
+      "id": "Ai9heqVUFPqXtdaG6g18sdjjprs1dGc8wttgMfG1UGa2",
+      "outcome": {
+        "executor_id": "player.we-inherit-night.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            null
+          ],
+          "gas_profile": [],
+          "version": 4
+        },
+        "receipt_ids": [],
+        "status": {
+          "SuccessValue": ""
+        },
+        "tokens_burnt": "0"
+      },
+      "proof": []
+    }
+  ],
+  "status": {
+    "Failure": {
+      "ActionError": {
+        "index": 0,
+        "kind": {
+          "FunctionCallError": {
+            "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:567:9:\naccess denied"
+          }
+        }
+      }
+    }
+  },
+  "transaction": {
+    "actions": [
+      {
+        "FunctionCall": {
+          "args": "eyJjYW1wYWlnbl9pZCI6InZlcmlmaWNhdGlvbi1hIiwibm9uY2UiOjIsInByb3BlcnR5X2lkIjoiY3J5cHQifQ==",
+          "deposit": "0",
+          "gas": 100000000000000,
+          "method_name": "enter_room"
+        }
+      }
+    ],
+    "hash": "A9KPpLkCKinAVGPdqFowYDLh9YPRD7uZmTXmGY7LTedJ",
+    "nonce": 277434038000003,
+    "priority_fee": 0,
+    "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+    "receiver_id": "castle.we-inherit-night.testnet",
+    "signature": "ed25519:CszxFDgHvRzt3piFcXZMt16TpiLXgxeL43Ln9xqEvmfPwMP4EJVBbrXeU2HpwQZtvuxkdDMAj6KyXSydcMEGo1p",
+    "signer_id": "player.we-inherit-night.testnet"
+  },
+  "transaction_outcome": {
+    "block_hash": "2WfweVNsMSvswpTtHYLJu9Xi2McmGGTSjRwHN9JvwxFG",
+    "id": "A9KPpLkCKinAVGPdqFowYDLh9YPRD7uZmTXmGY7LTedJ",
+    "outcome": {
+      "executor_id": "player.we-inherit-night.testnet",
+      "gas_burnt": 311588094910,
+      "logs": [],
+      "metadata": {
+        "gas_profile": null,
+        "version": 1
+      },
+      "receipt_ids": [
+        "2oWmQpTuwGodg8ub3gdUCXYv6Puuofi3Tny9uvYiYHx8"
+      ],
+      "status": {
+        "SuccessReceiptId": "2oWmQpTuwGodg8ub3gdUCXYv6Puuofi3Tny9uvYiYHx8"
+      },
+      "tokens_burnt": "31158809491000000000"
+    },
+    "proof": [
+      {
+        "direction": "Right",
+        "hash": "BcV8yjULCYnrENci4WXfVPbk83uWAGoh7p88zNoYMCVM"
+      }
+    ]
+  }
+}

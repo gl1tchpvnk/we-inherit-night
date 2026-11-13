@@ -1,0 +1,53 @@
+{
+  "status": "PASS-local",
+  "network": "local-sandbox-only",
+  "rust": {
+    "pass": 23,
+    "fail": 0
+  },
+  "node": {
+    "pass": 100,
+    "fail": 0
+  },
+  "sandbox": {
+    "discovered": 53,
+    "initialPass": 51,
+    "initialFail": 1,
+    "skipped": 1,
+    "focusedCorrectionPass": 1,
+    "uniqueExecutedPass": 52,
+    "skippedCase": "Windows-only startup; prior evidence retained"
+  },
+  "backendTestsIncludedInNode": 7,
+  "build": "PASS",
+  "artifact": {
+    "path": "target/near/night_authority/night_authority.wasm",
+    "size": 579736,
+    "sha256": "99f0deeac2fc7e95080d92656b87c0a1515311201d065c8588eacc25b35e05f0",
+    "codeStorageNearAtObservedPrice": 5.79736
+  },
+  "storage": {
+    "protocolYoctoPerByte": "10000000000000000000",
+    "initialPlayableBytes": 1441,
+    "boundedGrantLeaseFootprint": 27011,
+    "sevenNightRoutes": [
+      {
+        "id": "marius-route",
+        "sevenNightPeakBytes": 2033,
+        "storageBackingNear": 0.02033
+      },
+      {
+        "id": "independent-route",
+        "sevenNightPeakBytes": 2101,
+        "storageBackingNear": 0.02101
+      }
+    ],
+    "simpleReclamationBytes": 1321,
+    "remainingSimpleTombstoneBytes": 191
+  },
+  "notes": [
+    "Initial new lifecycle fixtures failed due to inherited internal initializer guard, restricted-key gas reservation and stress-fixture gas funding; corrected and focused case passed.",
+    "Full regression used behavior-identical pre-format WASM; final formatted artifact tested by corrected lifecycle case.",
+    "No Testnet credential access, deployment or transaction."
+  ]
+}

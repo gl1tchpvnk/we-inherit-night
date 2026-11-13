@@ -240,3 +240,192 @@
 - Origin is the existing https://github.com/gl1tchpvnk/we-inherit-night.git; remote refs were empty. No replacement repository or force-push.
 - Added explicit local-wallet ignore rules; corrected Git baseline documentation. Gameplay/contracts/artwork/project structure unchanged.
 - Tests/build NOT RUN for repository-hygiene-only changes; previous results remain applicable.
+
+## Testnet deployment preflight — awaiting required naming approval
+- Reviewed contract constructor, Sandbox signing/bootstrap, centralized Testnet views, local persistence and hosting constraints; no gameplay or contract changes.
+- PASS: Rust 13 tests and fresh locked cargo-near WASM build; SHA-256 recorded in docs/TESTNET_DEPLOYMENT.md.
+- PASS: official Testnet RPC returned UNKNOWN_ACCOUNT for all 12 proposed project IDs; names are not reserved or approved.
+- PASS: current storage price queried; WASM-only storage floor 2.15688 Testnet NEAR, additional state/account/gas budget still required.
+- BLOCKED: mandatory user account-name approval. No account creation, keys, funding, signing, deployment or initialization performed.
+- near-cli-rs not found on Windows/WSL PATH; official installation route identified, installation deferred until approval.
+- Existing frontend Testnet mode is read-only; public playable hosting needs a trusted durable execution service and isolated campaign worlds. Vercel NOT RUN.
+- Next: obtain explicit name approval, then install/verify CLI and prepare approved Testnet identities/funding. Existing Sandbox saves and Git history preserved.
+
+## Pass 4A — approved Testnet accounts created and verified
+- PASS: official near-cli-rs 0.31.1 installed; all 12 approved names rechecked and created on Testnet only.
+- Faucet funded parent with 10 NEAR; castle received 5, ten actors 0.25 each; parent retains 2.4217351150875 after fees.
+- PASS: finalized account/key queries and 12 creation/funding transactions; exact recipients/deposits, distinct keys and successful receipts verified.
+- Provisioning credentials saved in OS keychain outside Git; no plaintext fallback, overwrite or runtime executor access.
+- Evidence/hashes: docs/PASS4A.md and docs/evidence/pass4a-testnet-accounts.json. All accounts have no deployed code.
+- Build/regression tests NOT RUN: account/docs-only task; previous contract evidence retained.
+- Next: separate deployment approval, initialization and restricted runtime signing. Public multi-campaign architecture remains undecided.
+
+## Pass 4B.1 — multi-campaign authority, verified locally
+- IMPLEMENTED: one Authority registry with immutable campaign-keyed Worlds; scoped reads, mutations, budgets, nonces, executor and callbacks.
+- Private creation validates initial actors and reserves bounded storage; unrelated worlds' economic liabilities cannot fund new storage. No runtime admin override.
+- Sandbox scenarios share one deployed contract with distinct actors; recovery journals bind contract/campaign. Legacy saves retain old WASM; automatic incompatible upgrade disabled.
+- PASS: 19 Rust, 92 Node, production build and 52 unique Sandbox cases (49 initial Linux passes, two corrected fixture reruns, one separate Windows startup pass).
+- PASS: two simultaneous seven-night worlds finish Favoured/Mirelle and Unbound/Dorian; lost payment recovery, shared-account permissions, replay/concurrency and callback isolation covered.
+- WASM 492306 bytes; SHA-256 a96adbe06a90e92a6a92a4c82da1165273c6e054c3cf1c55e6a15861bd0e92a5. Raw release build used to avoid cargo-near's incompatible CLI-config migration.
+- Risks: privileged provisioning custody, conservative permanent storage reserve, no automatic legacy on-chain migration, no public execution service. See docs/PASS4B1.md.
+- No Testnet/credential operations, deployment, hosting, artwork/gameplay changes or Git history changes. Await Pass 4B.2 approval; previously verified 5 NEAR is insufficient for code plus first campaign backing.
+
+## Pass 4B.2 — Testnet preflight; funding deferred
+- PASS: approved 492306-byte WASM checksum, all twelve accounts and empty castle code/state verified on finalized Testnet RPC.
+- Castle retains 5 NEAR; measured code/base plus two campaign reserves needs 10.92616 before gas; working target 11.1 NEAR.
+- FAIL: direct castle faucet request finalized with Invalid receiver_id; parent request returned no hash/error and no confirmed funds; alternative faucet HTTP 503.
+- User requested skipping additional funding; stopped without transfers, deployment, initialization, campaigns or key changes.
+- PARTIAL: all contract smoke tests NOT RUN; unchanged Pass 4B.1 regressions reused, not repeated.
+- Public evidence under evidence/; docs/PASS4B2.md records balances, failed transaction, exact shortfall and resume prerequisites.
+- Next: adequate free Testnet funding, then recheck prerequisites and resume authorized deployment. Pass 4C not started.
+
+## Testnet funding recovery — policy prerequisite unresolved
+- Official CLI documentation confirms sponsored account creation, but current funding limits and permission for multiple donor accounts could not be established.
+- Honored the user's stop condition: zero accounts/credentials created, zero funding submissions or transfers, no deployment.
+- Finalized RPC: castle 5.005 NEAR, 182 bytes, no code; storage price unchanged; 11.1 NEAR target leaves 6.095 NEAR shortfall.
+- Evidence: evidence/pass4b2-funding-recovery.json; docs/PASS4B2.md updated with sources and exact limitation.
+- Tests NOT RUN: documentation/public-read-only evidence changes. Prior regression evidence retained.
+- Next: establish official faucet policy/operator permission or obtain a direct authorized Testnet top-up; do not infer permission from technical capability.
+
+## Testnet funding recovery — PASS
+- Normal official CLI faucet accepted one funding account, win-funding-20261112-a.testnet, with 10 Testnet NEAR; second account unnecessary.
+- Independent key stored in Windows OS keychain; existing credentials untouched, no private material recorded.
+- Transferred 6.095 NEAR to castle; finalized RPC verifies exact amount/recipient and all successful receipts.
+- Castle now 11.1 NEAR; funding account 3.9049553634875 NEAR; target shortfall zero. No deployed code.
+- Public creation/transfer evidence and transaction hashes recorded in docs/PASS4B2.md and evidence/pass4b2-funding-*.json.
+- No deployment, initialization, contract changes or Pass 4C work. Regressions not repeated for funding/docs-only task.
+- Next: await deployment resumption, then refresh prerequisites and complete Pass 4B.2 smoke tests.
+
+## Pass 4B.2 — PARTIAL: deployed, restricted signing blocked
+- PASS: approved WASM deployed once to castle.we-inherit-night.testnet; RPC bytes/checksum match, registry initialized, two full political verification worlds created.
+- PASS: grant/entry/revocation, finalized denied entry, independent Library entry, cross-world rejection and unchanged-world comparisons.
+- PASS: B sanctuary accepted with actual 0.02 NEAR escrow; A finances unchanged. Both remain night 0 for targeted smoke verification.
+- BLOCKED: CLI 0.31.1 used existing FullAccess key despite explicit restricted public-key argument. Restricted key is correctly installed but unused; stopped signing.
+- Negative method/deploy attempts finalized rejected by authority/protocol checks, not restricted-key checks. No unauthorized mutation; provisioning keys preserved.
+- Castle balance 11.1357778046366181 NEAR, storage 496223 bytes; includes 0.04 NEAR liabilities and backing for two reserves.
+- RPC 429 recovered through documented public Testnet endpoint with existing transaction hash; no resubmission. Evidence under evidence/pass4b2/.
+- docs/PASS4B2.md, deployment overview and README updated. Prior 4B.1 regressions reused; no source/WASM/save changes or Pass 4C.
+- Next: fix isolated key selection and verify signed public key before broadcast, then complete restricted signing acceptance; do not redeploy/recreate worlds.
+
+
+## Pass 4B.2-FIX — PASS, restricted signing resolved
+- Root cause confirmed in official CLI 0.31.1 source: online keychain path selects FullAccess; exact public-key lookup is supported offline.
+- Used existing Windows keychain via offline signing; decoded/verified exact key, signer, receiver, action, nonce and cryptographic signature before every broadcast.
+- Minimal A test grant created, then revoked with existing restricted Vesper key; finalized hash Hd2YJ6KY7so6AAfWgSLD6hqkphrkreWJdmBiuhreeagm.
+- PASS: MethodNameMismatch and RequiresFullAccess pre-inclusion rejections; correct-key nonce unchanged by negatives. No deployment or administration executed.
+- Initial 50 Tgas reservation exceeded allowance; confirmed rejection, then bounded 10 Tgas succeeded without altering key limits.
+- PASS: code unchanged, original A rights preserved, B unchanged, existing credentials intact; two FINAL successes and three pre-inclusion rejections recorded.
+- docs/PASS4B2.md, deployment overview, README and evidence/pass4b2/fix-* updated. No application/WASM changes; prior regression evidence reused.
+- Pass 4B.2 acceptance now PASS. Public runtime/custody/session work remains Pass 4C; not started.
+
+
+## Seven-night narrative correction — PASS
+- Paused incomplete Pass 4C.1 work on user direction; no further backend edits or Testnet operations during this correction.
+- Replaced Night Nine references in endings, lease reactions/reckonings, and counterproposal descriptions with state-aware seven-night wording.
+- Shared presentation-only expiry formatter distinguishes an early deadline, coverage through Night VII, unknown expiry and already-expired access.
+- Confirmed Rust uses end_night = acceptance night + duration and active while current night < end_night. Displayed Night VII is contract night 6; end 7 expires at final dawn.
+- Existing ending eligibility still requires an active sanctuary at its evaluation time; no arithmetic, duration, authority or ending-predicate change.
+- PASS: 65 focused narrative/gameplay tests (pass3a/b/c, encounters, final-court, politics, game), including expiry 6/7/8/9, expiry boundary and wrong-beneficiary coverage.
+- Changed src/leaseNarrative.ts, livingCourt.ts, reactiveCourt.ts, encounters.ts, finalCourt.ts, politics.ts and two narrative test files. Technical inspection retains exact raw expiry records.
+- No Rust, backend, artwork/layout, save migration or network changes in this correction. Build/full regressions NOT RUN per requested targeted verification. Stop after reporting.
+
+## Pass 4C.1 — PARTIAL: local backend implemented
+- Added loopback Node service, SQLite sessions/campaign allocation, durable transaction journal and Testnet scenario adapter.
+- Reused existing game/NPC engine and exact-key offline signing mechanism; no CLI reinvestigation or provisioning-key fallback.
+- Frontend opt-in supports backend New Game/Continue; Sandbox file persistence and read-only Testnet remain supported.
+- PASS: 98 Node tests; focused backend 5/5 after final nonce guard; targeted Sandbox campaign 1/1; TypeScript/production build.
+- PASS: actual local frontend 200, save metadata 200 and empty-capacity 409; service stopped after check.
+- Local HTTP fixtures verify separate sessions/restart; synthetic fault injection verifies recovery without duplicate sending. These are not Testnet evidence.
+- BLOCKED: fresh visitor campaigns and isolated Windows runtime keychain. Paid player actions blocked pending a bounded deposit signer.
+- NOT RUN: real backend Testnet player/NPC transactions and two-browser campaigns; no transaction hashes or live acceptance claimed.
+- Report/setup in docs/PASS4C1.md; README/config/requirements updated. No Rust, art, narrative, public deployment, commit or push.
+- Next: resolve these remaining 4C.1 blockers and exercise live acceptance before considering 4C.2.
+
+## Pass 4C.2 — PASS locally; no Testnet changes
+- Removed fixed campaign storage reservations; actual usage plus protected financial obligations must remain backed. Existing per-world bounds and new total quota enforced.
+- Added prepaid player treasury, bounded restricted provisioner, immutable actor policy and finite operator pool; no new player account required per repeat campaign.
+- Added completed/archived/reclaimed lifecycle, post-story lease-term closure, nonreusable tombstones and SQLite archive/session history.
+- PASS: 23 Rust tests; 100 Node tests (seven backend cases); TypeScript/production build; two independent prepaid seven-night routes with archive/reclaim/reopen.
+- Sandbox: 53 discovered, 51 initially passed, one new fixture failed and one Windows-only case skipped; corrected focused case passed. Final 52 unique executed cases PASS.
+- Measured initial playable footprint 1,441 bytes; seven-night peaks 2,033/2,101; 256 grants + 64 leases 27,011. Reclamation retains 191–202-byte tombstones in fixtures.
+- Final WASM 579,736 bytes, SHA-256 99f0deeac2fc7e95080d92656b87c0a1515311201d065c8588eacc25b35e05f0. Final artifact tested in focused Sandbox lifecycle case.
+- Existing evidence preserved; new evidence/report in docs/PASS4C2.md and docs/evidence/pass4c2-*.json. No gameplay narrative, artwork, Testnet credentials, deployment, funding, commit or push.
+- Remaining: approve a fresh deployment (incompatible root layout), provision isolated runtime custody, fund finite pool/gas, public operational safeguards and live acceptance. Abandoned/early-defeat worlds remain retained.
+- Stop before any Testnet upgrade/deployment; no subsequent pass begun.
+
+# Progress - 2026-11-13 - Pass 4D PARTIAL
+- Approved sustainable WASM deployed to night.we-inherit-night.testnet; independent RPC bytes match the approved SHA-256.
+- Registry, four-active-world provisioning policy and 0.15 NEAR pool initialized; seven administrative transactions finalized.
+- Storage 580,451 bytes / 5.80451 NEAR; final amount 6.0951742617979837 NEAR. Retained funding used; no faucet or paid service.
+- Old castle code, balance and storage unchanged; obligations preserved.
+- PASS: seven focused backend tests and Testnet-mode production build. Prior 4C.2 regressions reused.
+- BLOCKED: dedicated runtime identity/keys. User chose reporting after deployment; no administrative gameplay fallback.
+- NOT RUN: live visitors, player/NPC transactions, seven-night completion, archive/reclaim/replay. Next: isolated runtime setup and acceptance checks.
+- Report: docs/PASS4D.md; evidence/pass4d/. No public hosting, commit/push, Rust/gameplay/art changes.
+# Progress - 2026-11-13 UTC - Pass 4E preparation complete
+- Added one-service Render Blueprint: Node 24, existing frontend/API, /var/data persistent SQLite, PORT/0.0.0.0 and health checks.
+- Added protected-environment restricted signing, exact-roster startup permission checks and retained per-call signature/finality verification; no FullAccess fallback.
+- Corrected prepaid affordability, unsigned/signed/broadcast recovery, exact-byte retry safety, API privacy and durable creation/request quotas.
+- Bounded concurrent requests, streamed artwork, removed unbounded visitor cache and added crash-released single-writer locking.
+- PASS: 123/123 Windows Node regressions; 30/30 Linux backend/startup tests; production frontend build; five affected local Sandbox cases including two independent seven-night campaigns.
+- Linux full-suite attempt: 94 pass / four environment failures (Windows-native Vite dependencies/local-demo); focused Linux runtime and full Windows suite pass. Fresh Linux install/build remains unverified.
+- Linux synthetic memory: 124.1 MiB idle / 220.9 MiB peak RSS; four campaigns, 4,000 journals, 80 API + 80 artwork responses, 256 MiB heap cap. Starter is a reasonable initial sizing choice, not hosted capacity proof.
+- Updated README, project/deployment docs, AGENTS, environment example and docs/PASS4E.md; reviewed hackathon rules without changing them. Memory evidence: docs/evidence/pass4e-memory.json.
+- No live credentials, Testnet transactions, Rust changes, deployment, service purchase, commit or push. Existing unrelated work preserved.
+- Next: separately authorize restricted-key installation and Render setup, then verify real hosted gameplay. Finite capacity/abandoned worlds and unreconciled expired transactions remain operational limits.
+
+# Progress - 2026-11-13 UTC - Restricted runtime key installation complete
+- Verified all eleven existing Testnet accounts and current key lists through FastNEAR and official NEAR RPC; immutable roster unchanged.
+- Installed eleven independent Ed25519 FunctionCall keys for night.we-inherit-night.testnet with exact role allowlists; eleven AddKey-only transactions FINAL.
+- PASS: independent exact-key verification, all prior credentials preserved, production verifyRuntimeRoster, and unchanged deployed registry. All new allowances remain 0.05 test NEAR each.
+- Private JSON is DPAPI CurrentUser encrypted outside Git under AppData/Local/WeInheritNight/Render-night-testnet; user/SYSTEM-only ACL and secret/public matching verified.
+- Exact public NIGHT_CONFIG_JSON and encrypted NIGHT_RUNTIME_KEYS are ready; manual clipboard helper syntax passes and was not executed. Nothing uploaded to Render.
+- PASS: scoped production Vite bundle/import review; no signing/private environment/provider code in frontend. Dormant Sandbox/Windows helpers reported and preserved; no demonstrated issue warrants removal.
+- Initial protection cmdlet failure occurred before writing secrets; direct DPAPI succeeded. Corrected expected new-key nonce after provisioner FINAL; no duplicate installation transaction.
+- Docs: docs/RUNTIME_KEYS.md, Pass 4E follow-up, README, requirements and AGENTS. Public evidence: evidence/runtime-keys. Hackathon requirements reviewed unchanged.
+- No application/Rust/art/gameplay changes, new tests, deployment, new accounts, fund transfers, paid service, commit or push. No remaining key-installation blocker.
+- Next: separately approved Render setup and live hosted acceptance; no public playability claim.
+
+## Campaign capacity fix — locally verified
+- IMPLEMENTED: private operator setter updates existing max_active; no serialized layout changes; 32 MiB ceiling and financial backing checks retained.
+- IMPLEMENTED: durable, serialized inactivity/defeat cleanup freezes actual outcomes, settles through existing restricted methods and retains replay tombstones/history.
+- Creation quotas/cooldown are bounded configuration; finalized provisioning rejection can retry; uncertain identity remains journaled. Deadline/closure disclosed in existing UI.
+- PASS: 24 Rust tests, including fifth-campaign admission after raising capacity; 141 Node tests; TypeScript/Vite production build.
+- PASS: 5 Sandbox tests covering exact old-to-new upgrade, two early reclaimed worlds, financial/storage/replay protections and two complete independent seven-night games.
+- Exact public Testnet state and populated old-WASM state remained byte-identical across local code-only upgrade. Verified artifact SHA-256 a11d407105d4b09d17eb91642ff415040e37f0ede05355fb626d0774110df250.
+- Initial direct build missed --cfg near; unchanged lifecycle regression caught generic traps. Corrected build passed; no checks weakened. Native tests used bundled prebuilt NASM objects.
+- Docs: docs/CAMPAIGN_CAPACITY.md, public evidence, Render example, Pass 4E follow-up, README, requirements and AGENTS. Hackathon requirements reviewed unchanged.
+- No live transactions, upgrade/deployment, credentials, paid service, commit or push. Higher-capacity hosted memory/performance remains unverified; funding/gas/storage stay finite.
+- Next: separately authorized same-account code-only upgrade (no reinitialization), operator capacity selection and hosted acceptance.
+
+## Testnet upgrade and initial capacity — verified; expansion PARTIAL
+- PASS: two RPC providers confirmed preflight code/state unchanged; checksum a11d407105d4b09d17eb91642ff415040e37f0ede05355fb626d0774110df250 and sufficient storage backing verified.
+- FINAL code-only upgrade: F3wPz6J9xdoKtjpg12YTLGytMkh9L5JNkqgmDPtdKAuz. All stored bytes preserved; no initialization or provisioning/credential edits.
+- FINAL capacity=1: 5PQw61q96tiuQSL5ohZp51g74c9FZzWkvwetEUMXi6xq. Exact capacity-only byte diff, getter, code and financial state independently verified.
+- Actual deployment cost reduced the two-campaign planning margin; fresh guard blocked that attempt before signing. Only the one-capacity call was sent.
+- Balance 6.0907342792571656 test NEAR; storage 584636 bytes; pool 0.15; liabilities/treasuries/active worlds zero. All eleven runtime allowances remain 0.05 and permissions/nonces unchanged.
+- PARTIAL expansion: under documented measured-storage budget, capacity 2 needs 0.0003857207428344 extra free backing; capacity 5 needs 0.2302857207428344 total contract funding plus gas-budget/higher-capacity measurement clearance.
+- Evidence: evidence/capacity-testnet; report docs/CAPACITY_TESTNET_UPGRADE.md. README, requirements, prior capacity report and AGENTS synchronized; hackathon requirements reviewed unchanged.
+- No gameplay transactions, account/key changes, funding transfers, Render deployment, unrelated tests, commit or push. Existing local tests apply to the identical deployed artifact.
+- Stopped after independent verification. No public playability claim; additional funding/hosting operations need separate authorization.
+
+## Testnet funding — PASS, capacity 5
+- Two normal official CLI faucet requests created win-funding-20261113-a.testnet and win-funding-20261113-b.testnet with 10 Testnet NEAR each; both FINAL and independently verified. No rejection/bypass/repeated request.
+- First CLI hash capture missed stderr; read-only block/chunk lookup recovered and verified creation before proceeding. Deprecated RPC query rejection resolved using documented FastNEAR/dRPC providers, not another faucet.
+- FINAL transfer: 4 NEAR to existing night contract; authorized self-call adds 1 NEAR to pool. Final pool 1.15, capacity 5, contract balance 10.0903084649026567 NEAR.
+- Keeper/Seraphine finite allowances raised to 0.10/0.075 via atomic same-public-key delete/add; receiver/method permissions and all other keys preserved. Other nine allowances remain 0.05; no actor balance top-ups needed.
+- Five adjusted stress-storage footprints budget 2.7075 NEAR; free backing after current storage/pool/root reserve is 3.0877884649026567. Additional stress-budget headroom 0.3802884649026567.
+- Funding reserves: A 5.9999553634875, B 10; combined 15.9999553634875 NEAR (15.9963153634875 above their storage stakes).
+- PASS: all seven transactions FINAL-success through two RPC providers; balances, capacity getter, pool-only/capacity-only state changes, unchanged code/roster/policy and exact restricted permissions verified.
+- Evidence evidence/campaign-funding; docs/TESTNET_FUNDING.md, prior capacity/key docs, README, requirements and AGENTS updated. Hackathon requirements reviewed unchanged.
+- No contract/application changes, redeployment, live gameplay, Render work, unrelated tests, commit or push. Funding is verified; hosted five-player performance/public playability is not.
+- Stopped after verification; no additional operations authorized by this milestone record.
+
+## Public deployment — pre-push preparation
+- User authorized audit, commit/push and hosted acceptance, with separate approval required for paid service and runtime-secret upload.
+- Expanded ignore rules for encrypted credential exports, private local configurations, SQLite variants and signed recovery payloads; preserved safe public config/docs/receipts.
+- PASS: candidate/index/all-ref-and-reflog secret scans; no valid NEAR private key or other credential found. Public Ed25519 signatures excluded only after contextual and cryptographic checks; tracked ignored-file list empty.
+- PASS: production frontend build and import audit; exact Render install/build command in fresh Linux Node 24 directory; Linux SQLite WAL/startup/health/static-page smoke without credentials or chain calls.
+- Dependency audit: 13 low transitive elliptic findings, no moderate/high/critical; no unrelated dependency updates. Existing regression evidence reused.
+- Render sign-in completed by user; Blueprint setup awaits reviewed repository push and explicit payment/manual-secret steps. No service or secret upload yet.
+- Evidence/docs: evidence/public-deployment and docs/PUBLIC_DEPLOYMENT.md. Public gameplay acceptance remains NOT VERIFIED.

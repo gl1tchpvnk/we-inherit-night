@@ -1,0 +1,17 @@
+{
+  "role": "dorian",
+  "accountId": "dorian.we-inherit-night.testnet",
+  "publicKey": "ed25519:CyZzDYyZTWCCcktGdyorvQTdTai3PhCEA7kLawzbbYfu",
+  "administrativePublicKey": "ed25519:81aDBUVCuJ4FLyaX8JxPfGKFgvRYRbA3UszgTKhvpTdw",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "enter_room",
+    "grant_access"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434122000001,
+  "phase": "signed-verified",
+  "network": "testnet",
+  "hash": "EpNV9z2Us4USiFbuuJ25SiMSwReoXiD7mWu8HLeHwCRf",
+  "signatureVerified": true
+}

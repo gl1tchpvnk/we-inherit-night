@@ -1,0 +1,73 @@
+{
+  "network": "local-sandbox",
+  "deployedSha256": "99f0deeac2fc7e95080d92656b87c0a1515311201d065c8588eacc25b35e05f0",
+  "replacementSha256": "a11d407105d4b09d17eb91642ff415040e37f0ede05355fb626d0774110df250",
+  "exactLiveStatePreserved": true,
+  "populatedStatePreserved": true,
+  "records": [
+    {
+      "id": "early-defeat",
+      "reason": "defeat",
+      "initial": {
+        "status": "active",
+        "prepaid": true,
+        "treasury": "20000000000000000000000",
+        "commitment": "",
+        "world_bytes": 1270,
+        "storage_usage": 587406,
+        "storage_price": "10000000000000000000",
+        "pool": "0",
+        "liabilities": "60000000000000000000000",
+        "treasury_total": "40000000000000000000000",
+        "active": 2
+      },
+      "end": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "7ac814db706ddbee91b192fb93cee0ac66afc18fe213af23e1cded2af40f276f",
+        "world_bytes": 0,
+        "storage_usage": 586139,
+        "storage_price": "10000000000000000000",
+        "pool": "20000000000000000000000",
+        "liabilities": "30000000000000000000000",
+        "treasury_total": "20000000000000000000000",
+        "active": 1
+      },
+      "originalNight": 2,
+      "settlementNight": 7
+    },
+    {
+      "id": "abandoned",
+      "reason": "abandoned",
+      "initial": {
+        "status": "active",
+        "prepaid": true,
+        "treasury": "20000000000000000000000",
+        "commitment": "",
+        "world_bytes": 1267,
+        "storage_usage": 586139,
+        "storage_price": "10000000000000000000",
+        "pool": "20000000000000000000000",
+        "liabilities": "30000000000000000000000",
+        "treasury_total": "20000000000000000000000",
+        "active": 1
+      },
+      "end": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "f6b34c204e850f614f4911d1dbc3cd5063d0f2092066eaf855001e6142a98b90",
+        "world_bytes": 0,
+        "storage_usage": 584878,
+        "storage_price": "10000000000000000000",
+        "pool": "40000000000000000000000",
+        "liabilities": "0",
+        "treasury_total": "0",
+        "active": 0
+      },
+      "originalNight": 2,
+      "settlementNight": 7
+    }
+  ]
+}

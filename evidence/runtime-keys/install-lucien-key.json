@@ -1,0 +1,16 @@
+{
+  "block_hash": "HuoaDqysvM3u9kyAeU77GG2hx6LK4NaVDcXiRhaPEBA4",
+  "block_height": 277462442,
+  "nonce": 277462429000000,
+  "permission": {
+    "FunctionCall": {
+      "allowance": "50000000000000000000000",
+      "method_names": [
+        "grant_access",
+        "offer_lease",
+        "claim_rent"
+      ],
+      "receiver_id": "night.we-inherit-night.testnet"
+    }
+  }
+}

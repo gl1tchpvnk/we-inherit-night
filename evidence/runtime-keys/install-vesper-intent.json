@@ -1,0 +1,14 @@
+{
+  "role": "vesper",
+  "accountId": "vesper.we-inherit-night.testnet",
+  "publicKey": "ed25519:6f6KH1ub8739NakytBYzkubGX9RDWNNjeczdpdBMgiPj",
+  "administrativePublicKey": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "revoke_grant"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434053000008,
+  "phase": "preparing",
+  "network": "testnet"
+}

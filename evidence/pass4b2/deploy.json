@@ -1,0 +1,103 @@
+{
+  "final_execution_status": "FINAL",
+  "receipts_outcome": [
+    {
+      "block_hash": "AEbMchPhaCfaMxxUQbi7Ti8j9rn6MfdgjVsRxRHynpNu",
+      "id": "AxHZz9zPBpb9EVd4nrN6mXHokszxeEwyq11unRcZbn2R",
+      "outcome": {
+        "executor_id": "castle.we-inherit-night.testnet",
+        "gas_burnt": 32082473018864,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            null
+          ],
+          "gas_profile": [],
+          "version": 4
+        },
+        "receipt_ids": [
+          "ChRd73X1iy53YjWxfUmnEmvggbX1BhK9smKrvEojuAb3"
+        ],
+        "status": {
+          "SuccessValue": ""
+        },
+        "tokens_burnt": "3208247301886400000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "BWtaJMUXp7XhpKNUi27PTZ3pNryaA1cfg2MrqXD98ddk"
+        }
+      ]
+    },
+    {
+      "block_hash": "3SL2Db2Q9UeQVfxzyZJ7YHb735ypbNVSa6hcPbkdALSd",
+      "id": "ChRd73X1iy53YjWxfUmnEmvggbX1BhK9smKrvEojuAb3",
+      "outcome": {
+        "executor_id": "castle.we-inherit-night.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            {
+              "local": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg"
+            }
+          ],
+          "gas_profile": [],
+          "version": 4
+        },
+        "receipt_ids": [],
+        "status": {
+          "SuccessValue": ""
+        },
+        "tokens_burnt": "0"
+      },
+      "proof": []
+    }
+  ],
+  "status": {
+    "SuccessValue": ""
+  },
+  "transaction": {
+    "actions": [
+      {
+        "DeployContract": {
+          "code": "qWrb4GqQ6SpqkqTILaEWUnPG4FTDzxxV5qFYYb0OkqU="
+        }
+      }
+    ],
+    "hash": "663TFjUduJwkjuRiHiw3pMg34yLcxioJ5Aejvi3EHqtL",
+    "nonce": 277433962000001,
+    "priority_fee": 0,
+    "public_key": "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW",
+    "receiver_id": "castle.we-inherit-night.testnet",
+    "signature": "ed25519:tSqUW7UrX3QF8irvdaY77WRKKM5mXBbYPqDQJyx8C9m78ZMcA3RZ9ZWCnX9giNLZwtPxSVZK8FQNX5aQNfpDJwY",
+    "signer_id": "castle.we-inherit-night.testnet"
+  },
+  "transaction_outcome": {
+    "block_hash": "AEbMchPhaCfaMxxUQbi7Ti8j9rn6MfdgjVsRxRHynpNu",
+    "id": "663TFjUduJwkjuRiHiw3pMg34yLcxioJ5Aejvi3EHqtL",
+    "outcome": {
+      "executor_id": "castle.we-inherit-night.testnet",
+      "gas_burnt": 3646905535694,
+      "logs": [],
+      "metadata": {
+        "gas_profile": null,
+        "version": 1
+      },
+      "receipt_ids": [
+        "AxHZz9zPBpb9EVd4nrN6mXHokszxeEwyq11unRcZbn2R"
+      ],
+      "status": {
+        "SuccessReceiptId": "AxHZz9zPBpb9EVd4nrN6mXHokszxeEwyq11unRcZbn2R"
+      },
+      "tokens_burnt": "364690553569400000000"
+    },
+    "proof": [
+      {
+        "direction": "Right",
+        "hash": "9S7ans8sZfV4KYqspxx1nC4vScXKQii9g6Qj316NoX13"
+      }
+    ]
+  }
+}

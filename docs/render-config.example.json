@@ -1,0 +1,54 @@
+{
+  "lifecycle": true,
+  "creation": {"perMinute": 4, "perDay": 24, "cooldownMs": 60000},
+  "cleanup": {"inactivityMs": 86400000, "intervalMs": 60000},
+  "provisioning": {
+    "contractId": "night.we-inherit-night.testnet",
+    "actors": {
+      "provisioner": {
+        "accountId": "REPLACE_WITH_EXISTING_PROVISIONER.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "player": {
+        "accountId": "REPLACE_WITH_EXISTING_PLAYER.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "vesper": {
+        "accountId": "REPLACE_WITH_EXISTING_VESPER.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "seraphine": {
+        "accountId": "REPLACE_WITH_EXISTING_SERAPHINE.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "keeper": {
+        "accountId": "REPLACE_WITH_EXISTING_KEEPER.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "marius": {
+        "accountId": "REPLACE_WITH_EXISTING_MARIUS.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "lucien": {
+        "accountId": "REPLACE_WITH_EXISTING_LUCIEN.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "mirelle": {
+        "accountId": "REPLACE_WITH_EXISTING_MIRELLE.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "dorian": {
+        "accountId": "REPLACE_WITH_EXISTING_DORIAN.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "cassian": {
+        "accountId": "REPLACE_WITH_EXISTING_CASSIAN.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      },
+      "sabine": {
+        "accountId": "REPLACE_WITH_EXISTING_SABINE.testnet",
+        "publicKey": "ed25519:REPLACE_WITH_RESTRICTED_PUBLIC_KEY"
+      }
+    }
+  }
+}

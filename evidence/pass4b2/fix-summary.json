@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "network": "testnet",
+  "restricted_public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD",
+  "restricted_success": "Hd2YJ6KY7so6AAfWgSLD6hqkphrkreWJdmBiuhreeagm",
+  "finalized_successes": 2,
+  "pre_inclusion_rejections": [
+    "NotEnoughAllowance",
+    "MethodNameMismatch",
+    "RequiresFullAccess"
+  ],
+  "key_verified_before_broadcast": true,
+  "signature_verified_before_broadcast": true,
+  "campaign_b_unchanged": true,
+  "original_campaign_a_rights_unchanged": true,
+  "test_grant_revoked": true,
+  "code_unchanged": true,
+  "credentials_preserved": true,
+  "uncertain_resubmissions": 0,
+  "pass4c_started": false
+}

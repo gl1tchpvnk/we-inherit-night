@@ -46,7 +46,7 @@ for(const choice of ['accept','reject','failed','lost'])test(`provider pipeline 
  const root=resolve('.local');await mkdir(root,{recursive:true});const dir=await mkdtemp(join(root,'decision-test-')),path=join(dir,'campaign.json');
  const world=fixture();let calls=0,providerCalls=0;
  const actors=Object.fromEntries(['player','vesper','seraphine','lucien'].map(a=>[a,{accountId:a,balance:async()=>({available:'250000000000000000000000'})}]));
- const scenario={actors,view:async()=>structuredClone(world),hasAccess:async p=>world.access[p],snapshot:async(error=null)=>({world:structuredClone(world),walletYocto:'250000000000000000000000',error}),call:async()=>{world.night++;return {succeeded:true,receiptFailures:[]};},request:async()=>{
+ const scenario={contract:{accountId:"mock-contract"},campaignId:"default",actors,view:async()=>structuredClone(world),hasAccess:async p=>world.access[p],snapshot:async(error=null)=>({world:structuredClone(world),walletYocto:'250000000000000000000000',error}),call:async()=>{world.night++;return {succeeded:true,receiptFailures:[]};},request:async()=>{
   calls++;if(choice==='failed')return {error:'Injected rejection'};
   world.next_nonce++;world.leases[0].status='accepted';world.leases[0].end_night=world.night+3;world.leases[0].escrow_yocto=RENT;world.access.lounge=true;
   if(choice==='lost')throw new Error('Lost finalized response');return {error:null};
@@ -70,7 +70,7 @@ for(const choice of ['accept','reject','failed','lost'])test(`provider pipeline 
 test('durable decision reservation avoids another paid request after restart',async()=>{
  const root=resolve('.local');const dir=await mkdtemp(join(root,'decision-test-')),path=join(dir,'campaign.json'),world=fixture();const s=newCampaign('test',{legacy:true});s.revision=1;
  const actors=Object.fromEntries(['player','vesper','seraphine','lucien'].map(a=>[a,{accountId:a}]));let requested=[];
- const scenario={actors,view:async()=>structuredClone(world),snapshot:async(error=null)=>({world:structuredClone(world),walletYocto:RENT,error}),call:async()=>{world.night++;return {succeeded:true,receiptFailures:[]};}};
+ const scenario={contract:{accountId:"mock-contract"},campaignId:"default",actors,view:async()=>structuredClone(world),snapshot:async(error=null)=>({world:structuredClone(world),walletYocto:RENT,error}),call:async()=>{world.night++;return {succeeded:true,receiptFailures:[]};}};
  try{
   await saveJson(path,{campaign:newCampaign('test',{legacy:true}),pending:{kind:'dawn',index:0,state:s,intent:null,decision:{actor:'vesper',id:'test:0:vesper'}}});
   const session=await createCampaignSession(scenario,path,'test',undefined,async o=>{requested.push(o.actor);return {source:'fallback',detail:'test',attempts:0};});

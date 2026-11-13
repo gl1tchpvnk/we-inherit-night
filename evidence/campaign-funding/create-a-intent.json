@@ -1,0 +1,6 @@
+{
+  "accountId": "win-funding-20261113-a.testnet",
+  "network": "testnet",
+  "requestedAt": "2026-11-13T05:38:46.926Z",
+  "procedure": "official near-cli sponsor-by-faucet-service; single request; OS keychain"
+}

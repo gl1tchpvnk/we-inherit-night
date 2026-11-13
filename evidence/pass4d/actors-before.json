@@ -1,0 +1,102 @@
+[
+  {
+    "account": "vesper.we-inherit-night.testnet",
+    "amount": "242842755213231700000000",
+    "block_hash": "HzFf2NmdNfXPRuJuPojusjK94LJAsZcF5iUPiodEbYBS",
+    "block_height": 277456064,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 336
+  },
+  {
+    "account": "player.we-inherit-night.testnet",
+    "amount": "248782507812257900000000",
+    "block_hash": "HzFf2NmdNfXPRuJuPojusjK94LJAsZcF5iUPiodEbYBS",
+    "block_height": 277456064,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "keeper.we-inherit-night.testnet",
+    "amount": "250000000000000000000000",
+    "block_hash": "HzFf2NmdNfXPRuJuPojusjK94LJAsZcF5iUPiodEbYBS",
+    "block_height": 277456064,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "seraphine.we-inherit-night.testnet",
+    "amount": "248384948331407500000000",
+    "block_hash": "HzFf2NmdNfXPRuJuPojusjK94LJAsZcF5iUPiodEbYBS",
+    "block_height": 277456064,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "marius.we-inherit-night.testnet",
+    "amount": "249462385375740200000000",
+    "block_hash": "HzFf2NmdNfXPRuJuPojusjK94LJAsZcF5iUPiodEbYBS",
+    "block_height": 277456064,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "lucien.we-inherit-night.testnet",
+    "amount": "250000000000000000000000",
+    "block_hash": "7onfUfXYxrDe3C74cWZsWVTP5TdDcSdFKvnxpQQeWs8S",
+    "block_height": 277456065,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "mirelle.we-inherit-night.testnet",
+    "amount": "250000000000000000000000",
+    "block_hash": "7onfUfXYxrDe3C74cWZsWVTP5TdDcSdFKvnxpQQeWs8S",
+    "block_height": 277456065,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "dorian.we-inherit-night.testnet",
+    "amount": "250000000000000000000000",
+    "block_hash": "7onfUfXYxrDe3C74cWZsWVTP5TdDcSdFKvnxpQQeWs8S",
+    "block_height": 277456065,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "cassian.we-inherit-night.testnet",
+    "amount": "229504529883011500000000",
+    "block_hash": "7onfUfXYxrDe3C74cWZsWVTP5TdDcSdFKvnxpQQeWs8S",
+    "block_height": 277456065,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  {
+    "account": "sabine.we-inherit-night.testnet",
+    "amount": "250000000000000000000000",
+    "block_hash": "7CkdZ3upPyDc8fr2ihWiHoMQ4sbA19EPauV6pUh6mW5Y",
+    "block_height": 277456066,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  }
+]

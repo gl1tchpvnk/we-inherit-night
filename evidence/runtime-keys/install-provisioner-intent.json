@@ -1,0 +1,14 @@
+{
+  "role": "provisioner",
+  "accountId": "provisioner.we-inherit-night.testnet",
+  "publicKey": "ed25519:8QdPoPsxMoF6i4fpKHnmw3dTKnHMZiT4ESmxuoVuxGgF",
+  "administrativePublicKey": "ed25519:CPKB3yezj2baAgwkdqLoM544a3NTgbdz17p25UMB7WnK",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "open_campaign"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277455924000001,
+  "phase": "preparing",
+  "network": "testnet"
+}

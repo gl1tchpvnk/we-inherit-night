@@ -1,0 +1,124 @@
+{
+  "checkedAt": "2026-11-13T03:41:26.405617+00:00",
+  "network": "testnet",
+  "accounts": {
+    "night.we-inherit-night.testnet": {
+      "amount": "6095174261797983700000000",
+      "block_hash": "7aHvCPy8rdjhSCR8VD1rnpzh2MQoYpKRSBx8MJbCu12D",
+      "block_height": 277456454,
+      "code_hash": "BMvQViP8nmDMqF8ibmogXEhEvJmhVTj3L78nZ9h8Tu5y",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 580451
+    },
+    "provisioner.we-inherit-night.testnet": {
+      "amount": "50000000000000000000000",
+      "block_hash": "9V5npSNtBhEUVm73Fu8Bd5DmiMYSRrnLcLeAhvdc1AMk",
+      "block_height": 277456455,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "we-inherit-night.testnet": {
+      "amount": "117505136012500000000000",
+      "block_hash": "AJam8d7uerz9YVHxd3k4VMDtkDYJgFh65AZMYB66SzLs",
+      "block_height": 277456456,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "win-funding-20261112-a.testnet": {
+      "amount": "24381517378769300000000",
+      "block_hash": "AJam8d7uerz9YVHxd3k4VMDtkDYJgFh65AZMYB66SzLs",
+      "block_height": 277456456,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "castle.we-inherit-night.testnet": {
+      "amount": "11135777804636618100000000",
+      "block_hash": "7BU8jAAYm73BiB1YFKqfayp4feBAKdsmMrthsWRqRR6u",
+      "block_height": 277456457,
+      "code_hash": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 496323
+    }
+  },
+  "registry": {
+    "liabilities": "0",
+    "treasury_total": "0",
+    "pool": "150000000000000000000000",
+    "active": 0,
+    "policy": {
+      "creator": "provisioner.we-inherit-night.testnet",
+      "actors": [
+        "vesper.we-inherit-night.testnet",
+        "player.we-inherit-night.testnet",
+        "keeper.we-inherit-night.testnet",
+        "seraphine.we-inherit-night.testnet",
+        "marius.we-inherit-night.testnet",
+        "lucien.we-inherit-night.testnet",
+        "mirelle.we-inherit-night.testnet",
+        "dorian.we-inherit-night.testnet",
+        "cassian.we-inherit-night.testnet",
+        "sabine.we-inherit-night.testnet"
+      ],
+      "max_active": 4,
+      "interval_blocks": 10,
+      "treasury": "40000000000000000000000"
+    },
+    "last_creation": 0
+  },
+  "rawState": {
+    "block_hash": "7BU8jAAYm73BiB1YFKqfayp4feBAKdsmMrthsWRqRR6u",
+    "block_height": 277456457,
+    "values": [
+      {
+        "key": "U1RBVEU=",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBx8NErhMMfAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQEAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+      }
+    ]
+  },
+  "keys": {
+    "night.we-inherit-night.testnet": {
+      "block_hash": "GpC5PSMHwqDenzYgNjgfdByyprn9NdjvH1Z1Dy9GA6ju",
+      "block_height": 277456458,
+      "keys": [
+        {
+          "access_key": {
+            "nonce": 277455881000004,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:NsQXQy1puDfTF1zDTq31E99NjhxVE15cBK5Q96noKAL"
+        }
+      ]
+    },
+    "provisioner.we-inherit-night.testnet": {
+      "block_hash": "GpC5PSMHwqDenzYgNjgfdByyprn9NdjvH1Z1Dy9GA6ju",
+      "block_height": 277456458,
+      "keys": [
+        {
+          "access_key": {
+            "nonce": 277455924000000,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:CPKB3yezj2baAgwkdqLoM544a3NTgbdz17p25UMB7WnK"
+        }
+      ]
+    }
+  },
+  "transactions": {
+    "create-night": "2Xjuv9CoZyNBR4JzXjS4jq3zUG4jf6wCzPtDLqYsMruC",
+    "create-provisioner": "Bc5YxHGiEHBSXj5pKkHeRWUb43GgpUY8fenupijFV7QS",
+    "deploy": "FvPeCpDbNF1pNSJZaVZfWPvWbRZatKtw3hWZxHbQw6aS",
+    "funding-construct": "H8WRwHwzXArxBuzCUqNyJbr5ckeCs1b1cTSqAVrLft6W",
+    "policy": "DNLAW7oHnYZbaTJqLmhWqpeM6B1R3SWUCBmJq9XjQze",
+    "pool": "E7ezLe9ZBjAteTutcUYut6S6qBeDJjZMNdtCPX3omGb7",
+    "registry": "9V8F64vK7EqkDN3VN4YV1tUFcCQXiwwWVy7U1esEkqHC"
+  },
+  "oldCastleUnchanged": true
+}

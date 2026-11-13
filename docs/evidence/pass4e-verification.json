@@ -1,0 +1,33 @@
+{
+  "scope": "Pass 4E local preparation only",
+  "node": "24.13.0",
+  "tests": {
+    "windows_regression": {
+      "passed": 123,
+      "failed": 0
+    },
+    "linux_backend": {
+      "passed": 30,
+      "failed": 0
+    },
+    "affected_sandbox": {
+      "passed": 5,
+      "failed": 0
+    },
+    "production_frontend_build": "PASS",
+    "initial_linux_full_regression": {
+      "passed": 94,
+      "failed": 4,
+      "cause": "Windows-native Vite bindings and local-demo executable in shared checkout"
+    }
+  },
+  "memory_evidence": "pass4e-memory.json",
+  "not_run": [
+    "public deployment",
+    "live Testnet gameplay",
+    "live credential installation",
+    "fresh Linux dependency install/frontend build",
+    "Render container mount/HTTPS acceptance"
+  ],
+  "chain_changes": false
+}

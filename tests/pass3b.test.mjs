@@ -59,7 +59,7 @@ test('Dorian petitions only while a live rival can still be replaced and finishe
 });
 test('acceptance and rejection are separate evidence, never inferred from leaving dialogue',()=>{
  const r=fixture();r.world.leases=[{id:1,buyer:'player',property_id:'sanctuary',status:'offered',end_night:null,duration_nights:7}];assert.equal(courtReactions(r).length,0);
- r.world.leases[0].status='accepted';r.world.leases[0].end_night=8;assert.match(courtReactions(r)[0].text,/Night 9/);
+ r.world.leases[0].status='accepted';r.world.leases[0].end_night=8;assert.match(courtReactions(r)[0].text,/lasts through the final night/);
  r.world.leases[0].status='rejected';r.world.leases[0].end_night=null;assert.match(courtReactions(r)[0].text,/no shelter or access/);assert.equal(courtReactions(r)[0].night,-1);
 });
 test('historical assistant and rival replies acknowledge a subsequently closed route',()=>{

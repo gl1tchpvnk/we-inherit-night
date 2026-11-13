@@ -1,0 +1,10 @@
+{
+  "actor": "win-funding-20261113-a.testnet",
+  "receiver": "night.we-inherit-night.testnet",
+  "hash": "6Xw8DCHjjt1MqdmVswvonHjp7jWX9Urf8Rz1kWxsncss",
+  "signatureVerified": true,
+  "nonce": 277468401000001,
+  "actionTypes": [
+    "transfer"
+  ]
+}

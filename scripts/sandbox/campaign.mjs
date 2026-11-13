@@ -6,8 +6,11 @@ import {newCampaign,migrateCampaign,playerAction,spendAction,requirePlaying,dawn
 import {readJson,saveJson} from './persistence.mjs';
 
 // Policy receives data only. It never receives accounts, signing keys or a client.
-export async function createCampaignSession(scenario,path,id,selector=selectNpcAction,provider=null){
-  let saved=await readJson(path);
+export async function createCampaignSession(scenario,path,id,selector=selectNpcAction,provider=null,storage={readJson,saveJson}){
+  let saved=await storage.readJson(path);
+  const chainBinding={contractId:scenario.contract.accountId,campaignId:scenario.campaignId??'default'};
+  if(saved?.chainBinding && (saved.chainBinding.contractId!==chainBinding.contractId || saved.chainBinding.campaignId!==chainBinding.campaignId))throw new Error('Save belongs to a different on-chain campaign.');
+  if(saved&&!saved.chainBinding&&chainBinding.campaignId!=='default')throw new Error('Legacy save has no binding for this campaign.');
   if(!saved){
     const campaign=newCampaign(id,{legacy:!scenario.political,living:scenario.living,dangerous:scenario.dangerous});
     if(campaign.politics)campaign.politics.accounts=Object.fromEntries(Object.entries(scenario.actors).map(([name,actor])=>[name,actor.accountId]));
@@ -21,7 +24,7 @@ export async function createCampaignSession(scenario,path,id,selector=selectNpcA
     else throw new Error('Unknown saved NPC intent.');
   }
   let queue=Promise.resolve();
-  const persist=()=>saveJson(path,saved);
+  const persist=()=>storage.saveJson(path,{...saved,chainBinding});
   await persist();
   async function runDawn(){
     const pending=saved.pending;
@@ -94,6 +97,8 @@ export async function createCampaignSession(scenario,path,id,selector=selectNpcA
     saved={campaign:pending.after,pending:null};await persist();
   }
   async function recover(){
+    // Public-network uncertainty must resolve before nonce-based game recovery.
+    await scenario.reconcile?.();
     if(saved.pending?.kind==='dawn')await runDawn();
     else if(saved.pending?.kind==='player'){
       const p=saved.pending,world=await scenario.view();
@@ -109,6 +114,7 @@ export async function createCampaignSession(scenario,path,id,selector=selectNpcA
       saved.pending={kind:'dawn',index:0,intent:null,state:structuredClone(saved.campaign)};await persist();await runDawn();
     }
   }
+  const paymentBalance=()=>scenario.paymentBalance?scenario.paymentBalance():scenario.actors.player.balance().then(b=>b.available);
   function controls(world,wallet){
     const s=saved.campaign,lease=world.leases[0],base=[];
     if(s.status!=='playing')base.push('Campaign ended.');
@@ -141,7 +147,7 @@ export async function createCampaignSession(scenario,path,id,selector=selectNpcA
         if(request.choice==='sanctuary_pact'){
           const lease=world.leases[1],owner=scenario.actors.seraphine.accountId;
           if(!lease||lease.property_id!=='sanctuary'||lease.owner!==owner||world.properties.find(p=>p.id==='sanctuary')?.owner!==owner||lease.buyer!==scenario.actors.player.accountId||lease.price_yocto!=='20000000000000000000000'||lease.duration_nights!==7||lease.offer_expiry_night!==3)throw new Error('Sanctuary terms or authority changed.');
-          if(BigInt((await scenario.actors.player.balance()).available)<BigInt(lease.price_yocto))throw new Error('Insufficient Sandbox NEAR.');
+          if(BigInt(await paymentBalance())<BigInt(lease.price_yocto))throw new Error('Insufficient Sandbox NEAR.');
           chain={action:'sanctuary'};log(next,'Sanctuary covenant accepted: seven nights of non-revocable entry, not ownership (NEAR confirmed).');
         }
       }else if(['agreement_accept','agreement_reject'].includes(request.action)){
@@ -152,13 +158,13 @@ export async function createCampaignSession(scenario,path,id,selector=selectNpcA
           a.status='rejected';a.result='Player declined; no transaction or relationship penalty.';log(next,a.result);
         }else{
           validateAgreement(a,s,world,scenario.actors.seraphine.accountId,scenario.actors.player.accountId);
-          const blocked=controls(world,(await scenario.actors.player.balance()).available).accept;
+          const blocked=controls(world,await paymentBalance()).accept;
           if(blocked.length)throw new Error(blocked.join(' '));
           spendAction(next);a.status='accepted';a.result='Contract confirmed prepaid Lounge entry; no title or votes.';
           chain={action:'accept'};log(next,a.result);
         }
       }else if(['accept','reject'].includes(request.action)){
-        const blocked=controls(world,(await scenario.actors.player.balance()).available)[request.action];
+        const blocked=controls(world,await paymentBalance())[request.action];
         if(blocked.length)throw new Error(blocked.join(' '));
         if(request.action==='accept'||!s.politics?.library)spendAction(next);chain={action:request.action};
         for(const a of next.agreements)if(a.status==='pending'){a.status=request.action==='accept'?'accepted':'rejected';a.result='Standing lease decision confirmed by NEAR.';}log(next,request.action==='accept'?'You sign Seraphine’s lease. Vesper will choose her own response at dawn.':'You refuse the lease. No rent paid.');

@@ -1,0 +1,30 @@
+├  Unsigned transaction:
+│    signer_id:    vesper.we-inherit-night.testnet
+│    receiver_id:  vesper.we-inherit-night.testnet
+│    actions:
+│       -- add access key:     
+│                       public key:   ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD
+│                       nonce:        0
+│                       permission:   FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 50000000000000000000000 }), receiver_id: "castle.we-inherit-night.testnet", method_names: ["revoke_grant"] })
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo
+│    Signature:  ed25519:BK5R1xqyM8kUbY9ptsxgNGXjhpc4CKkcjJYyLcMjcCWUF1jaDejhaQ7sVmjGef8ef4q7MLSnEupmipLSXDeNPkL
+│     
+├  Transaction Execution Info:
+│    Gas used: 0.644 Tgas
+│    Transaction fee: 0.0000420604308606 NEAR
+│    Transaction ID: CihWZZgkW2XGZ3BoJjV4kzif6kjBqCk86UXwnMnzFFef
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CihWZZgkW2XGZ3BoJjV4kzif6kjBqCk86UXwnMnzFFef
+│     
+
+
+Added access key = ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD to vesper.we-inherit-night.testnet.
+
+The data for the access key is saved in the keychain
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' account add-key vesper.we-inherit-night.testnet grant-function-call-access --allowance '0.05 NEAR' --contract-account-id castle.we-inherit-night.testnet --function-names revoke_grant autogenerate-new-keypair --signature-scheme ed25519 save-to-keychain network-config testnet sign-with-keychain --signer-public-key ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo send
+

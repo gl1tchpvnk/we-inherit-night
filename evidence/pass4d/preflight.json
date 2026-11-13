@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-11-13T03:26:20.447535+00:00",
+  "network": "testnet",
+  "rpc": "https://test.rpc.fastnear.com",
+  "accounts": [
+    {
+      "account": "night.we-inherit-night.testnet",
+      "response": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "block_hash": "BPkxCgvLTjqJvKVLiSEEathBEura1F2XXMWRiwdnru6N",
+              "block_height": 277454942,
+              "requested_account_id": "night.we-inherit-night.testnet"
+            },
+            "name": "UNKNOWN_ACCOUNT"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "account night.we-inherit-night.testnet does not exist while viewing"
+        },
+        "id": "pass4d"
+      }
+    },
+    {
+      "account": "provisioner.we-inherit-night.testnet",
+      "response": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "block_hash": "BPkxCgvLTjqJvKVLiSEEathBEura1F2XXMWRiwdnru6N",
+              "block_height": 277454942,
+              "requested_account_id": "provisioner.we-inherit-night.testnet"
+            },
+            "name": "UNKNOWN_ACCOUNT"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "account provisioner.we-inherit-night.testnet does not exist while viewing"
+        },
+        "id": "pass4d"
+      }
+    },
+    {
+      "account": "we-inherit-night.testnet",
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "2421735115087500000000000",
+          "block_hash": "BPkxCgvLTjqJvKVLiSEEathBEura1F2XXMWRiwdnru6N",
+          "block_height": 277454942,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "pass4d"
+      }
+    },
+    {
+      "account": "win-funding-20261112-a.testnet",
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "3884426153891269300000000",
+          "block_hash": "9Q58dwSrCuB21v6zWEVHm87eP5E5yhPu8dc4sRAMnx8f",
+          "block_height": 277454943,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "pass4d"
+      }
+    },
+    {
+      "account": "castle.we-inherit-night.testnet",
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "11135777804636618100000000",
+          "block_hash": "9Q58dwSrCuB21v6zWEVHm87eP5E5yhPu8dc4sRAMnx8f",
+          "block_height": 277454943,
+          "code_hash": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 496323
+        },
+        "id": "pass4d"
+      }
+    }
+  ],
+  "storagePrice": "10000000000000000000",
+  "protocolBlock": 42376888
+}

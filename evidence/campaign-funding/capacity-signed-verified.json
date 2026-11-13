@@ -1,0 +1,10 @@
+{
+  "actor": "night.we-inherit-night.testnet",
+  "receiver": "night.we-inherit-night.testnet",
+  "hash": "8UF4jTXgriYktTRjoUavmR2drY2ddg7wnsvzG3qq7U1Q",
+  "signatureVerified": true,
+  "nonce": 277455881000008,
+  "actionTypes": [
+    "functionCall"
+  ]
+}

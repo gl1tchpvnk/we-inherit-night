@@ -6,7 +6,7 @@ export interface FinalCourt {response:'accept'|'refuse'|'counter'|null;result:'a
 export const FINAL_ACTIONS={
  final_accept:{label:'Give Marius a continuing invitation',description:'One major action. Give Marius non-delegable Library access without expiry; keep his revocable protection.',blood:0,property:'library'},
  final_refuse:{label:'Refuse Marius’s demand',description:'One major action. Marius will withdraw his own protection at this reckoning. Independent shelter remains; without it you may lose.',blood:0},
- final_counter:{label:'Offer a limited inspection',description:'One major action and 1 Blood. Give Marius Library entry until the start of Night Nine, even if he refuses. He evaluates the public account and Cassian’s separate passage; rejection costs his protection.',blood:1,property:'library'}
+ final_counter:{label:'Offer a limited inspection',description:'One major action and 1 Blood. Give Marius a two-night Library invitation covering the final night, even if he refuses. He evaluates the public account and Cassian’s separate passage; rejection costs his protection.',blood:1,property:'library'}
 } as const;
 export type FinalAction=keyof typeof FINAL_ACTIONS;
 export type FinalNpcAction='passage_offer'|'passage_buy'|'passage_collect'|'final_answer';

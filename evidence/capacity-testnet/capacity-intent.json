@@ -1,0 +1,9 @@
+{
+  "network": "testnet",
+  "accountId": "night.we-inherit-night.testnet",
+  "publicKey": "ed25519:NsQXQy1puDfTF1zDTq31E99NjhxVE15cBK5Q96noKAL",
+  "nonce": 277455881000006,
+  "codeSha256": "a11d407105d4b09d17eb91642ff415040e37f0ede05355fb626d0774110df250",
+  "max_active": 1,
+  "phase": "preparing"
+}

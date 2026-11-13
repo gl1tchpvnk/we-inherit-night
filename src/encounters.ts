@@ -1,3 +1,4 @@
+import {expiryDescription} from './leaseNarrative.ts';
 import type {Action,Result} from './chain';
 import type {GameAction,NpcName} from './game';
 import {AGENTS} from './agents.ts';
@@ -53,7 +54,7 @@ function characterLines(actor:NpcName,r:Result):DialogueLine[]{
 }
 function leaseTerms(r:Result,id:number):string[]{
   const l=r.world.leases.find(l=>l.id===id);if(!l)return ['No verified lease available.'];
-  return [`Lease #${l.id} · ${l.property_id} · ${l.status.toUpperCase()}`,`${amount(l.price_yocto)} prepaid and nonrefundable; network gas is additional.`,`${l.duration_nights} nights of entry only. No title, delegation or votes.`,`Accept before contract night ${l.offer_expiry_night}${l.end_night!==null?`; access ends at contract night ${l.end_night}`:''}.`,`Recipient: ${l.buyer}. Accepted lease cannot be revoked; it still expires.`];
+  return [`Lease #${l.id} · ${l.property_id} · ${l.status.toUpperCase()}`,`${amount(l.price_yocto)} prepaid and nonrefundable; network gas is additional.`,`${l.duration_nights} nights of entry only. No title, delegation or votes.`,`Accept before contract night ${l.offer_expiry_night}${l.end_night!==null?`; access ${expiryDescription(l.end_night,r.world.night)}`:''}.`,`Recipient: ${l.buyer}. Accepted lease cannot be revoked; it still expires.`];
 }
 const eventText:Record<string,string>={
   archive_assist:'The investigator brought an assistant into your Library. Their access depends on your permission; withdrawing it closes both doors.',
@@ -104,8 +105,8 @@ export function buildEncounterScenes(r:Result):EncounterScene[]{
   for(const night of [...new Set(c.agentHistory.map(e=>e.night))]){
     const events=c.agentHistory.filter(e=>e.night===night&&e.kind!=='pass'&&(e.execution==='confirmed'||e.execution==='local'));
     const lines=events.map(e=>line(e.actor,`${eventText[e.kind]??e.kind} ${e.execution==='confirmed'?'[NEAR-confirmed]':'[Off-chain political event]'}`));
-    for(const lease of r.world.leases.filter(l=>l.status==='accepted'&&l.end_night!==null&&l.end_night-l.duration_nights===night))lines.unshift(line('seraphine',`${lease.property_id} agreement accepted. Entry lasts until contract night ${lease.end_night}; ownership did not change. [NEAR lease record]`));
-    for(const lease of r.world.leases.filter(l=>l.status==='accepted'&&l.end_night===night+1))lines.push(line('narrator',`${lease.property_id} lease expired at contract night ${lease.end_night}. Current effective access: ${r.world.access[lease.property_id]?'permitted':'not permitted'} [current contract view].`));
+    for(const lease of r.world.leases.filter(l=>l.status==='accepted'&&l.end_night!==null&&l.end_night-l.duration_nights===night))lines.unshift(line('seraphine',`${lease.property_id} agreement accepted. Entry ${expiryDescription(lease.end_night,r.world.night)}; ownership did not change. [NEAR lease record]`));
+    for(const lease of r.world.leases.filter(l=>l.status==='accepted'&&l.end_night===night+1))lines.push(line('narrator',`${lease.property_id} lease expired at dawn. Current effective access: ${r.world.access[lease.property_id]?'permitted':'not permitted'} [current contract view].`));
     if(c.politics&&night===4&&r.world.grants.some(g=>g.property_id==='passage'&&g.grantee===c.politics?.accounts.player&&g.expiry_night===5))lines.push(line('narrator',`Lucien’s temporary passage deadline arrived at contract night 5. Current effective passage: ${r.world.access.passage?'permitted':'not permitted'} [current contract view].`));
     const finalReckoning=c.status!=='playing'&&night===c.night-1;
     if(!lines.length)lines.push(line('narrator',finalReckoning?'The final reckoning is complete. No new consequential NPC action was recorded. Review the campaign outcome.':'The court has completed this reckoning. No new consequential NPC action was recorded. Review your current rights before choosing again.'));

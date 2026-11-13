@@ -1,0 +1,26 @@
+├  Unsigned transaction:
+│    signer_id:    vesper.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- deploy code <CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg> to a account <castle.we-inherit-night.testnet>
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo
+│    Signature:  ed25519:NVuwzVQojSbSKr1prvqSxhvv5rZ7oF6UNdLpMUfh7TVESZTJ2kPphbYiQ7nFnXushSF9jXREZBwkCaaAU6rZCEZ
+│     
+├  ERROR Transaction failed
+│    Gas used: 56.1 Tgas
+│    Transaction fee: 0.0055850277265654 NEAR
+│    Transaction ID: 9YDZKF4QnohqbZFcmttSTnybxwwJon1ajSFoYGGhVnwh
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9YDZKF4QnohqbZFcmttSTnybxwwJon1ajSFoYGGhVnwh
+│     
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' transaction construct-transaction vesper.we-inherit-night.testnet receiver-id castle.we-inherit-night.testnet add-action deploy-contract use-file target/near/night_authority/night_authority.wasm without-init-call skip network-config testnet sign-with-keychain --signer-public-key ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD send
+
+Error: 
+   0: Error: Administrative actions can be proceed only if sender=receiver or the first TX action is a "Create Account" action.
+
+Location:
+   src\common.rs:1805

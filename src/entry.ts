@@ -13,7 +13,7 @@ export function readIntro(raw:string|null):IntroProgress|null{
 export function advanceIntro(progress:IntroProgress,skip=false):IntroProgress{
   return {...progress,line:Math.min(PROLOGUE.length-1,progress.line+1),done:skip||progress.line===PROLOGUE.length-1};
 }
-export type SaveStatus={exists:boolean;valid:boolean;id?:string;night?:number;error?:string};
+export type SaveStatus={exists:boolean;valid:boolean;id?:string;night?:number;error?:string;inactivityMs?:number};
 export function requiresReplacementConfirmation(save:SaveStatus|null){return !!save?.exists;}
 export async function loadEntryCampaign(fresh:boolean,save:SaveStatus,request:(action:Action)=>Promise<Result>):Promise<Result>{
   if(save.error||(!fresh&&!save.valid))throw new Error('No readable saved campaign is available. Nothing was replaced.');

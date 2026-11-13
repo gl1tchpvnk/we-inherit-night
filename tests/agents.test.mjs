@@ -42,7 +42,7 @@ test('distinct fallback policies and persisted per-night limit',()=>{
 for(const failure of ['before','after','unconfirmed'])test(`journal recovery after ${failure} execution; one outcome per actor/night`,async()=>{
  const root=resolve('.local');await mkdir(root,{recursive:true});
  const dir=await mkdtemp(join(root,'agent-test-')),path=join(dir,'campaign.json'),world=fixture();let calls=0,lost=true,observations=[];
- const scenario={actors:Object.fromEntries(['player','vesper','seraphine','lucien'].map(a=>[a,{accountId:a,balance:async()=>({available:'100'})}])),
+ const scenario={contract:{accountId:"mock-contract"},campaignId:"default",actors:Object.fromEntries(['player','vesper','seraphine','lucien'].map(a=>[a,{accountId:a,balance:async()=>({available:'100'})}])),
   view:async actor=>{const w=structuredClone(world);w.access={crypt:actor?.accountId==='vesper'||!world.grants[0].revoked,library:!actor||actor.accountId==='player',lounge:actor?.accountId==='seraphine'};return w;},
   snapshot:async(error=null)=>({world:await scenario.view(),walletYocto:'100',error}),
   request:async({action})=>{

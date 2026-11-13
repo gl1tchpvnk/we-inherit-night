@@ -1,0 +1,39 @@
+├  Unsigned transaction:
+│    signer_id:    player.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  enter_room
+│                       args:         {
+│                                       "campaign_id": "verification-a",
+│                                       "nonce": 2,
+│                                       "property_id": "crypt"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY
+│    Signature:  ed25519:CszxFDgHvRzt3piFcXZMt16TpiLXgxeL43Ln9xqEvmfPwMP4EJVBbrXeU2HpwQZtvuxkdDMAj6KyXSydcMEGo1p
+│     
+├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.0002099097186187 NEAR
+│    Transaction ID: A9KPpLkCKinAVGPdqFowYDLh9YPRD7uZmTXmGY7LTedJ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/A9KPpLkCKinAVGPdqFowYDLh9YPRD7uZmTXmGY7LTedJ
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet] (failed):   No logs
+│    Logs [player.we-inherit-night.testnet]:   No logs
+│     
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet enter_room json-args '{"property_id": "crypt", "campaign_id": "verification-a", "nonce": 2}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as player.we-inherit-night.testnet network-config testnet sign-with-keychain send
+
+Error: 
+   0: Error: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: panicked at contract\\src\\lib.rs:567:9:\naccess denied")
+
+Location:
+   src\common.rs:1864

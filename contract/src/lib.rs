@@ -49,6 +49,7 @@ pub struct Grant {
 
 #[near(serializers = [json])]
 pub struct WorldView {
+    pub campaign_id: String,
     pub passage_budget: Option<PassageBudget>,
     pub night: u32,
     pub properties: Vec<Property>,
@@ -60,7 +61,7 @@ pub struct WorldView {
     pub leases: Vec<Lease>,
 }
 
-#[near(serializers = [json])]
+#[near(serializers = [borsh, json])]
 #[derive(Clone)]
 pub struct PassageBudget {
     pub refund_pending: bool,
@@ -71,13 +72,11 @@ pub struct PassageBudget {
 }
 
 const PASSAGE_PRICE: u128 = 10_000_000_000_000_000_000_000;
-fn budget_key(account: &AccountId) -> Vec<u8> {
-    format!("passage-budget:v1:{}", account).into_bytes()
-}
-
-#[near(contract_state)]
-#[derive(PanicOnDefault)]
+#[near(serializers = [borsh])]
 pub struct World {
+    campaign_id: String,
+    budgets: BTreeMap<AccountId, PassageBudget>,
+    participants: Vec<AccountId>,
     properties: Vec<Property>,
     ancestry: Vec<Ancestry>,
     grants: Vec<Grant>,
@@ -87,49 +86,87 @@ pub struct World {
     leases: Vec<Lease>,
 }
 
-#[near]
 impl World {
-    /// One exact, self-funded spending mandate. Separate storage preserves old World layout.
-    #[payable]
+    /// One exact, self-funded spending mandate, held inside its campaign world.
     pub fn fund_passage(&mut self, nonce: u32) {
         let caller = env::predecessor_account_id();
         self.check_nonce(&caller, nonce);
         assert_eq!(self.night, 0, "bootstrap funding only");
-        assert_eq!(env::attached_deposit().as_yoctonear(), PASSAGE_PRICE, "exact budget required");
-        assert!(!env::storage_has_key(&budget_key(&caller)), "budget already funded");
-        let budget = PassageBudget { refund_pending: false, seller: self.property("passage").owner.clone(), remaining: U128(PASSAGE_PRICE), expiry_night: 5, lease_id: None };
-        env::storage_write(&budget_key(&caller), &near_sdk::serde_json::to_vec(&budget).unwrap());
+        assert_eq!(
+            env::attached_deposit().as_yoctonear(),
+            PASSAGE_PRICE,
+            "exact budget required"
+        );
+        assert!(!self.budgets.contains_key(&caller), "budget already funded");
+        let budget = PassageBudget {
+            refund_pending: false,
+            seller: self.property("passage").owner.clone(),
+            remaining: U128(PASSAGE_PRICE),
+            expiry_night: 5,
+            lease_id: None,
+        };
+        self.budgets.insert(caller.clone(), budget);
         self.consume(caller, nonce);
     }
 
     pub fn passage_budget(&self, account_id: AccountId) -> Option<PassageBudget> {
-        env::storage_read(&budget_key(&account_id)).map(|bytes| near_sdk::serde_json::from_slice(&bytes).expect("invalid budget"))
+        self.budgets.get(&account_id).cloned()
     }
 
     /// Expired, unused allowances return only to their original funder.
     pub fn refund_passage_budget(&mut self, nonce: u32) -> Promise {
         let caller = env::predecessor_account_id();
         self.check_nonce(&caller, nonce);
-        let mut budget = self.passage_budget(caller.clone()).expect("no funded budget");
+        let mut budget = self
+            .passage_budget(caller.clone())
+            .expect("no funded budget");
         assert!(self.night >= budget.expiry_night, "budget not expired");
-        assert!(budget.lease_id.is_none() && budget.remaining.0 == PASSAGE_PRICE, "no refundable budget");
-        assert!(env::prepaid_gas().as_gas() >= Gas::from_tgas(30).as_gas(), "at least 30 Tgas required");
+        assert!(
+            budget.lease_id.is_none() && budget.remaining.0 == PASSAGE_PRICE,
+            "no refundable budget"
+        );
+        assert!(
+            env::prepaid_gas().as_gas() >= Gas::from_tgas(30).as_gas(),
+            "at least 30 Tgas required"
+        );
         budget.remaining = U128(0);
         budget.refund_pending = true;
-        env::storage_write(&budget_key(&caller), &near_sdk::serde_json::to_vec(&budget).unwrap());
+        self.budgets.insert(caller.clone(), budget);
         self.consume(caller.clone(), nonce);
-        Promise::new(caller.clone()).transfer(NearToken::from_yoctonear(PASSAGE_PRICE)).then(
-            Self::ext(env::current_account_id()).with_static_gas(Gas::from_tgas(10)).passage_refunded(caller))
+        Promise::new(caller.clone())
+            .transfer(NearToken::from_yoctonear(PASSAGE_PRICE))
+            .then(
+                Authority::ext(env::current_account_id())
+                    .with_static_gas(Gas::from_tgas(10))
+                    .passage_refunded(self.campaign_id.clone(), caller),
+            )
     }
 
-    #[private]
-    pub fn passage_refunded(&mut self, account_id: AccountId, #[callback_result] result: Result<(), PromiseError>) -> bool {
-        assert_eq!(env::predecessor_account_id(), env::current_account_id(), "private callback");
-        let mut budget = self.passage_budget(account_id.clone()).expect("no funded budget");
-        assert!(budget.refund_pending && self.night >= budget.expiry_night && budget.lease_id.is_none() && budget.remaining.0 == 0, "no pending refund");
+    pub fn passage_refunded(
+        &mut self,
+        account_id: AccountId,
+        result: Result<(), PromiseError>,
+    ) -> bool {
+        assert_eq!(
+            env::predecessor_account_id(),
+            env::current_account_id(),
+            "private callback"
+        );
+        let mut budget = self
+            .passage_budget(account_id.clone())
+            .expect("no funded budget");
+        assert!(
+            budget.refund_pending
+                && self.night >= budget.expiry_night
+                && budget.lease_id.is_none()
+                && budget.remaining.0 == 0,
+            "no pending refund"
+        );
         budget.refund_pending = false;
-        if result.is_err() { budget.remaining = U128(PASSAGE_PRICE); }
-        env::storage_write(&budget_key(&account_id), &near_sdk::serde_json::to_vec(&budget).unwrap());
+        if result.is_err() {
+            budget.remaining = U128(PASSAGE_PRICE);
+        }
+        self.budgets.insert(account_id.clone(), budget);
         result.is_ok()
     }
 
@@ -137,19 +174,37 @@ impl World {
     pub fn accept_funded_passage(&mut self, lease_id: u32, nonce: u32) {
         let caller = env::predecessor_account_id();
         self.check_nonce(&caller, nonce);
-        let mut budget = self.passage_budget(caller.clone()).expect("no funded budget");
+        let mut budget = self
+            .passage_budget(caller.clone())
+            .expect("no funded budget");
         assert!(self.night < budget.expiry_night, "budget expired");
-        assert!(budget.lease_id.is_none() && budget.remaining.0 == PASSAGE_PRICE, "budget exhausted");
+        assert!(
+            budget.lease_id.is_none() && budget.remaining.0 == PASSAGE_PRICE,
+            "budget exhausted"
+        );
         let lease = self.leases.get(lease_id as usize).expect("unknown lease");
         assert_eq!(lease.buyer, caller, "buyer required");
         assert_eq!(lease.owner, budget.seller, "budget recipient mismatch");
         assert_eq!(lease.property_id, "passage", "budget property mismatch");
-        assert_eq!(self.property("passage").owner, budget.seller, "owner changed");
+        assert_eq!(
+            self.property("passage").owner,
+            budget.seller,
+            "owner changed"
+        );
         assert_eq!(lease.price_yocto.0, PASSAGE_PRICE, "budget price mismatch");
         assert_eq!(lease.duration_nights, 3, "budget duration mismatch");
-        assert_eq!(lease.offer_expiry_night, budget.expiry_night, "budget deadline mismatch");
+        assert_eq!(
+            lease.offer_expiry_night, budget.expiry_night,
+            "budget deadline mismatch"
+        );
         assert_eq!(lease.status, "offered", "offer not open");
-        assert!(!self.leases.iter().any(|l| l.property_id == "passage" && self.lease_active(l)), "property already leased");
+        assert!(
+            !self
+                .leases
+                .iter()
+                .any(|l| l.property_id == "passage" && self.lease_active(l)),
+            "property already leased"
+        );
         let end = self.night.checked_add(3).expect("night overflow");
         let lease = &mut self.leases[lease_id as usize];
         lease.status = "accepted".into();
@@ -157,21 +212,25 @@ impl World {
         lease.escrow_yocto = U128(PASSAGE_PRICE);
         budget.remaining = U128(0);
         budget.lease_id = Some(lease_id);
-        env::storage_write(&budget_key(&caller), &near_sdk::serde_json::to_vec(&budget).unwrap());
+        self.budgets.insert(caller.clone(), budget);
         self.consume(caller.clone(), nonce);
         self.event("funded_passage", near_sdk::serde_json::json!({"buyer":caller,"lease_id":lease_id,"price":U128(PASSAGE_PRICE)}));
     }
     /// Fixed two-room bootstrap. Must be called by contract account, once.
-    #[init]
-    #[private]
     pub fn new(vesper: AccountId, player: AccountId, executor: AccountId) -> Self {
         assert_eq!(
             env::predecessor_account_id(),
             env::current_account_id(),
             "private initialization"
         );
+        Self::bootstrap(vesper, player, executor)
+    }
+    fn bootstrap(vesper: AccountId, player: AccountId, executor: AccountId) -> Self {
         assert_ne!(vesper, player, "distinct characters required");
         Self {
+            campaign_id: String::new(),
+            budgets: BTreeMap::new(),
+            participants: vec![],
             properties: vec![
                 Property {
                     id: "crypt".into(),
@@ -195,9 +254,20 @@ impl World {
     }
 
     /// Alternative one-time bootstrap; no property/admin mutations after init.
-    #[init]
-    #[private]
     pub fn new_economy(
+        vesper: AccountId,
+        player: AccountId,
+        seraphine: AccountId,
+        executor: AccountId,
+    ) -> Self {
+        assert_eq!(
+            env::predecessor_account_id(),
+            env::current_account_id(),
+            "private initialization"
+        );
+        Self::economy_template(vesper, player, seraphine, executor)
+    }
+    fn economy_template(
         vesper: AccountId,
         player: AccountId,
         seraphine: AccountId,
@@ -207,7 +277,7 @@ impl World {
             seraphine != vesper && seraphine != player,
             "distinct owners required"
         );
-        let mut world = Self::new(vesper, player, executor);
+        let mut world = Self::bootstrap(vesper, player, executor);
         world.properties.push(Property {
             id: "lounge".into(),
             owner: seraphine,
@@ -216,9 +286,22 @@ impl World {
     }
 
     /// Disposable political campaign bootstrap; same runtime rights semantics.
-    #[init]
-    #[private]
     pub fn new_political(
+        vesper: AccountId,
+        player: AccountId,
+        seraphine: AccountId,
+        marius: AccountId,
+        lucien: AccountId,
+        executor: AccountId,
+    ) -> Self {
+        assert_eq!(
+            env::predecessor_account_id(),
+            env::current_account_id(),
+            "private initialization"
+        );
+        Self::political_template(vesper, player, seraphine, marius, lucien, executor)
+    }
+    fn political_template(
         vesper: AccountId,
         player: AccountId,
         seraphine: AccountId,
@@ -233,7 +316,7 @@ impl World {
                 "distinct actors required"
             );
         }
-        let mut world = Self::new_economy(vesper, player, seraphine.clone(), executor);
+        let mut world = Self::economy_template(vesper, player, seraphine.clone(), executor);
         world.properties.extend([
             Property {
                 id: "court".into(),
@@ -301,8 +384,10 @@ impl World {
         id
     }
 
-    #[payable]
     pub fn accept_lease(&mut self, lease_id: u32, nonce: u32) {
+        self.accept_paid_lease(lease_id, nonce, env::attached_deposit().as_yoctonear());
+    }
+    fn accept_paid_lease(&mut self, lease_id: u32, nonce: u32, payment: u128) {
         let caller = env::predecessor_account_id();
         self.check_nonce(&caller, nonce);
         let lease = self.leases.get(lease_id as usize).expect("unknown lease");
@@ -321,11 +406,7 @@ impl World {
                 .any(|l| l.property_id == lease.property_id && self.lease_active(l)),
             "property already leased"
         );
-        assert_eq!(
-            env::attached_deposit().as_yoctonear(),
-            lease.price_yocto.0,
-            "exact rent required"
-        );
+        assert_eq!(payment, lease.price_yocto.0, "exact rent required");
         let end = self
             .night
             .checked_add(lease.duration_nights)
@@ -401,18 +482,13 @@ impl World {
         Promise::new(caller)
             .transfer(NearToken::from_yoctonear(amount))
             .then(
-                Self::ext(env::current_account_id())
+                Authority::ext(env::current_account_id())
                     .with_static_gas(Gas::from_tgas(10))
-                    .rent_paid(lease_id),
+                    .rent_paid(self.campaign_id.clone(), lease_id),
             )
     }
 
-    #[private]
-    pub fn rent_paid(
-        &mut self,
-        lease_id: u32,
-        #[callback_result] result: Result<(), PromiseError>,
-    ) -> bool {
+    pub fn rent_paid(&mut self, lease_id: u32, result: Result<(), PromiseError>) -> bool {
         assert_eq!(
             env::predecessor_account_id(),
             env::current_account_id(),
@@ -554,6 +630,7 @@ impl World {
 
     pub fn get_world(&self, account_id: AccountId) -> WorldView {
         WorldView {
+            campaign_id: self.campaign_id.clone(),
             passage_budget: self.passage_budget(account_id.clone()),
             night: self.night,
             properties: self.properties.clone(),
@@ -591,6 +668,10 @@ impl World {
     fn check_nonce(&self, caller: &AccountId, nonce: u32) {
         assert_eq!(nonce, *self.nonces.get(caller).unwrap_or(&0), "stale nonce");
         assert!(nonce < u32::MAX, "nonce exhausted");
+        assert!(
+            self.nonces.contains_key(caller) || self.nonces.len() < 256,
+            "actor capacity reached"
+        );
     }
     fn consume(&mut self, caller: AccountId, nonce: u32) {
         self.nonces.insert(caller, nonce + 1);
@@ -617,10 +698,352 @@ impl World {
     fn event(&self, event: &str, data: near_sdk::serde_json::Value) {
         env::log_str(&format!(
             "EVENT_JSON:{}",
-            near_sdk::serde_json::json!({"standard":"we_inherit_night", "version":"1.0.0", "event":event, "data":[data]})
+            near_sdk::serde_json::json!({"standard":"we_inherit_night", "version":"1.0.0", "event":event, "campaign_id":self.campaign_id, "data":[data]})
         ));
     }
 }
 
+/// Serialization quota only; backing follows measured usage, not this maximum.
+const CAMPAIGN_BYTES: usize = 262_144;
+const TOTAL_STORAGE_BYTES: u64 = 32 * 1024 * 1024;
+
+#[near(contract_state)]
+#[derive(PanicOnDefault)]
+pub struct Authority {
+    liabilities: u128,
+    treasury_total: u128,
+    pool: u128,
+    active: u32,
+    policy: Option<Provisioning>,
+    last_creation: u64,
+}
+
+#[near]
+impl Authority {
+    #[init]
+    #[private]
+    pub fn new_registry() -> Self {
+        assert_eq!(
+            env::predecessor_account_id(),
+            env::current_account_id(),
+            "private initialization"
+        );
+        Self {
+            liabilities: 0,
+            treasury_total: 0,
+            pool: 0,
+            active: 0,
+            policy: None,
+            last_creation: 0,
+        }
+    }
+
+    /// Provisioning only. No post-creation owner override or campaign replacement exists.
+    #[payable]
+    #[private]
+    pub fn create_campaign(
+        &mut self,
+        campaign_id: String,
+        mode: String,
+        participants: Vec<AccountId>,
+        vesper: AccountId,
+        player: AccountId,
+        executor: AccountId,
+        seraphine: Option<AccountId>,
+        marius: Option<AccountId>,
+        lucien: Option<AccountId>,
+    ) {
+        if env::predecessor_account_id() != env::current_account_id() {
+            let p = self.policy.as_ref().expect("private campaign creation");
+            assert_eq!(
+                env::predecessor_account_id(),
+                p.creator,
+                "private campaign creation"
+            );
+            assert_eq!(participants, p.actors, "fixed roster required");
+            assert!(
+                mode == "political"
+                    && vesper == p.actors[0]
+                    && player == p.actors[1]
+                    && executor == p.actors[2]
+                    && seraphine.as_ref() == Some(&p.actors[3])
+                    && marius.as_ref() == Some(&p.actors[4])
+                    && lucien.as_ref() == Some(&p.actors[5]),
+                "fixed bootstrap required"
+            );
+        }
+        let key = Self::key(&campaign_id);
+        assert!(
+            !env::storage_has_key(&key) && !env::storage_has_key(&Self::meta_key(&campaign_id)),
+            "campaign already exists"
+        );
+        let player_for_meta = player.clone();
+        let mut world = match mode.as_str() {
+            "basic" => World::bootstrap(vesper, player, executor),
+            "economy" => World::economy_template(
+                vesper,
+                player,
+                seraphine.expect("Seraphine required"),
+                executor,
+            ),
+            "political" => World::political_template(
+                vesper,
+                player,
+                seraphine.expect("Seraphine required"),
+                marius.expect("Marius required"),
+                lucien.expect("Lucien required"),
+                executor,
+            ),
+            _ => panic!("unknown campaign mode"),
+        };
+        assert!(
+            world.properties.iter().all(|p| p.owner != world.executor),
+            "executor must be distinct"
+        );
+        assert!(participants.len() <= 16, "participant capacity reached");
+        assert!(
+            world
+                .properties
+                .iter()
+                .all(|p| participants.contains(&p.owner))
+                && participants.contains(&world.executor),
+            "initial actors must be registered"
+        );
+        assert!(
+            participants.iter().all(|p| p != &env::current_account_id()),
+            "contract cannot be a participant"
+        );
+        world.participants = participants;
+        world.campaign_id = campaign_id.clone();
+        let meta = CampaignMeta::new(player_for_meta);
+        let extra = near_sdk::borsh::to_vec(&world).unwrap().len()
+            + near_sdk::borsh::to_vec(&meta).unwrap().len()
+            + Self::key(&campaign_id).len()
+            + Self::meta_key(&campaign_id).len()
+            + 80;
+        self.assert_backed_extra(extra as u64);
+        self.write_meta(&campaign_id, &meta);
+        self.save(&world);
+        self.active += 1;
+        self.assert_backed();
+    }
+    #[payable]
+    pub fn fund_passage(&mut self, campaign_id: String, nonce: u32) {
+        self.update(&campaign_id, |world| {
+            assert!(
+                world.participants.contains(&env::predecessor_account_id()),
+                "campaign participant required"
+            );
+            world.fund_passage(nonce)
+        })
+    }
+    pub fn refund_passage_budget(&mut self, campaign_id: String, nonce: u32) -> Promise {
+        self.update(&campaign_id, |world| world.refund_passage_budget(nonce))
+    }
+    #[private]
+    pub fn passage_refunded(
+        &mut self,
+        campaign_id: String,
+        account_id: AccountId,
+        #[callback_result] result: Result<(), PromiseError>,
+    ) -> bool {
+        self.update(&campaign_id, |world| {
+            world.passage_refunded(account_id, result)
+        })
+    }
+    pub fn accept_funded_passage(&mut self, campaign_id: String, lease_id: u32, nonce: u32) {
+        self.update(&campaign_id, |world| {
+            world.accept_funded_passage(lease_id, nonce)
+        })
+    }
+    pub fn offer_lease(
+        &mut self,
+        campaign_id: String,
+        property_id: String,
+        buyer: AccountId,
+        price_yocto: U128,
+        duration_nights: u32,
+        offer_expiry_night: u32,
+        nonce: u32,
+    ) -> u32 {
+        self.update(&campaign_id, |world| {
+            world.offer_lease(
+                property_id,
+                buyer,
+                price_yocto,
+                duration_nights,
+                offer_expiry_night,
+                nonce,
+            )
+        })
+    }
+    #[payable]
+    pub fn accept_lease(&mut self, campaign_id: String, lease_id: u32, nonce: u32) {
+        let meta = self.meta(&campaign_id);
+        if meta.prepaid {
+            assert_eq!(
+                env::attached_deposit().as_yoctonear(),
+                0,
+                "prepaid requires zero deposit"
+            );
+            assert_eq!(
+                env::predecessor_account_id(),
+                meta.player,
+                "campaign player required"
+            );
+            let price = self
+                .load(&campaign_id)
+                .leases
+                .get(lease_id as usize)
+                .expect("unknown lease")
+                .price_yocto
+                .0;
+            assert!(meta.treasury >= price, "insufficient campaign treasury");
+            self.update_unchecked(&campaign_id, |world| {
+                world.accept_paid_lease(lease_id, nonce, price)
+            });
+            let mut meta = self.meta(&campaign_id);
+            meta.treasury -= price;
+            self.treasury_total -= price;
+            self.write_meta(&campaign_id, &meta);
+            self.assert_backed();
+        } else {
+            self.update(&campaign_id, |world| world.accept_lease(lease_id, nonce));
+        }
+    }
+    pub fn cancel_lease(&mut self, campaign_id: String, lease_id: u32, nonce: u32) {
+        self.update(&campaign_id, |world| world.cancel_lease(lease_id, nonce))
+    }
+    pub fn reject_lease(&mut self, campaign_id: String, lease_id: u32, nonce: u32) {
+        self.update(&campaign_id, |world| world.reject_lease(lease_id, nonce))
+    }
+    pub fn claim_rent(&mut self, campaign_id: String, lease_id: u32, nonce: u32) -> Promise {
+        self.update(&campaign_id, |world| world.claim_rent(lease_id, nonce))
+    }
+    #[private]
+    pub fn rent_paid(
+        &mut self,
+        campaign_id: String,
+        lease_id: u32,
+        #[callback_result] result: Result<(), PromiseError>,
+    ) -> bool {
+        self.update(&campaign_id, |world| world.rent_paid(lease_id, result))
+    }
+    pub fn grant_access(
+        &mut self,
+        campaign_id: String,
+        property_id: String,
+        scope: String,
+        grantee: AccountId,
+        parent_grant_id: Option<u32>,
+        can_delegate: bool,
+        expiry_night: Option<u32>,
+        nonce: u32,
+    ) -> u32 {
+        self.update(&campaign_id, |world| {
+            world.grant_access(
+                property_id,
+                scope,
+                grantee,
+                parent_grant_id,
+                can_delegate,
+                expiry_night,
+                nonce,
+            )
+        })
+    }
+    pub fn revoke_grant(&mut self, campaign_id: String, grant_id: u32, nonce: u32) {
+        self.update(&campaign_id, |world| world.revoke_grant(grant_id, nonce))
+    }
+    pub fn enter_room(&mut self, campaign_id: String, property_id: String, nonce: u32) {
+        self.update(&campaign_id, |world| world.enter_room(property_id, nonce))
+    }
+    pub fn advance_night(&mut self, campaign_id: String, expected_night: u32) {
+        self.update(&campaign_id, |world| world.advance_night(expected_night))
+    }
+    pub fn has_access(
+        &self,
+        campaign_id: String,
+        account_id: AccountId,
+        property_id: String,
+    ) -> bool {
+        self.load(&campaign_id).has_access(account_id, property_id)
+    }
+    pub fn get_world(&self, campaign_id: String, account_id: AccountId) -> WorldView {
+        self.load(&campaign_id).get_world(account_id)
+    }
+    pub fn passage_budget(
+        &self,
+        campaign_id: String,
+        account_id: AccountId,
+    ) -> Option<PassageBudget> {
+        self.load(&campaign_id).passage_budget(account_id)
+    }
+}
+impl Authority {
+    fn key(id: &str) -> Vec<u8> {
+        assert!(
+            !id.is_empty()
+                && id.len() <= 64
+                && id
+                    .bytes()
+                    .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_'),
+            "invalid campaign id"
+        );
+        [b"campaign:v1:".as_slice(), id.as_bytes()].concat()
+    }
+    fn load(&self, id: &str) -> World {
+        let bytes = env::storage_read(&Self::key(id)).expect("unknown campaign");
+        near_sdk::borsh::from_slice(&bytes).expect("invalid campaign storage")
+    }
+    fn save(&self, world: &World) {
+        let bytes = near_sdk::borsh::to_vec(world).expect("campaign serialization");
+        assert!(
+            bytes.len() <= CAMPAIGN_BYTES,
+            "campaign storage capacity reached"
+        );
+        env::storage_write(&Self::key(&world.campaign_id), &bytes);
+    }
+    fn update<R>(&mut self, id: &str, action: impl FnOnce(&mut World) -> R) -> R {
+        let result = self.update_unchecked(id, action);
+        self.assert_backed();
+        result
+    }
+    fn update_unchecked<R>(&mut self, id: &str, action: impl FnOnce(&mut World) -> R) -> R {
+        let meta = self.meta(id);
+        assert!(
+            meta.status == "active"
+                || (meta.status == "completed"
+                    && env::predecessor_account_id() == env::current_account_id()),
+            "campaign closed"
+        );
+        let mut world = self.load(id);
+        let before = world.liabilities();
+        let result = action(&mut world);
+        self.liabilities = self
+            .liabilities
+            .checked_sub(before)
+            .unwrap()
+            .checked_add(world.liabilities())
+            .expect("liability overflow");
+        self.save(&world);
+        result
+    }
+}
+impl World {
+    fn liabilities(&self) -> u128 {
+        self.leases.iter().map(|l| l.escrow_yocto.0).sum::<u128>()
+            + self
+                .budgets
+                .values()
+                .map(|b| b.remaining.0 + if b.refund_pending { PASSAGE_PRICE } else { 0 })
+                .sum::<u128>()
+    }
+}
+
+mod lifecycle;
+use lifecycle::{CampaignMeta, Provisioning};
+#[cfg(test)]
+mod campaigns_tests;
 #[cfg(test)]
 mod tests;

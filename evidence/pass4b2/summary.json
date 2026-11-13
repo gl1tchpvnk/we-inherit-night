@@ -1,0 +1,304 @@
+{
+  "status": "PARTIAL",
+  "network": "testnet",
+  "contract": "castle.we-inherit-night.testnet",
+  "campaigns": [
+    "verification-a",
+    "verification-b"
+  ],
+  "checks": {
+    "artifact_and_deployment": "PASS",
+    "registry_and_campaigns": "PASS",
+    "authority": "PASS",
+    "independent_library": "PASS",
+    "campaign_isolation": "PASS",
+    "sanctuary_payment": "PASS",
+    "restricted_runtime_signing": "BLOCKED: CLI used provisioning key despite restricted public-key selection"
+  },
+  "transactions": [
+    {
+      "evidence": "a-crypt-entry.json",
+      "hash": "8G2FCJ5FCXAxfVKpHHTvXKd7zAxN8unHtiu1GqLeY3qR",
+      "signer": "player.we-inherit-night.testnet",
+      "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "a-denied-entry.json",
+      "hash": "A9KPpLkCKinAVGPdqFowYDLh9YPRD7uZmTXmGY7LTedJ",
+      "signer": "player.we-inherit-night.testnet",
+      "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:567:9:\naccess denied"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "evidence": "a-independent-library-entry.json",
+      "hash": "2Rjtwdxa3FZ4CgQqgKmYAU1xLvwHX4rAme6aqQWuWZTa",
+      "signer": "player.we-inherit-night.testnet",
+      "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "a-restricted-revocation.json",
+      "hash": "6UmYh27yM6hgV17ue53im1KWarqMTSW2KUrhsBkr2hMk",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "b-sanctuary-payment.json",
+      "hash": "7iLD814gQUxn3LEfjyD7Tq7mZ9xh8bctSWuZXtXurukq",
+      "signer": "win-funding-20261112-a.testnet",
+      "public_key": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "create-verification-a.json",
+      "hash": "EUMJpZfiRjxm5XGAi1b5ZERUtEwZHVC1brsss7GjXLcJ",
+      "signer": "castle.we-inherit-night.testnet",
+      "public_key": "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "create-verification-b.json",
+      "hash": "CrnDxMK8N1Ra5PAem9gMyrKkpJvD3zBsDQEyQxKuWEw1",
+      "signer": "castle.we-inherit-night.testnet",
+      "public_key": "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "deploy.json",
+      "hash": "663TFjUduJwkjuRiHiw3pMg34yLcxioJ5Aejvi3EHqtL",
+      "signer": "castle.we-inherit-night.testnet",
+      "public_key": "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "registry.json",
+      "hash": "H7yMcS72iDg7GyrrktyrtLacKq1v4q6DJnj9FbTYcZg8",
+      "signer": "castle.we-inherit-night.testnet",
+      "public_key": "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "restricted-deploy-rejection.json",
+      "hash": "9YDZKF4QnohqbZFcmttSTnybxwwJon1ajSFoYGGhVnwh",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "ActorNoPermission": {
+                "account_id": "castle.we-inherit-night.testnet",
+                "actor_id": "vesper.we-inherit-night.testnet"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "evidence": "restricted-method-rejection.json",
+      "hash": "GWTm8Juhwm15h9UoURvJJMkWXLESXzUjBcso3bokMZ3m",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:579:9:\nassertion `left == right` failed: executor required\n  left: AccountId(\"vesper.we-inherit-night.testnet\")\n right: AccountId(\"keeper.we-inherit-night.testnet\")"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "evidence": "unauthorized-cross-campaign-library.json",
+      "hash": "3cUUoCEGcidme2nqLegbt5PXXFY3ZP8Kjmo3rY9nqZqv",
+      "signer": "player.we-inherit-night.testnet",
+      "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:524:13:\nassertion `left == right` failed: owner required\n  left: AccountId(\"win-funding-20261112-a.testnet\")\n right: AccountId(\"player.we-inherit-night.testnet\")"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "evidence": "verification-a-court-bootstrap.json",
+      "hash": "5XLZFa2muSoYS9D8vyxMLdBzTAXf6q1VheuMXp7HVyKM",
+      "signer": "marius.we-inherit-night.testnet",
+      "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+      "status": {
+        "SuccessValue": "Mg=="
+      }
+    },
+    {
+      "evidence": "verification-a-crypt-grant.json",
+      "hash": "4iPrXu1Jzse4urEem7K2uKuDsYtWY6pqnJGKiwnxZV87",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "SuccessValue": "MA=="
+      }
+    },
+    {
+      "evidence": "verification-a-library-bootstrap.json",
+      "hash": "BWh7AznKkDVdSHbmvhwM1CWe4Pr5j88MTt9GhigXyiDT",
+      "signer": "player.we-inherit-night.testnet",
+      "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+      "status": {
+        "SuccessValue": "MQ=="
+      }
+    },
+    {
+      "evidence": "verification-a-lounge-invitation.json",
+      "hash": "HLftRSTFY8q8ZZ1Azn36cKA5ALVZWppRyLkkn4ncVJ9y",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "Mw=="
+      }
+    },
+    {
+      "evidence": "verification-a-lounge-offer.json",
+      "hash": "2wwR3HAtTF9fFx5bEP3MfEF1CDuzi5yVkb6qWf61aZbz",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "MA=="
+      }
+    },
+    {
+      "evidence": "verification-a-passage-budget.json",
+      "hash": "2UwR7adBQkq3naHKyGqgpQX6CBhRK6yG4A9HjLJ3FMCW",
+      "signer": "cassian.we-inherit-night.testnet",
+      "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "verification-a-sanctuary-offer.json",
+      "hash": "BoJneEroYM6NSTbehjgUtioiXPeMg5tPazo6atUEG838",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "MQ=="
+      }
+    },
+    {
+      "evidence": "verification-b-court-bootstrap.json",
+      "hash": "46JNNuNCHC3e3E3eTnZX7FZKwaMsz96EW3hAnm9Ps3AS",
+      "signer": "marius.we-inherit-night.testnet",
+      "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+      "status": {
+        "SuccessValue": "Mg=="
+      }
+    },
+    {
+      "evidence": "verification-b-crypt-grant.json",
+      "hash": "H2NWrnukdjAG5b6QZjoEf4ouZu33PrKfueV7NB2pisuh",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "SuccessValue": "MA=="
+      }
+    },
+    {
+      "evidence": "verification-b-library-bootstrap.json",
+      "hash": "4jvH1qhBYV43qr8om5fXVGs6esshnGJCUXyePqZWpwnc",
+      "signer": "win-funding-20261112-a.testnet",
+      "public_key": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1",
+      "status": {
+        "SuccessValue": "MQ=="
+      }
+    },
+    {
+      "evidence": "verification-b-lounge-invitation.json",
+      "hash": "Ckkx729Tutd6jAeGj7uQX9U3zmtRhDhGHjxu9tFZaTaT",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "Mw=="
+      }
+    },
+    {
+      "evidence": "verification-b-lounge-offer.json",
+      "hash": "7S7zoHFobK5wBjLExf2sm19smF6AWY2UH7kZWPduopLd",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "MA=="
+      }
+    },
+    {
+      "evidence": "verification-b-passage-budget.json",
+      "hash": "CFVafPEej6d342nERmQPjhsXAkUKeGfJ7ai6m9awTRG7",
+      "signer": "cassian.we-inherit-night.testnet",
+      "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "evidence": "verification-b-sanctuary-offer.json",
+      "hash": "GDHg2EGjosfG6TFxq2skCia3tr5beVKDPJPHcmPsKLRi",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "public_key": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+      "status": {
+        "SuccessValue": "MQ=="
+      }
+    },
+    {
+      "evidence": "vesper-restricted-key.json",
+      "hash": "CihWZZgkW2XGZ3BoJjV4kzif6kjBqCk86UXwnMnzFFef",
+      "signer": "vesper.we-inherit-night.testnet",
+      "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+      "status": {
+        "SuccessValue": ""
+      }
+    }
+  ],
+  "finalized_count": 27,
+  "successful_count": 23,
+  "failed_expected_count": 4,
+  "resubmitted_transactions": 0
+}

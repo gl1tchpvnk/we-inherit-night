@@ -30,7 +30,7 @@ async function fixture(id='political-test',living=false){
    if(lose===method){lose=false;throw new Error('Lost committed response');}
    return {succeeded:true,receiptFailures:[]};
  };
- const scenario={actors,political:true,living,view,action,hasAccess:async id=>(await view()).access[id],snapshot:async(error=null)=>({world:await view(),walletYocto:'250000000000000000000000',error}),call:async()=>{world.night++;tx.push({method:'advance_night'});return {succeeded:true,receiptFailures:[]};},request:async()=>{await action('seraphine','claim_rent',{lease_id:0});return {error:null};}};
+ const scenario={contract:{accountId:"mock-contract"},campaignId:"default",actors,political:true,living,view,action,hasAccess:async id=>(await view()).access[id],snapshot:async(error=null)=>({world:await view(),walletYocto:'250000000000000000000000',error}),call:async()=>{world.night++;tx.push({method:'advance_night'});return {succeeded:true,receiptFailures:[]};},request:async()=>{await action('seraphine','claim_rent',{lease_id:0});return {error:null};}};
  let session,current;
  async function reload(){session=await createCampaignSession(scenario,path,id,undefined,async()=>{throw new Error('Provider must never run in 2C');});current=await session.request({action:'view'});return current;}
  async function request(action,extra={}){current=await session.request({action,campaign_id:id,revision:current.campaign.revision,...extra});return current;}

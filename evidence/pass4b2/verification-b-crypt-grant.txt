@@ -1,0 +1,48 @@
+0
+├  Unsigned transaction:
+│    signer_id:    vesper.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  grant_access
+│                       args:         {
+│                                       "campaign_id": "verification-b",
+│                                       "can_delegate": true,
+│                                       "expiry_night": null,
+│                                       "grantee": "win-funding-20261112-a.testnet",
+│                                       "nonce": 0,
+│                                       "parent_grant_id": null,
+│                                       "property_id": "crypt",
+│                                       "scope": "enter"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo
+│    Signature:  ed25519:51z8Z9fgtnEyNKQ35nq5vKL1wYbTT36LXTHK4HF6BariUx9NbfdTJjNxZCqCHDPak8fkAQ1JSTBbf9TQvBCXsT4f
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.8 Tgas
+│    Transaction fee: 0.000257336317876 NEAR
+│    Transaction ID: H2NWrnukdjAG5b6QZjoEf4ouZu33PrKfueV7NB2pisuh
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/H2NWrnukdjAG5b6QZjoEf4ouZu33PrKfueV7NB2pisuh
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:
+│      EVENT_JSON:{"standard":"we_inherit_night","version":"1.0.0","event":"grant","campaign_id":"verification-b","data":[{"grant":{"id":0,"property_id":"crypt","scope":"enter","grantor":"vesper.we-inherit-night.testnet","grantee":"win-funding-20261112-a.testnet","parent_grant_id":null,"can_delegate":true,"expiry_night":null,"revoked":false}}]}
+│    Logs [vesper.we-inherit-night.testnet]:   No logs
+│     
+
+Function execution return value (printed to stdout):
+
+
+The "grant_access" call to <castle.we-inherit-night.testnet> on behalf of <vesper.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet grant_access json-args '{"property_id": "crypt", "scope": "enter", "grantee": "win-funding-20261112-a.testnet", "parent_grant_id": null, "can_delegate": true, "expiry_night": null, "campaign_id": "verification-b", "nonce": 0}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as vesper.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

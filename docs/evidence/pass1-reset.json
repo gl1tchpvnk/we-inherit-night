@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "finishedAt": "2026-11-12T22:54:56.863Z",
+  "finishedAt": "2026-11-13T05:19:47.441Z",
   "snapshots": [
     {
       "action": "view",
@@ -16,65 +16,89 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "6oxRzTdiLSSgbdxn3NrA5eYFvqq13YcqLyGG7DvN7m1p",
+          "hash": "9bftFqPDtbKUQCLeqPVnQmEVxJC7DCNGYwgS4jpsdpQB",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "Fq8YyqAkpGPydFtzwmqR8m5LQQ2GZoNbTWgfpTFc7sR5",
+          "hash": "wUEyDJok1bVbUuMKGLiMNhLgib9q4mbAvkjAPHfVHZ8",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "ByD1gfvS2PzFzSFAZRKFUQ8vvu26XnXXdfF6x8B5ETex",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "AqvCnByveQoDw76iDDmjd4W3pgZqkjKpgqJp6yyyJy5m",
+          "hash": "FwwiKhkowci4qpWk7nSoEEvdhHpZCAsUrkpKbXYYvAtm",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3GPoKbRQ4E8TjJQP2ERiykvn6FHqGKxYVvFD9iqV76ay",
+          "hash": "Ejiw1HmU7vQBnicxEsktnjFiZ7WPgNTNZNfP8aXMjiaQ",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -92,65 +116,89 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "6oxRzTdiLSSgbdxn3NrA5eYFvqq13YcqLyGG7DvN7m1p",
+          "hash": "9bftFqPDtbKUQCLeqPVnQmEVxJC7DCNGYwgS4jpsdpQB",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "Fq8YyqAkpGPydFtzwmqR8m5LQQ2GZoNbTWgfpTFc7sR5",
+          "hash": "wUEyDJok1bVbUuMKGLiMNhLgib9q4mbAvkjAPHfVHZ8",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "ByD1gfvS2PzFzSFAZRKFUQ8vvu26XnXXdfF6x8B5ETex",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "AqvCnByveQoDw76iDDmjd4W3pgZqkjKpgqJp6yyyJy5m",
+          "hash": "FwwiKhkowci4qpWk7nSoEEvdhHpZCAsUrkpKbXYYvAtm",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3GPoKbRQ4E8TjJQP2ERiykvn6FHqGKxYVvFD9iqV76ay",
+          "hash": "Ejiw1HmU7vQBnicxEsktnjFiZ7WPgNTNZNfP8aXMjiaQ",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -168,81 +216,107 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "6oxRzTdiLSSgbdxn3NrA5eYFvqq13YcqLyGG7DvN7m1p",
+          "hash": "9bftFqPDtbKUQCLeqPVnQmEVxJC7DCNGYwgS4jpsdpQB",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "Fq8YyqAkpGPydFtzwmqR8m5LQQ2GZoNbTWgfpTFc7sR5",
+          "hash": "wUEyDJok1bVbUuMKGLiMNhLgib9q4mbAvkjAPHfVHZ8",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "ByD1gfvS2PzFzSFAZRKFUQ8vvu26XnXXdfF6x8B5ETex",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "AqvCnByveQoDw76iDDmjd4W3pgZqkjKpgqJp6yyyJy5m",
+          "hash": "FwwiKhkowci4qpWk7nSoEEvdhHpZCAsUrkpKbXYYvAtm",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3GPoKbRQ4E8TjJQP2ERiykvn6FHqGKxYVvFD9iqV76ay",
+          "hash": "Ejiw1HmU7vQBnicxEsktnjFiZ7WPgNTNZNfP8aXMjiaQ",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "reject_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "9rBjopKUko9jqCVBCmp5uXK5TqEAZo68bQJ5aGDjTJku",
+          "hash": "4R9RvzmYXUE4iD8uBDQhpbkVm3MNtUU6PYA1mo29f1bd",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2000919601149",
-          "storageBefore": 216320,
-          "storageAfter": 216345,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2713639625333",
+          "storageBefore": 584918,
+          "storageAfter": 584943,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -260,97 +334,125 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "6oxRzTdiLSSgbdxn3NrA5eYFvqq13YcqLyGG7DvN7m1p",
+          "hash": "9bftFqPDtbKUQCLeqPVnQmEVxJC7DCNGYwgS4jpsdpQB",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "Fq8YyqAkpGPydFtzwmqR8m5LQQ2GZoNbTWgfpTFc7sR5",
+          "hash": "wUEyDJok1bVbUuMKGLiMNhLgib9q4mbAvkjAPHfVHZ8",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "ByD1gfvS2PzFzSFAZRKFUQ8vvu26XnXXdfF6x8B5ETex",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "AqvCnByveQoDw76iDDmjd4W3pgZqkjKpgqJp6yyyJy5m",
+          "hash": "FwwiKhkowci4qpWk7nSoEEvdhHpZCAsUrkpKbXYYvAtm",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3GPoKbRQ4E8TjJQP2ERiykvn6FHqGKxYVvFD9iqV76ay",
+          "hash": "Ejiw1HmU7vQBnicxEsktnjFiZ7WPgNTNZNfP8aXMjiaQ",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "reject_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "9rBjopKUko9jqCVBCmp5uXK5TqEAZo68bQJ5aGDjTJku",
+          "hash": "4R9RvzmYXUE4iD8uBDQhpbkVm3MNtUU6PYA1mo29f1bd",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2000919601149",
-          "storageBefore": 216320,
-          "storageAfter": 216345,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2713639625333",
+          "storageBefore": 584918,
+          "storageAfter": 584943,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "advance_night",
           "actor": "keeper",
           "property": "castle",
-          "hash": "9q9aR1GKajrmYrBeBJ9BFUQHuEeMB5Qs6Y6vRMM8wKaS",
+          "hash": "A6Rth2RmZfhDqxtxQhabS8YV7J6SZ5soggGEAygWMtDu",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1922569890056",
-          "storageBefore": 216345,
-          "storageAfter": 216345,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2617471179832",
+          "storageBefore": 584943,
+          "storageAfter": 584943,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -368,65 +470,89 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -444,81 +570,107 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "accept_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "5JWvAacpoWQcUJr7jmrqtASHgt1CGyJcH8aT6DXLmt3e",
+          "hash": "63p4Rs1M7mJc6nJVPVZWe5zLMbP6RzRwrATiPKpA55Je",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2028420739884",
-          "storageBefore": 216320,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2819538995149",
+          "storageBefore": 584918,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -536,81 +688,107 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "accept_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "5JWvAacpoWQcUJr7jmrqtASHgt1CGyJcH8aT6DXLmt3e",
+          "hash": "63p4Rs1M7mJc6nJVPVZWe5zLMbP6RzRwrATiPKpA55Je",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2028420739884",
-          "storageBefore": 216320,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2819538995149",
+          "storageBefore": 584918,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -628,129 +806,161 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "accept_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "5JWvAacpoWQcUJr7jmrqtASHgt1CGyJcH8aT6DXLmt3e",
+          "hash": "63p4Rs1M7mJc6nJVPVZWe5zLMbP6RzRwrATiPKpA55Je",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2028420739884",
-          "storageBefore": 216320,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2819538995149",
+          "storageBefore": 584918,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "revoke_grant",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "3fD55MbumE3G46fE3Qd2MmzybgizSfMUABfW5S9u6WBN",
+          "hash": "2upqZJ6QLXQe64Ad2jYCPF4R46dqVRhsRS9cj92ouhc2",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2019247956421",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2733142876173",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "claim_rent",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "8mZeksCeuifVkCz31esMB5thKjky6AmTFuxEBg3VhyvX",
+          "hash": "HxiA1YNzVeEAQ6AEEqV6KqjHxtdxAYV7mpSmBgDKYM3s",
           "status": {
             "SuccessValue": "dHJ1ZQ=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "4760512163130",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "6172506559018",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "advance_night",
           "actor": "keeper",
           "property": "castle",
-          "hash": "6UcH7S6pHVP4jTFTEwazrRu3tfAA8ncH762uQkdNsBY6",
+          "hash": "Cwof7n1DyuWE9AgjxJ1CSaNt255CWo2uSBUcC9Yr4H9E",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1923205381600",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2618124772008",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -768,129 +978,161 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "accept_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "5JWvAacpoWQcUJr7jmrqtASHgt1CGyJcH8aT6DXLmt3e",
+          "hash": "63p4Rs1M7mJc6nJVPVZWe5zLMbP6RzRwrATiPKpA55Je",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2028420739884",
-          "storageBefore": 216320,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2819538995149",
+          "storageBefore": 584918,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "revoke_grant",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "3fD55MbumE3G46fE3Qd2MmzybgizSfMUABfW5S9u6WBN",
+          "hash": "2upqZJ6QLXQe64Ad2jYCPF4R46dqVRhsRS9cj92ouhc2",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2019247956421",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2733142876173",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "claim_rent",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "8mZeksCeuifVkCz31esMB5thKjky6AmTFuxEBg3VhyvX",
+          "hash": "HxiA1YNzVeEAQ6AEEqV6KqjHxtdxAYV7mpSmBgDKYM3s",
           "status": {
             "SuccessValue": "dHJ1ZQ=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "4760512163130",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "6172506559018",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "advance_night",
           "actor": "keeper",
           "property": "castle",
-          "hash": "6UcH7S6pHVP4jTFTEwazrRu3tfAA8ncH762uQkdNsBY6",
+          "hash": "Cwof7n1DyuWE9AgjxJ1CSaNt255CWo2uSBUcC9Yr4H9E",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1923205381600",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2618124772008",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -908,129 +1150,161 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "FwkzgmFSTBFNaYeLAFH58EKkiYx6TiUjc1gAeKofRQvi",
+          "hash": "8ZcA6fXxfNaeV5gcqUiVDxubjNhxVdNC5fyUvCNg53X",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "9Ytiwj2mUp59rgU77UX3wT5MetJxaD39MBDrie73NSUm",
+          "hash": "ApSPmw1FjymfYwBxgbZp65tSEAtWiaMY2QgMUmhZKjLe",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "EhKtBCscRjsfvVGV3TJSRtuiy7sPeSSoMGbsrcd6bW13",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "GL5wRMCmowscnS6xhsXoz3xRtMAtTf6926VuaHnieBk1",
+          "hash": "6rUyN6LzutS7ZSKsPWwdMygvQU3ucgkG4BUXKRcEVzps",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "3StyYXPupPYEYARdxjVWnD4NmWP9PQY5Bm1L4hhink1h",
+          "hash": "6ZSudUy25VPnPC38cZgg3iXhXgw5m9gXHEsHZNyCNWQL",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "accept_lease",
           "actor": "player",
           "property": "lounge",
-          "hash": "5JWvAacpoWQcUJr7jmrqtASHgt1CGyJcH8aT6DXLmt3e",
+          "hash": "63p4Rs1M7mJc6nJVPVZWe5zLMbP6RzRwrATiPKpA55Je",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2028420739884",
-          "storageBefore": 216320,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2819538995149",
+          "storageBefore": 584918,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "revoke_grant",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "3fD55MbumE3G46fE3Qd2MmzybgizSfMUABfW5S9u6WBN",
+          "hash": "2upqZJ6QLXQe64Ad2jYCPF4R46dqVRhsRS9cj92ouhc2",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2019247956421",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "5018238760929819200000000"
+          "gasBurnt": "2733142876173",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "20015333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "claim_rent",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "8mZeksCeuifVkCz31esMB5thKjky6AmTFuxEBg3VhyvX",
+          "hash": "HxiA1YNzVeEAQ6AEEqV6KqjHxtdxAYV7mpSmBgDKYM3s",
           "status": {
             "SuccessValue": "dHJ1ZQ=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "4760512163130",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "5018238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "6172506559018",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "20015333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "advance_night",
           "actor": "keeper",
           "property": "castle",
-          "hash": "6UcH7S6pHVP4jTFTEwazrRu3tfAA8ncH762uQkdNsBY6",
+          "hash": "Cwof7n1DyuWE9AgjxJ1CSaNt255CWo2uSBUcC9Yr4H9E",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1923205381600",
-          "storageBefore": 216349,
-          "storageAfter": 216349,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2618124772008",
+          "storageBefore": 584947,
+          "storageAfter": 584947,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     },
@@ -1048,65 +1322,89 @@
           "action": "deploy",
           "actor": "castle",
           "property": "castle",
-          "hash": "HreFaW8oXRo6Ys78NSqdDV9Cja3Qj4GN7Ese52JD57TQ",
+          "hash": "7Bm1Ypbdi9eantVRxEi3u5wiqmUxAtu5gfEqwtYJG55r",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "16205924336284",
+          "gasBurnt": "42492584285003",
           "storageBefore": 182,
-          "storageAfter": 215870,
-          "balanceBefore": "5000000000000000000000000",
-          "balanceAfter": "4998401725822621600000000"
+          "storageAfter": 584103,
+          "balanceBefore": "20000000000000000000000000",
+          "balanceAfter": "19995773059827749700000000"
         },
         {
-          "action": "new_economy",
+          "action": "new_registry",
           "actor": "castle",
           "property": "castle",
-          "hash": "DrUG1QWX7tUTcRZwbemGofZodr2cD1p1ce5FqmhreLno",
+          "hash": "H9e25gsssGvR6xaLJtXKuDZN1LCmY1vL2QjBEQ8rR9JE",
           "status": {
             "SuccessValue": ""
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "1852831490524",
-          "storageBefore": 215870,
-          "storageAfter": 216092,
-          "balanceBefore": "4998401725822621600000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2219227890507",
+          "storageBefore": 584103,
+          "storageAfter": 584209,
+          "balanceBefore": "19995773059827749700000000",
+          "balanceAfter": "19995573455294949000000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
+        },
+        {
+          "action": "create_campaign",
+          "actor": "castle",
+          "property": "castle",
+          "hash": "6XfpjAsYRiHmMi32BAY7cYZ8GdduMTjbCHCR8Qd1rr1s",
+          "status": {
+            "SuccessValue": ""
+          },
+          "executionStatus": "FINAL",
+          "success": true,
+          "gasBurnt": "2623430749847",
+          "storageBefore": 584209,
+          "storageAfter": 584690,
+          "balanceBefore": "19995573455294949000000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "grant_access",
           "actor": "vesper",
           "property": "crypt",
-          "hash": "7PYDNv1knSxVKfkZ9PFWNX4b3cKMj1ZtvAcUUqp7nDiK",
+          "hash": "3LqATHLX98bjF2PaQTD6r577qSy8oT65X53RguUMkcnZ",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2097210825504",
-          "storageBefore": 216092,
-          "storageAfter": 216182,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2814353163188",
+          "storageBefore": 584690,
+          "storageAfter": 584780,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         },
         {
           "action": "offer_lease",
           "actor": "seraphine",
           "property": "lounge",
-          "hash": "8Biuv8zN1g565Uc8ypoTnqMU7uSMHhRJuCyjHpUf7wQB",
+          "hash": "AYVbd9iZcxAYKq1HSJmi6JCNLQc6iGC6CWHez2DkbFVk",
           "status": {
             "SuccessValue": "MA=="
           },
           "executionStatus": "FINAL",
           "success": true,
-          "gasBurnt": "2173880656476",
-          "storageBefore": 216182,
-          "storageAfter": 216320,
-          "balanceBefore": "4998238760929819200000000",
-          "balanceAfter": "4998238760929819200000000"
+          "gasBurnt": "2896676973392",
+          "storageBefore": 584780,
+          "storageAfter": 584918,
+          "balanceBefore": "19995333430476214300000000",
+          "balanceAfter": "19995333430476214300000000",
+          "campaignId": "default",
+          "contractId": "castle.test.near"
         }
       ]
     }

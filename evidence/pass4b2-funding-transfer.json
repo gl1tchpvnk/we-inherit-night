@@ -1,0 +1,137 @@
+{
+  "network": "testnet",
+  "checked_at": "2026-11-13T01:11:36.420668+00:00",
+  "transfer": {
+    "jsonrpc": "2.0",
+    "result": {
+      "final_execution_status": "FINAL",
+      "receipts_outcome": [
+        {
+          "block_hash": "4JC9RdFJupbTCGAuxjTxwR8VhaNfm69bHSQMBCvPsAQH",
+          "id": "GUsvMpFWNGoiYnbZsgZjNT7MnGD6DPj8r5VpeKvoW91t",
+          "outcome": {
+            "executor_id": "castle.we-inherit-night.testnet",
+            "gas_burnt": 223182562500,
+            "logs": [],
+            "metadata": {
+              "contracts": [
+                null
+              ],
+              "gas_profile": [],
+              "version": 4
+            },
+            "receipt_ids": [
+              "7qAVPHAg5LYK4n4dzJsp3w4tmsNbb7TDvHmCrzqTsoZo"
+            ],
+            "status": {
+              "SuccessValue": ""
+            },
+            "tokens_burnt": "22318256250000000000"
+          },
+          "proof": [
+            {
+              "direction": "Left",
+              "hash": "6a5ccpEznfcuJgsChrze2yUWxDf8mVVWvq2nKJFfoJ4a"
+            }
+          ]
+        },
+        {
+          "block_hash": "FZ1oDhfM9uaX6m393X9pBVC8d5fNwJK1wBsa8GLjMA1Q",
+          "id": "7qAVPHAg5LYK4n4dzJsp3w4tmsNbb7TDvHmCrzqTsoZo",
+          "outcome": {
+            "executor_id": "win-funding-20261112-a.testnet",
+            "gas_burnt": 223182562500,
+            "logs": [],
+            "metadata": {
+              "contracts": [
+                null
+              ],
+              "gas_profile": [],
+              "version": 4
+            },
+            "receipt_ids": [],
+            "status": {
+              "SuccessValue": ""
+            },
+            "tokens_burnt": "0"
+          },
+          "proof": [
+            {
+              "direction": "Right",
+              "hash": "E3KumG1zRXyUH7o6LM2rSFCQuTUtSFUPMoysETEVVHsw"
+            }
+          ]
+        }
+      ],
+      "status": {
+        "SuccessValue": ""
+      },
+      "transaction": {
+        "actions": [
+          {
+            "Transfer": {
+              "deposit": "6095000000000000000000000"
+            }
+          }
+        ],
+        "hash": "36MS8cuw8sam4SC5H5NAAnK6n494rxtDrLM7T9hCdvRZ",
+        "nonce": 277441061000001,
+        "priority_fee": 0,
+        "public_key": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1",
+        "receiver_id": "castle.we-inherit-night.testnet",
+        "signature": "ed25519:3yt4koFqqB38DyJK4xmvitepsXWepdDq4KWsrjAwdEtbV8wcKZaWCLmPWctY6ABi8Q7RHRDPxYzwLRB4vcBEzM5L",
+        "signer_id": "win-funding-20261112-a.testnet"
+      },
+      "transaction_outcome": {
+        "block_hash": "2T6hgGB9YEWosqzLrDWVaM22ghW8JHURDEBBiNUffzcZ",
+        "id": "36MS8cuw8sam4SC5H5NAAnK6n494rxtDrLM7T9hCdvRZ",
+        "outcome": {
+          "executor_id": "win-funding-20261112-a.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "gas_profile": null,
+            "version": 1
+          },
+          "receipt_ids": [
+            "GUsvMpFWNGoiYnbZsgZjNT7MnGD6DPj8r5VpeKvoW91t"
+          ],
+          "status": {
+            "SuccessReceiptId": "GUsvMpFWNGoiYnbZsgZjNT7MnGD6DPj8r5VpeKvoW91t"
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": []
+      }
+    },
+    "id": "funding"
+  },
+  "accounts": {
+    "win-funding-20261112-a.testnet": {
+      "jsonrpc": "2.0",
+      "result": {
+        "amount": "3904955363487500000000000",
+        "block_hash": "5HinASWDJW355VSyrH8gr5uBq7yahcw9dRfxd66YDS9u",
+        "block_height": 277441244,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "id": "funding"
+    },
+    "castle.we-inherit-night.testnet": {
+      "jsonrpc": "2.0",
+      "result": {
+        "amount": "11100000000000000000000000",
+        "block_hash": "6WbQCSz1NWxbfN8bybkKfeDYckcJ6XhDbx75oiJonvL7",
+        "block_height": 277441251,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "id": "funding"
+    }
+  }
+}

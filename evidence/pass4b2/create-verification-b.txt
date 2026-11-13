@@ -1,0 +1,59 @@
+├  Unsigned transaction:
+│    signer_id:    castle.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  create_campaign
+│                       args:         {
+│                                       "campaign_id": "verification-b",
+│                                       "executor": "keeper.we-inherit-night.testnet",
+│                                       "lucien": "lucien.we-inherit-night.testnet",
+│                                       "marius": "marius.we-inherit-night.testnet",
+│                                       "mode": "political",
+│                                       "participants": [
+│                                         "vesper.we-inherit-night.testnet",
+│                                         "win-funding-20261112-a.testnet",
+│                                         "seraphine.we-inherit-night.testnet",
+│                                         "keeper.we-inherit-night.testnet",
+│                                         "lucien.we-inherit-night.testnet",
+│                                         "marius.we-inherit-night.testnet",
+│                                         "cassian.we-inherit-night.testnet",
+│                                         "mirelle.we-inherit-night.testnet",
+│                                         "dorian.we-inherit-night.testnet",
+│                                         "sabine.we-inherit-night.testnet"
+│                                       ],
+│                                       "player": "win-funding-20261112-a.testnet",
+│                                       "seraphine": "seraphine.we-inherit-night.testnet",
+│                                       "vesper": "vesper.we-inherit-night.testnet"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      3 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW
+│    Signature:  ed25519:4CUoZCaA6YRoMVbfsNfQq44qx8ctb1GzZyj71cRTvmnPAnmLKemzTS3jPFDmFMynRfkgi9ea9a8knNNP9iRtZ6T4
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002284712670906 NEAR
+│    Transaction ID: CrnDxMK8N1Ra5PAem9gMyrKkpJvD3zBsDQEyQxKuWEw1
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CrnDxMK8N1Ra5PAem9gMyrKkpJvD3zBsDQEyQxKuWEw1
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:   No logs
+│    Logs [castle.we-inherit-night.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "create_campaign" call to <castle.we-inherit-night.testnet> on behalf of <castle.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet create_campaign json-args '{"campaign_id": "verification-b", "mode": "political", "participants": ["vesper.we-inherit-night.testnet", "win-funding-20261112-a.testnet", "seraphine.we-inherit-night.testnet", "keeper.we-inherit-night.testnet", "lucien.we-inherit-night.testnet", "marius.we-inherit-night.testnet", "cassian.we-inherit-night.testnet", "mirelle.we-inherit-night.testnet", "dorian.we-inherit-night.testnet", "sabine.we-inherit-night.testnet"], "vesper": "vesper.we-inherit-night.testnet", "player": "win-funding-20261112-a.testnet", "executor": "keeper.we-inherit-night.testnet", "seraphine": "seraphine.we-inherit-night.testnet", "marius": "marius.we-inherit-night.testnet", "lucien": "lucien.we-inherit-night.testnet"}' prepaid-gas '100.0 Tgas' attached-deposit '3 NEAR' sign-as castle.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

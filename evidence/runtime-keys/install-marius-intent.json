@@ -1,0 +1,15 @@
+{
+  "role": "marius",
+  "accountId": "marius.we-inherit-night.testnet",
+  "publicKey": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2",
+  "administrativePublicKey": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "grant_access",
+    "revoke_grant"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434081000003,
+  "phase": "preparing",
+  "network": "testnet"
+}

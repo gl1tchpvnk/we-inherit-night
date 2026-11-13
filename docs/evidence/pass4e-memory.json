@@ -1,0 +1,15 @@
+{
+  "kind": "local synthetic workload, not live gameplay",
+  "platform": "linux",
+  "node": "v24.13.0",
+  "heapCapMiB": 256,
+  "campaigns": 4,
+  "storedTransactions": 4000,
+  "apiResponses": 80,
+  "assetResponses": 80,
+  "largestAssetBytes": 3106011,
+  "idleMiB": 124.10546875,
+  "peakRssMiB": 220.84765625,
+  "heapUsedMiB": 14.190277099609375,
+  "sqliteMiB": 18.0546875
+}

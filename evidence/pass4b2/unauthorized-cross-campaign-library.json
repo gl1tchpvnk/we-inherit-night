@@ -1,0 +1,215 @@
+{
+  "final_execution_status": "FINAL",
+  "receipts_outcome": [
+    {
+      "block_hash": "H4mWGdyfqmJ69GsuHDSMSV58jRqgBDiJEDYvbAV2i2Ca",
+      "id": "9xTYY821GKSPwoguXYUEwZzFRQv5ifjCT5rcn2LiyY6d",
+      "outcome": {
+        "executor_id": "castle.we-inherit-night.testnet",
+        "gas_burnt": 1844552713427,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            {
+              "local": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg"
+            }
+          ],
+          "gas_profile": [
+            {
+              "cost": "BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "3706753554"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "35445963"
+            },
+            {
+              "cost": "CONTRACT_LOADING_BYTES",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "536266464270"
+            },
+            {
+              "cost": "READ_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "7829589600"
+            },
+            {
+              "cost": "READ_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "851498592"
+            },
+            {
+              "cost": "READ_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "10068660744"
+            },
+            {
+              "cost": "READ_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "198405306"
+            },
+            {
+              "cost": "STORAGE_READ_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "112713691498"
+            },
+            {
+              "cost": "STORAGE_READ_KEY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "959528523"
+            },
+            {
+              "cost": "STORAGE_READ_VALUE_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "10054919168"
+            },
+            {
+              "cost": "UTF8_DECODING_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "3111779061"
+            },
+            {
+              "cost": "UTF8_DECODING_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "56275032447"
+            },
+            {
+              "cost": "WASM_INSTRUCTION",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "176031937224"
+            },
+            {
+              "cost": "WRITE_MEMORY_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "14018974305"
+            },
+            {
+              "cost": "WRITE_MEMORY_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "5526533388"
+            },
+            {
+              "cost": "WRITE_REGISTER_BASE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "11462089944"
+            },
+            {
+              "cost": "WRITE_REGISTER_BYTE",
+              "cost_category": "WASM_HOST_COST",
+              "gas_used": "6930251172"
+            }
+          ],
+          "version": 4
+        },
+        "receipt_ids": [
+          "8zob4JD5eXg6yJcJSDR3q1ywuXvDDQTUVP7Q9pr9kgTJ"
+        ],
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:524:13:\nassertion `left == right` failed: owner required\n  left: AccountId(\"win-funding-20261112-a.testnet\")\n right: AccountId(\"player.we-inherit-night.testnet\")"
+                }
+              }
+            }
+          }
+        },
+        "tokens_burnt": "184455271342700000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "48XgViKVYePpiHJH4mkuz3ZDahqTBoZpumFY1uSBi1Ws"
+        }
+      ]
+    },
+    {
+      "block_hash": "6qFays2Hryhtdosazmt8RKnXVoDtwHTPLeepTF755pdE",
+      "id": "8zob4JD5eXg6yJcJSDR3q1ywuXvDDQTUVP7Q9pr9kgTJ",
+      "outcome": {
+        "executor_id": "player.we-inherit-night.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "contracts": [
+            null
+          ],
+          "gas_profile": [],
+          "version": 4
+        },
+        "receipt_ids": [],
+        "status": {
+          "SuccessValue": ""
+        },
+        "tokens_burnt": "0"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "4X1V7fdTagLXX6skbRBnLoBnnZrqdoaC4FV6XbTUJRkU"
+        }
+      ]
+    }
+  ],
+  "status": {
+    "Failure": {
+      "ActionError": {
+        "index": 0,
+        "kind": {
+          "FunctionCallError": {
+            "ExecutionError": "Smart contract panicked: panicked at contract\\src\\lib.rs:524:13:\nassertion `left == right` failed: owner required\n  left: AccountId(\"win-funding-20261112-a.testnet\")\n right: AccountId(\"player.we-inherit-night.testnet\")"
+          }
+        }
+      }
+    }
+  },
+  "transaction": {
+    "actions": [
+      {
+        "FunctionCall": {
+          "args": "eyJjYW1wYWlnbl9pZCI6InZlcmlmaWNhdGlvbi1iIiwiY2FuX2RlbGVnYXRlIjpmYWxzZSwiZXhwaXJ5X25pZ2h0IjpudWxsLCJncmFudGVlIjoic2FiaW5lLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIsIm5vbmNlIjowLCJwYXJlbnRfZ3JhbnRfaWQiOm51bGwsInByb3BlcnR5X2lkIjoibGlicmFyeSIsInNjb3BlIjoiZW50ZXIifQ==",
+          "deposit": "0",
+          "gas": 100000000000000,
+          "method_name": "grant_access"
+        }
+      }
+    ],
+    "hash": "3cUUoCEGcidme2nqLegbt5PXXFY3ZP8Kjmo3rY9nqZqv",
+    "nonce": 277434038000005,
+    "priority_fee": 0,
+    "public_key": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+    "receiver_id": "castle.we-inherit-night.testnet",
+    "signature": "ed25519:2bVvEzz7Xri4TpyjbXD5xZMgcKHfwqxGrSZLoB49F5rqUKR6btTqgcBTbNypVLXhGthkTdtNZuZtmUNdWcRYHRXh",
+    "signer_id": "player.we-inherit-night.testnet"
+  },
+  "transaction_outcome": {
+    "block_hash": "Fu6tv5ZWGBBG2REKQad5ydf1eJCXVTWfcfVPbJFWBjEU",
+    "id": "3cUUoCEGcidme2nqLegbt5PXXFY3ZP8Kjmo3rY9nqZqv",
+    "outcome": {
+      "executor_id": "player.we-inherit-night.testnet",
+      "gas_burnt": 317691610430,
+      "logs": [],
+      "metadata": {
+        "gas_profile": null,
+        "version": 1
+      },
+      "receipt_ids": [
+        "9xTYY821GKSPwoguXYUEwZzFRQv5ifjCT5rcn2LiyY6d"
+      ],
+      "status": {
+        "SuccessReceiptId": "9xTYY821GKSPwoguXYUEwZzFRQv5ifjCT5rcn2LiyY6d"
+      },
+      "tokens_burnt": "31769161043000000000"
+    },
+    "proof": [
+      {
+        "direction": "Right",
+        "hash": "7yngo3vc7F7Ajv6bhBvWtgBNHgvEfyS2zBybLb3MtxYP"
+      }
+    ]
+  }
+}

@@ -4,6 +4,8 @@ Version: 0.7 / 2026-11-12 | Target: NEAR HACKATHON, 2026-11-14 | Status: **Pass 
 
 > **Everyone wants immortality. Nobody wants to answer to their sire forever.**
 
+> Deployment update: Pass 4D is PARTIAL. Sustainable Testnet code and provisioning are verified on the new night account; live walletless runtime remains blocked on isolated credentials. See [Pass 4D](docs/PASS4D.md). No public launch is claimed.
+
 ## 1. Product brief
 - **Title:** We Inherit Night. Previous working titles BLOODLINE / BLOODRIGHT are retired; *bloodline* remains the name of an in-world ancestry and authority mechanic.
 - **Genre:** gothic social simulation / political dynasty strategy with autonomous non-player characters (NPCs).
@@ -244,3 +246,59 @@ Pass 3A narrative is IMPLEMENTED across all seven nights of Living Court: distin
 Pass 3B reactive court is IMPLEMENTED: event-specific consequences, explicit political standing, evolving room follow-ups, bounded automatic playback and narrowed actor observations. Deterministic priorities and validated opportunities remain the decision source. Dorian no longer proposes an impossible late switch. The established one-major-action/night design is retained under the Pass 3B allowance for documented alternatives. No Rust, signing, save-schema or ending-rule changes; see docs/PASS3B.md for tests and limits. At its completion, Pass 3C integration was PARTIAL: story hierarchy, consequence clarity and route-specific endings are implemented and tested; NPC-to-NPC purchases and treasuries were absent. See docs/PASS3C.md and docs/PASS3D_HANDOFF.md for historical findings; the scoped 3D implementation below addresses that gap.
 
 Pass 3D implements the scoped Dangerous Court rules for new campaigns: state-dependent Night VII Marius demand, published-account counterproposal, and one funded Cassian–Lucien passage purchase. Existing endings and one-action rules remain. The previous NPC-to-NPC transaction gap is addressed only for this exact restricted Sandbox agreement, not a general economy. Older saves remain unchanged. See docs/PASS3D.md for settlement and evidence.
+
+## Locked Pass 4B architecture
+One deployed authority contract supports many independently isolated on-chain campaigns. Campaign creation must not deploy another WASM, use a factory/pool, or rely on off-chain isolation. Pass 4B.1 introduces campaign-scoped World state, private storage-backed creation and scoped callbacks; see docs/PASS4B1.md for verification and compatibility limits. Testnet deployment and restricted signing were verified in Pass 4B.2. Pass 4C.1 implements a local walletless service and durable session allocation, but live gameplay acceptance remains blocked by isolated runtime custody, fresh campaign capacity and bounded player-deposit signing. See docs/PASS4C1.md.
+
+
+## Pass 4C.2 local lifecycle and treasury implementation
+One contract still hosts isolated worlds. Fixed 3 NEAR reservations are superseded locally by measured storage checks, explicit per-world/total quotas and separately backed pool/treasury/escrow accounting. Restricted provisioning creates fixed-roster worlds; paid player actions debit their prepaid treasury with zero attached deposit. The trusted walletless backend enforces visitor ownership even when role accounts are shared. Completed, settled worlds can archive and reclaim while retaining nonreusable ID/commitment tombstones; abandoned or financially unresolved worlds remain retained. See docs/PASS4C2.md for measurements, tests and limits. The root layout is incompatible with the deployed registry: recommend a separately approved fresh deployment, not an automatic upgrade. Existing Testnet state and obligations remain untouched. Public deployment and runtime credential provisioning are not completed.
+
+## Pass 4E deployment preparation
+The current target is one paid Render native Node 24 Web Service with persistent
+SQLite at /var/data/night, serving the existing Vite build and game API together.
+The existing night.we-inherit-night.testnet deployment is preserved. Runtime-only
+FunctionCall keys use protected server environment configuration, with exact-key
+permission/signature verification and no FullAccess fallback. Prepaid affordability,
+interrupted signing, public snapshot privacy and durable abuse limits are corrected
+locally. No paid service, live credentials or public gameplay were configured in
+this pass. See docs/PASS4E.md for measurements, setup and remaining live acceptance.
+
+## Pass 4E deployment preparation
+The current target is one paid Render native Node 24 Web Service with persistent
+SQLite at /var/data/night, serving the existing Vite build and game API together.
+The existing night.we-inherit-night.testnet deployment is preserved. Runtime-only
+FunctionCall keys use protected server environment configuration, with exact-key
+permission/signature verification and no FullAccess fallback. Prepaid affordability,
+interrupted signing, public snapshot privacy and durable abuse limits are corrected
+locally. No paid service, live credentials or public gameplay were configured in
+this pass. See docs/PASS4E.md for measurements, setup and remaining live acceptance.
+
+## Restricted-key operational follow-up
+
+Current funding status: two official faucet accounts were FINAL-verified and
+funded the existing contract with 4 Testnet NEAR. Pool is 1.15; capacity is 5.
+Only necessary keeper/Seraphine allowances increased (same keys and permissions)
+to 0.10/0.075. Remaining funding reserve is 15.9999553634875 NEAR. No contract
+code change or Render work; hosted performance remains unverified. See docs/TESTNET_FUNDING.md.
+
+Historical initial upgrade:
+
+The verified capacity WASM was subsequently upgraded code-only on the same
+Testnet account. Exact storage was preserved; only max_active was then set to 1,
+the initial capacity justified by actual backing after fees. Expansion above
+four is PARTIAL pending funding, gas-budget and higher-capacity measurements.
+No Render deployment or live gameplay acceptance. See docs/CAPACITY_TESTNET_UPGRADE.md.
+
+At preparation completion, the campaign capacity follow-up was IMPLEMENTED locally: the existing provisioning cap
+is operator-adjustable without changing serialized state. Abandoned (default 24h)
+and defeated campaigns retain actual outcomes while existing restricted lifecycle
+methods settle and reclaim them. Creation quotas remain durable and configurable.
+Exact deployed-WASM/state compatibility is tested locally; no Testnet upgrade or
+public gameplay verification occurred. See docs/CAMPAIGN_CAPACITY.md.
+Eleven independent runtime FunctionCall keys for night.we-inherit-night.testnet
+are installed on the existing actor/provisioner accounts with exact method lists
+and 0.05 test NEAR allowances. Independent RPC and existing runtime preflight
+pass. Private material is DPAPI-encrypted outside the repository; Render entry
+is manual and has not occurred. No application changes or deployment in this
+operational task. See docs/RUNTIME_KEYS.md and evidence/runtime-keys/verification.json.

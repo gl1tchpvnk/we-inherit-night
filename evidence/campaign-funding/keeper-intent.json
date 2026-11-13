@@ -1,0 +1,23 @@
+{
+  "actor": "keeper.we-inherit-night.testnet",
+  "receiver": "keeper.we-inherit-night.testnet",
+  "publicKey": "ed25519:3CKR8uJWvKjbECXMxXimoE61XRMmoc2Yusz1hYPxyPzB",
+  "nonce": 277434024000002,
+  "mode": "keeper",
+  "network": "testnet",
+  "runtimePublicKey": "ed25519:7fJGW1whUCPU8aZQvkT7zdB7RCFSFf8sm2ztfjuGXXNU",
+  "allowance": "100000000000000000000000",
+  "oldPermission": {
+    "FunctionCall": {
+      "allowance": "50000000000000000000000",
+      "method_names": [
+        "advance_night",
+        "complete_campaign",
+        "settlement_dawn",
+        "archive_campaign",
+        "reclaim_campaign"
+      ],
+      "receiver_id": "night.we-inherit-night.testnet"
+    }
+  }
+}

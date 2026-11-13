@@ -1,0 +1,1 @@
+["contract", "deploy", "castle.we-inherit-night.testnet", "use-file", "target/near/night_authority/night_authority.wasm", "without-init-call", "network-config", "testnet", "sign-with-keychain", "--signer-public-key", "ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW", "send"]

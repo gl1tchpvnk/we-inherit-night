@@ -1,0 +1,49 @@
+{
+  "campaign_id": "verification-a",
+  "passage_budget": null,
+  "night": 0,
+  "properties": [
+    {
+      "id": "crypt",
+      "owner": "vesper.we-inherit-night.testnet"
+    },
+    {
+      "id": "library",
+      "owner": "player.we-inherit-night.testnet"
+    },
+    {
+      "id": "lounge",
+      "owner": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "court",
+      "owner": "marius.we-inherit-night.testnet"
+    },
+    {
+      "id": "sanctuary",
+      "owner": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "passage",
+      "owner": "lucien.we-inherit-night.testnet"
+    }
+  ],
+  "ancestry": [
+    {
+      "sire": "vesper.we-inherit-night.testnet",
+      "descendant": "player.we-inherit-night.testnet"
+    }
+  ],
+  "grants": [],
+  "grant_validity": [],
+  "access": {
+    "court": false,
+    "crypt": false,
+    "library": true,
+    "lounge": false,
+    "passage": false,
+    "sanctuary": false
+  },
+  "next_nonce": 0,
+  "leases": []
+}

@@ -1,0 +1,18 @@
+{
+  "role": "cassian",
+  "accountId": "cassian.we-inherit-night.testnet",
+  "publicKey": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2",
+  "administrativePublicKey": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "enter_room",
+    "accept_funded_passage",
+    "refund_passage_budget"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434136000003,
+  "phase": "signed-verified",
+  "network": "testnet",
+  "hash": "7z3sKjWbqzEreyiScze6YQs8ZBypQz58m4VGnEWqqsA3",
+  "signatureVerified": true
+}

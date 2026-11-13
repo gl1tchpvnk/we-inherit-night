@@ -1,8 +1,10 @@
+import {expiryDescription} from '../src/leaseNarrative.ts';
+import {courtReactions} from '../src/reactiveCourt.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {newCampaign,availableActions} from '../src/game.ts';
 import {buildEncounterScenes} from '../src/encounters.ts';
-import {CHAPTERS,roomDevelopment} from '../src/livingCourt.ts';
+import {CHAPTERS,roomDevelopment,endingSummary} from '../src/livingCourt.ts';
 
 function fixture(night=0){
  const c=newCampaign('pass3a',{living:true});c.night=night;
@@ -64,4 +66,21 @@ test('reckoning excludes pending/failed NPC acts; withdrawn research never erase
  r.campaign.agentHistory[0].execution='confirmed';r.campaign.agentHistory[1].execution='confirmed';
  s=buildEncounterScenes(r).find(s=>s.id==='reckoning:4');assert.ok(s.lines.some(l=>l.text.includes('work is published')));
  assert.ok(s.lines.some(l=>l.text.includes('Taking her key back will not undo')));
+});
+
+
+test('exclusive lease deadlines use the seven-night timeline without promising expired protection',()=>{
+ assert.equal(expiryDescription(6,5),'ends at the start of Night 7');
+ assert.equal(expiryDescription(7,6),'lasts through the final night');
+ assert.equal(expiryDescription(7,7),'has expired');
+ assert.equal(expiryDescription(null,6),'has no confirmed expiry');
+ for(const end of [7,8,9]){
+  const r=fixture(6);r.campaign.ending='unbound';r.world.leases[0].status='accepted';r.world.leases[0].end_night=end;
+  assert.equal(endingSummary(r),'Your Library is still yours. Seraphine cannot withdraw her protection, and it will last through the final night. But sanctuary is not ownership.');
+  assert.doesNotMatch(courtReactions(r).map(x=>x.text).join(' '),/Night (?:8|9|10|Eight|Nine)/);
+  r.world.night=end;assert.match(endingSummary(r),/has expired/);assert.doesNotMatch(endingSummary(r),/will last through/);
+ }
+ const short=fixture(4);short.campaign.ending='unbound';short.world.leases[0].status='accepted';short.world.leases[0].end_night=5;
+ assert.match(endingSummary(short),/ends at the start of Night 6/);assert.doesNotMatch(endingSummary(short),/through the final night/);
+ short.world.leases[0].buyer='someone-else';assert.match(endingSummary(short),/No accepted sanctuary/);
 });

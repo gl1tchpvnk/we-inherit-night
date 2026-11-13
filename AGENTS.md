@@ -219,3 +219,53 @@ AI vampire NPCs are runtime game agents, distinct from Codex development agents.
 - `finalCourt.ts` fixes the final demand and one Cassian–Lucien paid passage. `agents.ts` remains the only NPC validator; campaign journal confirms outcomes before publication.
 - Narrow Rust extension: one exact self-funded passage mandate in separate versioned storage, same predecessor/nonce authority; no serialized World layout change. Runtime NPC keys remain restricted. Acceptance atomically debits mandate into rent escrow plus lease rights; seller payout is separate.
 - Old blanket NPC-economy deferrals describe earlier passes. This single bounded Sandbox agreement supersedes them; recurring income, arbitrary purchases and unrestricted wallets remain prohibited. See docs/PASS3D.md.
+
+## Pass 4B.1 continuity
+- Locked architecture: one deployed contract, many isolated on-chain campaigns; no factory or per-player deployment.
+- Authority registry exports require campaign_id; World remains the internal authority implementation. Budgets and callbacks must remain campaign-scoped.
+- Private creation reserves bounded storage and excludes escrow liabilities from available backing. No runtime owner override or public provisioning endpoint.
+- Persist contract/campaign bindings before recovery. Do not automatically upgrade old single-World Sandbox saves into the incompatible registry layout.
+- Shared actor accounts confer only the rights assigned in each World; function-call keys cannot restrict campaign arguments. Never reuse identities implicitly.
+- No Testnet deployment in 4B.1; see docs/PASS4B1.md for results and remaining provisioning risks.
+
+## Pass 4C.2 continuity
+- Measured storage accounting supersedes 4B.1 fixed reserves locally. Keep pool, campaign treasuries and pending financial liabilities excluded from storage backing.
+- Provisioning policy/funding remain private operator operations; runtime open_campaign uses a distinct restricted identity and immutable roster/limits. Shared actor identities require trusted session authorization; campaign IDs are never credentials.
+- Prepaid accept_lease uses zero deposit and existing lease validation. Legacy attached-deposit campaigns remain supported; no unrestricted runtime payment signer.
+- Complete only after seven nights and financial settlement. Archive/reclaim must preserve paid terms, reject pending callbacks, retain replay tombstones and keep the committed SQLite history.
+- New registry layout is not a verified migration of current Testnet state. No automatic upgrade or deployment. See docs/PASS4C2.md.
+
+## Pass 4E continuity
+- One Render Node 24 service serves the frontend and API; /var/data/night holds
+  SQLite, journals and OS-released writer lock. No second writer or ephemeral DB.
+- Protected environment keys are restricted runtime keys only. Verify the exact
+  roster at startup and permissions before each call; never allow FullAccess fallback.
+- Payment affordability uses campaign treasury when prepaid. Preserve signed
+  identity before submission and block uncertain broadcasts until FINAL evidence.
+- Public API projection strips NPC memory/private journals; durable request and
+  creation limits and bounded in-flight work remain. No public admin endpoints.
+- Local sizing supports an initial Starter trial, not verified hosted capacity.
+  No deployment, live credential installation or live gameplay in this pass.
+  See docs/PASS4E.md; do not treat its setup instructions as deployment approval.
+
+## Campaign capacity continuity
+- Capacity changes use private set_campaign_capacity on the existing policy field;
+  no migration/reinitialization, runtime operator authority or larger storage cap.
+- Cleanup freezes actual outcomes after recovery, serializes with gameplay and
+  uses existing restricted clock/settlement/archive/reclaim calls. Never fabricate
+  NPC turns or endings; retain unknown outcomes, financial obligations and tombstones.
+- Default inactivity is 24h with durable activity and disclosed closure; configuration
+  stays bounded. The verified WASM is now upgraded and funded on Testnet with max_active=5;
+  backend/hosted gameplay is not deployed or verified. Do not reinitialize. Expansion
+  remains funding/gas/measurement-limited. Current pool is 1.15 Testnet NEAR;
+  keeper/Seraphine allowances are 0.10/0.075, other nine 0.05. Same keys/methods.
+  See docs/TESTNET_FUNDING.md; no implicit additional funding or hosting approval.
+
+## Installed runtime key continuity
+- Eleven receiver-specific restricted Testnet keys are installed; use the public
+  manifest/config in evidence/runtime-keys and docs/RUNTIME_KEYS.md. Preserve all
+  existing keys; do not regenerate, reinstall, rotate or delete them implicitly.
+- Private runtime JSON is DPAPI-encrypted outside Git. Never read it into model
+  output, logs, evidence or frontend assets. Render upload remains operator-controlled.
+- No hosting approval follows from key installation. Scoped production import
+  review found no demonstrated issue requiring source removal; do not general-clean.

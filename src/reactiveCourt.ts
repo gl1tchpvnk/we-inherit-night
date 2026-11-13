@@ -1,3 +1,4 @@
+import {expiryDescription} from './leaseNarrative.ts';
 import {cassianPassage} from './finalCourt.ts';
 import type {Result} from './chain';
 
@@ -49,7 +50,7 @@ export function courtReactions(r:Result):CourtReaction[]{
       case 'passage_offer':if(cassianPassage(c,r.world))add({...base,room:'lounge',level:'minor',title:'Lucien names his price',text:'After losing the appointment, Cassian has another offer: a temporary passage from Lucien. An offer alone buys him nothing.'});break;
       case 'passage_buy':if(cassianPassage(c,r.world)?.status==='accepted')add({...base,room:'lounge',level:'significant',title:'Cassian buys a way out',text:'Cassian has spent his entire passage allowance on three nights outside Marius’s protection. His paid escape does not depend on your Library invitation. The accepted lease is publicly recorded.'});break;
       case 'passage_collect':if(cassianPassage(c,r.world)?.settled)add({...base,room:'lounge',level:'minor',title:'Lucien receives Cassian’s payment',text:'The agreed passage rent has reached Lucien. Cassian’s finite allowance is spent; the passage retains its recorded deadline.'});break;
-      case 'final_answer':if(p.finalCourt?.result)add({...base,room:'lounge',level:'major',title:p.finalCourt.result==='accepted'?'Marius accepts your terms':'Marius withdraws his protection',text:p.finalCourt.result==='accepted'?(p.finalCourt.response==='counter'?'Marius accepts a limited inspection. Mirelle’s completed account and Cassian’s paid escape have made a narrower bargain worth accepting. Your invitation ends at the start of Night Nine.':'Marius keeps his protection. You have given him a continuing invitation to the Library; he cannot pass that invitation on.'):'Marius has withdrawn his own protection after your answer—or your silence. Other independent promises remain governed by their own terms.'});break;
+      case 'final_answer':if(p.finalCourt?.result)add({...base,room:'lounge',level:'major',title:p.finalCourt.result==='accepted'?'Marius accepts your terms':'Marius withdraws his protection',text:p.finalCourt.result==='accepted'?(p.finalCourt.response==='counter'?'Marius accepts a limited inspection. Mirelle’s completed account and Cassian’s paid escape have made a narrower bargain worth accepting. You gave him a two-night invitation, not permanent access.':'Marius keeps his protection. You have given him a continuing invitation to the Library; he cannot pass that invitation on.'):'Marius has withdrawn his own protection after your answer—or your silence. Other independent promises remain governed by their own terms.'});break;
 
 
       case 'revoke':if(grant)add({...base,room:'crypt',level:'major',title:'The door Vesper closed',text:r.world.access.crypt?'Vesper has withdrawn her invitation. Another valid right still opens the Crypt. Her decision did not erase it.':'Vesper has withdrawn her invitation. The Crypt no longer admits you. Your Library title remains separate; it is not a refuge.',follow:'record:crypt'});break;
@@ -122,7 +123,7 @@ export function courtReactions(r:Result):CourtReaction[]{
 
     const night=l.end_night===null?-1:l.end_night-l.duration_nights;
 
-    add({id:`reaction:lease:${l.id}:${l.status}`,night,actor:'seraphine',room:'lounge',level:'significant',title:l.status==='accepted'?'A bargain kept separate':'The bargain you declined',text:l.status==='accepted'?`Your ${l.property_id} agreement was accepted. It ends at the start of Night ${(l.end_night??0)+1}. Neither gratitude nor an unrelated quarrel changes that term.`:'You rejected this standing agreement. It grants no shelter or access. Refusal is recorded; no personal grudge is invented.',evidence:`Lease #${l.id}: ${l.status}.`,follow:'character:seraphine'});
+    add({id:`reaction:lease:${l.id}:${l.status}`,night,actor:'seraphine',room:'lounge',level:'significant',title:l.status==='accepted'?'A bargain kept separate':'The bargain you declined',text:l.status==='accepted'?`Your ${l.property_id} agreement was accepted. It ${expiryDescription(l.end_night,r.world.night)}. Neither gratitude nor an unrelated quarrel changes that term.`:'You rejected this standing agreement. It grants no shelter or access. Refusal is recorded; no personal grudge is invented.',evidence:`Lease #${l.id}: ${l.status}.`,follow:'character:seraphine'});
 
   }
 
@@ -166,7 +167,7 @@ export function politicalRelationship(r:Result,actor:NpcName):string{
 
   const issued=w.grants.find(g=>g.grantor===account&&g.grantee===p.accounts.player&&effectiveGrant(w,g));
 
-  if(issued)return issued.expiry_night===null?'Separate patron protection: the issuer may withdraw it.':`Temporary protection until the start of Night ${issued.expiry_night+1}.`;
+  if(issued)return issued.expiry_night===null?'Separate patron protection: the issuer may withdraw it.':`Temporary protection ${expiryDescription(issued.expiry_night,r.world.night)}; the issuer may still withdraw it.`;
 
   return actor==='cassian'?'Competing for a position; any Library invitation is separate from court sponsorship.':actor==='sabine'?'Sponsors Cassian only through her own valid court authority.':'No promise to you recorded. Motives beyond established interests remain unknown.';
 

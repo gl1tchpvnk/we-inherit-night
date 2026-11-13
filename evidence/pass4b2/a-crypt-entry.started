@@ -1,0 +1,1 @@
+["contract", "call-function", "as-transaction", "castle.we-inherit-night.testnet", "enter_room", "json-args", "{\"property_id\": \"crypt\", \"campaign_id\": \"verification-a\", \"nonce\": 1}", "prepaid-gas", "100 Tgas", "attached-deposit", "0 NEAR", "sign-as", "player.we-inherit-night.testnet", "network-config", "testnet", "sign-with-keychain", "send"]

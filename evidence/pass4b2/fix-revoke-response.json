@@ -1,0 +1,27 @@
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "name": "HANDLER_ERROR",
+    "cause": {
+      "info": {},
+      "name": "INVALID_TRANSACTION"
+    },
+    "code": -32000,
+    "message": "Server error",
+    "data": {
+      "TxExecutionError": {
+        "InvalidTxError": {
+          "InvalidAccessKeyError": {
+            "NotEnoughAllowance": {
+              "account_id": "vesper.we-inherit-night.testnet",
+              "allowance": "50000000000000000000000",
+              "cost": "50919334738468500000000",
+              "public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD"
+            }
+          }
+        }
+      }
+    }
+  },
+  "id": "revoke"
+}

@@ -112,7 +112,7 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
 
 
-  const disabled=!!busy||!world||!!state?.pending;
+  const disabled=!!busy||!world||!!state?.pending||!!state?.closure;
 
   const guidance=state?navigationGuidance(state):{situation:'Recover the current castle state before choosing.',leads:[]};
 
@@ -122,7 +122,8 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   const exploration=<SceneSurface>
 
-    <header className="game-hud"><button disabled={!!busy} onClick={onTitle}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><span>Blood {campaign.resources.blood}/12</span><span>Exposure {campaign.resources.exposure}/10</span><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span><button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button></>}</header>
+    <header className="game-hud"><button disabled={!!busy} onClick={onTitle}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><span>Blood {campaign.resources.blood}/12</span><span>Exposure {campaign.resources.exposure}/10</span><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span><button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button></>}</header>
+    {state?.closure&&<p role="status" className="notice">This campaign is closed{state.closure.reason==='abandoned'?' after its inactivity deadline':' after defeat'}. The original gameplay record is preserved. Return to the main menu to start another campaign.</p>}
 
     {campaign?.politics&&campaign.status==='playing'&&<nav className="story-nav" aria-label="Nightly phases"><button disabled={disabled} onClick={()=>openScene(`discovery:${campaign.night}`)}>Hear the court</button><button className="binding-choice" disabled={disabled} onClick={()=>openScene(`decision:${campaign.night}`)}>Choose this night</button></nav>}
 

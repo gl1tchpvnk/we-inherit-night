@@ -1,0 +1,43 @@
+├  Unsigned transaction:
+│    signer_id:    vesper.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  revoke_grant
+│                       args:         {
+│                                       "campaign_id": "verification-a",
+│                                       "grant_id": 0,
+│                                       "nonce": 1
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo
+│    Signature:  ed25519:2tZTjadEZWm9ZEbMMLS2q9gPTWEqhNG7kRhmTvQXnA4AEe29pwTzPDLEPiWAvcZMtdscNKCPRwr6WQ2UK4UymA8s
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002616496651675 NEAR
+│    Transaction ID: 6UmYh27yM6hgV17ue53im1KWarqMTSW2KUrhsBkr2hMk
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/6UmYh27yM6hgV17ue53im1KWarqMTSW2KUrhsBkr2hMk
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:
+│      EVENT_JSON:{"standard":"we_inherit_night","version":"1.0.0","event":"revoke","campaign_id":"verification-a","data":[{"grant_id":0,"actor":"vesper.we-inherit-night.testnet"}]}
+│    Logs [vesper.we-inherit-night.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "revoke_grant" call to <castle.we-inherit-night.testnet> on behalf of <vesper.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet revoke_grant json-args '{"grant_id": 0, "campaign_id": "verification-a", "nonce": 1}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as vesper.we-inherit-night.testnet network-config testnet sign-with-keychain --signer-public-key ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD send
+

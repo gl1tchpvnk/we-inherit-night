@@ -1,0 +1,170 @@
+{
+  "network": "testnet",
+  "checked_at": "2026-11-13T01:10:21.340135+00:00",
+  "creation": {
+    "jsonrpc": "2.0",
+    "result": {
+      "final_execution_status": "FINAL",
+      "receipts_outcome": [
+        {
+          "block_hash": "2xTrFiJyK44r5zhQECTa7foHoxacbVHWwbXWnzYxuffJ",
+          "id": "FoJYZSYEFW9nShyzoiCRwbZTBKA7Ey72NTfxRLppMdvg",
+          "outcome": {
+            "executor_id": "win-funding-20261112-a.testnet",
+            "gas_burnt": 7524947687500,
+            "logs": [],
+            "metadata": {
+              "contracts": [
+                null,
+                null,
+                null
+              ],
+              "gas_profile": [],
+              "version": 4
+            },
+            "receipt_ids": [
+              "5rFBzowTTjvb7Nuu3rK982caJFJSM7eT3hxqG88QCjGY"
+            ],
+            "status": {
+              "SuccessValue": ""
+            },
+            "tokens_burnt": "7032494768750000000000"
+          },
+          "proof": [
+            {
+              "direction": "Left",
+              "hash": "5ubrsKNgXAyWpZrJ2VwZjpW34NVgsVc1QnPxbXv5CsiX"
+            },
+            {
+              "direction": "Right",
+              "hash": "Fcf7m95gmEqk1aF9Wp1G3vhZmCgFAbGicism3AuAw99S"
+            }
+          ]
+        },
+        {
+          "block_hash": "AUvWGWxzd4r9x1L3cfiQitK1Jy5kq78XSw7QoXe3dhkf",
+          "id": "5rFBzowTTjvb7Nuu3rK982caJFJSM7eT3hxqG88QCjGY",
+          "outcome": {
+            "executor_id": "testnet",
+            "gas_burnt": 223182562500,
+            "logs": [],
+            "metadata": {
+              "contracts": [
+                {
+                  "local": "AjT2jpkGZaWeopfaP4wj7aFDNUBLFvFmSNUaVdKZJBPf"
+                }
+              ],
+              "gas_profile": [],
+              "version": 4
+            },
+            "receipt_ids": [],
+            "status": {
+              "SuccessValue": ""
+            },
+            "tokens_burnt": "0"
+          },
+          "proof": [
+            {
+              "direction": "Left",
+              "hash": "CXfxvZcH2BK2jbshhK5KGxyUkZJMuptZMXPNMzDVxEy8"
+            },
+            {
+              "direction": "Right",
+              "hash": "5NsYQouHUL9z2mrZG9ap3Spf1tSjFEefkYeyw591fjBN"
+            }
+          ]
+        }
+      ],
+      "status": {
+        "SuccessValue": ""
+      },
+      "transaction": {
+        "actions": [
+          "CreateAccount",
+          {
+            "Transfer": {
+              "deposit": "10000000000000000000000000"
+            }
+          },
+          {
+            "AddKey": {
+              "access_key": {
+                "nonce": 0,
+                "permission": "FullAccess"
+              },
+              "public_key": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1"
+            }
+          }
+        ],
+        "hash": "FYoKJWgycnYDig2w467N3fctErpAvADz8u9xaG8hijCZ",
+        "nonce": 51918942664616,
+        "priority_fee": 0,
+        "public_key": "ed25519:7fxH1zCVKf5WBqCNrwB5b2hyv3Qy29eQJAotJZ6muR3g",
+        "receiver_id": "win-funding-20261112-a.testnet",
+        "signature": "ed25519:3jjahR2ZVFY8AEpooQLQe1aaFwNSt1rJiHVvi1CRykFhnEpugRW3ZJWXRiAcbP4sf786n1UuEZderqCTjBpMVays",
+        "signer_id": "testnet"
+      },
+      "transaction_outcome": {
+        "block_hash": "Cx8W59Fw2wDoDktms5oEbFh4sYcSuZPYFdMDECUZPqoY",
+        "id": "FYoKJWgycnYDig2w467N3fctErpAvADz8u9xaG8hijCZ",
+        "outcome": {
+          "executor_id": "testnet",
+          "gas_burnt": 824947687500,
+          "logs": [],
+          "metadata": {
+            "gas_profile": null,
+            "version": 1
+          },
+          "receipt_ids": [
+            "FoJYZSYEFW9nShyzoiCRwbZTBKA7Ey72NTfxRLppMdvg"
+          ],
+          "status": {
+            "SuccessReceiptId": "FoJYZSYEFW9nShyzoiCRwbZTBKA7Ey72NTfxRLppMdvg"
+          },
+          "tokens_burnt": "82494768750000000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "5sQhR2NafdpZxmEXcgHXRV2ZrrfVbAQ16Ck3LrsmkaJA"
+          },
+          {
+            "direction": "Right",
+            "hash": "AgJYJGtYT8YNTtgr1PWU7MsYRmi7Arv9gFZkoG8Wdj11"
+          }
+        ]
+      }
+    },
+    "id": "funding"
+  },
+  "account": {
+    "jsonrpc": "2.0",
+    "result": {
+      "amount": "10000000000000000000000000",
+      "block_hash": "J2L1cxvb2ooTC62S7tZ6hsxcmo3jVvipPek83DeiW7Ez",
+      "block_height": 277441108,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "id": "funding"
+  },
+  "keys": {
+    "jsonrpc": "2.0",
+    "result": {
+      "block_hash": "9LGHyvgcqbYX5BkSFboYQjVV9PxUFtjpTVnSPAXty8UZ",
+      "block_height": 277441114,
+      "keys": [
+        {
+          "access_key": {
+            "nonce": 277441061000000,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1"
+        }
+      ]
+    },
+    "id": "funding"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "transfer",
+  "actor": "win-funding-20261112-a.testnet",
+  "receiver": "we-inherit-night.testnet",
+  "amount": "3860000000000000000000000",
+  "publicKey": "ed25519:FzEZF3YTTmDqyQSBm68LYJEfe1pKQTRdVtS225DTbGe1",
+  "nonce": 277441061000004,
+  "phase": "preparing",
+  "network": "testnet"
+}

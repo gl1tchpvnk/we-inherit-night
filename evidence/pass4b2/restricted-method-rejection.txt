@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    vesper.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  advance_night
+│                       args:         {
+│                                       "campaign_id": "verification-a",
+│                                       "expected_night": 0
+│                                     }
+│                       gas:          50.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo
+│    Signature:  ed25519:4ZS5GwX24rz7Ay5gvTR5vR4r1GeBcoWz335aga8Vo2bFrurhgoNNmGBwoiNxZLKnBxWNrZdaCrZ6Fj6My5hiXr9E
+│     
+├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.0002141418800635 NEAR
+│    Transaction ID: GWTm8Juhwm15h9UoURvJJMkWXLESXzUjBcso3bokMZ3m
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GWTm8Juhwm15h9UoURvJJMkWXLESXzUjBcso3bokMZ3m
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet] (failed):   No logs
+│    Logs [vesper.we-inherit-night.testnet]:   No logs
+│     
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet advance_night json-args '{"campaign_id": "verification-a", "expected_night": 0}' prepaid-gas '50.0 Tgas' attached-deposit '0 NEAR' sign-as vesper.we-inherit-night.testnet network-config testnet sign-with-keychain --signer-public-key ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD send
+
+Error: 
+   0: Error: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: panicked at contract\\src\\lib.rs:579:9:\nassertion `left == right` failed: executor required\n  left: AccountId(\"vesper.we-inherit-night.testnet\")\n right: AccountId(\"keeper.we-inherit-night.testnet\")")
+
+Location:
+   src\common.rs:1864

@@ -1,0 +1,67 @@
+{
+  "network": "testnet",
+  "rpc": "https://rpc.testnet.near.org",
+  "checked_at_utc": "2026-11-12T23:29:50.972749+00:00",
+  "accounts": [
+    {
+      "account": "we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "castle.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "keeper.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "player.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "vesper.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "seraphine.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "marius.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "lucien.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "mirelle.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "dorian.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "cassian.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    },
+    {
+      "account": "sabine.we-inherit-night.testnet",
+      "status": "NOT_FOUND",
+      "cause": "UNKNOWN_ACCOUNT"
+    }
+  ]
+}

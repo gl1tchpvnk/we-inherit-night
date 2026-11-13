@@ -1,0 +1,16 @@
+{
+  "role": "lucien",
+  "accountId": "lucien.we-inherit-night.testnet",
+  "publicKey": "ed25519:8X8JpTLPgMVeM6jgiDfvnP4s4FD67EVHiaHrw79g9iNY",
+  "administrativePublicKey": "ed25519:6oP1s5fkWLqPG1VKcxU6CLRQzXtCHNRBP8BaaYh324Bw",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "grant_access",
+    "offer_lease",
+    "claim_rent"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434095000001,
+  "phase": "preparing",
+  "network": "testnet"
+}

@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState,type ReactNode} from 'react';
-import {adapter,type Result} from './chain';
+import {adapter,playableTestnet,type Result} from './chain';
 import {Portrait} from './visuals';
 import {PROLOGUE,readIntro,advanceIntro,requiresReplacementConfirmation,loadEntryCampaign,type IntroProgress,type SaveStatus} from './entry';
 
@@ -7,7 +7,8 @@ export function TitleScreen({save,busy,error,confirm,onNew,onContinue,onCancel,o
   const title=useRef<HTMLHeadingElement>(null);
   useEffect(()=>{title.current?.focus();},[confirm]);
   return <main className="game-entry"><div className="cover-art" aria-hidden="true"/><section className="entry-copy"><p className="eyebrow">A gothic political graphic novel</p><h1 ref={title} tabIndex={-1}>We Inherit<br/>Night</h1><p className="entry-motto">The night belongs to those who survive it.</p>
-    {confirm?<section className="notice" aria-label="Confirm new campaign"><h2>Begin another seven nights?</h2><p>This replaces the current local campaign. Its progress cannot be continued afterward. No public account is affected.</p><div className="controls"><button disabled={busy} onClick={onConfirm}>Replace save · New Game</button><button disabled={busy} onClick={onCancel}>Keep existing save</button></div></section>:<div className="entry-controls"><button disabled={busy||!save||!!save.error} onClick={onNew}>{adapter.mode==='sandbox'?'New Game':'Open contract inspection'}</button><button disabled={busy||!save?.valid} onClick={onContinue}>Continue</button></div>}
+    {playableTestnet&&save?.inactivityMs&&<p className="notice">Inactive campaigns close after {save.inactivityMs/3600000} hours without gameplay activity. Your recorded outcome is retained; closed campaigns cannot resume.</p>}
+    {confirm?<section className="notice" aria-label="Confirm new campaign"><h2>Begin another seven nights?</h2><p>{playableTestnet?'This assigns a new unused campaign. Your previous campaign remains on-chain but cannot be resumed through this session. If capacity is full, your current campaign is preserved.':'This replaces the current local campaign. Its progress cannot be continued afterward. No public account is affected.'}</p><div className="controls"><button disabled={busy} onClick={onConfirm}>Replace save · New Game</button><button disabled={busy} onClick={onCancel}>Keep existing save</button></div></section>:<div className="entry-controls"><button disabled={busy||!save||!!save.error} onClick={onNew}>{(adapter.mode==='sandbox'||playableTestnet)?'New Game':'Open contract inspection'}</button><button disabled={busy||!save?.valid} onClick={onContinue}>Continue</button></div>}
     <p role="status" className={busy||error||save?.error?'entry-alert':undefined}>{busy?'Opening the court. Waiting for the saved state…':error||save?.error||(!save?'Checking for a saved campaign…':save.valid?`Saved campaign · Night ${Math.min(7,(save.night??0)+1)}`:'No saved campaign.')}</p><small>Local development preview · deterministic vampires · no live AI</small></section></main>;
 }
 export function Prologue({progress,onAdvance,waiting=false}:{progress:IntroProgress;onAdvance:(skip:boolean)=>void;waiting?:boolean}){
@@ -22,7 +23,7 @@ export function GameEntry({children}:{children:(result:Result,onTitle:()=>void)=
   const lock=useRef(false),opening=useRef(false),pendingIntro=useRef<IntroProgress|null>(null);
   useEffect(()=>{if(result&&opening.current){opening.current=false;performance.mark('night:entry-committed');performance.measure('night:entry-render','night:state-ready','night:entry-committed');requestAnimationFrame(()=>requestAnimationFrame(()=>{performance.mark('night:entry-painted');performance.measure('night:entry-total','night:entry-start','night:entry-painted');if(import.meta.env.DEV)console.info('[startup]',JSON.stringify(performance.getEntriesByType('measure').filter(e=>e.name.startsWith('night:')).map(e=>({name:e.name,ms:Math.round(e.duration*10)/10}))));}));}},[result]);
   async function check(){
-    if(adapter.mode!=='sandbox'){setSave({exists:false,valid:false});return;}
+    if(adapter.mode!=='sandbox'&&!playableTestnet){setSave({exists:false,valid:false});return;}
     try{const response=await fetch('/api/save',{cache:'no-store'});if(!response.ok)throw new Error();setSave(await response.json());}
     catch{setSave({exists:false,valid:false,error:'Saved campaign could not be checked. Reload to retry; nothing has been replaced.'});}
   }
@@ -32,7 +33,7 @@ export function GameEntry({children}:{children:(result:Result,onTitle:()=>void)=
     if(lock.current)return;performance.mark('night:entry-start');opening.current=true;lock.current=true;setBusy(true);setError('');
     try{
       let current=save!;
-      if(adapter.mode==='sandbox'){
+      if(adapter.mode==='sandbox'||playableTestnet){
         const response=await fetch('/api/save',{cache:'no-store'});if(!response.ok)throw new Error('Saved campaign could not be checked.');
         current=await response.json();
         if(fresh&&current.exists&&(!confirm||current.id!==save?.id)){setSave(current);setConfirm(true);return;}

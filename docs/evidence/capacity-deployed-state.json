@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-11-13T05:03:25.332Z",
+  "network": "testnet",
+  "readOnly": true,
+  "accountId": "night.we-inherit-night.testnet",
+  "sha256": "99f0deeac2fc7e95080d92656b87c0a1515311201d065c8588eacc25b35e05f0",
+  "account": {
+    "amount": "6095174261797983700000000",
+    "block_hash": "Dq3w6s9K4oQ9Fvf4BmgWBNsrfV6pw7uWQceiLgDjEWP7",
+    "block_height": 277464827,
+    "code_hash": "BMvQViP8nmDMqF8ibmogXEhEvJmhVTj3L78nZ9h8Tu5y",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 580451
+  },
+  "state": {
+    "block_hash": "Cq5LUTm3vXYtEfRkVvVmo4qpJZ8RWox51aVnAue6nwVX",
+    "block_height": 277464822,
+    "values": [
+      {
+        "key": "U1RBVEU=",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBx8NErhMMfAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQEAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+      }
+    ]
+  }
+}

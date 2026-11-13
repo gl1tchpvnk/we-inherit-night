@@ -1,0 +1,17 @@
+{
+  "role": "mirelle",
+  "accountId": "mirelle.we-inherit-night.testnet",
+  "publicKey": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM",
+  "administrativePublicKey": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "enter_room",
+    "grant_access"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434109000001,
+  "phase": "signed-verified",
+  "network": "testnet",
+  "hash": "D8MtNvXKFMciCvgupvym78MgcEdyFXJpgkaDfTNFiYeK",
+  "signatureVerified": true
+}

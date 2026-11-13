@@ -1,0 +1,167 @@
+{
+  "world": {
+    "campaign_id": "verification-a",
+    "passage_budget": null,
+    "night": 0,
+    "properties": [
+      {
+        "id": "crypt",
+        "owner": "vesper.we-inherit-night.testnet"
+      },
+      {
+        "id": "library",
+        "owner": "player.we-inherit-night.testnet"
+      },
+      {
+        "id": "lounge",
+        "owner": "seraphine.we-inherit-night.testnet"
+      },
+      {
+        "id": "court",
+        "owner": "marius.we-inherit-night.testnet"
+      },
+      {
+        "id": "sanctuary",
+        "owner": "seraphine.we-inherit-night.testnet"
+      },
+      {
+        "id": "passage",
+        "owner": "lucien.we-inherit-night.testnet"
+      }
+    ],
+    "ancestry": [
+      {
+        "sire": "vesper.we-inherit-night.testnet",
+        "descendant": "player.we-inherit-night.testnet"
+      }
+    ],
+    "grants": [
+      {
+        "id": 0,
+        "property_id": "crypt",
+        "scope": "enter",
+        "grantor": "vesper.we-inherit-night.testnet",
+        "grantee": "player.we-inherit-night.testnet",
+        "parent_grant_id": null,
+        "can_delegate": true,
+        "expiry_night": null,
+        "revoked": true
+      },
+      {
+        "id": 1,
+        "property_id": "library",
+        "scope": "enter",
+        "grantor": "player.we-inherit-night.testnet",
+        "grantee": "mirelle.we-inherit-night.testnet",
+        "parent_grant_id": null,
+        "can_delegate": false,
+        "expiry_night": 3,
+        "revoked": false
+      },
+      {
+        "id": 2,
+        "property_id": "court",
+        "scope": "enter",
+        "grantor": "marius.we-inherit-night.testnet",
+        "grantee": "sabine.we-inherit-night.testnet",
+        "parent_grant_id": null,
+        "can_delegate": true,
+        "expiry_night": null,
+        "revoked": false
+      },
+      {
+        "id": 3,
+        "property_id": "lounge",
+        "scope": "enter",
+        "grantor": "seraphine.we-inherit-night.testnet",
+        "grantee": "player.we-inherit-night.testnet",
+        "parent_grant_id": null,
+        "can_delegate": false,
+        "expiry_night": null,
+        "revoked": false
+      }
+    ],
+    "grant_validity": [
+      false,
+      true,
+      true,
+      true
+    ],
+    "access": {
+      "court": false,
+      "crypt": false,
+      "library": true,
+      "lounge": true,
+      "passage": false,
+      "sanctuary": false
+    },
+    "next_nonce": 3,
+    "leases": [
+      {
+        "id": 0,
+        "property_id": "lounge",
+        "owner": "seraphine.we-inherit-night.testnet",
+        "buyer": "player.we-inherit-night.testnet",
+        "price_yocto": "20000000000000000000000",
+        "duration_nights": 3,
+        "offer_expiry_night": 2,
+        "status": "offered",
+        "end_night": null,
+        "escrow_yocto": "0",
+        "payout_pending": false,
+        "settled": false
+      },
+      {
+        "id": 1,
+        "property_id": "sanctuary",
+        "owner": "seraphine.we-inherit-night.testnet",
+        "buyer": "player.we-inherit-night.testnet",
+        "price_yocto": "20000000000000000000000",
+        "duration_nights": 7,
+        "offer_expiry_night": 3,
+        "status": "offered",
+        "end_night": null,
+        "escrow_yocto": "0",
+        "payout_pending": false,
+        "settled": false
+      }
+    ]
+  },
+  "account": {
+    "amount": "11135777804636618100000000",
+    "block_hash": "2fwUrXvLgvVf7vP5pLBbvzfwydjdMsDQjVBwtwLkjXwR",
+    "block_height": 277442568,
+    "code_hash": "CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 496223
+  },
+  "keys": {
+    "block_hash": "BwJdzdEfytWWJq25vYd9DkdaKWcgZmSTrUdkpt6b5w5u",
+    "block_height": 277442572,
+    "keys": [
+      {
+        "access_key": {
+          "nonce": 277442391000000,
+          "permission": {
+            "FunctionCall": {
+              "allowance": "50000000000000000000000",
+              "method_names": [
+                "revoke_grant"
+              ],
+              "receiver_id": "castle.we-inherit-night.testnet"
+            }
+          }
+        },
+        "public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD"
+      },
+      {
+        "access_key": {
+          "nonce": 277434053000004,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo"
+      }
+    ]
+  }
+}

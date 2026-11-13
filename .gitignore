@@ -47,3 +47,41 @@ wallets/
 wallet.json
 keystore/
 *.keystore
+
+# Walletless runtime database and writer ownership
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite.writer
+
+*.sqlite-journal
+
+# Private local deployment configuration and encrypted credential handoffs
+.envrc
+.envrc.*
+*.dpapi
+*.p7m
+*.age
+*.gpg
+NIGHT_RUNTIME_KEYS*
+night_runtime_keys*
+runtime_keys.json
+runtime_keys.md
+!docs/RUNTIME_KEYS.md
+testnet-server.json
+testnet-server.*.json
+*.local.json
+*.local.yaml
+*.local.yml
+
+# SQLite variants, sidecars and private transaction recovery payloads
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.sqlite-*
+*.sqlite.writer.sqlite*
+*.signed.json
+*.signed-transaction.json
+*.journal
+*.journal.*

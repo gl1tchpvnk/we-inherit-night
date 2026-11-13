@@ -1,0 +1,14 @@
+{
+  "block_hash": "72Cfr9nrGe2RVLpM5bgyi9wN22uaBJZdaD5WbCGVfk8t",
+  "block_height": 277443646,
+  "nonce": 277442391000001,
+  "permission": {
+    "FunctionCall": {
+      "allowance": "49736352778516100000000",
+      "method_names": [
+        "revoke_grant"
+      ],
+      "receiver_id": "castle.we-inherit-night.testnet"
+    }
+  }
+}

@@ -12,7 +12,7 @@ test('Pass 1: finite opportunities, actual rights, seven nights, persistence and
  async function start(resume=false){({worker}=await startPersistentSandbox(home));scenario=await createScenario(worker,{resume,restrictKeys:true,transactions:await readJson(join(home,'transactions.json'))??[],saveTransactions:t=>saveJson(join(home,'transactions.json'),t)});session=await createCampaignSession(scenario,join(home,'campaign.json'),id);current=await session.request({action:'view'});assert.equal(current.error,null);}
  async function request(action,extra={}){current=await session.request({action,...extra,campaign_id:id,revision:current.campaign.revision});assert.equal(current.error,null);return current;}
  try{
-  await start();assert.equal(current.phase,'offered');assert.equal(current.escrowYocto,'0');assert.equal(current.transactions.length,4);
+  await start();assert.equal(current.phase,'offered');assert.equal(current.escrowYocto,'0');assert.equal(current.transactions.length,5);
   const permissions={};for(const actor of ['vesper','seraphine','keeper','lucien']){const keys=await scenario.actors[actor].viewAccessKeys(scenario.actors[actor].accountId);permissions[actor]=keys;assert.equal(keys.keys.length,1);assert.notEqual(keys.keys[0].access_key.permission,'FullAccess');}
   await assert.rejects(()=>scenario.actors.vesper.transfer(scenario.actors.player.accountId,1n),/full access|FullAccess|InvalidAccessKey|permission/i);
   assert.deepEqual(current.world.grant_validity,[true]);

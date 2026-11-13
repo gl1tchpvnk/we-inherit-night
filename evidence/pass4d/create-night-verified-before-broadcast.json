@@ -1,0 +1,11 @@
+{
+  "kind": "create",
+  "actor": "we-inherit-night.testnet",
+  "receiver": "night.we-inherit-night.testnet",
+  "amount": "6100000000000000000000000",
+  "publicKey": "ed25519:78yA89dyVFh7gtuN88EEgJQXwtzj8NAPaM1i5VMqTjsM",
+  "nonce": 277433850000012,
+  "hash": "2Xjuv9CoZyNBR4JzXjS4jq3zUG4jf6wCzPtDLqYsMruC",
+  "signatureVerified": true,
+  "network": "testnet"
+}

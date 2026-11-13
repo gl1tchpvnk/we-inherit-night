@@ -1,0 +1,1 @@
+["contract", "call-function", "as-transaction", "castle.we-inherit-night.testnet", "fund_passage", "json-args", "{\"campaign_id\": \"verification-a\", \"nonce\": 0}", "prepaid-gas", "100 Tgas", "attached-deposit", "0.01 NEAR", "sign-as", "cassian.we-inherit-night.testnet", "network-config", "testnet", "sign-with-keychain", "send"]

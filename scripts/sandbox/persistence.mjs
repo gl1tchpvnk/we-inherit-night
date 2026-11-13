@@ -6,7 +6,16 @@ import {resolve,join} from 'node:path';
 import nearApi from 'near-api-js';
 import {Worker,KeyPair} from 'near-workspaces';
 const {keyStores}=nearApi; // Existing Workspaces dependency.
-export async function saveJson(path,value){await writeFile(path+'.tmp',JSON.stringify(value,null,2)+'\n',{mode:0o600});await rename(path+'.tmp',path);}
+export async function saveJson(path,value){
+  await writeFile(path+'.tmp',JSON.stringify(value,null,2)+'\n',{mode:0o600});
+  // Windows scanners can briefly hold the destination. Keep atomic replacement;
+  // never unlink the previous journal to work around a sharing violation.
+  for(let attempt=0;;attempt++){
+    try {await rename(path+'.tmp',path);return;}
+    catch(error){if(process.platform!=='win32'||!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=3)throw error;
+      await new Promise(resolve=>setTimeout(resolve,10*2**attempt));}
+  }
+}
 export async function readJson(path){try{return JSON.parse(await readFile(path,'utf8'));}catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function freePort(){const s=createServer();await new Promise(r=>s.listen(0,'127.0.0.1',r));const port=s.address().port;await new Promise(r=>s.close(r));return port;}
 // Workspaces' SandboxWorker.init deletes existing homes. Use its custom-RPC

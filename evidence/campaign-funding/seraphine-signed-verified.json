@@ -1,0 +1,11 @@
+{
+  "actor": "seraphine.we-inherit-night.testnet",
+  "receiver": "seraphine.we-inherit-night.testnet",
+  "hash": "HUKN7E2ggNpdpeafF4upjRybtE3GH66PoXqXTVJeid5k",
+  "signatureVerified": true,
+  "nonce": 277434067000008,
+  "actionTypes": [
+    "deleteKey",
+    "addKey"
+  ]
+}

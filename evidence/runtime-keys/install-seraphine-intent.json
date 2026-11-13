@@ -1,0 +1,14 @@
+{
+  "role": "seraphine",
+  "accountId": "seraphine.we-inherit-night.testnet",
+  "publicKey": "ed25519:5yFPoCyzWFr9LiF72XGf9JsQS3QR6cJ2hxX8CvQN5Sxy",
+  "administrativePublicKey": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "claim_rent"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434067000007,
+  "phase": "preparing",
+  "network": "testnet"
+}

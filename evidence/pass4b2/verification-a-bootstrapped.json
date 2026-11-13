@@ -1,0 +1,128 @@
+{
+  "campaign_id": "verification-a",
+  "passage_budget": null,
+  "night": 0,
+  "properties": [
+    {
+      "id": "crypt",
+      "owner": "vesper.we-inherit-night.testnet"
+    },
+    {
+      "id": "library",
+      "owner": "player.we-inherit-night.testnet"
+    },
+    {
+      "id": "lounge",
+      "owner": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "court",
+      "owner": "marius.we-inherit-night.testnet"
+    },
+    {
+      "id": "sanctuary",
+      "owner": "seraphine.we-inherit-night.testnet"
+    },
+    {
+      "id": "passage",
+      "owner": "lucien.we-inherit-night.testnet"
+    }
+  ],
+  "ancestry": [
+    {
+      "sire": "vesper.we-inherit-night.testnet",
+      "descendant": "player.we-inherit-night.testnet"
+    }
+  ],
+  "grants": [
+    {
+      "id": 0,
+      "property_id": "crypt",
+      "scope": "enter",
+      "grantor": "vesper.we-inherit-night.testnet",
+      "grantee": "player.we-inherit-night.testnet",
+      "parent_grant_id": null,
+      "can_delegate": true,
+      "expiry_night": null,
+      "revoked": false
+    },
+    {
+      "id": 1,
+      "property_id": "library",
+      "scope": "enter",
+      "grantor": "player.we-inherit-night.testnet",
+      "grantee": "mirelle.we-inherit-night.testnet",
+      "parent_grant_id": null,
+      "can_delegate": false,
+      "expiry_night": 3,
+      "revoked": false
+    },
+    {
+      "id": 2,
+      "property_id": "court",
+      "scope": "enter",
+      "grantor": "marius.we-inherit-night.testnet",
+      "grantee": "sabine.we-inherit-night.testnet",
+      "parent_grant_id": null,
+      "can_delegate": true,
+      "expiry_night": null,
+      "revoked": false
+    },
+    {
+      "id": 3,
+      "property_id": "lounge",
+      "scope": "enter",
+      "grantor": "seraphine.we-inherit-night.testnet",
+      "grantee": "player.we-inherit-night.testnet",
+      "parent_grant_id": null,
+      "can_delegate": false,
+      "expiry_night": null,
+      "revoked": false
+    }
+  ],
+  "grant_validity": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "access": {
+    "court": false,
+    "crypt": true,
+    "library": true,
+    "lounge": true,
+    "passage": false,
+    "sanctuary": false
+  },
+  "next_nonce": 1,
+  "leases": [
+    {
+      "id": 0,
+      "property_id": "lounge",
+      "owner": "seraphine.we-inherit-night.testnet",
+      "buyer": "player.we-inherit-night.testnet",
+      "price_yocto": "20000000000000000000000",
+      "duration_nights": 3,
+      "offer_expiry_night": 2,
+      "status": "offered",
+      "end_night": null,
+      "escrow_yocto": "0",
+      "payout_pending": false,
+      "settled": false
+    },
+    {
+      "id": 1,
+      "property_id": "sanctuary",
+      "owner": "seraphine.we-inherit-night.testnet",
+      "buyer": "player.we-inherit-night.testnet",
+      "price_yocto": "20000000000000000000000",
+      "duration_nights": 7,
+      "offer_expiry_night": 3,
+      "status": "offered",
+      "end_night": null,
+      "escrow_yocto": "0",
+      "payout_pending": false,
+      "settled": false
+    }
+  ]
+}

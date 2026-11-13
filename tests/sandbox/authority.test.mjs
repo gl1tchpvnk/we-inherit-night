@@ -39,14 +39,15 @@ test('authority WASM in local NEAR Sandbox', { timeout: 240_000 }, async t => {
       const deployment = await contract.deploy(wasm);
       record('deploy', deployment, before, await contract.accountView());
       assert.equal(deployment.succeeded, true);
-      await call(contract, contract, 'new', {vesper:vesper.accountId,player:player.accountId,executor:keeper.accountId});
+      await call(contract, contract, 'new_registry', {});
+      await call(contract, contract, 'create_campaign', {mode:'basic',participants:[vesper,player,keeper,lucien].map(a=>a.accountId),vesper:vesper.accountId,player:player.accountId,executor:keeper.accountId});
       return contract;
     }
-    const view = (contract, actor) => contract.view('get_world', {account_id:actor.accountId});
+    const view = (contract, actor) => contract.view('get_world', {campaign_id:'default',account_id:actor.accountId});
     async function call(contract, actor, method, args, expectedError) {
       const before = await contract.accountView();
-      const prior = method === 'new' ? null : await view(contract, actor);
-      const result = await actor.callRaw(contract, method, args, {gas:'100000000000000'});
+      const prior = ['new_registry','create_campaign'].includes(method) ? null : await view(contract, actor);
+      const result = await actor.callRaw(contract, method, {...args,campaign_id:'default'}, {gas:'100000000000000',attachedDeposit:method==='create_campaign'?'3000000000000000000000000':'0'});
       record(method, result, before, await contract.accountView());
       if (expectedError) {
         assert.equal(result.failed, true, `${method} must fail`);

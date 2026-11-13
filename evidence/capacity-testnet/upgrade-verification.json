@@ -1,0 +1,75 @@
+{
+  "network": "testnet",
+  "after": {
+    "checkedAt": "2026-11-13T05:30:02.060Z",
+    "block": {
+      "hash": "rHjYR2Z82G6nt6ZoBtnFuTncZpc689J1pu9BRPApYBj",
+      "height": 277467510,
+      "gasPrice": "100000000"
+    },
+    "account": {
+      "amount": "6090947321625733400000000",
+      "block_hash": "rHjYR2Z82G6nt6ZoBtnFuTncZpc689J1pu9BRPApYBj",
+      "block_height": 277467510,
+      "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 584636
+    },
+    "state": {
+      "block_hash": "rHjYR2Z82G6nt6ZoBtnFuTncZpc689J1pu9BRPApYBj",
+      "block_height": 277467510,
+      "values": [
+        {
+          "key": "U1RBVEU=",
+          "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBx8NErhMMfAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQEAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+        }
+      ]
+    },
+    "registry": {
+      "liabilities": "0",
+      "treasury_total": "0",
+      "pool": "150000000000000000000000",
+      "active": 0,
+      "policy": {
+        "creator": "provisioner.we-inherit-night.testnet",
+        "actors": [
+          "vesper.we-inherit-night.testnet",
+          "player.we-inherit-night.testnet",
+          "keeper.we-inherit-night.testnet",
+          "seraphine.we-inherit-night.testnet",
+          "marius.we-inherit-night.testnet",
+          "lucien.we-inherit-night.testnet",
+          "mirelle.we-inherit-night.testnet",
+          "dorian.we-inherit-night.testnet",
+          "cassian.we-inherit-night.testnet",
+          "sabine.we-inherit-night.testnet"
+        ],
+        "max_active": 4,
+        "interval_blocks": 10,
+        "treasury": "40000000000000000000000"
+      },
+      "capacityOffset": 452,
+      "last_creation": "0"
+    },
+    "keys": {
+      "block_hash": "rHjYR2Z82G6nt6ZoBtnFuTncZpc689J1pu9BRPApYBj",
+      "block_height": 277467510,
+      "keys": [
+        {
+          "access_key": {
+            "nonce": 277455881000005,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:NsQXQy1puDfTF1zDTq31E99NjhxVE15cBK5Q96noKAL"
+        }
+      ]
+    },
+    "codeSha256": "a11d407105d4b09d17eb91642ff415040e37f0ede05355fb626d0774110df250",
+    "codeBytes": 583921
+  },
+  "capacity": 4,
+  "exactStateVerified": true,
+  "keysPreserved": true,
+  "transaction": "F3wPz6J9xdoKtjpg12YTLGytMkh9L5JNkqgmDPtdKAuz"
+}

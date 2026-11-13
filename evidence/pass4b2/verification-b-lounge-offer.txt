@@ -1,0 +1,47 @@
+0
+├  Unsigned transaction:
+│    signer_id:    seraphine.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  offer_lease
+│                       args:         {
+│                                       "buyer": "win-funding-20261112-a.testnet",
+│                                       "campaign_id": "verification-b",
+│                                       "duration_nights": 3,
+│                                       "nonce": 0,
+│                                       "offer_expiry_night": 2,
+│                                       "price_yocto": "20000000000000000000000",
+│                                       "property_id": "lounge"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL
+│    Signature:  ed25519:5iyBMnZUhMT6giPxe3hsDQFyvjk3MjFtG7ftUfogDqN1vn4EZfbzgXQpW9L2JTR6d9bCDnx32FzLkwom3HBVig5v
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.000266278599974 NEAR
+│    Transaction ID: 7S7zoHFobK5wBjLExf2sm19smF6AWY2UH7kZWPduopLd
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7S7zoHFobK5wBjLExf2sm19smF6AWY2UH7kZWPduopLd
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:
+│      EVENT_JSON:{"standard":"we_inherit_night","version":"1.0.0","event":"offer_lease","campaign_id":"verification-b","data":[{"lease":{"id":0,"property_id":"lounge","owner":"seraphine.we-inherit-night.testnet","buyer":"win-funding-20261112-a.testnet","price_yocto":"20000000000000000000000","duration_nights":3,"offer_expiry_night":2,"status":"offered","end_night":null,"escrow_yocto":"0","payout_pending":false,"settled":false}}]}
+│    Logs [seraphine.we-inherit-night.testnet]:   No logs
+│     
+
+Function execution return value (printed to stdout):
+
+
+The "offer_lease" call to <castle.we-inherit-night.testnet> on behalf of <seraphine.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet offer_lease json-args '{"property_id": "lounge", "buyer": "win-funding-20261112-a.testnet", "price_yocto": "20000000000000000000000", "duration_nights": 3, "offer_expiry_night": 2, "campaign_id": "verification-b", "nonce": 0}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as seraphine.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

@@ -1,0 +1,59 @@
+{
+  "scope": "PASS 4B.1 local verification only; no Testnet deployment",
+  "recorded_at_utc": "2026-11-13T00:35:27.209413+00:00",
+  "wasm": {
+    "path": "target/near/night_authority/night_authority.wasm",
+    "sha256": "a96adbe06a90e92a6a92a4c82da1165273c6e054c3cf1c55e6a15861bd0e92a5",
+    "bytes": 492306,
+    "build": "cargo build --target wasm32-unknown-unknown --release --locked --manifest-path contract/Cargo.toml; RUSTFLAGS=--cfg near"
+  },
+  "rust": {
+    "passed": 19,
+    "failed": 0,
+    "existing": 13,
+    "new_campaign_tests": 6
+  },
+  "node": {
+    "passed": 92,
+    "failed": 0,
+    "command": "node --test --test-concurrency=1 tests/*.test.mjs"
+  },
+  "sandbox": {
+    "discovered": 52,
+    "initial_linux_run": {
+      "passed": 49,
+      "failed": 2,
+      "skipped_windows_only": 1
+    },
+    "focused_corrected_reruns": {
+      "legacy_campaign": 1,
+      "isolation": 1
+    },
+    "windows_startup": {
+      "passed": 1
+    },
+    "final_unique_cases_passed": 52,
+    "unresolved_failures": 0
+  },
+  "production_build": "PASS (TypeScript and Vite)",
+  "fresh_native_demo_bridge": "PASS (1 existing Node case repeated against rebuilt native executable)",
+  "routes": {
+    "one_contract_two_worlds": [
+      "marius-route: favoured, Mirelle research",
+      "independent-route: unbound, Dorian research"
+    ],
+    "seven_nights_each": true,
+    "lost_payment_recovery": "PASS; one purchase only",
+    "wrong_save_binding": "REJECTED"
+  },
+  "evidence": [
+    "pass4b1-isolation.json",
+    "pass4b1-campaigns.json"
+  ],
+  "limitations": [
+    "SDK mocked-host tests cover failed private callbacks; actual Sandbox covers successful scoped settlement/refunds and unauthorized callback rejection",
+    "No legacy on-chain state conversion",
+    "No Testnet operations or production backend",
+    "Raw release WASM, no wasm-opt postprocessing"
+  ]
+}

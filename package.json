@@ -11,7 +11,9 @@
     "demo:build": "cargo build --features local-demo --bin local-demo",
     "contract:wasm": "cargo near build non-reproducible-wasm --manifest-path contract/Cargo.toml --no-abi --locked",
     "test:sandbox": "node --test --test-concurrency=1 tests/sandbox/*.test.mjs",
-    "test:economy": "node --test tests/sandbox/economy.test.mjs"
+    "test:economy": "node --test tests/sandbox/economy.test.mjs",
+    "testnet:serve": "node scripts/testnet/start.mjs",
+    "testnet:register": "node scripts/testnet/register.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

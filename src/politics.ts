@@ -57,7 +57,7 @@ export function politicalEnding(s:Campaign,w:Authority):void {
   const player=w.leases.find(l=>l.id===0)?.buyer;
   const sanctuary=w.leases.find(l=>l.property_id==='sanctuary'&&l.buyer===player&&l.status==='accepted'&&l.end_night!==null&&l.end_night>w.night);
   if(w.access.sanctuary&&sanctuary&&w.properties.some(p=>p.id==='library'&&p.owner===player)){
-    s.status='concluded';s.ending='unbound';s.reason=`THE UNBOUND — your Library title and non-revocable sanctuary lease survive Vesper. Sanctuary remains temporary, ending at contract night ${sanctuary.end_night}.`;
+    s.status='concluded';s.ending='unbound';s.reason=`THE UNBOUND — your Library title and non-revocable sanctuary lease survive Vesper. Sanctuary lasts through the final night, but remains temporary access, not ownership.`;
   }else if(s.politics.library&&w.access.passage&&w.grants.some(g=>g.property_id==='passage'&&g.grantee===player&&g.grantor===s.politics!.accounts.lucien&&g.expiry_night===null&&w.grant_validity?.[w.grants.indexOf(g)])){
     s.status='concluded';s.ending='favoured';s.reason='THE FAVOURED — Lucien protects you beyond the temporary passage. His independent grant remains revocable by him, not by Vesper or by withdrawing your Library permission.';
   }else if(w.access.court){

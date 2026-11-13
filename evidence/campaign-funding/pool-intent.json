@@ -1,0 +1,8 @@
+{
+  "actor": "night.we-inherit-night.testnet",
+  "receiver": "night.we-inherit-night.testnet",
+  "publicKey": "ed25519:NsQXQy1puDfTF1zDTq31E99NjhxVE15cBK5Q96noKAL",
+  "nonce": 277455881000007,
+  "mode": "pool",
+  "network": "testnet"
+}

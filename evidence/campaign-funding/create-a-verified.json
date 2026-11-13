@@ -1,0 +1,160 @@
+{
+  "network": "testnet",
+  "accountId": "win-funding-20261113-a.testnet",
+  "hash": "71kYzuikt6ekHUiuP5WUACc8vxL1zgXzFWqXo8XZzvRp",
+  "final": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "Etocu99c87wvPQpFvuXJixwpfrbtMcFsRn2E7QKFCFdh",
+        "id": "dWmLVXkGhSvdUJK6ExbCbwcL74v6XYEroLXZK6Dc6z4",
+        "outcome": {
+          "executor_id": "win-funding-20261113-a.testnet",
+          "gas_burnt": 7524947687500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "EeaBtJHYkHD4sTqvaCiRNUdmSnzQ95jnhWu2xAFoSwPU"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "7032494768750000000000"
+        },
+        "proof": []
+      },
+      {
+        "block_hash": "A7XSsAZMq2RfMcJC3R9vMvPZsKXwG8bes2rj5pyrvuZg",
+        "id": "EeaBtJHYkHD4sTqvaCiRNUdmSnzQ95jnhWu2xAFoSwPU",
+        "outcome": {
+          "executor_id": "testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              {
+                "local": "AjT2jpkGZaWeopfaP4wj7aFDNUBLFvFmSNUaVdKZJBPf"
+              }
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "ABW1kDivE8ynReZuaFF79j1tLih1eqsa8eV8mimCu9aw"
+          },
+          {
+            "direction": "Right",
+            "hash": "21Bf9iGQDs62cH6dd9jmVdVhKy3PWFRt78jdFW8Dh6wv"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        "CreateAccount",
+        {
+          "Transfer": {
+            "deposit": "10000000000000000000000000"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X"
+          }
+        }
+      ],
+      "hash": "71kYzuikt6ekHUiuP5WUACc8vxL1zgXzFWqXo8XZzvRp",
+      "nonce": 51910683665105,
+      "priority_fee": 0,
+      "public_key": "ed25519:7ZTfRyUGJ7ZoEQgi7qDzzxVeRo7LKXFkyJLsm66mMtRa",
+      "receiver_id": "win-funding-20261113-a.testnet",
+      "signature": "ed25519:4a5YL2EMBm7YFrvFPSq2XR7F6qmaVE9S6GJYD6pFRqfAN3mtoTBweqTR6MqWnjKrppnbpXLaRN7GeHPu9aB7t7wT",
+      "signer_id": "testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "8oH2EL54m9sXujEYfobxhREMtXyL47wC2LayfMarpvUo",
+      "id": "71kYzuikt6ekHUiuP5WUACc8vxL1zgXzFWqXo8XZzvRp",
+      "outcome": {
+        "executor_id": "testnet",
+        "gas_burnt": 824947687500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "dWmLVXkGhSvdUJK6ExbCbwcL74v6XYEroLXZK6Dc6z4"
+        ],
+        "status": {
+          "SuccessReceiptId": "dWmLVXkGhSvdUJK6ExbCbwcL74v6XYEroLXZK6Dc6z4"
+        },
+        "tokens_burnt": "82494768750000000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "BwNket9QtucVfpuu73E8cRLZDFwHYrXUL9KwFeomLvvD"
+        },
+        {
+          "direction": "Right",
+          "hash": "6RUxpcsxocKdv6CgAukX77YTeptkhW3R4Wmxy2Qdue7W"
+        }
+      ]
+    }
+  },
+  "account": {
+    "amount": "10000000000000000000000000",
+    "block_hash": "AZv1UR3GBtxdGGrFgad9sKGoChCAJ9a4V6nTfwm62V2u",
+    "block_height": 277468617,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "independentAccount": {
+    "amount": "10000000000000000000000000",
+    "block_hash": "EmcMwCZQ7JiuahXGet8oAZZD8a3EK7zXjK8mxmWY2eiY",
+    "block_height": 277468618,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "keys": {
+    "block_hash": "9n136CV25n8NWSZw8PoyGmd5xMmajbNMfNeVJ51VdH8R",
+    "block_height": 277468616,
+    "keys": [
+      {
+        "access_key": {
+          "nonce": 277468401000000,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X"
+      }
+    ]
+  },
+  "reconciledReadOnly": true
+}

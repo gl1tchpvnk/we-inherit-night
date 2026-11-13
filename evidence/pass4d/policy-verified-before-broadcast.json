@@ -1,0 +1,32 @@
+{
+  "kind": "call",
+  "actor": "night.we-inherit-night.testnet",
+  "receiver": "night.we-inherit-night.testnet",
+  "method": "configure_provisioning",
+  "args": {
+    "policy": {
+      "creator": "provisioner.we-inherit-night.testnet",
+      "actors": [
+        "vesper.we-inherit-night.testnet",
+        "player.we-inherit-night.testnet",
+        "keeper.we-inherit-night.testnet",
+        "seraphine.we-inherit-night.testnet",
+        "marius.we-inherit-night.testnet",
+        "lucien.we-inherit-night.testnet",
+        "mirelle.we-inherit-night.testnet",
+        "dorian.we-inherit-night.testnet",
+        "cassian.we-inherit-night.testnet",
+        "sabine.we-inherit-night.testnet"
+      ],
+      "max_active": 4,
+      "interval_blocks": 10,
+      "treasury": "40000000000000000000000"
+    }
+  },
+  "amount": "0",
+  "publicKey": "ed25519:NsQXQy1puDfTF1zDTq31E99NjhxVE15cBK5Q96noKAL",
+  "nonce": 277455881000003,
+  "hash": "DNLAW7oHnYZbaTJqLmhWqpeM6B1R3SWUCBmJq9XjQze",
+  "signatureVerified": true,
+  "network": "testnet"
+}

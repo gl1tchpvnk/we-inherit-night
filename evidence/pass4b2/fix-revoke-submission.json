@@ -1,0 +1,12 @@
+{
+  "network": "testnet",
+  "rpc": "https://test.rpc.fastnear.com",
+  "hash": "CSYj2x1LExNG7u1iBYbNuT5QvzCLRQMbAjPsGHRqf7jU",
+  "signer": "vesper.we-inherit-night.testnet",
+  "publicKey": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD",
+  "receiver": "castle.we-inherit-night.testnet",
+  "nonce": "277442391000001",
+  "method": "revoke_grant",
+  "signatureVerified": true,
+  "keyVerifiedBeforeBroadcast": true
+}

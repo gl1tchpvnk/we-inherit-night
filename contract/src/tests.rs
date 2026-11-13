@@ -339,11 +339,23 @@ fn failed_payout_restores_claimability_and_callback_is_private() {
     });
 }
 
-
 fn funded_world() -> World {
     as_actor("world.testnet");
-    let mut w = World::new_political(account("vesper.testnet"), account("player.testnet"), account("seraphine.testnet"), account("marius.testnet"), account("lucien.testnet"), account("keeper.testnet"));
-    testing_env!(VMContextBuilder::new().current_account_id(account("world.testnet")).predecessor_account_id(account("cassian.testnet")).attached_deposit(NearToken::from_yoctonear(PASSAGE_PRICE)).build());
+    let mut w = World::new_political(
+        account("vesper.testnet"),
+        account("player.testnet"),
+        account("seraphine.testnet"),
+        account("marius.testnet"),
+        account("lucien.testnet"),
+        account("keeper.testnet"),
+    );
+    testing_env!(
+        VMContextBuilder::new()
+            .current_account_id(account("world.testnet"))
+            .predecessor_account_id(account("cassian.testnet"))
+            .attached_deposit(NearToken::from_yoctonear(PASSAGE_PRICE))
+            .build()
+    );
     w.fund_passage(0);
     w
 }
@@ -352,34 +364,76 @@ fn passage_budget_enforces_exact_terms_identity_nonce_and_single_spend() {
     let mut w = funded_world();
     rejects(|| w.fund_passage(1));
     as_actor("lucien.testnet");
-    let id = w.offer_lease("passage".into(), account("cassian.testnet"), U128(PASSAGE_PRICE), 3, 5, 0);
-    as_actor("player.testnet");rejects(|| w.accept_funded_passage(id,0));
-    as_actor("cassian.testnet");rejects(|| w.accept_funded_passage(id,0));
+    let id = w.offer_lease(
+        "passage".into(),
+        account("cassian.testnet"),
+        U128(PASSAGE_PRICE),
+        3,
+        5,
+        0,
+    );
+    as_actor("player.testnet");
+    rejects(|| w.accept_funded_passage(id, 0));
+    as_actor("cassian.testnet");
+    rejects(|| w.accept_funded_passage(id, 0));
     for mutation in 0..5 {
-        let original=w.leases[id as usize].clone();
-        let l=&mut w.leases[id as usize];
-        match mutation {0=>l.owner=account("marius.testnet"),1=>l.price_yocto=U128(PASSAGE_PRICE+1),2=>l.duration_nights=2,3=>l.offer_expiry_night=4,_=>l.property_id="library".into()};
-        rejects(|| w.accept_funded_passage(id,1));
-        w.leases[id as usize]=original;
+        let original = w.leases[id as usize].clone();
+        let l = &mut w.leases[id as usize];
+        match mutation {
+            0 => l.owner = account("marius.testnet"),
+            1 => l.price_yocto = U128(PASSAGE_PRICE + 1),
+            2 => l.duration_nights = 2,
+            3 => l.offer_expiry_night = 4,
+            _ => l.property_id = "library".into(),
+        };
+        rejects(|| w.accept_funded_passage(id, 1));
+        w.leases[id as usize] = original;
     }
-    w.night=5;rejects(|| w.accept_funded_passage(id,1));w.night=4;
-    w.accept_funded_passage(id,1);
-    assert_eq!(w.passage_budget(account("cassian.testnet")).unwrap().remaining.0,0);
-    assert_eq!(w.leases[id as usize].escrow_yocto.0,PASSAGE_PRICE);
-    assert!(w.has_access(account("cassian.testnet"),"passage".into()));
-    rejects(|| w.accept_funded_passage(id,2));
-    w.night=5;rejects(|| {let _=w.refund_passage_budget(2);});
+    w.night = 5;
+    rejects(|| w.accept_funded_passage(id, 1));
+    w.night = 4;
+    w.accept_funded_passage(id, 1);
+    assert_eq!(
+        w.passage_budget(account("cassian.testnet"))
+            .unwrap()
+            .remaining
+            .0,
+        0
+    );
+    assert_eq!(w.leases[id as usize].escrow_yocto.0, PASSAGE_PRICE);
+    assert!(w.has_access(account("cassian.testnet"), "passage".into()));
+    rejects(|| w.accept_funded_passage(id, 2));
+    w.night = 5;
+    rejects(|| {
+        let _ = w.refund_passage_budget(2);
+    });
 }
 #[test]
 fn unused_passage_refund_retries_failure_without_double_payment() {
-    let mut w=funded_world();as_actor("cassian.testnet");
-    rejects(|| {let _=w.refund_passage_budget(1);});
-    w.night=5;let _=w.refund_passage_budget(1);
-    rejects(|| {let _=w.refund_passage_budget(2);});
-    rejects(|| {w.passage_refunded(account("cassian.testnet"),Ok(()));});
-    as_actor("world.testnet");assert!(!w.passage_refunded(account("cassian.testnet"),Err(PromiseError::Failed)));
-    as_actor("cassian.testnet");let _=w.refund_passage_budget(2);
-    as_actor("world.testnet");assert!(w.passage_refunded(account("cassian.testnet"),Ok(())));
-    rejects(|| {w.passage_refunded(account("cassian.testnet"),Ok(()));});
-    as_actor("cassian.testnet");rejects(|| {let _=w.refund_passage_budget(3);});
+    let mut w = funded_world();
+    as_actor("cassian.testnet");
+    rejects(|| {
+        let _ = w.refund_passage_budget(1);
+    });
+    w.night = 5;
+    let _ = w.refund_passage_budget(1);
+    rejects(|| {
+        let _ = w.refund_passage_budget(2);
+    });
+    rejects(|| {
+        w.passage_refunded(account("cassian.testnet"), Ok(()));
+    });
+    as_actor("world.testnet");
+    assert!(!w.passage_refunded(account("cassian.testnet"), Err(PromiseError::Failed)));
+    as_actor("cassian.testnet");
+    let _ = w.refund_passage_budget(2);
+    as_actor("world.testnet");
+    assert!(w.passage_refunded(account("cassian.testnet"), Ok(())));
+    rejects(|| {
+        w.passage_refunded(account("cassian.testnet"), Ok(()));
+    });
+    as_actor("cassian.testnet");
+    rejects(|| {
+        let _ = w.refund_passage_budget(3);
+    });
 }

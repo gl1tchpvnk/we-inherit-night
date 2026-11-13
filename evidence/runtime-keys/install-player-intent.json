@@ -1,0 +1,18 @@
+{
+  "role": "player",
+  "accountId": "player.we-inherit-night.testnet",
+  "publicKey": "ed25519:7S7CZjHkHz91coykg7vSeRpaH6WCm81qryFGxnufHdNv",
+  "administrativePublicKey": "ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY",
+  "receiver": "night.we-inherit-night.testnet",
+  "methods": [
+    "grant_access",
+    "revoke_grant",
+    "enter_room",
+    "accept_lease",
+    "reject_lease"
+  ],
+  "allowance": "50000000000000000000000",
+  "nonce": 277434038000006,
+  "phase": "preparing",
+  "network": "testnet"
+}

@@ -1,0 +1,11 @@
+{
+  "actor": "keeper.we-inherit-night.testnet",
+  "receiver": "keeper.we-inherit-night.testnet",
+  "hash": "3yzy5UtXnnMHGkuYUCGSf31UmDPhehqsaky5xPCgHCAY",
+  "signatureVerified": true,
+  "nonce": 277434024000002,
+  "actionTypes": [
+    "deleteKey",
+    "addKey"
+  ]
+}

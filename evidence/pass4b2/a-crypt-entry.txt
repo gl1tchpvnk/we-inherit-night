@@ -1,0 +1,43 @@
+├  Unsigned transaction:
+│    signer_id:    player.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  enter_room
+│                       args:         {
+│                                       "campaign_id": "verification-a",
+│                                       "nonce": 1,
+│                                       "property_id": "crypt"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A7FpMMBBqQESKtLSL4cLfYUH4rVhTfRRG4sTjvZ7HDBY
+│    Signature:  ed25519:tWnLkS8HXAciXFscm9pbWjrua8eBan8mHy1iHGs1C2Q37hypTfs8hgMNfpiJoPVzwMrgJ6DRrS318SiDpvJaBoS
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002625830034376 NEAR
+│    Transaction ID: 8G2FCJ5FCXAxfVKpHHTvXKd7zAxN8unHtiu1GqLeY3qR
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/8G2FCJ5FCXAxfVKpHHTvXKd7zAxN8unHtiu1GqLeY3qR
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:
+│      EVENT_JSON:{"standard":"we_inherit_night","version":"1.0.0","event":"enter","campaign_id":"verification-a","data":[{"property_id":"crypt","actor":"player.we-inherit-night.testnet"}]}
+│    Logs [player.we-inherit-night.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "enter_room" call to <castle.we-inherit-night.testnet> on behalf of <player.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet enter_room json-args '{"property_id": "crypt", "campaign_id": "verification-a", "nonce": 1}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as player.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

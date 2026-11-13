@@ -1,0 +1,24 @@
+[
+  {
+    "access_key": {
+      "nonce": 277442391000000,
+      "permission": {
+        "FunctionCall": {
+          "allowance": "50000000000000000000000",
+          "method_names": [
+            "revoke_grant"
+          ],
+          "receiver_id": "castle.we-inherit-night.testnet"
+        }
+      }
+    },
+    "public_key": "ed25519:4npGof7CY5hWbtx1PfFGswyNR3dxp2qCsH23nwdW25GD"
+  },
+  {
+    "access_key": {
+      "nonce": 277434053000003,
+      "permission": "FullAccess"
+    },
+    "public_key": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo"
+  }
+]

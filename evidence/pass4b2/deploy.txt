@@ -1,0 +1,26 @@
+├  Unsigned transaction:
+│    signer_id:    castle.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- deploy code <CQLQdiyR7RwaocGCAXypqpiC5ALAjXuFPjwDKC8kyjYg> to a account <castle.we-inherit-night.testnet>
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW
+│    Signature:  ed25519:tSqUW7UrX3QF8irvdaY77WRKKM5mXBbYPqDQJyx8C9m78ZMcA3RZ9ZWCnX9giNLZwtPxSVZK8FQNX5aQNfpDJwY
+│     
+├  Transaction Execution Info:
+│    Gas used: 36.0 Tgas
+│    Transaction fee: 0.0035729378554558 NEAR
+│    Transaction ID: 663TFjUduJwkjuRiHiw3pMg34yLcxioJ5Aejvi3EHqtL
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/663TFjUduJwkjuRiHiw3pMg34yLcxioJ5Aejvi3EHqtL
+│     
+
+Contract code has been successfully deployed.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract deploy castle.we-inherit-night.testnet use-file target/near/night_authority/night_authority.wasm without-init-call network-config testnet sign-with-keychain --signer-public-key ed25519:6Y422Kas8gFSZww3vyGfgFjtiG3ppZu4c78a9CguuvJW send
+

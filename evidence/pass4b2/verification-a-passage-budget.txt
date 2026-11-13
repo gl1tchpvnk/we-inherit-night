@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    cassian.we-inherit-night.testnet
+│    receiver_id:  castle.we-inherit-night.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  fund_passage
+│                       args:         {
+│                                       "campaign_id": "verification-a",
+│                                       "nonce": 0
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0.01 NEAR
+│     
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx
+│    Signature:  ed25519:2SejASYWCGGaRtDR7LT5qY5yX4tmArywusuTPmifoFk1adWPm4FdQ4mvktSxxJ6nD8GtuFeYKuw47zUpQdL37xDV
+│     
+├  Transaction Execution Info:
+│    Gas used: 2.8 Tgas
+│    Transaction fee: 0.0002477975729681 NEAR
+│    Transaction ID: 2UwR7adBQkq3naHKyGqgpQX6CBhRK6yG4A9HjLJ3FMCW
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2UwR7adBQkq3naHKyGqgpQX6CBhRK6yG4A9HjLJ3FMCW
+│     
+├  Function execution logs:
+│    Logs [castle.we-inherit-night.testnet]:   No logs
+│    Logs [cassian.we-inherit-night.testnet]:   No logs
+│     
+├  Function execution return value:
+│    Empty return value
+│     
+
+
+The "fund_passage" call to <castle.we-inherit-night.testnet> on behalf of <cassian.we-inherit-night.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    'C:\Users\gauge\.cargo\bin\near.exe' contract call-function as-transaction castle.we-inherit-night.testnet fund_passage json-args '{"campaign_id": "verification-a", "nonce": 0}' prepaid-gas '100.0 Tgas' attached-deposit '0.01 NEAR' sign-as cassian.we-inherit-night.testnet network-config testnet sign-with-keychain send
+

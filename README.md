@@ -5,6 +5,14 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+Campaign capacity fix: **contract upgraded on Testnet; backend prepared locally**. Operator-adjustable
+admission, durable abandoned/early-defeat settlement and reclamation, and bounded
+configurable creation quotas. Existing state layouts and 32 MiB ceiling remain.
+See [upgrade verification and configuration](docs/CAMPAIGN_CAPACITY.md).
+Current funded on-chain capacity: **5**, with a 1.15 Testnet NEAR gameplay pool.
+See [finalized funding and remaining reserves](docs/TESTNET_FUNDING.md).
+Hosted five-player performance and public gameplay remain unverified.
+
 New Game startup is measured and optimized: a local benchmark improved from
 68.46 s to 5.65 s; the browser prologue appeared in 0.48 s. Fully verified gameplay
 is **not yet under three seconds**. See [startup measurements](docs/STARTUP_PERFORMANCE.md)
@@ -12,6 +20,10 @@ for configuration, reproducible profiling, regression evidence, abandoned-lock r
 
 | Feature | Status | Evidence / limit |
 |---|---|---|
+| Render deployment preparation | IMPLEMENTED locally | One Node 24 service, persistent SQLite, Linux restricted signing, recovery/privacy/abuse fixes and memory assessment. Public hosting remains unverified. [Setup and verification](docs/PASS4E.md). |
+| Sustainable Testnet deployment | PARTIAL | New `night.we-inherit-night.testnet` code, registry and bounded pool verified. Eleven restricted runtime keys are now installed and independently verified; live walletless acceptance remains pending. [Key setup](docs/RUNTIME_KEYS.md). Render replaces the earlier Windows-host proposal. [Pass 4D](docs/PASS4D.md). |
+| Sustainable campaign lifecycle | IMPLEMENTED locally | Measured storage, prepaid restricted-key payments, bounded provisioning, archives and reclamation. 23 Rust, 100 Node and 52 executed Sandbox cases pass. Fresh deployment recommended; public operation remains blocked. [Pass 4C.2](docs/PASS4C2.md). |
+| Multi-campaign authority | IMPLEMENTED locally | One Sandbox contract, two complete independent campaigns; 19 Rust, 92 Node and 52 Sandbox cases pass after focused fixture corrections. [Pass 4B.1](docs/PASS4B1.md). Testnet deployed with two verified worlds; exact-key restricted signing verified (local operational tooling, public runtime pending): [Pass 4B.2](docs/PASS4B2.md). |
 | Pass 3D Dangerous Court | IMPLEMENTED | New campaigns: final demand, published-account leverage, counterproposal and verified Cassian–Lucien payment. 92 Node, 13 Rust, 50 actual Sandbox tests; five full routes. [Report](docs/PASS3D.md). |
 | Pass 3C integration and evaluation | PARTIAL | Story-first records, complete mobile portraits, immediate consequences and route-specific epilogues. 89 Node, 11 Rust and 44 actual Sandbox tests pass. NPC-to-NPC purchase was absent at 3C completion; the single scoped 3D agreement now fills that gap. [Report](docs/PASS3C.md), [3D handoff](docs/PASS3D_HANDOFF.md). |
 | Pass 3B reactive court | IMPLEMENTED | Evidence-based consequence scenes, evolving room follow-ups, explicit political relationships and narrower NPC observations; 84 Node and 41 Sandbox tests. [Report](docs/PASS3B.md). No physical NPC simulation or new historical canon. |
@@ -22,8 +34,8 @@ for configuration, reproducible profiling, regression evidence, abandoned-lock r
 | Castle, agreement, court log, keyboard controls | IMPLEMENTED | M2 browser walkthrough; Hunting Grounds/Council remain planned |
 | Local contract adapter | IMPLEMENTED | Actual Rust methods in SDK mocked host; bridge integration test |
 | WASM Sandbox authority verification | IMPLEMENTED | Nine scenarios pass on Sandbox 2.14.0/protocol 88; receipts and gas recorded |
-| NEAR network integration | PARTIAL | Finalized read-only testnet adapter/config; live RPC unverified |
-| Wallet and testnet deployment | PLANNED | Only disposable local Sandbox accounts have signed transactions |
+| NEAR network integration | PARTIAL | Read-only adapter/config; live account RPC verified in Pass 4A, contract queries pending deployment |
+| Walletless Testnet gameplay | PARTIAL | Contract deployment and restricted signing verified in [Pass 4B.2](docs/PASS4B2.md). Pass 4C.2 resolves prepaid payment and repeat creation locally; deployment, runtime custody and live end-to-end acceptance remain outstanding. See [Pass 4C.1](docs/PASS4C1.md) and [Pass 4C.2](docs/PASS4C2.md). |
 | Native Sandbox NEAR lease/payment/settlement | IMPLEMENTED | 12 economy scenarios, actual transfer and refund receipts |
 | Deterministic Vesper retaliation | IMPLEMENTED | Authorized contract revocation after finalized lease acceptance |
 | Seven nights / one major action | IMPLEMENTED | Automatic reckoning; Unbound, Favoured and Failure from verified rights; legacy saves retain old rules |
@@ -156,7 +168,7 @@ is explicitly disclosed; no public testnet wallet signing is implemented.
 - Resolved M2 failures: starter wallet initially lacked upfront gas reservation;
   balance assertions initially ran before gas refunds. Now use finite 0.25 NEAR
   treasury and await `FINAL`, including refunds. No authority bypass was found.
-- NOT RUN: testnet deployment/transactions, wallet integration, live testnet RPC,
+- At M2: NOT RUN testnet deployment/transactions, wallet integration, live testnet RPC,
   mobile viewport and comprehensive accessibility audit remain unverified.
 
 Verified WASM artifact: `target/near/night_authority/night_authority.wasm`.
@@ -164,6 +176,8 @@ See [Sandbox setup, commands, hashes and gas](docs/M1B_SANDBOX.md).
 These small-fixture tests do not establish worst-case gas/storage limits.
 
 ## Testnet configuration and deployment prerequisites
+
+For the new local walletless backend, use [Pass 4C.1 setup and blockers](docs/PASS4C1.md). The following M1 instructions describe the older read-only adapter; they are not current deployment instructions. The multi-campaign contract is already deployed as documented in Pass 4B.2.
 
 Copy `.env.example` to `.env` if configuring read-only access. Browser-exposed
 variables are public: never put credentials in them.
@@ -292,3 +306,6 @@ To reproduce: seek Marius’s appointment I → feed II/III → invite Mirelle I
 Cassian’s 0.01 allowance is actual pre-funded local Sandbox NEAR, separate from gas, not real money or a generic currency. No testnet migration. See [Pass 3D evidence and limitations](docs/PASS3D.md).
 
 Encounter layout correction: IMPLEMENTED — 44/56 desktop/tablet split, compact 26dvh mobile portraits and one natural scroll flow. Rendered checks at 1280, 900, 390 and 320px widths: [layout evidence](docs/ENCOUNTER_LAYOUT.md). Gameplay and artwork unchanged.
+
+### Multi-campaign contract (Pass 4B.1)
+One authority WASM now hosts campaign-addressed World state. The private registry creates storage-backed campaigns; every runtime call and callback includes campaign_id. The Sandbox adapter can bind distinct actor sets and separate recovery journals to the same deployed contract. Testnet deployment and restricted signing are verified in Pass 4B.2. Public session/signing integration remains PARTIAL; see docs/PASS4C1.md. See [architecture, verification and legacy-save limits](docs/PASS4B1.md).

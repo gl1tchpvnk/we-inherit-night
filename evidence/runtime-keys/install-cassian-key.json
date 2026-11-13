@@ -1,0 +1,16 @@
+{
+  "block_hash": "DXAYKDaf5oyG6QQuWC8x7LHXATBZMfmCHQ8mGsw1pdFn",
+  "block_height": 277462496,
+  "nonce": 277462484000000,
+  "permission": {
+    "FunctionCall": {
+      "allowance": "50000000000000000000000",
+      "method_names": [
+        "enter_room",
+        "accept_funded_passage",
+        "refund_passage_budget"
+      ],
+      "receiver_id": "night.we-inherit-night.testnet"
+    }
+  }
+}
