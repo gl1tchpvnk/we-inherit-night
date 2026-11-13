@@ -2,7 +2,7 @@ import {expiryDescription} from './leaseNarrative.ts';
 import {finalDemand,counterAccepted,FINAL_ACTIONS,isFinalAction} from './finalCourt.ts';
 import type {Result} from './chain';
 
-import type {NpcName,GameAction} from './game';
+import {ACTIONS,type NpcName,type GameAction} from './game.ts';
 
 import type {EncounterScene,SceneChoice,DialogueLine} from './encounters';
 
@@ -135,7 +135,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
   const inspect=(id:string,label:string):SceneChoice=>({id,label,inspect:id});
 
-  const action=(kind:GameAction,label=ROLEPLAY_LABELS[kind]??kind)=>inspect(`action:${kind}`,label);
+  const action=(kind:GameAction,label=ROLEPLAY_LABELS[kind]??ACTIONS[kind].label)=>inspect(`action:${kind}`,label);
 
   const make=(id:string,title:string,speaker:DialogueLine['speaker'],text:string,choices:SceneChoice[],terms:string[]=[]):EncounterScene=>({id,title,type:'ENCOUNTER',location:speaker==='vesper'?'crypt':['mirelle','cassian','dorian'].includes(speaker)?'library':'lounge',portraits:speaker==='narrator'?[]:[speaker],lines:[{speaker,text}],choices,terms,rights:[],compact:true});
 
@@ -318,7 +318,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
   if(finalDemand(c,w)&&!p.finalCourt!.response){
     const demand=make('final-demand','The price of remaining','marius','The work is finished. Our arrangement is not. I want to enter your Library without having to ask again. Give me that, or find another protector.',[action('final_accept','Keep his protection: give a standing invitation'),action('final_refuse','Refuse and face the loss of his protection'),...(allowed('final_counter')?[action('final_counter','Propose a limited inspection using the published account')]:[])],['One major action. Refusing, ignoring the demand, or offering an unacceptable alternative leads Marius to withdraw his own protection tonight. Independent rights remain intact.']);
     scenes.push(demand);
-    for(const id of [`incident:${n}`,`decision:${n}`,'character:marius']){const target=scenes.find(s=>s.id===id);if(target){target.lines=demand.lines;target.choices.unshift(inspect('final-demand','Answer Marius’s final demand'));target.terms.unshift(...demand.terms);}}
+    for(const id of [`incident:${n}`,`decision:${n}`,'character:marius']){const target=scenes.find(s=>s.id===id);if(target){target.lines=demand.lines;target.choices=target.choices.filter(ch=>!ch.inspect?.startsWith('action:final_'));target.choices.unshift(inspect('final-demand','Answer Marius’s final demand'));target.terms.unshift(...demand.terms);}}
     const hold=scenes.find(s=>s.id===`hold:${n}`);if(hold)hold.terms.unshift('Leaving Marius unanswered costs his protection at this reckoning.');
   }
 }

@@ -516,3 +516,9 @@
 - PASS: 19 focused Blood/encounter tests, one focused SQLite campaign-engine test, production build, desktop/mobile UI checks. No broad suite or additional seven-night run.
 - Browser fixture double-click sent one feed: Blood 2 → 6 → 5 after sheltered dawn, revision 1 and Night Two; this fixture is not live-chain evidence.
 - Covered low Blood, exhausted actions, disabled availability, ended/closing campaigns, pending commitments, stale replay and preserved pending journal. Existing user save untouched; no deployment, commit or push.
+
+## Night Seven choice correction — local PASS, hosted verification pending
+- Replaced raw action-ID label fallback with existing descriptive action labels.
+- Consolidated final responses beneath the existing Marius demand encounter; all response inspections, availability, material terms and deadlines remain unchanged.
+- PASS: 27 focused final-court/encounter/chapter tests and production build. An initial new test fixture omitted its description; corrected before the passing run.
+- No contract, gameplay, signing, funding or lifecycle changes. Public finale/reclamation/replay verification follows deployment.
