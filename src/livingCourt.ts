@@ -34,7 +34,7 @@ export const ROLEPLAY_LABELS:Partial<Record<GameAction,string>>={
 
   investigate_title:'Put my claim before Seraphine',sanctuary_pact:'I want a refuge of my own',petition_marius:'I will take my chances with Marius',fulfil_service:'Keep my word to Marius',
 
-  authorize_mirelle:'Let Mirelle and Cassian do the work',authorize_dorian:'Back Dorian and Lucien',withdraw_library:'I want my Library back',broker_passage:'Ask Lucien for a way out',feed:'Hunt before hunger decides for me',rest:'Rest while Vesper still permits it',conceal:'Keep out of sight'
+  authorize_mirelle:'Let Mirelle and Cassian do the work',authorize_dorian:'Back Dorian and Lucien',withdraw_library:'I want my Library back',broker_passage:'Ask Lucien for a way out',feed:'Feed · restore 4 Blood',rest:'Rest while Vesper still permits it'
 
 };
 
@@ -55,7 +55,7 @@ export function endingSummary(r:Result):string{
 
   if(c.ending==='favoured')return `${c.reason.includes('Lucien')?'Lucien':'Marius'} protects you. That promise has no scheduled end, but remains the patron’s to withdraw. Your Library remains separate.`;
 
-  return c.resources.blood===0?'Your Blood is exhausted. Rights and promises cannot keep you alive without it.':c.resources.exposure>=10?'The hunters found you. Exposure reached 10.':c.night<7?'No shelter remained after Vesper closed the Crypt. The Library and Lounge are not refuges.':'No lasting patron protection or qualifying sanctuary remained at the final reckoning. Ordinary room invitations cannot replace them.';
+  return c.resources.blood===0?'Your Blood is exhausted. Rights and promises cannot keep you alive without it.':c.reason.includes('Exposure')?'The recorded campaign ended when hunters found you.':c.night<7?'No shelter remained after Vesper closed the Crypt. The Library and Lounge are not refuges.':'No lasting patron protection or qualifying sanctuary remained at the final reckoning. Ordinary room invitations cannot replace them.';
 
 }
 
@@ -165,27 +165,27 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
   const material:Partial<Record<GameAction,string[]>>={
 
-    investigate_title:['Put your existing independent Library claim before Seraphine. It opens her sanctuary offer; it does not give shelter.','Cost: one major action and 1 Blood. Accept sanctuary separately by the end of Night Three.'],
+    investigate_title:['Put your existing independent Library claim before Seraphine. It opens her sanctuary offer; it does not give shelter.','This takes tonight’s action and 1 Blood. Accept sanctuary separately by the end of Night Three.'],
 
-    sanctuary_pact:['Receive 7 nights of sanctuary. Neither Vesper nor Marius can withdraw it; Seraphine cannot cancel an accepted bargain. Your Library remains yours.','Cost: 0.02 Sandbox NEAR, prepaid and nonrefundable, plus network gas and one major action. Temporary shelter, not ownership. Accept before Night Four.'],
+    sanctuary_pact:['Receive 7 nights of sanctuary. Neither Vesper nor Marius can withdraw it; Seraphine cannot cancel an accepted bargain. Your Library remains yours.','The bargain takes tonight’s action and 0.02 NEAR of prepaid, nonrefundable rent, plus network gas. Temporary shelter, not ownership. Accept before Night Four.'],
 
-    petition_marius:['Claim the appointment before Cassian. Marius must actually offer protection at reckoning; the appointment alone is not shelter.','Cost: one major action. Finish service on Night Four or Five, directly or through Mirelle’s completed work. Otherwise Marius withdraws his protection at the sixth reckoning.'],
+    petition_marius:['Take the appointment before Cassian does. Fulfil my work, and you may shelter under my authority. Until I issue the invitation at dawn, you have only my offer.','This takes tonight’s action. Finish service on Night Four or Five, directly or through Mirelle’s completed work. Otherwise Marius withdraws his protection at the sixth reckoning.'],
 
-    fulfil_service:['Complete the work you owe Marius. His protection remains dependent on him; this does not buy independence.','Cost: one major action and 1 Blood. Completes your outstanding service.'],
+    fulfil_service:['Finish the work you promised me. I will keep my protection, but do not mistake a place in my House for independence.','This takes tonight’s action and 1 Blood. Completes your outstanding service.'],
 
-    authorize_mirelle:['Let Mirelle read the Library and invite Cassian. Completed research satisfies Marius’s service and can earn his protection.','Cost: one major action. No deadline on these invitations; you may withdraw them. They need a subsequent reckoning to finish. Publication closes Dorian’s competing route and cannot be recalled.'],
+    authorize_mirelle:['Let me into your Library, and let me bring Cassian. Our finished account will satisfy Marius’s service and give him reason to protect you.','This takes tonight’s action. No deadline on these invitations; you may withdraw them. They need a subsequent reckoning to finish. Publication closes Dorian’s competing route and cannot be recalled.'],
 
-    authorize_dorian:['Let Dorian read the Library and invite Lucien. Completed research can earn lasting protection from Lucien, still his to withdraw.','Cost: one major action. No deadline on these invitations; you may withdraw them. Lucien can see your records. Publication needs a subsequent reckoning, closes Mirelle’s route and cannot be recalled.'],
+    authorize_dorian:['Let me bring Lucien into the Library. Finish this account with us, and he has reason to offer lasting protection. It will still be his promise to withdraw.','This takes tonight’s action. No deadline on these invitations; you may withdraw them. Lucien can see your records. Publication needs a subsequent reckoning, closes Mirelle’s route and cannot be recalled.'],
 
-    withdraw_library:['Take back the investigator’s key and any assistant’s dependent invitation. Unfinished research stops.','Cost: one major action. Published findings, your Library ownership, sanctuary and separate patron protection remain.'],
+    withdraw_library:['Ask for my key, and my assistant loses this invitation too. If our work is unfinished, it stops here.','This takes tonight’s action. Published findings, your Library ownership, sanctuary and separate patron protection remain.'],
 
-    broker_passage:['Lucien can open temporary shelter at reckoning, ending at the start of Night Six. It cannot carry you through the ending alone.','Cost: one major action. For lasting protection on this route, begin Dorian’s research on Night Four and allow it to finish on Night Five.'],
+    broker_passage:['I can open the passage at dawn. It will shelter you until Night Six begins, no longer. You must find a lasting arrangement before then.','This takes tonight’s action. For lasting protection on this route, begin Dorian’s research on Night Four and allow it to finish on Night Five.'],
 
-    feed:['Recover 4 Blood, up to 12; gain 2 Exposure before reckoning. Exposure 10 is fatal. Tonight’s upkeep still applies.','Cost: one major action. Hunting grants no political protection.'],
+    feed:['Hunting restores 4 Blood, up to 12. Tonight’s upkeep still applies.','This takes tonight’s action. Hunting grants no political protection.'],
 
-    rest:['Recover 2 Blood and lose 1 Exposure, within resource limits. Requires Crypt access.','Cost: one major action. Vesper’s deadline is unchanged.'],
+    rest:['Rest restores 2 Blood, up to 12, while the Crypt remains open to you.','This takes tonight’s action. Vesper’s deadline is unchanged.'],
 
-    conceal:['Lose 3 Exposure, down to zero.','Cost: one major action and 1 Blood. This does not provide shelter.']
+
 
   };
 
@@ -197,13 +197,13 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
     if(s.id.startsWith('action:')){
 
-      const kind=s.id.slice(7) as GameAction;s.rights.push(...s.terms);s.terms=material[kind]??s.terms;
+      const kind=s.id.slice(7) as GameAction;s.rights.push(...s.terms);s.terms=(material[kind]??s.terms).map(t=>t.replace(/^Cost: /,'This takes '));
 
       s.title=ROLEPLAY_LABELS[kind]??s.title;
       if(isFinalAction(kind)){
         s.title=FINAL_ACTIONS[kind].label;s.lines=[{speaker:'marius',text:kind==='final_counter'?'A limited inspection, instead of a standing invitation? Show me what makes that worth accepting.':kind==='final_refuse'?'Then you understand what you are refusing. My protection ends tonight. Your arrangements with the others are their affair.':'A standing invitation, then. I keep my protection; you let me into the Library. Neither of us needs to pretend this is friendship.'}];
-        s.terms=[FINAL_ACTIONS[kind].description,'This decision uses tonight’s one major action. Navigation and inspection are free. Marius answers at this reckoning. Independent shelter and other patrons’ promises remain separate.'];
-        if(kind==='final_counter')s.terms.push('You surrender the limited invitation even if he rejects the proposal. Issuing it and his later answer are separate operations, not an atomic bargain.',counterAccepted(c,w)?'Mirelle’s public account, your completed service and Cassian’s settled independent passage give Marius reason to accept a limited inspection.':'Marius will reject this alternative: it requires Mirelle’s published account, completed service, and Cassian’s settled, still-active purchased passage.');
+        s.terms=[FINAL_ACTIONS[kind].description,'Marius answers before dawn. Independent shelter and other patrons’ promises remain separate.'];
+        if(kind==='final_counter')s.terms.push('Once you offer the invitation, you cannot take it back as part of this bargain—even if Marius refuses.',counterAccepted(c,w)?'Mirelle’s public account, your completed service and Cassian’s settled independent passage give Marius reason to accept a limited inspection.':'Marius will reject this alternative: it requires Mirelle’s published account, completed service, and Cassian’s settled, still-active purchased passage.');
       }
       if(p.finalCourt&&['petition_marius','fulfil_service','authorize_mirelle'].includes(kind))s.terms.push('Marius may demand a continuing Library invitation on Night Seven. Refusal costs his own protection; independent shelter survives. A published account may support a limited counterproposal.');
 
@@ -211,13 +211,15 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
       if(speaker&&!isFinalAction(kind)){s.portraits=[speaker];s.lines=[{speaker,text:kind==='withdraw_library'?(d.result==='open'?'You can tell us to leave. Just understand that the work will stop with us.':'The work is already out. If you want the keys back, say so.'):kind==='investigate_title'?'You need not win the Library from Vesper. It is yours. Put that fact before Seraphine, and see what she will offer.':voices[speaker].opening}];}
 
-      if(kind==='feed'||kind==='rest'||kind==='conceal')s.lines=[{speaker:'narrator',text:kind==='feed'?'There are arguments you can postpone. Hunger is not one of them.':kind==='rest'?'For one more night, Vesper’s roof is available. Rest here, knowing it is still hers.':'Leave the court’s attention elsewhere. Silence costs time too.'}];
+      if(kind==='feed'||kind==='rest')s.lines=[{speaker:'narrator',text:kind==='feed'?'There are arguments you can postpone. Hunger is not one of them.':kind==='rest'?'For one more night, Vesper’s roof is available. Rest here, knowing it is still hers.':'Leave the court’s attention elsewhere. Silence costs time too.'}];
 
-      const cost=r.actions?.find(a=>a.kind===kind)?.cost.blood??0;
+      if(material[kind]&&s.lines[0]){s.lines[0].text+=' '+material[kind]![0];s.terms=s.terms.slice(1);}
 
-      if(c.resources.blood<=cost+1&&kind!=='feed'&&kind!=='rest')s.terms.push('Warning: the Blood cost and dawn upkeep may kill you. Protection cannot sustain an exhausted body.');
 
-      if(kind==='feed'&&c.resources.exposure>=8)s.terms.push('Warning: feeding now reaches the fatal Exposure threshold of 10.');
+
+
+
+
 
       if(kind==='investigate_title'&&n>=2)s.terms.push('Too late to secure sanctuary this way: you cannot file and accept with the single action left before her deadline.');
 
@@ -249,7 +251,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
       if(c.ending==='favoured')s.portraits=[c.reason.includes('Lucien')?'lucien':'marius'];
 
-      s.rights.push(c.reason,...s.terms);s.lines=[{speaker:'narrator',text:c.ending==='unbound'?'Vesper’s door is closed. You no longer need it. The Library remains yours, and Seraphine’s bargain has carried you beyond this week. Freedom has an end date here; it is still more than you began with.':c.ending==='favoured'?`You have survived. ${c.reason.includes('Lucien')?'Lucien':'Marius'} stands behind you. That is a place in the world, even if it is not a place beyond everyone else’s reach.`:c.resources.blood===0?'You kept count of promises until there was no Blood left to spend. A safe room cannot save a body that cannot reach it.':c.resources.exposure>=10?'You fed until the hunters found you. The court’s promises were no shield against that attention.':'The Library may still bear your name. It is not a refuge. Dawn finds you without the protection you needed.'}];
+      s.rights.push(c.reason,...s.terms);s.lines=[{speaker:'narrator',text:c.ending==='unbound'?'Vesper’s door is closed. You no longer need it. The Library remains yours, and Seraphine’s bargain has carried you beyond this week. Freedom has an end date here; it is still more than you began with.':c.ending==='favoured'?`You have survived. ${c.reason.includes('Lucien')?'Lucien':'Marius'} stands behind you. That is a place in the world, even if it is not a place beyond everyone else’s reach.`:c.resources.blood===0?'You kept count of promises until there was no Blood left to spend. A safe room cannot save a body that cannot reach it.':c.reason.includes('Exposure')?'The old chronicle records the hunters finding you. The court’s promises could not shield you.':'The Library may still bear your name. It is not a refuge. Dawn finds you without the protection you needed.'}];
 
       s.terms=[endingSummary(r),...endingConsequences(r)];
 
@@ -289,20 +291,27 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
   const contacts:NpcName[]=n<3?['seraphine','marius','lucien']:root?[d.chosen!,d.chosen==='mirelle'?'dorian':'mirelle','sabine']:d.result!=='open'?[d.result==='mirelle'?'marius':'lucien','sabine']:['mirelle','dorian','sabine'];
 
-  scenes.push(make(`discovery:${n}`,chapter.question,'narrator',text,[...contacts.map(a=>inspect(`character:${a}`,`Hear ${a[0].toUpperCase()+a.slice(1)}`)),inspect(`decision:${n}`,'I am ready to choose')]));
+  scenes.push(make(`discovery:${n}`,chapter.question,'narrator',text,[...contacts.map(a=>({...inspect(`character:${a}`,`Hear ${a[0].toUpperCase()+a.slice(1)}`),secondary:n===0&&a==='lucien'})),inspect(`decision:${n}`,'I am ready to choose')]));
 
   // Filing is a route to sanctuary, not useful busywork after its offer closes.
   const choices=(r.actions??[]).filter(a=>a.allowed&&a.cost.majorActions>0&&!demoted.has(a.kind)&&(a.kind!=='investigate_title'||w.leases.some(l=>l.property_id==='sanctuary'&&l.status==='offered'&&w.night<l.offer_expiry_night))).map(a=>action(a.kind as GameAction));
 
   if(!r.pending&&!r.error&&r.availability?.end_night.length===0)choices.push(inspect(`hold:${n}`,root&&d.result==='open'?'Let the investigation finish':root?'Keep the Library open to my allies':'Keep my bargains and wait for dawn'));
 
-  scenes.push({...make(`decision:${n}`,chapter.question,'narrator','Choose how to spend this night. Hear the terms before you commit; you can still walk away.',choices),type:'DECISION'});
+  // Rank presentation only: every allowed choice remains available in this same list.
+  for(const choice of choices){
+    const kind=choice.inspect?.replace('action:','');
+    const urgent=kind?.startsWith('final_')||kind==='sanctuary_pact'||kind==='petition_marius'||kind==='fulfil_service'||kind==='investigate_title'&&n<2||kind==='broker_passage'&&n>=2&&!w.access.sanctuary&&!w.access.court;
+    choice.secondary=!urgent&&kind!=='feed'&&(kind==='rest'||n<3);
+  }
+  if(c.resources.blood<=3)choices.sort((a,b)=>Number(b.inspect==='action:feed')-Number(a.inspect==='action:feed'));
+  scenes.push({...make(`decision:${n}`,chapter.question,'narrator','You have one action before dawn. A hunt takes the same night as a bargain; hear the terms before you choose.',choices),type:'DECISION'});
 
-  scenes.push({...make(`hold:${n}`,n===6?'Meet the final dawn':'Let the court move','narrator',root&&d.result==='open'?'You leave the investigators to their work. If they still have what they need, they may finish at this reckoning.':'You make no new commitment. The court will still act, and every promise keeps its deadline.',[{id:'pass',label:n===6?'Face the final reckoning':'Wait for dawn',action:{action:'end_night'}}],['Ends this night. No new protection is purchased. Dawn costs 1 Blood with shelter, 3 without; NPCs act and deadlines still apply.',...(c.resources.blood<=1?['Warning: waiting with this much Blood is fatal.']:[])]),type:'DECISION'});
+  scenes.push({...make(`hold:${n}`,n===6?'Meet the final dawn':'Let the court move','narrator',root&&d.result==='open'?'You leave the investigators to their work. If they still have what they need, they may finish at this reckoning.':'You make no new commitment. The court will still act, and every promise keeps its deadline.',[{id:'pass',label:n===6?'Face the final reckoning':'Wait for dawn',action:{action:'end_night'}}],['Ends this night. No new protection is purchased. Dawn costs 1 Blood with shelter, 3 without; NPCs act and deadlines still apply.']),type:'DECISION'});
 
   const opening=scenes.find(s=>s.id==='ultimatum');
 
-  if(opening){opening.title=chapter.title;opening.lines=[{speaker:'vesper',text:voices.vesper.opening},{speaker:'narrator',text:CHAPTERS[0].text}];opening.terms=['Find shelter before the third reckoning. Survive seven nights with your Library and Seraphine’s sanctuary, or lasting patron protection. A Lounge invitation is not shelter.'];opening.choices=[inspect(`discovery:${n}`,'Find out who might help me'),inspect('character:vesper','I want an explanation')];}
+  if(opening){opening.title=chapter.title;opening.lines=[{speaker:'vesper',text:voices.vesper.opening},{speaker:'narrator',text:'Before the third dawn, you need another refuge. Seraphine offers a bargain; Marius wants your service. Your Library is yours, but its walls are no shelter from the sun.'}];opening.terms=[];opening.choices=[inspect(`discovery:${n}`,'Find out who might help me'),inspect('character:vesper','I want an explanation')];}
 
   if(n>0)scenes.push({...make(`incident:${n}`,chapter.title,'narrator',text,[inspect(`discovery:${n}`,'Hear the people involved'),inspect(`decision:${n}`,'Choose my next move')]),automatic:true});
 

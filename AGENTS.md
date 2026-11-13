@@ -47,7 +47,7 @@ Stop additional verification once required acceptance criteria pass. Prioritize 
 - Don't use a central admin override to bypass core permissions after initialization. Any demo seeding privilege must be isolated, minimal, and disabled in production design.
 - Preserve existing work. No destructive git operations unless directly requested. Record limitations and unresolved threats instead of claiming security is solved.
 
-- Pass 1 economy: retain Blood and transitional Exposure; no fictional Coin, spendable Influence or resource-purchased political authority. Finite discoveries are information, not rights/votes. New Pass 2C campaigns use one major action per night and automatic reckoning over seven nights; legacy saves retain their old rules. Deterministic agents are the MVP; keep the LLM provider disabled. Eight-seat voting remains Pass 3; cutscenes belong to Pass 2D.
+- Pass 1 economy: retain Blood; Exposure is historical inert save data after the gameplay refinement; no fictional Coin, spendable Influence or resource-purchased political authority. Finite discoveries are information, not rights/votes. New Pass 2C campaigns use one major action per night and automatic reckoning over seven nights; legacy saves retain their old rules. Deterministic agents are the MVP; keep the LLM provider disabled. Eight-seat voting remains Pass 3; cutscenes belong to Pass 2D.
 
 ## Engineering expectations
 - Prefer TypeScript for app and agent runner, Rust + `near-sdk` for contract, and official NEAR tooling when verified compatible. Pin dependencies after checking currently available versions.
@@ -177,7 +177,7 @@ AI vampire NPCs are runtime game agents, distinct from Codex development agents.
 - src/story.ts is presentation only: directed incidents, free branches and Decision
   choices must resolve to existing actions, never new rights or campaign state.
 - Keep ordinary Lounge/Library access distinct from shelter and final protection.
-  Explain Blood/Exposure defeat even when other rights remain valid.
+  Explain Blood defeat (historical Exposure outcomes remain recorded) even when other rights remain valid.
 - Dialogue attitudes are free and penalty-free; newly authored lines are provisional.
 
 ## Local startup continuity
@@ -211,7 +211,7 @@ AI vampire NPCs are runtime game agents, distinct from Codex development agents.
 
 ## Pass 3C continuity
 - Epilogues and consequence terms project recorded decisions and effective rights; never recalculate victory or infer a payment from dialogue.
-- Keep Exposure visible, secondary records collapsed, and mobile portraits proportional with reachable scrolling choices. Private NPC memory is not player-facing diagnostics.
+- Exposure visibility was superseded by its removal; keep secondary records collapsed, and mobile portraits proportional with reachable scrolling choices. Private NPC memory is not player-facing diagnostics.
 - Pass 3C was PARTIAL at completion: NPC-to-NPC purchases/treasuries were unimplemented. Do not claim Seraphine collecting player-paid rent meets that acceptance requirement. The original proposal is recorded in docs/PASS3D_HANDOFF.md; the narrowly implemented successor is documented below.
 
 ## Pass 3D continuity

@@ -58,7 +58,7 @@
 
 /* Exploration: one castle, navigation anchored to the illustration. */
 
-.game-shell{height:100dvh;display:flex;flex-direction:column;padding:16px 3vw;overflow:hidden;background:var(--ink)}.game-hud{display:flex;align-items:center;gap:20px;font:12px system-ui;flex-wrap:wrap}.game-hud>button:first-child{margin-right:auto}.game-hud button{font:11px system-ui;padding:10px}.game-hud span{white-space:nowrap}.story-nav{display:flex;gap:10px;margin-top:8px}.story-nav button{font-size:14px}.inspection-nav{position:absolute;right:3vw;top:70px;display:flex;gap:6px}.inspection-nav button{font:10px system-ui;padding:12px 8px}.scene-status{font:12px/1.4 system-ui;min-height:17px;margin:10px 0;color:var(--muted)}.castle-view{flex:1;min-height:0;display:grid;grid-template-columns:68% 32%;gap:0}.castle-architecture{position:relative;min-height:0;display:flex;align-items:center;overflow:hidden;background:#000}.castle-architecture h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.castle-map{position:relative;width:100%;aspect-ratio:1672/941}.castle-map>img{display:block;width:100%;height:auto}.castle-hotspots{position:absolute;inset:0}.architectural-hotspot{position:absolute;width:23%;height:18%;min-height:44px;padding:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;background:transparent;text-align:center}.architectural-hotspot span,.architectural-hotspot small{background:#050505ed;padding:0 8px}.architectural-hotspot span{font-size:clamp(13px,1.5vw,20px)}.architectural-hotspot small{font-size:10px;padding-bottom:2px}.architectural-hotspot:hover:not(:disabled){background:#c700191a;color:var(--paper)}.architectural-hotspot:hover span,.architectural-hotspot:focus-visible span{color:#fff;background:var(--blood-deep)}.hotspot-crypt{left:26%;top:61%}.hotspot-library{left:51%;top:42%}.hotspot-lounge{left:26%;top:42%}.architectural-hotspot.restricted small{color:var(--muted)}.scene-guidance{padding:30px 0 20px 32px;min-height:0;overflow:auto}.scene-guidance h2{font-size:clamp(1.8rem,2.8vw,3rem)}.scene-guidance h3{font:11px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;margin-top:30px}.scene-guidance>p:not(.eyebrow){font-size:17px}.scene-guidance>button,.scene-guidance details button{display:block;width:100%;padding:12px 0}.scene-guidance>button::before{content:'› ';color:var(--blood)}
+.game-shell{height:100dvh;display:flex;flex-direction:column;padding:16px 3vw;overflow:hidden;background:var(--ink)}.game-hud{display:flex;align-items:center;gap:20px;font:12px system-ui;flex-wrap:wrap}.game-hud>button:first-child{margin-right:auto}.game-hud button{font:11px system-ui;padding:10px}.game-hud span{white-space:nowrap}.story-nav{display:flex;gap:10px;margin-top:8px}.story-nav button{font-size:14px}.inspection-nav{position:absolute;right:3vw;top:70px;display:flex;gap:6px}.inspection-nav button{font:10px system-ui;padding:12px 8px}.scene-status{font:12px/1.4 system-ui;min-height:17px;margin:10px 0;color:var(--muted)}.castle-view{flex:1;min-height:0;display:grid;grid-template-columns:68% 32%;gap:0}.castle-architecture{position:relative;min-height:0;display:flex;align-items:center;overflow:hidden;background:#000}.castle-architecture h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.castle-map{position:relative;width:100%;aspect-ratio:1672/941}.castle-map>img{display:block;width:100%;height:auto}.castle-hotspots{position:absolute;inset:0}.architectural-hotspot{position:absolute;width:23%;height:18%;min-height:44px;padding:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;background:transparent;text-align:center}.architectural-hotspot span,.architectural-hotspot small{background:#050505ed;padding:0 8px}.architectural-hotspot span{font-size:clamp(13px,1.5vw,20px)}.architectural-hotspot small{font-size:10px;padding-bottom:2px}.architectural-hotspot:hover:not(:disabled){background:#c700191a;color:var(--paper)}.architectural-hotspot:hover span,.architectural-hotspot:focus-visible span{color:#fff;background:var(--blood-deep)}.hotspot-crypt{left:26%;top:61%}.hotspot-crypt span,.hotspot-crypt small{position:relative;bottom:clamp(10px,1.6vw,24px)}.hotspot-library{left:51%;top:42%}.hotspot-lounge{left:26%;top:42%}.architectural-hotspot.restricted small{color:var(--muted)}.scene-guidance{padding:30px 0 20px 32px;min-height:0;overflow:auto}.scene-guidance h2{font-size:clamp(1.8rem,2.8vw,3rem)}.scene-guidance h3{font:11px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;margin-top:30px}.scene-guidance>p:not(.eyebrow){font-size:17px}.scene-guidance>button,.scene-guidance details button{display:block;width:100%;padding:12px 0}.scene-guidance>button::before{content:'› ';color:var(--blood)}
 
 /* Temporary interior plates: distinct scale and framing, explicitly not final art. */
 
@@ -157,3 +157,37 @@ button:hover:not(:disabled) small{color:inherit}
  .chapter-folio{font-size:1.8rem;margin:4px 0 8px}
  .chapter-folio span{margin-top:4px}
 }
+
+/* The title note follows the intact artwork, never its confirmation overlay. */
+.game-entry{height:auto;min-height:100dvh;overflow:auto;padding-top:var(--cover-height);--cover-width:min(100vw,177.58dvh);--cover-height:min(56.31vw,100dvh)}
+.cover-art,.entry-copy{top:0;transform:translateX(-50%)}
+.expiration-note{position:relative;margin:16px auto 24px;padding:0 20px;width:min(100%,650px);font:14px/1.6 system-ui;color:var(--muted);text-align:center}
+.expiration-note strong{display:block;color:var(--paper);font-weight:500;margin-bottom:4px}
+.expiration-note p{margin:0}
+.scene-terms p{font:15px/1.6 system-ui;margin:8px 0;color:var(--paper)}
+.other-choices summary{font-size:13px;letter-spacing:0;text-transform:none;line-height:1.6}
+.court-developments summary{font-size:12px}
+.court-developments button{display:block;width:100%;font-size:14px}
+.court-developments small{display:block}
+.campaign-finale{min-height:100dvh;display:grid;grid-template-columns:44% 56%;background:var(--ink)}
+.campaign-finale>.portrait{position:sticky;top:0;height:100dvh;margin:0}
+.finale-copy{padding:clamp(24px,5vw,72px);min-width:0}
+.finale-copy h1{font-size:clamp(3rem,6vw,6rem)}
+.finale-copy h2{font-size:1.3rem;margin-top:32px;letter-spacing:.03em}
+.finale-copy p{line-height:1.65}
+.finale-epilogue{font-style:italic;font-size:clamp(1.3rem,2vw,1.8rem)}
+.finale-copy>section p{font:15px/1.65 system-ui}
+.finale-copy .controls{margin-top:32px}
+@media(max-width:760px){.campaign-finale{display:block}.campaign-finale>.portrait{position:relative;height:35dvh}.finale-copy{padding:24px}.expiration-note{font-size:14px;margin-top:12px}}
+
+/* Blood stays in view while dialogue and choices scroll beneath it. */
+.blood-status{display:flex;align-items:center;flex-wrap:wrap;gap:4px 14px;padding:8px 16px;background:#090909;color:var(--paper);border-bottom:1px solid var(--line);font:13px/1.4 system-ui}
+.blood-status strong{white-space:nowrap}.blood-status small{font:12px/1.4 system-ui;color:var(--muted)}
+.blood-status[data-danger=true] strong{color:#ffb6b6}
+.vampire-scene>.blood-status{position:sticky;top:0;z-index:5}
+.blood-warning{border-left:3px solid #df6767;padding:8px 12px;color:#ffd5d5;font:14px/1.5 system-ui;margin:8px 0}
+.game-hud .blood-status{padding:4px 8px}.game-hud .blood-status span{white-space:normal}
+@media(max-width:640px){.blood-status{font-size:12px;padding:8px 14px;gap:3px 10px}.blood-status small{width:100%;font-size:11px}.blood-warning{font-size:13px}}
+.encounter-player-action{border-top:1px solid var(--line);margin-top:22px;padding-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.encounter-player-action button{border:1px solid var(--line);font:14px system-ui;min-height:44px}
+.encounter-player-action small{flex-basis:100%;font:12px/1.5 system-ui}

@@ -18,11 +18,18 @@ export function requiresReplacementConfirmation(save:SaveStatus|null){return !!s
 export async function loadEntryCampaign(fresh:boolean,save:SaveStatus,request:(action:Action)=>Promise<Result>):Promise<Result>{
   if(save.error||(!fresh&&!save.valid))throw new Error('No readable saved campaign is available. Nothing was replaced.');
   let result=await request({action:'view'});
-  if(result.error||result.pending&&(fresh||!result.closure))throw new Error('Campaign recovery is not yet confirmed. Continue again to recover; no replacement was attempted.');
+  if(result.error||result.pending&&(fresh||!result.closure&&(!result.campaign||result.campaign.status==='playing')))throw new Error('Campaign recovery is not yet confirmed. Continue again to recover; no replacement was attempted.');
   if(save.exists&&result.campaign?.id!==save.id)throw new Error('The saved campaign changed. Return to the title screen before choosing again.');
   if(fresh&&save.exists){
     result=await request({action:'reset',campaign_id:result.campaign?.id,revision:result.campaign?.revision});
     if(result.error||result.pending)throw new Error('New campaign was not confirmed. Reload the title screen before trying again.');
   }
   return result;
+}
+
+// Story completion is not proof that financial settlement/reclamation finished.
+export function canReplayCampaign(result:Result,requireArchive:boolean):boolean{
+  return !!result.campaign&&result.campaign.status!=='playing'&&!result.pending&&!result.error&&
+    (!requireArchive||result.archiveComplete===true&&!!result.archiveCommitment)&&
+    (!result.closure||result.closure.complete);
 }

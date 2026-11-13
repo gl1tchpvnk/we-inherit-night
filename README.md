@@ -113,10 +113,10 @@ disposable Sandbox credentials. Do not expose this development server publicly.
    exchange. This records a **future opportunity**, not a completed agreement.
 5. End night: established scripted M2 revocation/settlement resolve, then upkeep.
    Crypt access reduces dawn Blood loss from 3 to 1. Lease access expires normally.
-6. Feed/rest/manage transitional Exposure and explore remaining finite leads.
+6. Feed/rest and explore remaining finite leads. Feeding competes with politics for the nightly action.
    Three major actions reset each night; navigation and inspection are free reads.
 7. Survive seven dawns for a **temporary development conclusion**, not political
-   victory. Blood 0 or Exposure 10 causes defeat. No Coin, spendable Influence,
+   victory. Blood 0 causes defeat. Legacy Exposure values are inert. No Coin, spendable Influence,
    purchasable seats, AI agents or final voting exists.
 
 Saves and the disposable chain persist across reload and graceful server restart
@@ -318,3 +318,7 @@ Encounter layout correction: IMPLEMENTED — 44/56 desktop/tablet split, compact
 
 ### Multi-campaign contract (Pass 4B.1)
 One authority WASM now hosts campaign-addressed World state. The private registry creates storage-backed campaigns; every runtime call and callback includes campaign_id. The Sandbox adapter can bind distinct actor sets and separate recovery journals to the same deployed contract. Testnet deployment and restricted signing are verified in Pass 4B.2. Public session/signing integration remains PARTIAL; see docs/PASS4C1.md. See [architecture, verification and legacy-save limits](docs/PASS4B1.md).
+
+### Gameplay refinement — IMPLEMENTED locally, awaiting deployment
+Seven-night pacing, unified nightly choices, Exposure removal and the persistent finale are implemented locally. Normal replay waits for verified reclamation; Quit and Save and Return remain separate. See [verification and limitations](docs/GAMEPLAY_REFINEMENT.md). The current public build has not been updated by this pass.
+Blood visibility correction — IMPLEMENTED locally: persistent encounter Blood/hunger status and engine-derived pre-commitment fatal warnings, with unchanged survival rules. See the refinement verification above; not yet deployed.

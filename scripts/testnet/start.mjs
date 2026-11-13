@@ -31,6 +31,13 @@ async function closeCampaign(scenario,snapshot,reason){
     return closingSnapshot(closing);
   }
 }
+async function archiveCampaign(scenario,snapshot){
+  try{return await lifecycle.archive(scenario,snapshot);}
+  catch(error){
+    if(!snapshot.campaign||snapshot.campaign.status==='playing')throw error;
+    return {...snapshot,archiveComplete:false,pending:true,actions:[],error:null};
+  }
+}
 async function loadSession(id){
   const archived=store.archive(id);
   if(archived?.complete){store.finishClosing(id);return {request:async()=>archivedSnapshot(archived)};}
@@ -38,7 +45,7 @@ async function loadSession(id){
   const scenario=await createTestnetScenario(store.config(id),store,sign);
   const closing=store.closing(id);
   if(closing)return {request:async()=>closeCampaign(scenario,closing.snapshot,closing.reason)};
-  if(archived)return {request:async()=>lifecycle.archive(scenario,archived.snapshot)};
+  if(archived)return {request:async()=>archiveCampaign(scenario,archived.snapshot)};
   const session=await createCampaignSession(scenario,id,id,undefined,null,store);
   const saved=await store.readJson(id),reason=config.lifecycle?lifecycle.cleanupReason(id,saved.campaign):null;
   if(reason){
@@ -61,7 +68,7 @@ async function loadSession(id){
     }
     const snapshot=await session.request(request);
     if(!config.lifecycle)return snapshot;
-    return snapshot.campaign?.status==='defeat'?closeCampaign(scenario,snapshot,'defeat'):lifecycle.archive(scenario,snapshot);
+    return snapshot.campaign?.status==='defeat'?closeCampaign(scenario,snapshot,'defeat'):archiveCampaign(scenario,snapshot);
   }};
 }
 const server=createGameServer({store,loadSession,creation:config.creation,cleanup:config.cleanup,ensureCapacity:lifecycle.ensureCapacity,requireCompletion:!!config.provisioning,origin:config.origin,dist:config.dist,secureCookies:config.secureCookies!==false});

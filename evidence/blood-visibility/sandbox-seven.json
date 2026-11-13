@@ -1,0 +1,76 @@
+{
+  "scope": "real local Sandbox; no public transactions",
+  "status": "PASS",
+  "nights": [
+    {
+      "night": 1,
+      "choice": "petition_marius",
+      "blood": 7
+    },
+    {
+      "night": 2,
+      "choice": "feed",
+      "blood": 10
+    },
+    {
+      "night": 3,
+      "choice": "feed",
+      "blood": 11
+    },
+    {
+      "night": 4,
+      "choice": "authorize_mirelle",
+      "blood": 10
+    },
+    {
+      "night": 5,
+      "choice": "pass",
+      "blood": 9
+    },
+    {
+      "night": 6,
+      "choice": "withdraw_library",
+      "blood": 8
+    },
+    {
+      "night": 7,
+      "choice": "final_counter",
+      "blood": 6
+    }
+  ],
+  "ending": "favoured",
+  "finalDemand": {
+    "response": "counter",
+    "result": "accepted"
+  },
+  "passage": {
+    "id": 2,
+    "property_id": "passage",
+    "owner": "lucien.test.near",
+    "buyer": "cassian.test.near",
+    "price_yocto": "10000000000000000000000",
+    "duration_nights": 3,
+    "offer_expiry_night": 5,
+    "status": "accepted",
+    "end_night": 7,
+    "escrow_yocto": "0",
+    "payout_pending": false,
+    "settled": true
+  },
+  "resources": {
+    "status": "reclaimed",
+    "prepaid": true,
+    "treasury": "0",
+    "commitment": "4d504239e393dea25f5a87feffc5b3e1ab5d2b492b1770cd0e5f4527c8a95512",
+    "world_bytes": 0,
+    "storage_usage": 584408,
+    "storage_price": "10000000000000000000",
+    "pool": "40000000000000000000000",
+    "liabilities": "0",
+    "treasury_total": "0",
+    "active": 0
+  },
+  "archiveComplete": true,
+  "closure": null,
+  "recoveredWithoutDuplicate": true
+}

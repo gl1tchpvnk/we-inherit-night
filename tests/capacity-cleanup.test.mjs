@@ -141,3 +141,22 @@ test('creation policy stays bounded and final capacity rejection does not perman
   await life.ensureCapacity();assert.equal(calls.length,2);assert.notEqual(calls[0],calls[1]);assert.equal(f.store.db.prepare('SELECT count(*) AS n FROM campaigns').get().n,2);
  }finally{await f.clean();}
 });
+
+test('normal completion remains reviewable after reload while incomplete archive cannot enable replay',async()=>{
+ const {archivedSnapshot}=await import('../scripts/testnet/lifecycle.mjs');
+ const {publicSnapshot}=await import('../scripts/testnet/server.mjs');
+ const f=await fixture('quit');let server;
+ try{
+  f.snapshot.campaign.status='concluded';f.snapshot.campaign.night=7;
+  const record={snapshot:f.snapshot,commitment:'verified-history',complete:false};
+  assert.equal(publicSnapshot(archivedSnapshot(record)).archiveComplete,false);
+  assert.equal(publicSnapshot(archivedSnapshot(record)).pending,true);
+  record.complete=true;
+  f.store.db.prepare('INSERT INTO archives VALUES (?,?,?)').run('one',record.commitment,JSON.stringify(record));
+  const origin='http://127.0.0.1:5219';server=createGameServer({store:f.store,origin,requireCompletion:true,secureCookies:false,loadSession:async()=>({request:async()=>archivedSnapshot(record)})});
+  await new Promise(r=>server.listen(5219,'127.0.0.1',r));
+  const response=await fetch(origin+'/api/save',{headers:{Cookie:'night_session='+f.allocation.token}});const meta=await response.json();
+  assert.equal(meta.closed,true);assert.equal(meta.valid,true);
+  const snapshot=publicSnapshot(archivedSnapshot(record));assert.equal(snapshot.archiveComplete,true);assert.equal(snapshot.pending,false);assert.equal(snapshot.campaign.status,'concluded');
+ }finally{if(server)await new Promise(r=>server.close(r));await f.clean();}
+});

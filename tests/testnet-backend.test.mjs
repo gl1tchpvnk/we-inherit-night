@@ -90,10 +90,16 @@ test('interrupted broadcast retries identical bytes only; unresolved status bloc
 test('existing campaign engine writes SQLite and retains pending player state during uncertain finality',async()=>{
  const tmp=await temporary(),store=new Store(tmp.path);const actors=Object.fromEntries(Object.keys(METHODS).map(role=>[role,{accountId:role+'.fixture.testnet'}]));
  const world={campaign_id:'one',night:0,next_nonce:0,access:{crypt:true,library:true,lounge:true},properties:[],grants:[],leases:[{status:'offered',price_yocto:'0',offer_expiry_night:2}],ancestry:[]};
- let uncertain=false;const scenario={actors,campaignId:'one',contract:{accountId:CONTRACT},political:true,living:true,dangerous:true,reconcile:async()=>{if(uncertain)throw new Error('pending finality');},view:async()=>world,snapshot:async()=>({world,error:null,walletYocto:'1'})};
+ let uncertain=false;const scenario={actors,campaignId:'one',contract:{accountId:CONTRACT},political:true,living:true,dangerous:true,reconcile:async()=>{if(uncertain)throw new Error('pending finality');},view:async()=>world,snapshot:async(error=null)=>({world,error,walletYocto:'1'})};
  try{
   let session=await createCampaignSession(scenario,'one','one',undefined,null,store);const initial=await session.request({action:'view'});assert.equal(initial.campaign.id,'one');
-  const saved=await store.readJson('one');saved.pending={kind:'player',nonce:0,before:saved.campaign,after:{...saved.campaign,revision:1},action:'reject'};await store.saveJson('one',saved);uncertain=true;
+  let saved=await store.readJson('one');saved.campaign.resources.blood=2;saved.campaign.actionsLeft=3;saved.campaign.actionLimit=3;await store.saveJson('one',saved);
+  session=await createCampaignSession(scenario,'one','one',undefined,null,store);
+  const feed={action:'game',choice:'feed',campaign_id:'one',revision:saved.campaign.revision};
+  const fed=await session.request(feed);assert.equal(fed.error,null);assert.equal(fed.campaign.resources.blood,6);assert.equal(fed.campaign.actionsLeft,2);
+  const duplicate=await session.request(feed);assert.match(duplicate.error,/stale/);assert.equal(duplicate.campaign.resources.blood,6);
+  saved=await store.readJson('one');saved.pending={kind:'player',nonce:0,before:saved.campaign,after:{...saved.campaign,revision:saved.campaign.revision+1},action:'reject'};await store.saveJson('one',saved);uncertain=true;
   session=await createCampaignSession(scenario,'one','one',undefined,null,store);await session.request({action:'view'});assert.equal((await store.readJson('one')).pending.kind,'player');
+  const before=await store.readJson('one');await session.request({...feed,revision:fed.campaign.revision});assert.deepEqual(await store.readJson('one'),before);
  }finally{store.close();await tmp.clean();}
 });

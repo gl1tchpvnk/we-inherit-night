@@ -35,11 +35,11 @@ Temporary sanctuary never means ownership. No final council voting. Pass 2D adds
 Older saves retain legacy rules; new rights require an explicit fresh bootstrap.
 
 ## 3. Core gameplay: Night → Dawn
-1. **Nightfall:** display Blood, transitional Exposure, rights and finite opportunities. Show actual NEAR funds/deposits separately.
+1. **Nightfall:** display Blood, rights and finite opportunities. Show actual NEAR funds/deposits separately.
 2. **Choose action:** feed, negotiate/counteroffer, invest/lease, explore, delegate or conspire. Limit per night to force trade-offs.
 3. **The Court acts:** Vesper, Lucien, Seraphine choose and pursue distinct goals, also interacting with each other.
 4. **Resolve:** schema-validate actions; authenticate accounts; apply deterministic rules; submit on-chain economic/authority changes in consistent order; only acknowledge finalized successful actions.
-5. **Dawn:** deterministic upkeep, income, exposure and council votes; open/close rooms and change political positions based on current rights.
+5. **Dawn:** deterministic upkeep and rights-based consequences; council votes remain planned; open/close rooms and change political positions based on current rights.
 
 **Historical Pass 1 campaign:** seven nights, three major actions per night (provisional). Blood exhaustion or Exposure 10 causes defeat; surviving Night 7 gives a temporary development conclusion. Resource-purchased three-seat victory is deprecated. **Pass 3 target (PLANNED):** eight identifiable seats and five valid supporting votes at Night 7. Final voting is not implemented.
 
@@ -50,7 +50,7 @@ Older saves retain legacy rules; new rights require an explicit fresh bootstrap.
 | **Ancestral Crypt** | shelter, low upkeep | valid property owner or scoped resting/access grant |
 | **Forbidden Library** | finite title, lineage and lease-deadline investigations | contract-verified access; discoveries grant no authority |
 | **Crimson Lounge** | finite character interests and a future access-exchange opportunity | expiring commercial entry lease; no income or automatic political support |
-| **Hunting Grounds** | blood vs hunter attention | location use rights; exposure from overuse |
+| **Hunting Grounds** | feeding versus political action | location use rights; nightly action cost |
 | **Council Chamber** | debates, votes, succession | voting authority, seat ownership or explicit delegation |
 
 Primary UI: **Castle Map** (rooms, characters, context actions), **Bloodline Tree** (siring, power relationships, derived vs independent privileges), **The Court** (typed proposals, negotiation, event outcomes, audit trail). No platformer in the MVP. Ghosts and additional cities are later concepts.
@@ -65,7 +65,7 @@ Primary UI: **Castle Map** (rooms, characters, context actions), **Bloodline Tre
 - **Blood (retained):** local survival/exertion resource, 0–12. Feeding/rest restore it; investigations, lying low and dawn consume it. Never purchases political power.
 - **Coin (removed):** no fictional currency, production, costs or replacement token. Existing native NEAR leases remain the economic commitment.
 - **Influence (removed):** no spendable universal political stat or farming. Information, signed relationships and explicit contract rights remain distinct.
-- **Exposure (transitional):** local danger, 0–10. Feeding raises it; rest/lying low/dawn reduce it. Keep defeat at 10 until character-specific danger replaces it in a later pass.
+- **Exposure (retired):** removed from active gameplay by the approved refinement. Historical save values and completed outcomes remain intact; no replacement penalty.
 
 No custom tradable token is required for v0.1. NFTs/NEP-171 and multi-tokens/NEP-245 are **optional** integrations only if they add real game value and can be finished. NEAR Intents are **not** required for on-NEAR property and lease contracts.
 
@@ -107,7 +107,7 @@ Public testnet wallet signing remains unimplemented; no browser private keys.
 | Layer | Can decide | Cannot decide |
 |---|---|---|
 | **NEAR contract (Rust near-sdk)** | persistent ownership, grants/revocations, leases, balances, enforceable votes | arbitrary LLM narrative, player UI state |
-| **Deterministic engine (TypeScript)** | blood/exposure rules, actions available, night advancement calculations, win/loss proposals | create title, override finalized contract, mint testnet NEAR |
+| **Deterministic engine (TypeScript)** | Blood rules, actions available, night advancement calculations, win/loss proposals | create title, override finalized contract, mint testnet NEAR |
 | **AI agent orchestration (TypeScript + optional provider)** | bounded goals, counters, strategic negotiation, dialog, typed action proposals | choose unchecked account IDs, access unrestricted signing keys, bypass contract policies |
 
 ### Wallet / account model

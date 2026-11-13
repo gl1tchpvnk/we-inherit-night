@@ -73,12 +73,45 @@ test('title and prologue SSR provide accessible real controls, no settings or ga
   const file=join(dir,'entry.mjs');await writeFile(file,output.output.find(o=>o.type==='chunk').code);
   const {TitleScreen,Prologue,GameEntry}=await import(pathToFileURL(file).href);
   const props={save:{exists:false,valid:false},busy:false,error:'',confirm:false,onNew(){},onContinue(){},onCancel(){},onConfirm(){}};
-  const html=renderToStaticMarkup(createElement(TitleScreen,props));assert.match(html,/>New Game</);assert.match(html,/disabled="">Continue/);assert.doesNotMatch(html,/Settings/);
+  const html=renderToStaticMarkup(createElement(TitleScreen,props));assert.match(html,/>Begin the Night</);assert.match(html,/disabled="">Continue/);assert.doesNotMatch(html,/Settings/);
   const confirm=renderToStaticMarkup(createElement(TitleScreen,{...props,confirm:true}));assert.match(confirm,/Replace save/);assert.match(confirm,/Keep existing save/);
   const valid=renderToStaticMarkup(createElement(TitleScreen,{...props,save:{exists:true,valid:true,night:3}}));assert.match(valid,/<button>Continue/);
   const intro=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},onAdvance(){}}));assert.match(intro,/Skip intro/);assert.match(intro,/Dialogue is free/);
   const waiting=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},waiting:true,onAdvance(){}}));assert.match(waiting,/Establishing verified local rights/);assert.doesNotMatch(waiting,/<button disabled/);
   const skipped=renderToStaticMarkup(createElement(Prologue,{progress:{line:3,done:true},waiting:true,onAdvance(){assert.fail('render must not commit');}}));assert.match(skipped,/<button disabled="">Continue/);assert.match(skipped,/<button disabled="">Skip intro/);
   const entry=renderToStaticMarkup(createElement(GameEntry,{children(){assert.fail('gameplay cannot render on title');}}));assert.match(entry,/Checking for a saved campaign/);
+ }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('normal finale requires verified reclamation for public replay, never just a commitment',async()=>{
+ const {canReplayCampaign}=await import('../src/entry.ts');
+ const r={campaign:{status:'concluded'},pending:false,error:null,archiveCommitment:'commitment'};
+ assert.equal(canReplayCampaign(r,true),false);assert.equal(canReplayCampaign({...r,archiveComplete:false},true),false);
+ assert.equal(canReplayCampaign({...r,archiveComplete:true},true),true);
+ assert.equal(canReplayCampaign({...r,archiveComplete:true,pending:true},true),false);
+ assert.equal(canReplayCampaign({...r,archiveComplete:true,error:'uncertain'},true),false);
+ assert.equal(canReplayCampaign({...r,archiveComplete:true,closure:{complete:false}},true),false);
+ assert.equal(canReplayCampaign({...r,campaign:{status:'playing'},archiveComplete:true},true),false);
+ assert.equal(canReplayCampaign(r,false),true);
+ const result=await loadEntryCampaign(false,{exists:true,valid:true,id:'ended'},async()=>({...r,campaign:{id:'ended',status:'concluded'},pending:true}));
+ assert.equal(result.pending,true);
+});
+
+test('public title note and persistent finale render accessible copy and safe replay states',async()=>{
+ const dir=await mkdtemp(resolve('.local/refinement-ssr-'));
+ try{
+  const input=join(dir,'input.ts');await writeFile(input,"export {TitleScreen} from '../../src/GameEntry';export {CampaignFinale} from '../../src/CampaignFinale';");
+  const output=await build({configFile:false,logLevel:'silent',define:{'import.meta.env.VITE_MODE':'"testnet"','import.meta.env.VITE_TESTNET_BACKEND':'"1"'},build:{ssr:input,write:false,rollupOptions:{external:['react','react/jsx-runtime']}}});
+  const file=join(dir,'components.mjs');await writeFile(file,output.output.find(o=>o.type==='chunk').code);
+  const {TitleScreen,CampaignFinale}=await import(pathToFileURL(file).href);
+  const title=renderToStaticMarkup(createElement(TitleScreen,{save:{exists:false,valid:false,inactivityMs:86400000},busy:false,error:'',confirm:false,onNew(){},onContinue(){},onCancel(){},onConfirm(){}}));
+  assert.match(title,/<aside class="expiration-note"><strong>The night waits for no one\.<\/strong>/);
+  assert.match(title,/Campaigns close after 24 hours of inactivity\. Their recorded outcome is preserved, but they cannot be resumed\./);
+  assert(title.indexOf('expiration-note')>title.indexOf('entry-controls'));assert.doesNotMatch(title,/class="notice"/);
+  const campaign=newCampaign('ending',{living:true});campaign.status='concluded';campaign.ending='favoured';campaign.reason='Lucien protects you beyond the temporary passage.';campaign.night=7;
+  const result={campaign,world:{night:7,properties:[],grants:[],leases:[],ancestry:[],access:{},next_nonce:0},pending:false,error:null,archiveCommitment:'record'};
+  const props={result,busy:false,requireArchive:true,onReplay(){assert.fail('render must not reset');},onRefresh(){}};
+  const pending=renderToStaticMarkup(createElement(CampaignFinale,props));assert.match(pending,/CAMPAIGN COMPLETE/);assert.match(pending,/The Favoured/);assert.match(pending,/Lucien stands behind you/);assert.match(pending,/Review Your Chronicle/);assert.match(pending,/disabled="">Begin Another Campaign/);assert.match(pending,/still being verified/);assert.doesNotMatch(pending,/Finish \/ skip|Return to exploration/);
+  const ready=renderToStaticMarkup(createElement(CampaignFinale,{...props,result:{...result,archiveComplete:true}}));assert.match(ready,/<button class="binding-choice">Begin Another Campaign/);assert.doesNotMatch(ready,/Check settlement/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });

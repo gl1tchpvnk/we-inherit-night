@@ -2,7 +2,7 @@ import {createHash,randomUUID} from 'node:crypto';
 import {servicePolicy} from './config.mjs';
 import {createTestnetScenario,proveUnexecutedProvision} from './scenario.mjs';
 
-export const archivedSnapshot=record=>({...record.snapshot,...(record.snapshot.closure?{closure:{...record.snapshot.closure,complete:!!record.complete},pending:!record.complete,actions:[]}:{}),proof:'Archived campaign: verified historical state; on-chain world reclaimed',archiveCommitment:record.commitment});
+export const archivedSnapshot=record=>({...record.snapshot,archiveComplete:!!record.complete,pending:!record.complete,...(record.snapshot.closure?{closure:{...record.snapshot.closure,complete:!!record.complete},pending:!record.complete,actions:[]}:{}),proof:record.complete?'Archived campaign: verified historical state; on-chain world reclaimed':'Campaign complete: archive and reclamation verification pending',archiveCommitment:record.commitment});
 export const closingSnapshot=record=>({...record.snapshot,closure:{reason:record.reason,startedAt:record.startedAt,complete:false},pending:true,actions:[],error:null});
 
 // Both paths use the same durable signing/finality adapter as gameplay. No

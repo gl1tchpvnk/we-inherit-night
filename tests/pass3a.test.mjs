@@ -55,9 +55,9 @@ test('Night Seven can stop pending research or keep it running; publication chan
 });
 test('material risks remain visible; failed or pending actions never acquire narrative commitments',()=>{
  const r=fixture(1);r.campaign.politics.titleFiled=true;r.campaign.resources.exposure=8;r.actions=availableActions(r.campaign,r.world);
- let scenes=buildEncounterScenes(r),terms=scenes.find(s=>s.id==='action:sanctuary_pact').terms.join(' ');
- for(const text of ['0.02 Sandbox NEAR','nonrefundable','gas','7 nights','one major action','Night Four'])assert.ok(terms.includes(text),text);
- assert.match(scenes.find(s=>s.id==='action:feed').terms.join(' '),/fatal Exposure/);
+ let scenes=buildEncounterScenes(r),terms=[...scenes.find(s=>s.id==='action:sanctuary_pact').terms,...scenes.find(s=>s.id==='action:sanctuary_pact').lines.map(l=>l.text)].join(' ');
+ for(const text of ['0.02 NEAR','nonrefundable','gas','7 nights','tonight’s action','Night Four'])assert.ok(terms.includes(text),text);
+ assert.doesNotMatch(scenes.find(s=>s.id==='action:feed').terms.join(' '),/Exposure/);
  r.pending=true;scenes=buildEncounterScenes(r);assert.ok(scenes.every(s=>!s.automatic&&s.choices.every(c=>!c.action)));
 });
 test('reckoning excludes pending/failed NPC acts; withdrawn research never erases independent rewards',()=>{
@@ -83,4 +83,16 @@ test('exclusive lease deadlines use the seven-night timeline without promising e
  const short=fixture(4);short.campaign.ending='unbound';short.world.leases[0].status='accepted';short.world.leases[0].end_night=5;
  assert.match(endingSummary(short),/ends at the start of Night 6/);assert.doesNotMatch(endingSummary(short),/through the final night/);
  short.world.leases[0].buyer='someone-else';assert.match(endingSummary(short),/No accepted sanctuary/);
+});
+
+test('opening focuses choices without removing alternatives, deadlines or feeding',()=>{
+ const r=fixture(),scenes=buildEncounterScenes(r),opening=scenes.find(s=>s.id==='ultimatum');
+ assert.equal(opening.terms.length,0);assert.equal(opening.choices.length,2);
+ assert.match(opening.lines.map(l=>l.text).join(' '),/third dawn|3 more nights/);
+ const first=scenes.find(s=>s.id==='decision:0');assert.equal(first.choices.filter(c=>!c.secondary).length,3);
+ for(const kind of ['feed','rest','petition_marius','investigate_title'])assert(first.choices.some(c=>c.inspect===`action:${kind}`));
+ r.campaign.night=2;r.world.night=2;r.world.access.sanctuary=false;r.campaign.politics.publicLead=true;r.actions=availableActions(r.campaign,r.world);
+ const late=buildEncounterScenes(r).find(s=>s.id==='decision:2');
+ for(const c of late.choices.filter(c=>['action:sanctuary_pact','action:petition_marius','action:broker_passage'].includes(c.inspect)))assert.notEqual(c.secondary,true);
+ for(const s of scenes.filter(s=>s.id.startsWith('action:')))assert.doesNotMatch(s.terms.join(' '),/\b(?:Benefit|Cost|Deadline):/);
 });

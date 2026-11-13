@@ -1,3 +1,4 @@
+import {bloodWarning} from '../src/blood.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
@@ -75,6 +76,11 @@ test('React scene renders native accessible controls, escaped dialogue and alway
  const r=fixture(),scene=buildEncounterScenes(r).find(s=>s.id==='lease:0');scene.lines[0].text='<script>not trusted</script>';
  let calls=0;const html=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:false,feedback:'',onLine:()=>{},onChoice:()=>{calls++;},onComplete:()=>{},onSkipReckoning:()=>{}}));
  assert.match(html,/<dialog/);assert.match(html,/aria-labelledby="encounter-title"/);assert.match(html,/type="button"/);assert.match(html,/0.02 Sandbox NEAR/);assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);assert.equal(calls,0);
+ const focused=fixture();focused.campaign.politics.library={chosen:null,authorizedNight:null,result:'open',challenged:false};
+ const opening=buildEncounterScenes(focused).find(s=>s.id==='ultimatum');
+ const props={scene:opening,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
+ const first=renderToStaticMarkup(createElement(VampireEncounter,props));assert.match(first,/>Continue</);assert.doesNotMatch(first,/Find out who|Finish \/ skip|What changes/);
+ const last=renderToStaticMarkup(createElement(VampireEncounter,{...props,lineIndex:1}));assert.match(last,/Find out who might help/);assert.doesNotMatch(last,/>Continue</);assert.equal((last.match(/Return to the castle/g)||[]).length,1);
  const busy=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:true,feedback:'',onLine:()=>{},onChoice:()=>{},onComplete:()=>{},onSkipReckoning:()=>{}}));assert.match(busy,/disabled/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
@@ -134,8 +140,8 @@ test('Pass 2G: late qualification and immediately dangerous resources are explai
  const r=fixture();r.campaign.night=2;r.world.night=2;r.campaign.resources.blood=2;r.campaign.resources.exposure=8;r.actions=availableActions(r.campaign,r.world);
  const scenes=buildEncounterScenes(r),decision=scenes.find(s=>s.id==='decision:2');
  assert.match(decision.choices.find(c=>c.inspect==='action:investigate_title').summary.join(' '),/Too late/);
- assert.match(scenes.find(s=>s.id==='action:investigate_title').terms.join(' '),/may exhaust/);
- assert.match(scenes.find(s=>s.id==='action:feed').terms.join(' '),/fatal threshold/);
+ assert.match(bloodWarning(r,{action:'game',choice:'investigate_title'}),/Fatal/);
+ assert.doesNotMatch(scenes.find(s=>s.id==='action:feed').terms.join(' '),/Exposure|fatal threshold/);
  // Warnings inform; only the existing validator determines availability.
  assert.deepEqual(scenes.find(s=>s.id==='action:feed').choices.find(c=>c.id==='commit').action,{action:'game',choice:'feed'});
 });

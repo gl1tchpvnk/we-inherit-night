@@ -7,7 +7,7 @@ import {addCourtReactions} from './reactiveCourt.ts';
 
 export type SceneType='ENCOUNTER'|'NEGOTIATION'|'RECKONING'|'CAMPAIGN CONCLUSION'|'DECISION';
 export interface DialogueLine {speaker:NpcName|'narrator';text:string}
-export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[]}
+export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[];secondary?:boolean}
 export interface EncounterScene {
   id:string;type:SceneType;title:string;location:'crypt'|'library'|'lounge';
   portraits:NpcName[];lines:DialogueLine[];terms:string[];rights:string[];

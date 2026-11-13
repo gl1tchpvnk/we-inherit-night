@@ -14,9 +14,11 @@ import {AGENTS} from './agents';
 
 import {courtReactions} from './reactiveCourt';
 
-import {EncounterDirector} from './VampireEncounter';
+import {EncounterDirector,BloodStatus} from './VampireEncounter';
 
-import {GameEntry} from './GameEntry';
+import {GameEntry} from './GameEntry';
+import {bloodWarning} from './blood';
+import {CampaignFinale} from './CampaignFinale';
 
 import {buildEncounterScenes,readSceneMemory} from './encounters';
 
@@ -126,14 +128,14 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   function actionScene(kind:string){openScene(`action:${kind}`);}
 
+  if(state&&campaign&&campaign.status!=='playing'&&!['quit','abandoned'].includes(state.closure?.reason??''))return <CampaignFinale result={state} busy={!!busy} requireArchive={playableTestnet} onReplay={onTitle} onRefresh={()=>void act({action:'view'})}/>;
   const exploration=<SceneSurface>
 
-    <header className="game-hud"><button disabled={!!busy||settling} onClick={()=>playableTestnet?setMenuOpen(true):onTitle()}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><span>Blood {campaign.resources.blood}/12</span><span>Exposure {campaign.resources.exposure}/10</span><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span><button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button></>}</header>
+    <header className="game-hud"><button disabled={!!busy||settling} onClick={()=>playableTestnet?setMenuOpen(true):onTitle()}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><BloodStatus result={state!}/><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span>{!campaign.politics&&state&&bloodWarning(state,{action:'end_night'})&&<span className="blood-warning">{bloodWarning(state,{action:'end_night'})}</span>}{!campaign.politics&&<button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button>}</>}</header>
     {menuOpen&&<section className="notice" aria-label="Game menu"><h2 ref={menuHeading} tabIndex={-1}>{confirmQuit?'Quit this campaign?':'Game menu'}</h2>{confirmQuit?<><p>This permanently ends this campaign. Your history is kept. Existing payments and obligations must settle before its slot is released. You cannot resume after confirming.</p><button disabled={!!busy||settling||!!state?.pending||!!state?.error} onClick={()=>{setQuitRequested(true);setMenuOpen(false);setConfirmQuit(false);void act({action:'quit'});}}>Confirm Quit Campaign</button><button onClick={()=>setConfirmQuit(false)}>Keep playing</button></>:<><button onClick={onTitle}>Save and return to title</button><button disabled={!!busy||settling||!campaign||campaign.status!=='playing'||!!state?.pending||!!state?.error||!!state?.closure} onClick={()=>setConfirmQuit(true)}>Quit Campaign</button><button onClick={()=>setMenuOpen(false)}>Back to game</button></>}</section>}
     {settling&&<section role="status" className="notice"><p>{state?.closure?'Campaign closure is recorded. Settlement and slot reclamation are not yet confirmed.':'Quit outcome is not yet confirmed. Gameplay is paused while you check its status.'} Your history and financial obligations are preserved.</p><button disabled={!!busy} onClick={()=>void act({action:'view'})}>{busy?'Checking settlement…':'Check settlement'}</button></section>}
     {state?.closure?.complete&&<p role="status" className="notice">This campaign is closed{state.closure.reason==='quit'?' at your request':state.closure.reason==='abandoned'?' after its inactivity deadline':' after defeat'}. Its active slot has been reclaimed and the original gameplay record is preserved.</p>}
 
-    {campaign?.politics&&campaign.status==='playing'&&<nav className="story-nav" aria-label="Nightly phases"><button disabled={disabled} onClick={()=>openScene(`discovery:${campaign.night}`)}>Hear the court</button><button className="binding-choice" disabled={disabled} onClick={()=>openScene(`decision:${campaign.night}`)}>Choose this night</button></nav>}
 
     <details className="court-records"><summary>Court records</summary><nav className="inspection-nav" aria-label="Secondary information">{(['Rights','Bloodline','Relationships','Chronicle','Diagnostics'] as Inspection[]).map(kind=><button key={kind} onClick={()=>setInspection(kind)}>{kind}</button>)}</nav></details>
 
@@ -147,9 +149,8 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
       <div aria-label="Developments in this room">{developments.filter(u=>u.room===room.id).slice(-3).reverse().map(u=><button key={u.id} onClick={()=>openScene(u.id)}>{u.title}<small>{u.level} · read freely</small></button>)}</div>
 
-      <div className="context-actions">{roomActions(state,room.id).filter(a=>a.allowed).map(a=><button key={a.kind} disabled={disabled} onClick={()=>actionScene(a.kind)}>{a.label}<small>{a.cost.majorActions?'Inspect commitment':'Free information'}</small></button>)}</div>
+      <div className="context-actions">{campaign?.politics?<button disabled={disabled} onClick={()=>openScene(`decision:${campaign.night}`)}>Consider tonight’s choices</button>:roomActions(state,room.id).filter(a=>a.allowed).map(a=><button key={a.kind} disabled={disabled} onClick={()=>actionScene(a.kind)}>{a.label}</button>)}</div>
 
-      <details><summary>Unavailable interactions</summary>{roomActions(state,room.id).filter(a=>!a.allowed).map(a=><p key={a.kind}>{a.label}: {a.reasons.join(' ')}</p>)}</details>
 
       <button onClick={()=>setInspection('Rights')}>Inspect this room’s authority</button></div>
 
@@ -157,9 +158,8 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
       <div className="castle-architecture"><h1 ref={sceneHeading} tabIndex={-1}>The castle</h1><div className="castle-map"><img src="/art/castle-cutaway.png" alt="Castle cutaway: Lounge and Library above the Crypt."/><div className="castle-hotspots">{ROOMS.map(r=><button className={`architectural-hotspot hotspot-${r.id} ${world?.access[r.id]?'permitted':'restricted'}`} disabled={disabled||adapter.mode==='testnet'} key={r.id} onClick={()=>enter(r.id)} aria-label={`${r.name} · ${world?.access[r.id]?'Enter':'Access restricted; inspect reason'}`}><span>{r.id==='crypt'?'Crypt':r.id==='library'?'Library':'Lounge'}</span><small>{world?.access[r.id]?'Enter':'Restricted'}</small></button>)}</div></div></div>
 
-      <aside className="scene-guidance"><p className="eyebrow">Current situation</p><h2>{campaign?.status==='playing'?(campaign.politics?.library?CHAPTERS[campaign.night].title:'Choose your next allegiance'):'Your political position'}</h2><p>{guidance.situation}</p><div aria-label="Court developments">{developments.slice(-3).reverse().map(u=><button key={u.id} onClick={()=>openScene(u.id)}>{u.title}<small>{u.level} · read freely</small></button>)}</div><h3>Possible next steps</h3>{guidance.leads.map((lead,i)=><button key={i} disabled={disabled} onClick={()=>lead.room?enter(lead.room):openScene(lead.scene??`character:${lead.actor}`)}>{lead.label}</button>)}
+      <aside className="scene-guidance"><p className="eyebrow">Current situation</p><h2>{campaign?.status==='playing'?(campaign.politics?.library?CHAPTERS[campaign.night].title:'Choose your next allegiance'):'Your political position'}</h2><p>{guidance.situation}</p><details className="court-developments"><summary>Word from the court</summary>{developments.slice(-3).reverse().map(u=><button key={u.id} onClick={()=>openScene(u.id)}>{u.title}<small>{u.level} · read freely</small></button>)}</details><h3>Tonight</h3>{guidance.leads.map((lead,i)=><button key={i} disabled={disabled} onClick={()=>lead.room?enter(lead.room):openScene(lead.scene??`character:${lead.actor}`)}>{lead.label}</button>)}
 
-      <details><summary>Attend to yourself</summary>{state.actions?.filter(a=>['feed','rest','conceal'].includes(a.kind)).map(a=><div key={a.kind}><button disabled={disabled||!a.allowed} onClick={()=>actionScene(a.kind)}>{ROLEPLAY_LABELS[a.kind as keyof typeof ROLEPLAY_LABELS]??a.label}</button>{!a.allowed&&<small>{a.reasons.join(' ')}</small>}</div>)}</details>
 
       {campaign&&campaign.status!=='playing'&&<button onClick={()=>openScene(buildEncounterScenes(state).find(s=>s.type==='CAMPAIGN CONCLUSION')!.id)}>Review conclusion</button>}
 

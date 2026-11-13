@@ -12,7 +12,7 @@ function tokenOf(req){return req.headers.cookie?.split(';').map(s=>s.trim()).fin
 
 const pick=(value,fields)=>Object.fromEntries(fields.filter(k=>Object.hasOwn(value,k)).map(k=>[k,value[k]]));
 export function publicSnapshot(snapshot){
-  const result=pick(snapshot,['world','proof','events','walletYocto','escrowYocto','actions','authority','availability','archiveCommitment','closure']);
+  const result=pick(snapshot,['world','proof','events','walletYocto','escrowYocto','actions','authority','availability','archiveCommitment','archiveComplete','closure']);
   result.pending=!!snapshot.pending;
   result.error=snapshot.error?'The request could not be completed. Refresh to check the confirmed campaign state.':null;
   if(snapshot.campaign){
@@ -44,8 +44,9 @@ export function createGameServer({store,loadSession,origin='http://localhost:519
     if(path==='/api/save'&&req.method==='GET'){
       if(!owned)return json(res,200,{exists:false,valid:false,inactivityMs:policy.cleanup.inactivityMs,...(token?{error:'This session has expired. Clear its cookie to start a new campaign.'}:{})});
       const saved=await store.readJson(owned.id);
-      const closed=!!store.archive(owned.id)?.complete,closing=!!store.closing(owned.id)&&!closed;
-      return json(res,200,{exists:true,valid:!closed,closed,closing,inactivityMs:policy.cleanup.inactivityMs,id:owned.id,night:saved?.campaign?.night??0});
+      const archived=store.archive(owned.id),closed=!!archived?.complete,closing=!!store.closing(owned.id)&&!closed;
+      const reviewable=closed&&!!archived.snapshot?.campaign&&archived.snapshot.campaign.status!=='playing'&&!['quit','abandoned'].includes(archived.snapshot?.closure?.reason);
+      return json(res,200,{exists:true,valid:!closed||reviewable,closed,closing,inactivityMs:policy.cleanup.inactivityMs,id:owned.id,night:saved?.campaign?.night??0});
     }
     if(path!=='/api/game'||req.method!=='POST')return json(res,404,{error:'Not found.'});
     if(req.headers.origin!==base.origin||req.headers['content-type']!=='application/json')return json(res,403,{error:'Same-origin JSON request required.'});

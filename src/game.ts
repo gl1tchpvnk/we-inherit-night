@@ -2,9 +2,10 @@ import {FINAL_ACTIONS,isFinalAction,finalReasons,type FinalAction} from './final
 import {LIBRARY_ACTIONS,isLibraryAction,libraryReasons,type LibraryAction} from './library.ts';
 import type {AgentEvent,Agreement} from './agents';
 import {POLITICAL_ACTIONS,newPolitics,politicalReasons,hasShelter, type Politics,type PoliticalAction} from './politics.ts';
-export type Resources = {blood:number;exposure:number};
+// Legacy Exposure is retained as inert historical save data.
+export type Resources = {blood:number;exposure?:number};
 export type NpcName = 'vesper'|'seraphine'|'lucien'|'marius'|'cassian'|'mirelle'|'dorian'|'sabine';
-export type GameAction = 'feed'|'rest'|'conceal'|'investigate_title'|'investigate_bloodline'|'investigate_expiry'|'learn_seraphine'|'discuss_exchange'|PoliticalAction|LibraryAction|FinalAction;
+export type GameAction = 'feed'|'rest'|'investigate_title'|'investigate_bloodline'|'investigate_expiry'|'learn_seraphine'|'discuss_exchange'|PoliticalAction|LibraryAction|FinalAction;
 export interface Authority {
   passage_budget?:{seller:string;remaining:string;expiry_night:number;lease_id:number|null}|null;
   night:number;access:Record<string,boolean>;properties:{id:string;owner:string}[];
@@ -21,9 +22,8 @@ export const ACTIONS:Record<GameAction,{label:string;description:string;blood:nu
   ...POLITICAL_ACTIONS,
   ...LIBRARY_ACTIONS,
   ...FINAL_ACTIONS,
-  feed:{label:'Feed discreetly',description:'+4 Blood (maximum 12), +2 transitional Exposure',blood:0},
-  rest:{label:'Rest in the Crypt',description:'+2 Blood, −1 Exposure; requires Crypt access',blood:0,property:'crypt'},
-  conceal:{label:'Lie low',description:'Cost 1 Blood; −3 Exposure',blood:1},
+  feed:{label:'Feed discreetly',description:'+4 Blood (maximum 12); uses tonight’s action',blood:0},
+  rest:{label:'Rest in the Crypt',description:'+2 Blood; requires Crypt access and tonight’s action',blood:0,property:'crypt'},
   investigate_title:{label:'Investigate your Library title',description:'Cost 1 Blood; record its owner and independent title once',blood:1,property:'library',once:true},
   investigate_bloodline:{label:'Trace the Crypt delegation',description:'Cost 2 Blood; discover the recorded ancestry and grant chain once',blood:2,property:'library',once:true},
   investigate_expiry:{label:'Investigate the lease deadline',description:'Cost 1 Blood; unlocks after acceptance; record the actual expiry once',blood:1,property:'library',once:true},
@@ -37,13 +37,13 @@ export function newCampaign(id:string,options:{legacy?:boolean;actionLimit?:numb
   if(!Number.isInteger(limit)||limit<1||limit>3)throw new Error('Invalid internal action limit.');
   const npcs={vesper:vampire(),seraphine:vampire(),lucien:vampire()} as Record<NpcName,Vampire>;
   if(!options.legacy)for(const name of ['marius','cassian','mirelle','dorian','sabine'] as NpcName[])npcs[name]=vampire();
-  return {version:options.legacy?2:3,id,revision:0,night:0,actionsLeft:limit,...(!options.legacy?{actionLimit:limit,politics:{...newPolitics(id),...(options.dangerous?{finalCourt:{response:null,result:null}}:{}),...(options.living?{library:{chosen:null,authorizedNight:null,result:'open',challenged:false}}:{})}}:{}),resources:{blood:8,exposure:0},seats:1,status:'playing',reason:'',discoveries:[],agentHistory:[],agreements:[],events:[options.legacy?'Legacy seven-night campaign.':'Vesper will revoke Crypt shelter at the third reckoning. Secure sanctuary or institutional protection. Deterministic agents; no model calls.'],npcs};
+  return {version:options.legacy?2:3,id,revision:0,night:0,actionsLeft:limit,...(!options.legacy?{actionLimit:limit,politics:{...newPolitics(id),...(options.dangerous?{finalCourt:{response:null,result:null}}:{}),...(options.living?{library:{chosen:null,authorizedNight:null,result:'open',challenged:false}}:{})}}:{}),resources:{blood:8},seats:1,status:'playing',reason:'',discoveries:[],agentHistory:[],agreements:[],events:[options.legacy?'Legacy seven-night campaign.':'Vesper will revoke Crypt shelter at the third reckoning. Secure sanctuary or institutional protection. Deterministic agents; no model calls.'],npcs};
 }
 export function log(s:Campaign,text:string){s.events.push(text);s.events=s.events.slice(-80);}
-function bounds(s:Campaign){s.resources.blood=Math.max(0,Math.min(12,s.resources.blood));s.resources.exposure=Math.max(0,Math.min(10,s.resources.exposure));}
+function bounds(s:Campaign){s.resources.blood=Math.max(0,Math.min(12,s.resources.blood));}
 export function requirePlaying(s:Campaign){if(s.status!=='playing')throw new Error('This campaign has ended. Start a new game.');}
 export function spendAction(s:Campaign){requirePlaying(s);if(s.actionsLeft<1)throw new Error('No major actions remain. End the night.');s.actionsLeft--;}
-export function assess(s:Campaign){bounds(s);if(s.resources.blood===0||s.resources.exposure>=10){s.status='defeat';if(s.politics)s.ending='failure';s.reason=s.resources.blood===0?'FAILURE — your Blood is exhausted.':'FAILURE — hunters found you: Exposure reached 10.';}else if(s.night===7&&!s.politics){s.status='concluded';s.reason='Temporary development conclusion: seven nights survived. Final council voting awaits Pass 3.';}}
+export function assess(s:Campaign){bounds(s);if(s.resources.blood===0){s.status='defeat';if(s.politics)s.ending='failure';s.reason='FAILURE — your Blood is exhausted.';}else if(s.night===7&&!s.politics){s.status='concluded';s.reason='Temporary development conclusion: seven nights survived. Final council voting awaits Pass 3.';}}
 // Signed relationships are not spendable resources. Migrate only local save data,
 // preserving chain identity/night; never reconstruct or grant blockchain rights.
 export function migrateCampaign(raw:Campaign):Campaign{
@@ -81,8 +81,7 @@ export function actionAvailability(s:Campaign,kind:string,w:Authority):Availabil
   if(spec.once&&s.discoveries.some(d=>d.id===kind))reasons.push('Completed — this opportunity is exhausted.');
   if(kind==='investigate_expiry'&&!w.leases.some(l=>l.status==='accepted'))reasons.push('Requires an accepted lease to investigate.');
   if(kind==='discuss_exchange'&&!s.discoveries.some(d=>d.id==='learn_seraphine'))reasons.push('First learn what Seraphine wants.');
-  if(kind==='conceal'&&s.resources.exposure===0)reasons.push('No Exposure to reduce.');
-  if(kind==='rest'&&s.resources.blood===12&&s.resources.exposure===0)reasons.push('Already fully rested.');
+  if(kind==='rest'&&s.resources.blood===12)reasons.push('Already fully rested.');
   return {kind,label:spec.label,allowed:!reasons.length,reasons,cost:{blood:free?0:spec.blood,majorActions:free?0:1},permission:spec.property??null,description:free?'Free information: inspect this record once; rereading it is always free.':s.politics&&kind==='investigate_title'?'Cost 1 Blood; publicly file your verified Library title to qualify for sanctuary negotiations. This grants no rights.':spec.description};
 }
 export function validateAction(s:Campaign,proposal:GameProposal,w:Authority):Availability{
@@ -101,9 +100,8 @@ export function playerAction(s:Campaign,kind:GameAction,w:Authority):Campaign{
     if(kind==='secure_dossier')next.politics.dossier='player';
     if(kind==='broker_passage')next.politics.passageRequested=true;
   }
-  if(kind==='feed'){next.resources.blood+=4;next.resources.exposure+=2;}
-  if(kind==='rest'){next.resources.blood+=2;next.resources.exposure--;}
-  if(kind==='conceal')next.resources.exposure-=3;
+  if(kind==='feed'){next.resources.blood+=4;}
+  if(kind==='rest'){next.resources.blood+=2;}
   if(ACTIONS[kind].once){
     const discovery:Discovery={id:kind,summary:'',source:'contract-view',observedNight:w.night,facts:{},futureOpportunity:false};
     if(kind==='investigate_title'){discovery.summary='The Library has its own owner. Bloodline ancestry does not transfer this title.';discovery.facts={property:w.properties.find(p=>p.id==='library')};}
@@ -117,8 +115,8 @@ export function playerAction(s:Campaign,kind:GameAction,w:Authority):Campaign{
 }
 export function dawn(s:Campaign,w:Authority):Campaign{
   requirePlaying(s);if(w.night!==s.night)throw new Error('Contract night mismatch.');
-  const next=structuredClone(s),sheltered=s.politics?hasShelter(w):w.access.crypt,cost=sheltered?1:3;next.resources.blood=Math.max(0,next.resources.blood-cost);if(next.resources.exposure<10)next.resources.exposure=Math.max(0,next.resources.exposure-1);next.night++;next.actionsLeft=next.night<7?(s.actionLimit??3):0;
-  log(next,`Dawn ${next.night}: ${cost} Blood upkeep (${sheltered?'verified shelter':'no shelter'}); Exposure eases by 1 unless already fatal.`);assess(next);if(next.status!=='playing')log(next,next.reason);return next;
+  const next=structuredClone(s),sheltered=s.politics?hasShelter(w):w.access.crypt,cost=sheltered?1:3;next.resources.blood=Math.max(0,next.resources.blood-cost);next.night++;next.actionsLeft=next.night<7?(s.actionLimit??3):0;
+  log(next,`Dawn ${next.night}: ${cost} Blood upkeep (${sheltered?'verified shelter':'no shelter'}).`);assess(next);if(next.status!=='playing')log(next,next.reason);return next;
 }
 
 export function inspectRights(w:Authority,account:string){

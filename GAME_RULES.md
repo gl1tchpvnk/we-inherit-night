@@ -22,7 +22,7 @@ Older saves retain version-2 behavior and do not acquire rights during migration
 | Seed derives from campaign ID; per-night actor selection and outcomes persist | IMPLEMENTED | politics.ts seededRoll; encounters and finite opportunity claims in journal |
 | At most one turn per eight NPCs/night; pass counts; provider always disabled | IMPLEMENTED | COURT_ORDER, history guards; at most 56 records |
 | Shelter from Crypt/sanctuary/court/passage costs 1 Blood, none costs 3 | IMPLEMENTED | dawn over effective contract view |
-| No shelter after third dawn, Blood 0 or Exposure 10 causes early failure | IMPLEMENTED | fresh-state politicalEnding plus assess |
+| No shelter after third dawn or Blood 0 causes early failure | IMPLEMENTED | fresh-state politicalEnding plus assess |
 | Final Unbound = Library ownership AND effective accepted sanctuary lease ending after current night | IMPLEMENTED | politicalEnding; fixed-term protection, not permanent ownership |
 | Otherwise final Favoured = effective court access; otherwise Failure | IMPLEMENTED | politicalEnding; no score/victory flag or automatic discovery right |
 | Cutscenes / illustrated encounter presentation | IMPLEMENTED | Pass 2D pure scenes over verified results |
@@ -41,10 +41,10 @@ code, not presumed future authorization. Internal nights are 0–6, displayed 1�
 |---|---|---|
 | Seven nights; three major player actions per night; unused actions do not carry over | IMPLEMENTED | `src/game.ts`: newCampaign, spendAction, dawn; provisional balance |
 | Navigation, rights/character inspection and chronicle reading cost no major action | IMPLEMENTED | `campaign.mjs`: enter/view; finite investigations still cost one action |
-| Blood 0–12, initial 8; Exposure 0–10, initial 0 | IMPLEMENTED | game.ts bounds/newCampaign; local simulation, not tokens |
-| Feed +4 Blood/+2 Exposure; rest +2 Blood/−1 Exposure with Crypt permission; conceal −1 Blood/−3 Exposure | IMPLEMENTED | ACTIONS/playerAction; conceal requires Exposure, full rest cannot repeat |
-| Dawn costs 1 Blood with Crypt shelter, otherwise 3; reduces nonfatal Exposure by 1 | IMPLEMENTED | dawn; clamp resources; Exposure already at 10 is not rescued |
-| Blood 0 or Exposure 10 defeats; survive seven dawns for temporary development conclusion | IMPLEMENTED | assess; not final political victory |
+| Blood 0–12, initial 8; legacy Exposure data is inert | IMPLEMENTED | game.ts bounds/newCampaign; local simulation, not tokens |
+| Feed +4 Blood; rest +2 Blood with Crypt permission; conceal retired | IMPLEMENTED | ACTIONS/playerAction; both consume a major action; full rest cannot repeat |
+| Dawn costs 1 Blood with shelter, otherwise 3 | IMPLEMENTED | dawn; clamp Blood; no Exposure calculation |
+| Blood 0 defeats; survive seven dawns for temporary development conclusion | IMPLEMENTED | assess; not final political victory |
 | Five finite discoveries, exact Blood costs and prerequisites | IMPLEMENTED | ACTIONS/actionAvailability; persisted once; no rights or votes granted |
 | Validate shape, remaining actions, resources, access and prerequisites before effects | IMPLEMENTED | validateAction/playerAction; clone before mutation; fresh has_access recheck in runner |
 | Failed local/chain action consumes no Blood or major action; rejected chain call may still cost network gas | IMPLEMENTED | campaign recovery/rollback; revision advances for failed submitted player action |
@@ -102,7 +102,7 @@ Opening title reads metadata only. New Game with an existing save requires expli
 Discovery/Decision are browser presentation phases, not a new scheduler. Questions
 and conversational attitudes are free, carry no hidden penalties and grant no
 rights. Public title filing remains one major action. Lounge entry and Library
-ownership do not qualify as shelter; Blood zero/Exposure ten can end a protected
+ownership do not qualify as shelter; Blood zero can end a protected
 campaign. Incidents, commitment explanations and endings clarify the unchanged
 Pass 2C predicates. See docs/PASS2G.md.
 

@@ -8,10 +8,10 @@ import {AGENTS} from './agents.ts';
 export function protectionSummary(r:Result):string[]{
   const c=r.campaign!,w=r.world;
   return [
-    `Blood ${c.resources.blood}/12; Exposure ${c.resources.exposure}/10. Blood reaching zero or Exposure reaching 10 ends the campaign even with valid rights. Feeding is a major action.`,
+    `Blood ${c.resources.blood}/12. Blood reaching zero ends the campaign even with valid rights. Feeding is a major action.`,
     `Effective protection: ${['crypt','sanctuary','court','passage'].filter(id=>w.access[id]).join(', ')||'none'}. After the third reckoning, at least one must remain. Vesper withdraws only her Crypt grant.`,
     `Ordinary access: Library ${w.access.library?'open':'closed'}; Lounge ${w.access.lounge?'open':'closed'}. Neither counts as shelter. Library ownership remains independent; Lounge tenancy is not sanctuary.`,
-    'Night 7: Unbound requires your Library ownership and effective sanctuary lease extending beyond that reckoning. Favoured requires effective court protection. Both require surviving Blood and Exposure.',
+    'Night 7: Unbound requires your Library ownership and effective sanctuary lease extending beyond that reckoning. Favoured requires effective court protection. Both require enough Blood to survive.',
     ...(c.politics?.appointment==='player'?[c.politics.serviceFulfilled?'Marius’s service is fulfilled. His grant remains patron-dependent and revocable.':'Marius’s service is due during Nights 4–5. Leaving it unfulfilled lets him revoke his grant at the sixth reckoning.']:[])
   ];
 }
@@ -23,16 +23,14 @@ const impacts:Record<string,string>={
   petition_marius:'Gain: claim the finite appointment; Marius can issue court protection at reckoning. This supports Favoured, not Unbound. Marius benefits from your service; Cassian loses this appointment. It does not block Seraphine, but spends one of the three nights before her deadline.',
   fulfil_service:'Gain: meet Marius’s obligation and retain his patron-dependent route. Marius receives the service. This grants no independent title or sanctuary.',
   broker_passage:'Gain: Lucien’s temporary protection after his verified grant. It expires at the start of Night 6 and cannot win an ending. Use the time to secure another source; this is not permanent escape.',
-  feed:'Gain: +4 Blood, capped at 12; cost: +2 Exposure before reckoning. You benefit; no vampire gains authority. Feeding preserves physical survival but grants no political protection.',
-  rest:'Gain: +2 Blood and -1 Exposure, subject to resource bounds and Crypt access. You benefit; no authority changes. Resting cannot preserve Vesper’s revoked grant.',
-  conceal:'Gain: reduce Exposure by 3. You benefit; no protection or authority changes. Concealment cannot remedy missing shelter.'
+  feed:'Recover 4 Blood, capped at 12. You benefit; no vampire gains authority. Feeding preserves physical survival but grants no political protection.',
+  rest:'Recover 2 Blood, subject to resource bounds and Crypt access. You benefit; no authority changes. Resting cannot preserve Vesper’s revoked grant.',
+
 };
 export function commitmentImpact(kind:string,r?:Result):string[]{
   let benefit=impacts[kind]??'Information does not grant rights or protection.';
   if(r?.campaign&&['investigate_title','secure_dossier'].includes(kind)&&r.campaign.night>=2)benefit='Too late for the sanctuary route: this record grants no protection. Committing now cannot leave another major action before sanctuary closes after Night 3. '+benefit;
-  if(r?.campaign&&kind==='feed'&&r.campaign.resources.exposure>=8)benefit='WARNING: feeding adds 2 Exposure immediately and would reach the fatal threshold of 10. '+benefit;
-  const cost=r?.actions?.find(a=>a.kind===kind)?.cost.blood??0;
-  return [benefit,...(r?.campaign&&cost>0&&r.campaign.resources.blood<=cost+1?['WARNING: this Blood cost may exhaust you now or at reckoning. Valid protection does not prevent Blood defeat.']:[]),...(kind in impacts?['Opportunity cost: this commitment spends tonight’s major action and advances the court. Other deadlines and finite claims continue; free conversation alone closes nothing.']:[])];
+  return [benefit,...(kind in impacts?['Opportunity cost: this commitment spends tonight’s major action and advances the court. Other deadlines and finite claims continue; free conversation alone closes nothing.']:[])];
 }
 
 const voices:Record<NpcName,{question:string;answer:string;relationship:string;respect:string;challenge:string}>={

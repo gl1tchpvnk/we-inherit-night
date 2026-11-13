@@ -483,3 +483,36 @@
 - Pool 1.04 Testnet NEAR; fresh campaign alone holds 0.04 treasury and 0.01 passage liability. No funding/configuration changes.
 - Secret scans passed; unrelated earlier provisioning documentation remains unstaged. No pacing/title proposals included.
 - Evidence in evidence/quit-campaign; no live blockers. Stop after this verification.
+
+## Gameplay refinement — IMPLEMENTED locally, not deployed
+- Seven-night campaign retained; early dialogue and unified nightly choices focus attention without removing urgent options.
+- Exposure retired; Blood and feeding's action cost preserved. Legacy records remain readable.
+- Persistent finale, Chronicle review and replay gated by verified reclamation; Quit remains separate.
+- Exact inactivity note moved below the title artwork using dedicated styling.
+- PASS: 155 automated tests, 57 focused checks, production build, real Sandbox seven-night and Quit recovery integrations, complete local browser playthrough and desktop/mobile checks.
+- Updated gameplay rules, requirements and continuity notes; no contract, artwork, credentials or public deployment changes.
+- Evidence and limitations: docs/GAMEPLAY_REFINEMENT.md. Next: user review before any deployment.
+
+## Crypt label alignment — local PASS
+- Raised only the Crypt label and Enter text with a responsive 10–24px child offset.
+- Room button bounds, artwork, navigation handlers and breakpoint positions remain unchanged.
+- PASS: desktop and 390px mobile visual checks using the existing map markup/styles; labels sit above the floor boundary.
+- PASS: production build and diff whitespace check. No logic tests needed for this CSS-only correction.
+- Reviewed requirements/README continuity; no product or submission rule changes. Not deployed.
+
+## Blood visibility correction — local PASS
+- Added persistent Blood status and concise hunger text to primary encounters/decisions and the exploration HUD, including mobile scrolling.
+- Fatal warnings appear immediately before commitment controls; no additional confirmation or gameplay restriction. Feed is explicitly labelled with its +4 Blood recovery and stays primary.
+- Warning projections call existing playerAction/dawn calculations on copies. They distinguish immediate depletion, fatal upkeep even with shelter, and conditional death without shelter. NPC authority changes are never predicted as guaranteed.
+- Removed the older approximate Blood warnings to avoid duplicate/conflicting advice. Blood, action costs, shelter, NPCs, contract and save rules are unchanged.
+- PASS: 158 automated tests, Testnet-mode production build, desktop/mobile visual checks and isolated full seven-night Sandbox regression with normal settlement/reclamation and interrupted-response recovery.
+- The first targeted run exposed a missing .ts import extension in the new helper; corrected before the successful full suite. No remaining test failures.
+- User's personal campaign was not loaded, reset or altered. No commit, push or deployment. Evidence: evidence/blood-visibility.
+
+## Encounter Feed and fatal warning clarification — local PASS
+- Confirmed title filing at 2 Blood: the action leaves 1, ends the night, and even sheltered upkeep leaves 0, which is fatal. Wording now states the arithmetic and threshold explicitly.
+- Added a distinct Your action / Feed control inside encounters. It uses existing feed availability and the same command, busy lock, session/revision checks and pending-transaction recovery.
+- Confirmed feeding clears the active encounter without falsely recording its dialogue response; fresh campaign state drives the next scene. No action/resource/contract changes.
+- PASS: 19 focused Blood/encounter tests, one focused SQLite campaign-engine test, production build, desktop/mobile UI checks. No broad suite or additional seven-night run.
+- Browser fixture double-click sent one feed: Blood 2 → 6 → 5 after sheltered dawn, revision 1 and Night Two; this fixture is not live-chain evidence.
+- Covered low Blood, exhausted actions, disabled availability, ended/closing campaigns, pending commitments, stale replay and preserved pending journal. Existing user save untouched; no deployment, commit or push.
