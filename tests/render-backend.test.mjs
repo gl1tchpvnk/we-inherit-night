@@ -32,7 +32,7 @@ function outcome(payload){
   const checked=verifySigned(payload,expected);
   return {final_execution_status:'FINAL',status:{SuccessValue:''},receipts_outcome:[],transaction:{hash:checked.hash,public_key:expected.publicKey,signer_id:tx.signerId,receiver_id:CONTRACT,actions:[{FunctionCall:{method_name:c.methodName,deposit:'0',gas:gasForMethod(c.methodName),args:Buffer.from(c.args).toString('base64')}}]}};
 }
-const query=async(_method,p)=>p.request_type==='view_access_key'?{permission:{FunctionCall:{receiver_id:CONTRACT,method_names:['revoke_grant'],allowance:'10000000000000000000000'}},nonce:1,block_hash:hash,block_height:1}:{result:[...Buffer.from(JSON.stringify({campaign_id:'one',night:0,next_nonce:0}))]};
+const query=async(_method,p)=>_method==='block'?{header:{height:1}}:_method==='EXPERIMENTAL_protocol_config'?{transaction_validity_period:86400}:p.request_type==='view_access_key'?{permission:{FunctionCall:{receiver_id:CONTRACT,method_names:['revoke_grant'],allowance:'10000000000000000000000'}},nonce:1,block_hash:hash,block_height:1}:{result:[...Buffer.from(JSON.stringify({campaign_id:'one',night:0,next_nonce:0}))]};
 
 test('obsolete unfunded provisioning closes atomically only with independent absence proof, preserves evidence and permits one fresh intent',async()=>{
  const f=await fixture(),s=signingFixture(),release=acquireWriter(join(f.dir,'game.sqlite'));

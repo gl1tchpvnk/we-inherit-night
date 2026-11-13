@@ -91,6 +91,9 @@ export class Store {
   }
   transactions(id){return this.db.prepare('SELECT id,value FROM transactions WHERE campaign_id=? ORDER BY rowid').all(id).map(r=>({id:r.id,...JSON.parse(r.value)}));}
   pendingForActor(account){return !!this.db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.actor')=? AND json_extract(value,'$.phase') NOT IN ('final','rejected','unsubmitted') LIMIT 1").get(account);}
+  pendingTransactions(account=null){
+    return this.db.prepare("SELECT id,campaign_id,value FROM transactions WHERE json_extract(value,'$.phase') NOT IN ('final','rejected','unsubmitted') AND (? IS NULL OR json_extract(value,'$.actor')=?) ORDER BY rowid").all(account,account).map(r=>({campaignId:r.campaign_id,id:r.id,...JSON.parse(r.value)}));
+  }
 
   history(token){
     if(!this.lookup(token))return [];

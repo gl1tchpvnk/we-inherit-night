@@ -66,6 +66,46 @@ export function finalized(t,expected){
   return {succeeded:success(t),receiptFailures:t.receipts_outcome.filter(r=>'Failure' in r.outcome.status),result:t};
 }
 
+// The caller holds the shared actor queue, including every journal transition.
+// This completes authorized bytes only; it never invokes a campaign or signer.
+async function reconcileActor(store,actors,account,{query=result,send=rpc}={}){
+  for(const {campaignId,...entry} of store.pendingTransactions(account)){
+    const role=Object.keys(actors).find(r=>actors[r].accountId===account),actor=actors[role];
+    if(!actor||entry.actor!==account||entry.publicKey!==actor.publicKey||!METHODS[role]?.includes(entry.method)||entry.args?.campaign_id!==campaignId)throw new Error('Recovery journal identity mismatch');
+    if(entry.phase==='intent'){
+      if(entry.payload||entry.hash)throw new Error('Unsigned intent contains transaction identity');
+      store.journal(entry.id,campaignId,{...entry,phase:'unsubmitted',reason:'Interrupted before signing'});continue;
+    }
+    if(!['signed','broadcast'].includes(entry.phase)||!entry.payload)throw new Error('Unsupported recovery journal phase');
+    const tx=near.transactions.SignedTransaction.decode(Buffer.from(entry.payload,'base64')).transaction;
+    const nonce=tx.nonce.toString(),blockHash=near.utils.serialize.base_encode(Buffer.from(tx.blockHash));
+    const checked=verifySigned(entry.payload,{...actor,nonce,blockHash,method:entry.method,args:entry.args});
+    if(checked.hash!==entry.hash)throw new Error('Recovery transaction hash mismatch');
+    // NONE returns current evidence promptly; a non-FINAL result stays blocked.
+    let response=await send('tx',{tx_hash:entry.hash,sender_account_id:entry.actor,wait_until:'NONE'});
+    if(response.error?.cause?.name==='UNKNOWN_TRANSACTION'){
+      // UNKNOWN alone is not permission to replace or discard anything. Before
+      // replaying identical bytes, verify their key, nonce and block validity.
+      const key=await query('query',{request_type:'view_access_key',finality:'final',account_id:account,public_key:actor.publicKey});
+      restrictedPermission(role,key,entry.method);
+      const [original,protocol]=await Promise.all([query('block',{block_id:blockHash}),query('EXPERIMENTAL_protocol_config',{block_id:key.block_hash})]);
+      if(!Number.isSafeInteger(key.nonce)||BigInt(key.nonce)>=BigInt(nonce)||!Number.isSafeInteger(key.block_height)||!Number.isSafeInteger(original.header?.height)||!Number.isSafeInteger(protocol.transaction_validity_period)||key.block_height<original.header.height||key.block_height-original.header.height>protocol.transaction_validity_period)throw new Error('Transaction outcome remains unknown; nonce or expiry requires authoritative resolution');
+      store.journal(entry.id,campaignId,{...entry,phase:'broadcast'});
+      try{response=await send('send_tx',{signed_tx_base64:entry.payload,wait_until:'FINAL'});}
+      catch{throw new Error('Transaction outcome remains unknown; recorded identity retained');}
+    }
+    if(response.error||!response.result)throw new Error('Transaction outcome remains unknown; no replacement action or payment signed');
+    finalized(response.result,entry);
+    store.journal(entry.id,campaignId,{...entry,phase:'final',outcome:response.result});
+  }
+}
+export async function recoverSharedActors(store,actors,options={}){
+  const accounts=[...new Set(store.pendingTransactions().map(t=>t.actor))];
+  // An uncertain actor must not prevent independent actors from reconciling.
+  const results=await Promise.allSettled(accounts.map(account=>serialize(account,()=>reconcileActor(store,actors,account,options))));
+  return {checked:accounts.length,blocked:results.filter(r=>r.status==='rejected').length};
+}
+
 export async function createTestnetScenario(config,store,sign,{query=result,send=rpc}={}){
   if(!/^[a-zA-Z0-9_-]{1,64}$/.test(config.campaignId)||config.contractId!==CONTRACT)throw new Error('Invalid Testnet campaign binding');
   const actors={};
@@ -86,31 +126,10 @@ export async function createTestnetScenario(config,store,sign,{query=result,send
     const world=JSON.parse(Buffer.from(r.result));if(world.campaign_id!==config.campaignId)throw new Error('Wrong campaign response');return world;
   }
   async function reconcile(){
-    for(const entry of store.transactions(config.campaignId)){
-      if(entry.phase==='rejected'&&entry.reason==='Interrupted before broadcast'){
-        store.journal(entry.id,config.campaignId,{...entry,phase:'unsubmitted'});continue;
-      }
-      if(['final','rejected','unsubmitted'].includes(entry.phase))continue;
-      if(entry.phase==='intent'){
-        // No payload existed, so this attempt could never have been submitted.
-        store.journal(entry.id,config.campaignId,{...entry,phase:'unsubmitted',reason:'Interrupted before signing'});continue;
-      }
-      if(entry.phase==='signed'){
-        // Resume the exact durable bytes, never create a replacement payment.
-        store.journal(entry.id,config.campaignId,{...entry,phase:'broadcast'});
-        await send('send_tx',{signed_tx_base64:entry.payload,wait_until:'FINAL'});
-      }
-      let response=await send('tx',{tx_hash:entry.hash,sender_account_id:entry.actor,wait_until:'FINAL'});
-      if(response.error?.cause?.name==='UNKNOWN_TRANSACTION'&&entry.payload){
-        // The marker may have committed before submission. Replaying these exact
-        // bytes cannot execute twice: hash/access-key nonce stay unchanged. Never
-        // re-sign an uncertain action, even after expiry or nonce rejection.
-        try{response=await send('send_tx',{signed_tx_base64:entry.payload,wait_until:'FINAL'});}
-        catch{throw new Error('Transaction outcome remains unknown; recorded identity retained');}
-      }
-      if(response.error||!response.result)throw new Error('Transaction outcome remains unknown; no replacement action or payment signed');
-      finalized(response.result,entry);store.journal(entry.id,config.campaignId,{...entry,phase:'final',outcome:response.result});
-    }
+    // Never hold one actor queue while waiting for another. A shared actor may
+    // own journal entries from other campaigns, but no new decisions run here.
+    const accounts=new Set(store.transactions(config.campaignId).filter(t=>!['final','rejected','unsubmitted'].includes(t.phase)).map(t=>t.actor));
+    for(const account of accounts)await serialize(account,()=>reconcileActor(store,actors,account,{query,send}));
   }
   // Called under the campaign engine's single-writer queue. Recovery is also
   // performed before exposing views, so an unchanged game nonce cannot erase
@@ -125,8 +144,9 @@ export async function createTestnetScenario(config,store,sign,{query=result,send
       deposit='0';
     }
     const actor=actors[role];
+    await reconcile();
     return serialize(actor.accountId,async()=>{
-      await reconcile();
+      await reconcileActor(store,actors,actor.accountId,{query,send});
       if(store.pendingForActor(actor.accountId))throw new Error('Another campaign has an unresolved transaction for this actor');
       const body={...args,campaign_id:config.campaignId};
       const id=createHash('sha256').update(JSON.stringify([config.campaignId,actor.accountId,method,body])).digest('hex');

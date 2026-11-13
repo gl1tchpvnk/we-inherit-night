@@ -2,7 +2,7 @@ import {runtimeConfig,acquireWriter} from './config.mjs';
 import {Store} from './store.mjs';
 import {campaignLifecycle,archivedSnapshot,closingSnapshot} from './lifecycle.mjs';
 import {createGameServer} from './server.mjs';
-import {createTestnetScenario,verifyRuntimeRoster} from './scenario.mjs';
+import {createTestnetScenario,verifyRuntimeRoster,recoverSharedActors} from './scenario.mjs';
 import {createKeychainSigner,createEnvironmentSigner} from './signing.mjs';
 import {createCampaignSession} from '../sandbox/campaign.mjs';
 
@@ -72,9 +72,19 @@ async function loadSession(id){
   }};
 }
 const server=createGameServer({store,loadSession,creation:config.creation,cleanup:config.cleanup,ensureCapacity:lifecycle.ensureCapacity,requireCompletion:!!config.provisioning,origin:config.origin,dist:config.dist,secureCookies:config.secureCookies!==false});
-const cleanupTimer=config.lifecycle?setInterval(()=>{
-  void lifecycle.sweep(loadSession).catch(()=>console.warn('Campaign cleanup deferred; durable recovery state retained.'));
-},config.cleanup.intervalMs):null;
+let maintenance=null;
+function maintain(){
+  if(maintenance)return maintenance;
+  maintenance=(async()=>{
+    const recovery=await recoverSharedActors(store,config.provisioning?.actors??config.actors);
+    if(recovery.blocked)console.warn('Shared transaction recovery deferred; original identities retained.');
+    if(config.lifecycle)await lifecycle.sweep(loadSession);
+  })().catch(()=>console.warn('Campaign cleanup deferred; durable recovery state retained.')).finally(()=>{maintenance=null;});
+  return maintenance;
+}
+// Reconcile even when no player returns and no campaign is yet inactive.
+void maintain();
+const cleanupTimer=setInterval(()=>void maintain(),config.cleanup.intervalMs);
 cleanupTimer?.unref();
 let closing=false;
 async function close(){
@@ -82,7 +92,7 @@ async function close(){
   if(cleanupTimer)clearInterval(cleanupTimer);
   // Finish in-flight work if possible. A forced platform stop leaves durable intents.
   await new Promise(r=>server.close(r));
-  await Promise.all([...store.queues.values()]);store.close();release();
+  await maintenance;await Promise.all([...store.queues.values()]);store.close();release();
 }
 process.once('SIGINT',()=>void close());process.once('SIGTERM',()=>void close());
 server.requestTimeout=15000;server.headersTimeout=10000;
