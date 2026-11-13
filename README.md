@@ -5,6 +5,8 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+Seraphine motion-comic prototype: **IMPLEMENTED locally, not deployed**. One sanctuary-bargain sequence uses the approved portrait, brief skippable motion and an outcome reveal gated by returned accepted-lease state. See [preview and verification](docs/MOTION_COMIC.md).
+
 Quit Campaign: **IMPLEMENTED and verified on public Testnet**. The Testnet game menu requires
 confirmation, immediately begins existing settlement/archive/reclaim, and returns
 to title only after verified reclamation. Pending closure resumes through Check

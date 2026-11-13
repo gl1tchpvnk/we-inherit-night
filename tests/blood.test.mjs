@@ -47,7 +47,7 @@ test('encounters show Blood and fatal warnings before commitment; feeding stays 
   const {VampireEncounter}=await import(pathToFileURL(file).href),r=fixture(2);r.actions=availableActions(r.campaign,r.world);
   const scenes=buildEncounterScenes(r),scene=scenes.find(s=>s.id==='action:investigate_title');
   const html=renderToStaticMarkup(createElement(VampireEncounter,{result:r,scene,lineIndex:scene.lines.length-1,busy:false,feedback:'',onFeed(){},onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}}));
-  assert.match(html,/Your action/);assert.match(html,/Feed .*4 Blood .*1 action/);
+  assert.match(html,/class="scene-choices">[\s\S]*class="encounter-feed"/);assert.doesNotMatch(html,/Your action/);assert.match(html,/Feed .*4 Blood .*1 action/);
   assert.match(html,/Blood 2\/12/);assert.match(html,/Hunger is closing in/);assert.match(html,/Fatal: this leaves 1 Blood/);
   assert(html.indexOf('Fatal:')<html.indexOf('class="binding-choice"'));
   for(const blocked of [{...r,pending:true},{...r,campaign:{...r.campaign,actionsLeft:0}}]){

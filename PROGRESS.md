@@ -522,3 +522,56 @@
 - Consolidated final responses beneath the existing Marius demand encounter; all response inspections, availability, material terms and deadlines remain unchanged.
 - PASS: 27 focused final-court/encounter/chapter tests and production build. An initial new test fixture omitted its description; corrected before the passing run.
 - No contract, gameplay, signing, funding or lifecycle changes. Public finale/reclamation/replay verification follows deployment.
+
+## Seraphine motion-comic prototype — local PASS
+- One eligible sanctuary conversation/bargain sequence now uses approved art, paper dialogue overlap, finite camera/framing cuts and skippable motion.
+- Consequence projects a newly accepted active sanctuary lease only after a non-error, non-pending result; reuses the existing reaction identity and changes no authoritative state.
+- Centred the intact cover with save status and expiration copy below; preserved controls, original lettering and artwork proportions.
+- PASS: 35 focused tests and production build; desktop/mobile encounter, desktop/tablet/mobile title, optional dialogue, busy/pending/failure fixture states and still-mode checks.
+- Fixed mobile overflow and duplicate reaction presentation found during review; final checks pass. OS reduced-motion preference not toggled; CSS rule plus equivalent still mode checked.
+- No fresh chain transactions, Sandbox reset, commit, push or deployment. Personal local and public saves untouched. Browser fixture is explicitly simulated.
+- Preview and limitations: docs/MOTION_COMIC.md; screenshots: evidence/motion-comic/. Next: user visual-direction review before any expansion.
+
+## Seraphine cinematic staging correction — local verification PASS
+- Replaced subtle-motion staging with five distinct shots: lounge, face close-up, diagonal confrontation, stable decision, and paper-white confirmed outcome.
+- Six-second opening; immediate choices, pause/next-shot and skip-to-controls. Reduced motion bypasses timed shots; Blood, material terms and existing transaction guards remain intact.
+- PASS: 23 focused tests, production build and diff whitespace check; desktop 1280×800/mobile 390×844 visual checks, pending/failure fixtures and emulated reduced-motion preference.
+- Corrected mobile verdict wrapping found during visual review. No new artwork, authority changes, title changes, transactions, campaign resets, commit, push or deployment.
+- Evidence: evidence/motion-comic-correction/. Local fixture is explicitly simulated; source Lounge study remains labelled provisional. User visual review is next.
+
+## Seraphine layered motion and authority reveal — local verification PASS
+- Added independently animated architecture/foreground, portrait masking, overlapping close-ups and dialogue-triggered cuts to the same prototype only.
+- Confirmed sanctuary now cuts to black, introduces labelled lessor/tenant portraits, draws a crimson fixed-term lease connection, then resolves to the existing outcome. No new authority or ancestry implication.
+- Retained existing confirmation guard/reaction identity, immediate gameplay controls, sticky Blood, pause/advance/skip and reduced-motion bypass.
+- PASS: 23 focused tests, production build, whitespace check; desktop/mobile motion sampling, layout, keyboard skip and emulated reduced-motion checks.
+- Pending/failure fixtures produced no authority visuals and one callback. No real chain transactions, campaign reset, commit, push or deployment.
+- Evidence: evidence/motion-comic-impact/; local review URL and limits in docs/MOTION_COMIC.md. Source artwork unchanged; provisional environment remains labelled. User visual review is next.
+
+## 2026-11-13 — Final Seraphine cinematic polish (local)
+- Varied hand/ring, eyes/face and lips/environment compositions; 9.9-second opening with deliberately unequal holds.
+- Exact dialogue excerpts during motion; full dialogue remains accessible, with stable decisions and unchanged gameplay controls.
+- Confirmed climax retains both lease parties, crimson connection and SANCTUARY GRANTED; fixed-term semantics and confirmation guards preserved.
+- PASS: 24 focused tests, production build and whitespace check; desktop/mobile visual review, automatic pacing, keyboard skip, pause, reduced-motion emulation and pending/failure fixtures.
+- Evidence and preview instructions: docs/MOTION_COMIC.md; evidence/motion-comic-polish/.
+- No live transactions, campaign resets, commit, push or deployment. Next: user visual review; existing provisional Lounge label remains.
+
+## 2026-11-13 — Cinematic and encounter UX refinement (local)
+- Seraphine entrance shortened to 4.5 seconds; playback controls disappear at interaction, with black integrated dialogue panels.
+- Compact mobile art and balanced desktop columns bring primary choices into view; Feed joins the existing choice list without changing its action rules.
+- Essential commitment terms remain visible; confirmed lease details move to optional inspection after the two-party climax.
+- PASS: 24 focused tests, production build; desktop/tablet/mobile visual checks, keyboard skip, reduced-motion emulation and pending/failure guards.
+- Evidence: evidence/motion-comic-ux/; reproduction and limits: docs/MOTION_COMIC.md.
+- No campaign changes, live transactions, commit, push or deployment. Next: user visual review. Long dialogue/expanded terms may still need scrolling.
+
+## 2026-11-13 — Immersive Seraphine / compact decision states (local)
+- Entrance, sanctuary-terms dialogue and confirmed consequence fill the game viewport; ordinary action rail is hidden until interaction resumes.
+- Persistent Blood and keyboard-accessible Continue / Skip remain; focus follows presentation state. No Fullscreen API.
+- Removed duplicate artwork panels; kept meaningful lessor/tenant composition. Scene-scoped skip and seen-scene memory prevent unnecessary replay.
+- PASS: 24 focused tests, production build; desktop/mobile visual review, skip, dialogue return, replay suppression, reduced motion and pending/failed fixtures.
+- Documentation/evidence: docs/MOTION_COMIC.md; evidence/motion-comic-immersive/.
+- No live transactions, campaign changes, commit, push or deployment. Next: user preview review; long expanded dialogue still scrolls normally.
+
+## Cinematic preservation branch
+- Prototype deferred until after the hackathon on feature/motion-comic; stable base 307f377.
+- Versioned synthetic preview, screenshots, tests and presentation documentation; original ignored preview retained locally.
+- Existing main gameplay remains the deployment baseline. No Render deployment.

@@ -76,6 +76,12 @@ test('React scene renders native accessible controls, escaped dialogue and alway
  const r=fixture(),scene=buildEncounterScenes(r).find(s=>s.id==='lease:0');scene.lines[0].text='<script>not trusted</script>';
  let calls=0;const html=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:false,feedback:'',onLine:()=>{},onChoice:()=>{calls++;},onComplete:()=>{},onSkipReckoning:()=>{}}));
  assert.match(html,/<dialog/);assert.match(html,/aria-labelledby="encounter-title"/);assert.match(html,/type="button"/);assert.match(html,/0.02 Sandbox NEAR/);assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);assert.equal(calls,0);
+ const cinematic={...scene,id:'character:seraphine',portraits:['seraphine'],choices:[{id:'bargain',label:'Discuss sanctuary',inspect:'action:sanctuary_pact'}]};
+ const cinematicProps={scene:cinematic,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
+ const entrance=renderToStaticMarkup(createElement(VampireEncounter,cinematicProps));
+ assert.match(entrance,/data-immersive="true"/);assert.match(entrance,/class="scene-script" hidden=""/);assert.match(entrance,/Continue \/ Skip/);
+ const revisited=renderToStaticMarkup(createElement(VampireEncounter,{...cinematicProps,seen:['character:seraphine']}));
+ assert.match(revisited,/data-immersive="false"/);assert.doesNotMatch(revisited,/class="scene-script" hidden|Cinematic playback/);assert.match(revisited,/Discuss sanctuary/);
  const focused=fixture();focused.campaign.politics.library={chosen:null,authorizedNight:null,result:'open',challenged:false};
  const opening=buildEncounterScenes(focused).find(s=>s.id==='ultimatum');
  const props={scene:opening,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
