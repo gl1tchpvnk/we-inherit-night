@@ -7,6 +7,7 @@ import type {NpcName} from './game';
 import type {EncounterScene,SceneChoice} from './encounters';
 
 import {effectiveGrant} from './library.ts';
+import {completedInvestigator,investigationFinding} from './courtPayoff.ts';
 
 
 
@@ -181,21 +182,23 @@ export function addCourtReactions(r:Result,scenes:EncounterScene[]):void{
 
   const c=r.campaign!,latest=updates.filter(u=>u.night===c.night-1);
 
-  const automatic=latest.filter(u=>u.level==='major').at(-1)??latest.filter(u=>u.level==='significant'&&u.id.startsWith('reaction:npc:')).at(-1)??latest.find(u=>u.level==='significant');
+  const automatic=latest.find(u=>u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor)??latest.filter(u=>u.level==='major').at(-1)??latest.filter(u=>u.level==='significant'&&u.id.startsWith('reaction:npc:')).at(-1)??latest.find(u=>u.level==='significant');
 
   for(const u of updates){
 
     const choices:SceneChoice[]=[];
 
     let follow=u.follow&&scenes.find(s=>s.id===u.follow);
+    if(u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor)follow=scenes.find(s=>s.id===`meaning:${u.actor}`);
 
     if(follow&&u.follow?.startsWith('action:')&&!follow.choices.some(choice=>choice.action))follow=scenes.find(s=>s.id==='record:library');
 
     if(follow)choices.push({id:'follow',label:follow.id.startsWith('action:')?'Consider the next commitment':'Follow this development · free',inspect:follow.id});
 
     const reply=reactionReply(u,r);
+    const finding=u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor;
 
-    scenes.push({id:u.id,type:'ENCOUNTER',title:u.title,location:u.room,portraits:[u.actor],lines:reply?[{speaker:u.actor,text:reply},{speaker:'narrator',text:u.text}]:[{speaker:'narrator',text:u.text}],terms:[u.text,politicalRelationship(r,u.actor)],rights:[u.evidence,'Recorded correspondence and consequences; this scene establishes no physical NPC location.'],choices,compact:true,outcome:u.night>=0?`Correspondence from Night ${u.night+1}. Your current standing is shown above.`:'Earlier correspondence; the exact night is not recorded.',reactionLevel:u.level,automatic:u.id===automatic?.id});
+    scenes.push({id:u.id,type:'ENCOUNTER',title:u.title,location:u.room,portraits:[u.actor],lines:finding?[{speaker:u.actor,text:investigationFinding(u.actor as 'mirelle'|'dorian')}]:reply?[{speaker:u.actor,text:reply},{speaker:'narrator',text:u.text}]:[{speaker:'narrator',text:u.text}],terms:[politicalRelationship(r,u.actor)],rights:[u.evidence,'Recorded correspondence and consequences; this scene establishes no physical NPC location.'],choices,compact:true,outcome:u.night>=0?`Recorded on Night ${u.night+1}. Present rights are shown separately.`:'Earlier correspondence; the exact night is not recorded.',reactionLevel:u.level,automatic:u.id===automatic?.id});
 
   }
 
@@ -235,13 +238,13 @@ function reactionReply(u:CourtReaction,r:Result):string|undefined{
 
   switch(kind){
 
-    case 'revoke':return 'The three nights are over. I have taken back my invitation. You may dislike the decision; you cannot say I concealed it.';
+    case 'revoke':return 'I have withdrawn my invitation. You are still my descendant. I will not let you make those the same promise.';
 
     case 'dismiss':return 'I kept a place for you. You left the work undone. I have withdrawn that promise. Whatever you arranged elsewhere is your affair.';
 
     case 'archive_assist':if(!r.world.grants.some(g=>g.property_id==='library'&&g.grantor===r.campaign?.politics?.accounts[u.actor]&&effectiveGrant(r.world,g)))return 'I brought an assistant into the work. That invitation no longer works. The unfinished research cannot continue through it.';return u.actor==='mirelle'?'Cassian has his invitation. Now we can get on with it. Give us another night, unless you would rather have an empty desk.':'Lucien has his invitation. I said whom I wanted involved. I have not changed the bargain behind your back.';
 
-    case 'archive_challenge':if(r.campaign?.politics?.library?.result!=='open'||r.campaign.night>4||r.campaign.politics.library.chosen!=='mirelle')return 'I asked you to reconsider while there was time to change patrons. That was the offer then. We must deal with the choices you have made since.';return 'You can still stop Mirelle. Take her key back, then hear me. But count the nights before you decide; changing your mind twice will not give us more of them.';
+    case 'archive_challenge':if(r.campaign?.politics?.library?.result!=='open'||r.campaign.night>4||r.campaign.politics.library.chosen!=='mirelle')return 'I asked you to reconsider while there was time to change patrons. That was the offer then. We must deal with the choices you have made since.';return 'Stop Mirelle before she publishes, then invite me. Two commitments, not one clever answer. Count the nights before you choose.';
 
     case 'archive_research':return u.actor==='mirelle'?'Finished. Marius has the account. You can close the Library tomorrow, but he will still have read it.':'Lucien has the finished account. Mirelle will not like losing the race. That does not make the work any less finished.';
 

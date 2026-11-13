@@ -22,7 +22,7 @@ export function navigationGuidance(result:Result):{situation:string;leads:Lead[]
  const allowed=new Set((result.actions??[]).filter(a=>a.allowed).map(a=>a.kind));
  const leads:Lead[]=[];
  if(c.politics?.library){
-   leads.push({label:'Hear the court',scene:`discovery:${c.night}`},{label:'Choose tonight’s commitment',scene:`decision:${c.night}`});
+   leads.push({label:'Review tonight’s situation and choices',scene:`decision:${c.night}`});
    if(c.resources.blood<=3&&allowed.has('feed'))leads.unshift({label:'Hunt before dawn',scene:'action:feed'});
    else leads.push({label:c.night<3?'Read your Library claim':'Revisit the Library dispute',room:'library'});
    return {situation:chapterSituation(result),leads};

@@ -1,0 +1,13 @@
+# Gameplay refinements deployment — PARTIAL
+
+- Deployed commit: `bbd34d9f0263700d9656848652d2451e5ec7abe0` (main).
+- Render deployment `dep-dbrda8utlv9c7386hang`: Live; production HTTPS health 200 and served JavaScript hash matched the local production build. See deployment.json.
+- Final local verification: 59 focused tests PASS; production build PASS. History, staged-file and working-tree secret scans PASS. No contract, signing infrastructure, credential, funding or deployment configuration changes.
+- Existing public campaign resumed after deployment. Six nightly actions reached Night Seven at 2/12 Blood. Observed progressive opening, unified actions, persistent Blood, no active Exposure display, corrected Crypt label, integrated title notice and contextual Feed control.
+- Fatal counterproposal warning correctly stated action cost 1, remaining Blood 1, sheltered upkeep 1 and fatal zero threshold. The counterproposal was not submitted.
+- STOP: Night Seven's unified choices exposed `final_accept`, `final_refuse` and `final_counter` as labels. `src/livingCourt.ts` maps available actions through `ROLEPLAY_LABELS[kind] ?? kind`, but these three entries are absent. The fallback/list path also existed in the preceding deployed version; this is an exposed unresolved defect, not a demonstrated newly introduced regression. See night-seven-label-defect.png.
+- No further gameplay, fix or redeployment after discovery. Campaign `visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad` remains active; no final choice or cleanup was submitted.
+- Independent finalized reads from FastNEAR and dRPC agree: capacity 5, active 1, available 4; gameplay pool 1.04 Testnet NEAR; campaign treasury 0.04; pending financial liabilities 0; contract balance 10.0203084649026567 NEAR; storage 587849 bytes. Contract code hash unchanged. See stopped-night-seven.json.
+- Runtime account/key reads recorded in runtime-balances.json: eleven finite restricted FunctionCall keys, allowances approximately 0.124086–0.248722 NEAR. No funding/allowance mutation performed.
+- NOT COMPLETED in this hosted pass: fresh New Game, actual encounter feeding, seven-night finale/Chronicle/replay, normal completion/archive/reclaim, and fresh Quit/reclaim verification. Previously verified local/Sandbox and older hosted evidence is not a substitute. Per-transaction independent receipt verification for this playthrough was not completed before stopping; finalized state reads alone do not establish every requested receipt assertion.
+- Submission acceptance remains PARTIAL. Report and new hosted evidence are local, uncommitted; unrelated pre-existing working-tree changes were excluded from the deployed commit.

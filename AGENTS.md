@@ -269,3 +269,18 @@ AI vampire NPCs are runtime game agents, distinct from Codex development agents.
   output, logs, evidence or frontend assets. Render upload remains operator-controlled.
 - No hosting approval follows from key installation. Scoped production import
   review found no demonstrated issue requiring source removal; do not general-clean.
+
+## Investigation/finale continuity
+- courtPayoff.ts projects committed publication plus successful research journals and recorded endings; authored findings are PROVISIONAL interpretations of current obligations, never new rights/history.
+- CampaignFinale uses browser-only farewell memory before factual results. Free replies cannot execute actions, change affinity or bypass settlement/replay gates.
+- Dorian’s existing petition/pass selection uses public shelter and the original eligibility window. Preserve old journal recovery and private-observation boundaries. See docs/INVESTIGATION_FINALE.md.
+
+## Encounter-flow continuity
+- Topic read versions in encounters.ts identify displayed information, never a full state/night/resource snapshot. Retain legacy seen history; unversioned conditional content requests review rather than inventing read/completion status.
+- repairCourtFlow routes old discovery/incident/hold/final-action IDs to current scenes. No executable commitments on redirect records. Use existing availability and validated handlers; do not manufacture investigator exclusivity or suppress independent protection/research.
+- One Feed control per visible scene. Pending/error recovery uses existing view reconciliation. Browser acceptance remains BLOCKED as documented in docs/ENCOUNTER_FLOW_REPAIR.md.
+
+## Opening continuity
+- Prologue controls remain outside the alternating artwork/text columns. Preserve artwork geometry, the existing text scroll, and confirmed-state entry gates; prose V3 remains proposal-only pending user approval.
+- Vesper's existing free questions must remain reachable from the opening court and return to it. Navigation cannot spend actions or repeat transactions.
+- Latest local Chromium/Sandbox browser evidence supersedes the earlier browser-access blocker for the exercised paid-sanctuary route; see docs/OPENING_CORRECTION_RELEASE.md. Public latest-release acceptance remains separate.

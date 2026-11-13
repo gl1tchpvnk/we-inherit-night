@@ -302,3 +302,15 @@ and 0.05 test NEAR allowances. Independent RPC and existing runtime preflight
 pass. Private material is DPAPI-encrypted outside the repository; Render entry
 is manual and has not occurred. No application changes or deployment in this
 operational task. See docs/RUNTIME_KEYS.md and evidence/runtime-keys/verification.json.
+
+## Investigation/finale follow-up (local)
+A provisional Library-account payoff and route-specific personal farewell now project existing committed state before the factual results. Free expressive replies have no relationship or authority effect. Dorian alone gains public-shelter-dependent petition/restraint selection using existing validated actions. No new mechanics, seven-night budget changes or contract interface changes. See docs/INVESTIGATION_FINALE.md for verification and limitations.
+
+## Encounter-flow repair continuity
+Information read state is browser-only, campaign-scoped and versioned by displayed topic content. Existing scene IDs may redirect to one current decision surface; availability and persisted outcomes still govern commitments. Reviewed information cannot imply completed actions. Required browser acceptance of the local repair is BLOCKED; see docs/ENCOUNTER_FLOW_REPAIR.md. No new gameplay, authority or economy rules.
+
+Opening correction (2026-11-13): prologue navigation has stable controls without
+changing artwork or initialization authority. Both Vesper questions remain freely
+reachable from the opening court. V3 prologue writing is proposal-only; approved
+V2 prose remains the release text. See docs/OPENING_CORRECTION_RELEASE.md for
+local verification and the separate GitHub/Render/public-acceptance status.

@@ -20,9 +20,9 @@ test('surviving Crypt access after revocation is not attributed to Vesper',async
  const r=await recorded('switch');r.world.access.crypt=true;
  assert.match(roomDevelopment(r,'crypt').text,/surviving right/);assert.doesNotMatch(roomDevelopment(r,'crypt').text,/Vesper still permits/);
 });
-test('reaction material consequences remain visible without advancing dialogue',async()=>{
+test('reactions keep standing and evidence without repeating narrative text in terms',async()=>{
  const r=await recorded('switch');const scenes=buildEncounterScenes(r).filter(s=>s.reactionLevel);
- assert.ok(scenes.length);assert.ok(scenes.every(s=>s.terms.length>=2));assert.ok(scenes.every(s=>s.choices.every(c=>!c.action)));
+ assert.ok(scenes.length);assert.ok(scenes.every(s=>s.terms.length===1&&s.terms[0].length>0));assert.ok(scenes.every(s=>s.terms.every(t=>!s.lines.some(l=>l.text===t))));assert.ok(scenes.every(s=>s.rights.length>=2));assert.ok(scenes.every(s=>s.choices.every(c=>!c.action)));
 });
 test('late decision lists do not sell an expired sanctuary route as useful title filing',async()=>{
  const r=await recorded('marius');r.campaign.status='playing';r.campaign.night=6;

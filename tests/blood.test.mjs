@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {newCampaign,playerAction,dawn} from '../src/game.ts';
-import {bloodWarning,hungerText,encounterFeed} from '../src/blood.ts';
+import {bloodWarning,hungerText,encounterFeed,encounterFeedText} from '../src/blood.ts';
 function fixture(blood,political=true){
  const campaign=newCampaign('blood-warning',{political,living:political,legacy:!political});campaign.resources.blood=blood;
  const world={night:0,next_nonce:0,properties:[{id:'library',owner:'player'}],grants:[],leases:[],ancestry:[],access:{crypt:true,library:true,lounge:true}};
@@ -47,7 +47,7 @@ test('encounters show Blood and fatal warnings before commitment; feeding stays 
   const {VampireEncounter}=await import(pathToFileURL(file).href),r=fixture(2);r.actions=availableActions(r.campaign,r.world);
   const scenes=buildEncounterScenes(r),scene=scenes.find(s=>s.id==='action:investigate_title');
   const html=renderToStaticMarkup(createElement(VampireEncounter,{result:r,scene,lineIndex:scene.lines.length-1,busy:false,feedback:'',onFeed(){},onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}}));
-  assert.match(html,/Your action/);assert.match(html,/Feed .*4 Blood .*1 action/);
+  assert.doesNotMatch(html,/Your action/);assert.match(html,/class="scene-choices">[\s\S]*encounter-feed/);assert.match(html,/Feed .*4 Blood .*1 action/);
   assert.match(html,/Blood 2\/12/);assert.match(html,/Hunger is closing in/);assert.match(html,/Fatal: this leaves 1 Blood/);
   assert(html.indexOf('Fatal:')<html.indexOf('class="binding-choice"'));
   for(const blocked of [{...r,pending:true},{...r,campaign:{...r.campaign,actionsLeft:0}}]){
@@ -55,7 +55,7 @@ test('encounters show Blood and fatal warnings before commitment; feeding stays 
    assert.match(disabled,/disabled="">Feed/);
   }
 
-  const feed=scenes.find(s=>s.id==='decision:0').choices.find(c=>c.inspect==='action:feed');assert.equal(feed.secondary,false);assert.match(feed.label,/Feed.*4 Blood/);
+  const feed=scenes.find(s=>s.id==='decision:0').choices.find(c=>c.inspect==='action:feed');assert.equal(feed.secondary,false);assert.match(feed.label,/Review feeding.*4 Blood/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
 
@@ -72,4 +72,23 @@ test('encounter feeding respects availability, pending state, closure and exhaus
  const fed=playerAction(r.campaign,encounterFeed(r).choice,r.world);assert.equal(fed.resources.blood,5);assert.equal(fed.actionsLeft,0);assert.equal(dawn(fed,r.world).resources.blood,4);assert.deepEqual(r,before);
  for(const blocked of [{...r,pending:true},{...r,error:'uncertain'},{...r,closure:{reason:'quit',complete:false}},{...r,actions:[]},{...r,actions:r.actions.map(a=>({...a,allowed:false}))},{...r,campaign:{...r.campaign,actionsLeft:0}},{...r,campaign:{...r.campaign,status:'defeat'}}])assert.equal(encounterFeed(blocked),null);
  assert.throws(()=>playerAction({...r.campaign,actionsLeft:0},'feed',r.world),/No major actions/);
+});
+
+test('encounter feeding copy follows action count, automatic dawn and actual offer deadlines',async()=>{
+ const {availableActions}=await import('../src/game.ts');
+ const r=fixture(2);r.campaign.politics.accounts.player='player';r.campaign.politics.titleFiled=true;
+ r.world.leases=[{id:1,property_id:'sanctuary',status:'offered',buyer:'player',offer_expiry_night:3}];
+ const refresh=()=>{r.actions=availableActions(r.campaign,r.world);};refresh();
+ assert.match(encounterFeedText(r),/last action and advances the night/);
+ assert.doesNotMatch(encounterFeedText(r),/Closes at dawn/);
+ r.campaign.actionsLeft=2;refresh();assert.match(encounterFeedText(r),/return to this conversation before dawn/);
+ r.campaign.actionsLeft=1;r.campaign.night=r.world.night=2;refresh();
+ const before=structuredClone(r);assert.match(encounterFeedText(r),/Closes at dawn:.*sanctuary/);assert.deepEqual(r,before);
+ r.campaign.actionsLeft=2;refresh();assert.doesNotMatch(encounterFeedText(r),/Closes at dawn/);
+ r.campaign.actionsLeft=0;refresh();assert.equal(encounterFeedText(r),'No nightly action remains.');
+ r.pending=true;assert.match(encounterFeedText(r),/Waiting/);r.pending=false;
+ r.campaign.night=r.world.night=6;r.campaign.actionsLeft=1;refresh();assert.match(encounterFeedText(r),/final reckoning/);
+ const legacy=fixture(11,false);legacy.campaign.actionsLeft=1;legacy.actions=availableActions(legacy.campaign,legacy.world);
+ assert.match(encounterFeedText(legacy),/you choose when to end the night/);
+ assert.equal(playerAction(legacy.campaign,'feed',legacy.world).resources.blood,12);
 });

@@ -1,10 +1,10 @@
 import type {Action,Result} from './chain';
 // Provisional narration; these panels convey no authority and invent no player history.
 export const PROLOGUE = [
-  {title:'A borrowed shelter',actor:'vesper',text:'The Crypt keeps the daylight out. For now. Vesper is your sire, and she has begun to speak of your shelter as something she might take away.'},
+  {title:'A borrowed shelter',actor:'vesper',text:'The Crypt keeps the daylight out. Vesper is your sire, and for now she permits you to sleep there. Tonight, she has a limit to put on that permission.'},
   {title:'House Volari',actor:'marius',text:'Here, a promise can open a door. A debt can close it. Marius presides over the court, where every offer asks something of you in return.'},
   {title:'A power of her own',actor:'seraphine',text:'Marius and Seraphine founded House Volari together. But hers is a power of her own. If you seek shelter at her table, it will be on her terms.'},
-  {title:'Three nights',actor:'vesper',text:'Vesper will close the Crypt to you at the third reckoning. Over seven nights, you must survive with a refuge of your own or a patron willing to protect you. Before its rival promises pull you apart, she has something to say.'}
+  {title:'Three nights',actor:'vesper',text:'At the third reckoning, Vesper will withdraw her Crypt invitation. You have seven nights to survive—and three to find another refuge.'}
 ] as const;
 export type IntroProgress={line:number;done:boolean};
 export function readIntro(raw:string|null):IntroProgress|null{

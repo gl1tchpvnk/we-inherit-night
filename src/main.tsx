@@ -128,7 +128,7 @@ function App({initialResult,onTitle}:{initialResult:Result;onTitle:()=>void}){
 
   function actionScene(kind:string){openScene(`action:${kind}`);}
 
-  if(state&&campaign&&campaign.status!=='playing'&&!['quit','abandoned'].includes(state.closure?.reason??''))return <CampaignFinale result={state} busy={!!busy} requireArchive={playableTestnet} onReplay={onTitle} onRefresh={()=>void act({action:'view'})}/>;
+  if(state&&campaign&&campaign.status!=='playing'&&!['quit','abandoned'].includes(state.closure?.reason??''))return <CampaignFinale key={campaign.id} result={state} busy={!!busy} requireArchive={playableTestnet} onReplay={onTitle} onRefresh={()=>void act({action:'view'})}/>;
   const exploration=<SceneSurface>
 
     <header className="game-hud"><button disabled={!!busy||settling} onClick={()=>playableTestnet?setMenuOpen(true):onTitle()}>Main menu</button>{campaign&&<><span>Night {Math.min(7,campaign.night+1)}/7</span><BloodStatus result={state!}/><span>Action {campaign.actionsLeft}/{campaign.actionLimit??3}</span>{!campaign.politics&&state&&bloodWarning(state,{action:'end_night'})&&<span className="blood-warning">{bloodWarning(state,{action:'end_night'})}</span>}{!campaign.politics&&<button disabled={disabled||campaign.status!=='playing'||!!state?.availability?.end_night.length} onClick={()=>void act({action:'end_night'})}>End night / Pass</button>}</>}</header>

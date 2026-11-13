@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-11-13T20:30:12.885Z",
+  "network": "testnet",
+  "campaignId": "visitor-4abbbeae-11dc-407f-ade2-70afb2f9c584",
+  "results": [
+    {
+      "url": "https://test.rpc.fastnear.com",
+      "blockHeight": 277559336,
+      "blockHash": "D2QHPaTYQ4PprzFYNQxBfJyzg5PtDjcVNZGgFbCULN1C",
+      "account": {
+        "amount": "10010308464902656700000000",
+        "block_hash": "D2QHPaTYQ4PprzFYNQxBfJyzg5PtDjcVNZGgFbCULN1C",
+        "block_height": 277559336,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 587762
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "40000000000000000000000",
+        "pool": "1020000000000000000000000",
+        "active": 1
+      },
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "42f224c9adc3c338c79ff5ffb6abc1daea0203c319d1bd313d93f3e4e3976ec5",
+        "world_bytes": 0,
+        "storage_usage": 587762,
+        "storage_price": "10000000000000000000",
+        "pool": "1020000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "40000000000000000000000",
+        "active": 1
+      }
+    },
+    {
+      "url": "https://near-testnet.drpc.org",
+      "blockHeight": 277559338,
+      "blockHash": "9NCobPdcRYsLp3C1RH2YNqwfZD2LcwcdmLyMJcvLiDQz",
+      "account": {
+        "amount": "10010308464902656700000000",
+        "block_hash": "9NCobPdcRYsLp3C1RH2YNqwfZD2LcwcdmLyMJcvLiDQz",
+        "block_height": 277559338,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 587762
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "40000000000000000000000",
+        "pool": "1020000000000000000000000",
+        "active": 1
+      },
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "42f224c9adc3c338c79ff5ffb6abc1daea0203c319d1bd313d93f3e4e3976ec5",
+        "world_bytes": 0,
+        "storage_usage": 587762,
+        "storage_price": "10000000000000000000",
+        "pool": "1020000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "40000000000000000000000",
+        "active": 1
+      }
+    }
+  ]
+}

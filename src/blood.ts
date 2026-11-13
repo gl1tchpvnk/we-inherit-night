@@ -1,4 +1,5 @@
 import type {Action,Result} from './chain';
+import {finalDemand} from './finalCourt.ts';
 import {actionAvailability,dawn,playerAction,spendAction} from './game.ts';
 
 // Presentation only: use the engine on copies; never predict NPC rights or commit state.
@@ -29,4 +30,27 @@ export function encounterFeed(result:Result):Action|null{
   if(!result.campaign||result.pending||result.error||result.closure)return null;
   const feed=result.actions?.find(a=>a.kind==='feed');
   return feed?.allowed&&actionAvailability(result.campaign,'feed',result.world).allowed?{action:'game',choice:'feed'}:null;
+}
+
+// Compare only the clock against existing rules, never forecast NPC decisions or rights.
+export function encounterFeedText(result:Result):string{
+  const c=result.campaign;
+  if(result.pending)return 'Waiting for the current commitment to resolve.';
+  if(!c||c.status!=='playing'||result.closure)return 'This campaign is no longer taking actions.';
+  if(result.error)return 'Refresh the current state before feeding.';
+  if(c.actionsLeft<1)return 'No nightly action remains.';
+  if(!encounterFeed(result))return 'Feeding is currently unavailable.';
+  if(c.actionsLeft>1)return 'Restores up to 4 Blood (maximum 12). One action; you can return to this conversation before dawn.';
+  if(!c.politics)return 'Restores up to 4 Blood (maximum 12). Uses your last action; you choose when to end the night.';
+  if(c.night===6)return 'Restores up to 4 Blood (maximum 12), then begins the final reckoning. No nightly action will remain for another commitment.'+(finalDemand(c,result.world)&&!c.politics.finalCourt?.response?' Leaving Marius unanswered also costs his protection at this reckoning.':'');
+  const tomorrow={...c,night:c.night+1},world={...result.world,night:result.world.night+1};
+  const closing=(result.actions??[]).filter(a=>a.allowed&&a.kind!=='feed'&&!actionAvailability(tomorrow,a.kind,world).allowed).map(a=>a.label);
+  const player=c.politics.accounts.player;
+  for(const lease of result.world.leases){
+    if(lease.status==='offered'&&lease.buyer===player&&lease.offer_expiry_night>result.world.night&&lease.offer_expiry_night<=world.night){
+      const action=result.actions?.find(a=>a.kind==='sanctuary_pact');
+      if(lease.property_id!=='sanctuary'||!action||!closing.includes(action.label))closing.push(`${lease.property_id} lease offer`);
+    }
+  }
+  return `Restores up to 4 Blood (maximum 12). Uses your last action and advances the night; dawn upkeep follows. ${closing.length?`Closes at dawn: ${closing.join('; ')}.`:'You can return to opportunities that remain available after the court acts.'}`;
 }

@@ -1,0 +1,274 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "boxes": [
+      {
+        "panel": 0,
+        "continue": {
+          "x": 1124,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 1248,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 1,
+        "continue": {
+          "x": 1124,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 1248,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 2,
+        "continue": {
+          "x": 1124,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 1248,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 3,
+        "continue": {
+          "x": 1124,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 1248,
+          "y": 820,
+          "width": 112,
+          "height": 48
+        }
+      }
+    ],
+    "keyboard": "PASS",
+    "textReachable": "PASS"
+  },
+  {
+    "width": 820,
+    "height": 1180,
+    "boxes": [
+      {
+        "panel": 0,
+        "continue": {
+          "x": 535,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 659,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 1,
+        "continue": {
+          "x": 535,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 659,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 2,
+        "continue": {
+          "x": 535,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 659,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        }
+      },
+      {
+        "panel": 3,
+        "continue": {
+          "x": 535,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        },
+        "skip": {
+          "x": 659,
+          "y": 1100,
+          "width": 112,
+          "height": 48
+        }
+      }
+    ],
+    "keyboard": "PASS",
+    "textReachable": "PASS"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "boxes": [
+      {
+        "panel": 0,
+        "continue": {
+          "x": 24,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        },
+        "skip": {
+          "x": 201,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        }
+      },
+      {
+        "panel": 1,
+        "continue": {
+          "x": 24,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        },
+        "skip": {
+          "x": 201,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        }
+      },
+      {
+        "panel": 2,
+        "continue": {
+          "x": 24,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        },
+        "skip": {
+          "x": 201,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        }
+      },
+      {
+        "panel": 3,
+        "continue": {
+          "x": 24,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        },
+        "skip": {
+          "x": 201,
+          "y": 772,
+          "width": 165,
+          "height": 48
+        }
+      }
+    ],
+    "keyboard": "PASS",
+    "textReachable": "PASS"
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "boxes": [
+      {
+        "panel": 0,
+        "continue": {
+          "x": 24,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        },
+        "skip": {
+          "x": 166,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        }
+      },
+      {
+        "panel": 1,
+        "continue": {
+          "x": 24,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        },
+        "skip": {
+          "x": 166,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        }
+      },
+      {
+        "panel": 2,
+        "continue": {
+          "x": 24,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        },
+        "skip": {
+          "x": 166,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        }
+      },
+      {
+        "panel": 3,
+        "continue": {
+          "x": 24,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        },
+        "skip": {
+          "x": 166,
+          "y": 496,
+          "width": 130,
+          "height": 48
+        }
+      }
+    ],
+    "keyboard": "PASS",
+    "textReachable": "PASS"
+  }
+]

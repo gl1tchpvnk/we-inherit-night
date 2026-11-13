@@ -77,6 +77,12 @@ test('title and prologue SSR provide accessible real controls, no settings or ga
   const confirm=renderToStaticMarkup(createElement(TitleScreen,{...props,confirm:true}));assert.match(confirm,/Replace save/);assert.match(confirm,/Keep existing save/);
   const valid=renderToStaticMarkup(createElement(TitleScreen,{...props,save:{exists:true,valid:true,night:3}}));assert.match(valid,/<button>Continue/);
   const intro=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},onAdvance(){}}));assert.match(intro,/Skip intro/);assert.match(intro,/Dialogue is free/);
+  for(let line=0;line<PROLOGUE.length;line++){
+   const panel=renderToStaticMarkup(createElement(Prologue,{progress:{line,done:false},onAdvance(){}}));
+   assert.match(panel,/<\/section><div class="controls prologue-controls" aria-label="Prologue navigation">/,'navigation is outside the panel-specific swapping text column');
+   assert.equal((panel.match(/>Continue<\/button>/g)??[]).length,1);
+   assert.equal((panel.match(/>Skip intro<\/button>/g)??[]).length,1);
+  }
   const waiting=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},waiting:true,onAdvance(){}}));assert.match(waiting,/Establishing verified local rights/);assert.doesNotMatch(waiting,/<button disabled/);
   const skipped=renderToStaticMarkup(createElement(Prologue,{progress:{line:3,done:true},waiting:true,onAdvance(){assert.fail('render must not commit');}}));assert.match(skipped,/<button disabled="">Continue/);assert.match(skipped,/<button disabled="">Skip intro/);
   const entry=renderToStaticMarkup(createElement(GameEntry,{children(){assert.fail('gameplay cannot render on title');}}));assert.match(entry,/Checking for a saved campaign/);
@@ -99,7 +105,9 @@ test('normal finale requires verified reclamation for public replay, never just 
 
 test('public title note and persistent finale render accessible copy and safe replay states',async()=>{
  const dir=await mkdtemp(resolve('.local/refinement-ssr-'));
+ const originalStorage=globalThis.localStorage;
  try{
+  globalThis.localStorage={getItem:()=>JSON.stringify({done:true,response:null})};
   const input=join(dir,'input.ts');await writeFile(input,"export {TitleScreen} from '../../src/GameEntry';export {CampaignFinale} from '../../src/CampaignFinale';");
   const output=await build({configFile:false,logLevel:'silent',define:{'import.meta.env.VITE_MODE':'"testnet"','import.meta.env.VITE_TESTNET_BACKEND':'"1"'},build:{ssr:input,write:false,rollupOptions:{external:['react','react/jsx-runtime']}}});
   const file=join(dir,'components.mjs');await writeFile(file,output.output.find(o=>o.type==='chunk').code);
@@ -111,7 +119,7 @@ test('public title note and persistent finale render accessible copy and safe re
   const campaign=newCampaign('ending',{living:true});campaign.status='concluded';campaign.ending='favoured';campaign.reason='Lucien protects you beyond the temporary passage.';campaign.night=7;
   const result={campaign,world:{night:7,properties:[],grants:[],leases:[],ancestry:[],access:{},next_nonce:0},pending:false,error:null,archiveCommitment:'record'};
   const props={result,busy:false,requireArchive:true,onReplay(){assert.fail('render must not reset');},onRefresh(){}};
-  const pending=renderToStaticMarkup(createElement(CampaignFinale,props));assert.match(pending,/CAMPAIGN COMPLETE/);assert.match(pending,/The Favoured/);assert.match(pending,/Lucien stands behind you/);assert.match(pending,/Review Your Chronicle/);assert.match(pending,/disabled="">Begin Another Campaign/);assert.match(pending,/still being verified/);assert.doesNotMatch(pending,/Finish \/ skip|Return to exploration/);
+  const pending=renderToStaticMarkup(createElement(CampaignFinale,props));assert.match(pending,/CAMPAIGN COMPLETE/);assert.match(pending,/The Favoured/);assert.match(pending,/Lucien’s protection still standing/);assert.match(pending,/Review Your Chronicle/);assert.match(pending,/disabled="">Begin Another Campaign/);assert.match(pending,/still being verified/);assert.doesNotMatch(pending,/Finish \/ skip|Return to exploration/);
   const ready=renderToStaticMarkup(createElement(CampaignFinale,{...props,result:{...result,archiveComplete:true}}));assert.match(ready,/<button class="binding-choice">Begin Another Campaign/);assert.doesNotMatch(ready,/Check settlement/);
- }finally{await rm(dir,{recursive:true,force:true});}
+ }finally{globalThis.localStorage=originalStorage;await rm(dir,{recursive:true,force:true});}
 });

@@ -56,6 +56,7 @@ export function observeAgent(actor:NpcName,account:string,s:Campaign,w:Authority
 export const selectNpcAction:NpcSelector=o=>{
   if(o.politics){
     const available=(kind:NpcAction)=>o.available.some(p=>p.kind===kind);
+    if(o.actor==='dorian'&&available('archive_challenge')&&!petitionHasShelter(o.publicState,o.night))return {kind:'pass'};
     // Seeded competition is bounded and reproducible; it cannot mint permissions.
     for(const kind of POLICY_PRIORITIES[o.actor]){
       if(available(kind)&&(kind!=='compete'||o.night>=2||seededRoll(o.politics.seed,o.night,o.actor)<0.55))return {kind};
@@ -68,6 +69,15 @@ export const selectNpcAction:NpcSelector=o=>{
   if(o.actor==='seraphine'&&lease?.owner===o.account&&lease.status==='accepted'&&!lease.settled&&!lease.payout_pending&&BigInt(lease.escrow_yocto)>0n)return {kind:'collect'};
   return {kind:'pass'};
 };
+
+// Public Library ownership identifies the player; no private resources or decisions.
+// A switch costs two commitments. Temporary passage alone is not a stable fallback.
+export function petitionHasShelter(w:AgentObservation['publicState'],night:number):boolean{
+  const player=w.properties.find(p=>p.id==='library')?.owner;
+  if(!player)return false;
+  return w.leases.some(l=>l.property_id==='sanctuary'&&l.buyer===player&&l.status==='accepted'&&l.end_night!==null&&l.end_night>=7)
+    ||w.grants.some((g,i)=>['court','passage'].includes(g.property_id)&&g.grantee===player&&g.scope==='enter'&&!g.revoked&&w.grant_validity?.[i]===true&&(g.expiry_night===null||g.expiry_night>=7)&&night<7);
+}
 
 // Each policy pursues its own legitimate opportunities. Availability is computed
 // by the validator; the selector never receives the player's private politics.

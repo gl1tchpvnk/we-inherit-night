@@ -50,7 +50,7 @@
 
 /* Shared unaltered portrait assets. No filters, stretching or simulated depth. */
 
-.portrait{margin:0;position:relative;overflow:hidden;background:var(--ink);min-width:0}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}.portrait.compact{width:56px;height:70px;flex:0 0 56px}.portrait-seraphine img{object-position:55% 35%}.portrait-mirelle img,.portrait-sabine img{object-position:55% 30%}.portrait-cassian img,.portrait-dorian img{object-position:60% 30%}.bloodline-selected .portrait{float:left;margin:0 18px 10px 0}.prologue{height:100dvh;display:grid;grid-template-columns:60% 40%;overflow:hidden}.prologue>.portrait{height:100%;clip-path:polygon(0 0,100% 0,93% 100%,0 100%)}.prologue section{align-self:center;padding:5vw;max-height:100%;overflow:auto}.prologue h1{font-size:clamp(2.5rem,4.8vw,5rem)}.prologue-text{font-size:clamp(1.2rem,1.8vw,1.7rem);line-height:1.6}.prologue .controls{margin:28px 0}.prologue .controls button:first-child{background:var(--paper);color:var(--ink)}.panel-1{grid-template-columns:40% 60%}.panel-1>.portrait{order:2;clip-path:polygon(7% 0,100% 0,100% 100%,0 100%)}.panel-1 section{order:1}.panel-3>.portrait img{object-position:50% 15%}
+.portrait{margin:0;position:relative;overflow:hidden;background:var(--ink);min-width:0}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}.portrait.compact{width:56px;height:70px;flex:0 0 56px}.portrait-seraphine img{object-position:55% 35%}.portrait-mirelle img,.portrait-sabine img{object-position:55% 30%}.portrait-cassian img,.portrait-dorian img{object-position:60% 30%}.bloodline-selected .portrait{float:left;margin:0 18px 10px 0}.prologue{position:relative;height:100dvh;display:grid;grid-template-columns:60% 40%;overflow:hidden}.prologue>.portrait{height:100%;clip-path:polygon(0 0,100% 0,93% 100%,0 100%)}.prologue section{align-self:center;padding:5vw 5vw 120px;max-height:100%;overflow:auto}.prologue h1{font-size:clamp(2.5rem,4.8vw,5rem)}.prologue-text{font-size:clamp(1.2rem,1.8vw,1.7rem);line-height:1.6}.prologue .prologue-controls{position:absolute;z-index:2;right:5vw;bottom:24px;display:flex;flex-wrap:nowrap;gap:12px;margin:0;padding:8px;background:var(--ink)}.prologue-controls button{min-width:112px}.prologue .controls button:first-child{background:var(--paper);color:var(--ink)}.panel-1{grid-template-columns:40% 60%}.panel-1>.portrait{order:2;clip-path:polygon(7% 0,100% 0,100% 100%,0 100%)}.panel-1 section{order:1}.panel-3>.portrait img{object-position:50% 15%}
 
 /* Encounter page: black gutters are integrated into the portrait composition. */
 
@@ -74,7 +74,7 @@
 
  .entry-copy .notice{padding:22px}.entry-copy .notice h2{font-size:2rem}
 
- .prologue,.panel-1{height:100dvh;grid-template-columns:1fr;grid-template-rows:42dvh minmax(0,1fr)}.prologue>.portrait,.panel-1>.portrait{order:0;clip-path:none}.prologue section,.panel-1 section{order:1;padding:24px;align-self:start}.prologue h1{font-size:2.5rem}.prologue-text{font-size:18px}.prologue .controls{margin:16px 0}.prologue>.portrait img{object-position:50% 25%}
+ .prologue,.panel-1{height:100dvh;grid-template-columns:1fr;grid-template-rows:42dvh minmax(0,1fr)}.prologue>.portrait,.panel-1>.portrait{order:0;clip-path:none}.prologue section,.panel-1 section{order:1;padding:24px 24px 112px;align-self:start}.prologue h1{font-size:2.5rem}.prologue-text{font-size:18px}.prologue .prologue-controls{right:16px;left:16px;bottom:16px;margin:0}.prologue-controls button{flex:1;min-width:0}.prologue>.portrait img{object-position:50% 25%}
 
 
 
@@ -188,6 +188,8 @@ button:hover:not(:disabled) small{color:inherit}
 .blood-warning{border-left:3px solid #df6767;padding:8px 12px;color:#ffd5d5;font:14px/1.5 system-ui;margin:8px 0}
 .game-hud .blood-status{padding:4px 8px}.game-hud .blood-status span{white-space:normal}
 @media(max-width:640px){.blood-status{font-size:12px;padding:8px 14px;gap:3px 10px}.blood-status small{width:100%;font-size:11px}.blood-warning{font-size:13px}}
-.encounter-player-action{border-top:1px solid var(--line);margin-top:22px;padding-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
-.encounter-player-action button{border:1px solid var(--line);font:14px system-ui;min-height:44px}
-.encounter-player-action small{flex-basis:100%;font:12px/1.5 system-ui}
+/* Feeding is a player choice, distinct from free dialogue without a utility panel. */
+.encounter-feed button{border-left:2px solid var(--blood)}
+.encounter-feed p{font:12px/1.45 system-ui;color:var(--muted);margin:4px 14px 10px}
+.encounter-feed[data-hungry=true] button{outline:1px solid var(--blood);color:var(--paper)}
+.encounter-feed[data-hungry=true] button:hover,.encounter-feed[data-hungry=true] button:focus-visible{color:var(--ink)}

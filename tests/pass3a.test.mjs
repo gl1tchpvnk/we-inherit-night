@@ -21,7 +21,7 @@ test('ending portrait follows the recorded patron when multiple rights survive',
  const r=fixture(7);r.campaign.status='victory';r.campaign.ending='favoured';r.campaign.reason='Lucien protects you beyond the temporary passage.';
  r.world.access.court=true;r.world.access.passage=true;
  const scene=buildEncounterScenes(r).find(s=>s.type==='CAMPAIGN CONCLUSION');
- assert.deepEqual(scene.portraits,['lucien']);assert.match(scene.lines[0].text,/Lucien stands behind you/);
+ assert.deepEqual(scene.portraits,['lucien']);assert.match(scene.lines[0].text,/Lucien’s protection still standing/);
 });
 test('seven distinct chapters have available decisions and resolvable links without changing state',()=>{
  assert.equal(new Set(CHAPTERS.map(c=>c.title)).size,7);
@@ -47,8 +47,8 @@ test('no phantom assistant, patron protection or private knowledge is narrated',
 test('Night Seven can stop pending research or keep it running; publication changes the stakes',()=>{
  const r=fixture(6);researcher(r);let scenes=buildEncounterScenes(r);
  const decision=scenes.find(s=>s.id==='decision:6');assert.ok(decision.choices.some(c=>c.inspect==='action:withdraw_library'));
- assert.ok(decision.choices.some(c=>c.inspect==='hold:6'));
- assert.deepEqual(scenes.find(s=>s.id==='hold:6').choices[0].action,{action:'end_night'});
+ assert.deepEqual(decision.choices.find(c=>c.id==='wait').action,{action:'end_night'});
+ assert.equal(scenes.find(s=>s.id==='hold:6').redirect,'decision:6');assert.equal(scenes.find(s=>s.id==='hold:6').choices.length,0);
  assert.ok(!decision.choices.some(c=>c.inspect==='action:authorize_dorian'));
  assert.match(roomDevelopment(r,'library').text,/unfinished|stop the research/);
  r.campaign.politics.library.result='mirelle';assert.match(roomDevelopment(r,'library').text,/public/);
@@ -56,7 +56,7 @@ test('Night Seven can stop pending research or keep it running; publication chan
 test('material risks remain visible; failed or pending actions never acquire narrative commitments',()=>{
  const r=fixture(1);r.campaign.politics.titleFiled=true;r.campaign.resources.exposure=8;r.actions=availableActions(r.campaign,r.world);
  let scenes=buildEncounterScenes(r),terms=[...scenes.find(s=>s.id==='action:sanctuary_pact').terms,...scenes.find(s=>s.id==='action:sanctuary_pact').lines.map(l=>l.text)].join(' ');
- for(const text of ['0.02 NEAR','nonrefundable','gas','7 nights','tonight’s action','Night Four'])assert.ok(terms.includes(text),text);
+ for(const text of ['0.02 NEAR','nonrefundable','gas','Seven nights','One nightly action','Night Four'])assert.ok(terms.includes(text),text);
  assert.doesNotMatch(scenes.find(s=>s.id==='action:feed').terms.join(' '),/Exposure/);
  r.pending=true;scenes=buildEncounterScenes(r);assert.ok(scenes.every(s=>!s.automatic&&s.choices.every(c=>!c.action)));
 });
@@ -76,7 +76,7 @@ test('exclusive lease deadlines use the seven-night timeline without promising e
  assert.equal(expiryDescription(null,6),'has no confirmed expiry');
  for(const end of [7,8,9]){
   const r=fixture(6);r.campaign.ending='unbound';r.world.leases[0].status='accepted';r.world.leases[0].end_night=end;
-  assert.equal(endingSummary(r),'Your Library is still yours. Seraphine cannot withdraw her protection, and it will last through the final night. But sanctuary is not ownership.');
+  assert.equal(endingSummary(r),'Your Library is still yours. Your sanctuary lasts through the final night. Seraphine cannot cancel the remaining term. You own no part of her sanctuary.');
   assert.doesNotMatch(courtReactions(r).map(x=>x.text).join(' '),/Night (?:8|9|10|Eight|Nine)/);
   r.world.night=end;assert.match(endingSummary(r),/has expired/);assert.doesNotMatch(endingSummary(r),/will last through/);
  }
@@ -89,7 +89,7 @@ test('opening focuses choices without removing alternatives, deadlines or feedin
  const r=fixture(),scenes=buildEncounterScenes(r),opening=scenes.find(s=>s.id==='ultimatum');
  assert.equal(opening.terms.length,0);assert.equal(opening.choices.length,2);
  assert.match(opening.lines.map(l=>l.text).join(' '),/third dawn|3 more nights/);
- const first=scenes.find(s=>s.id==='decision:0');assert.equal(first.choices.filter(c=>!c.secondary).length,3);
+ const first=scenes.find(s=>s.id==='decision:0');assert.equal(first.choices.filter(c=>!c.secondary).length,5);assert.equal(scenes.find(s=>s.id==='discovery:0').redirect,'decision:0');
  for(const kind of ['feed','rest','petition_marius','investigate_title'])assert(first.choices.some(c=>c.inspect===`action:${kind}`));
  r.campaign.night=2;r.world.night=2;r.world.access.sanctuary=false;r.campaign.politics.publicLead=true;r.actions=availableActions(r.campaign,r.world);
  const late=buildEncounterScenes(r).find(s=>s.id==='decision:2');

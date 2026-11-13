@@ -3,6 +3,7 @@
 export function expiryDescription(end:number|null,current:number):string {
   if(end===null)return 'has no confirmed expiry';
   if(current>=end)return 'has expired';
+  if(current>=7)return `has ${end-current} night${end-current===1?'':'s'} remaining under the recorded lease`;
   if(end>=7)return 'lasts through the final night';
   return `ends at the start of Night ${end+1}`;
 }

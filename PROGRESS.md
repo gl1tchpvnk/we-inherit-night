@@ -463,6 +463,13 @@
 - PASS: one focused regression including fail-closed uncertainty/tombstone/provider cases and fresh nonce, 47 affected backend checks total; production Testnet frontend build.
 - Next: secret scan, push reviewed correction, deploy existing Render service, verify one fresh New Game and independent FINAL receipt. No broad suite requested or run.
 
+## Stuck provisioning correction — hosted PASS
+- Scanned Git history/index/worktree and pushed 5b5ef54; no secret findings. Deployed existing Render service after one stalled clone/cache-cleared retry.
+- Existing exclusive writer atomically rejected obsolete attempt with original signed payload/digest, prior job/phase and two finalized provider proofs retained.
+- Public New Game opened first encounter for visitor-5457928e-f82e-4e75-b9b9-520324cd6318; SQLite now has one session/state/campaign and two preserved transaction records.
+- PASS: new open_campaign FLT7p9ifoVkN9bPE5QRuDgWZzW8NEGfGu7pvsYdHYpjQ FINAL-success independently on FastNEAR/dRPC; correct restricted key/receiver/args, zero deposit and current nonce.
+- Active prepaid treasury 0.04 NEAR, passage liability 0.01, pool 1.10 after normal creation; no funding, contract, credential or Render configuration changes.
+- Hosted health 200; evidence and screenshot in evidence/provisioning-reconciliation. Stopped before gameplay actions; seven-night public acceptance remains unverified.
 ## Quit Campaign — local PASS, not deployed
 - Added owned-session/revision-checked Quit and confirmation in the playable Testnet game menu.
 - Explicit Quit bypasses inactivity delay only; existing settlement, archive and reclaim preserve the original outcome, obligations and history.
@@ -517,8 +524,88 @@
 - Browser fixture double-click sent one feed: Blood 2 → 6 → 5 after sheltered dawn, revision 1 and Night Two; this fixture is not live-chain evidence.
 - Covered low Blood, exhausted actions, disabled availability, ended/closing campaigns, pending commitments, stale replay and preserved pending journal. Existing user save untouched; no deployment, commit or push.
 
+## Gameplay refinements deployment — hosted PARTIAL
+- Committed/pushed bbd34d9f0263700d9656848652d2451e5ec7abe0; existing Render service reports Live and serves the verified production asset.
+- PASS: final 59 focused tests, production build, history/index/worktree secret scans; unrelated provisioning notes/evidence excluded.
+- Resumed the existing hosted campaign and advanced six nightly actions to Night Seven, Blood 2. Recorded title, HUD, Crypt and fatal-warning evidence.
+- STOP: unified Night Seven choices expose final_accept/final_refuse/final_counter because the label map falls back to action IDs. This fallback also existed before this deployment; no speculative fix performed.
+- Two finalized Testnet RPC reads agree: 1/5 campaigns active, pool 1.04 NEAR, treasury 0.04, pending liabilities 0, unchanged contract code.
+- Full hosted finale, normal reclamation, fresh New Game, encounter feeding and Quit verification remain incomplete; no released-slot or full-playability claim.
+- Evidence/report: evidence/refinement-hosted/REPORT.md. Campaign retained at Night Seven; next task is the scoped label correction after user direction.
+
 ## Night Seven choice correction — local PASS, hosted verification pending
 - Replaced raw action-ID label fallback with existing descriptive action labels.
 - Consolidated final responses beneath the existing Marius demand encounter; all response inspections, availability, material terms and deadlines remain unchanged.
 - PASS: 27 focused final-court/encounter/chapter tests and production build. An initial new test fixture omitted its description; corrected before the passing run.
 - No contract, gameplay, signing, funding or lifecycle changes. Public finale/reclamation/replay verification follows deployment.
+
+## 2026-11-13 — Cinematic prototype preserved; static main restored
+- Deferred cinematic work committed as 2dff7550b7f82eb77285ca0db9eda1ae3d97143f on feature/motion-comic and verified on GitHub.
+- Returned to main at unchanged deployed baseline 307f377b2461b1679450399a191809a4d5f462aa; source/tests/art/contract/runtime/config match that commit.
+- PASS: history/index/worktree secret scans, cinematic and static production builds, 19 static encounter/Blood tests, browser static encounter with Blood and Feed visible.
+- All 60 starting modified/untracked files accounted for; unrelated deployment notes/evidence remain local. Original ignored preview/logs retained; reproducible fixture versioned on the feature branch.
+- Local preservation manifest/patch and visual evidence: .local/motion-comic-preservation/. No credentials committed, campaign changes or Render deployment.
+- Next: continue hackathon work on static main; resume cinematics later from feature/motion-comic, which must remain preserved.
+
+## 2026-11-13 — Encounter Feed choice presentation (local)
+- Moved Feed into the encounter choice list as its final option, per player preference; removed the separate Your Action utility panel.
+- Retained +4 Blood / one-action label and existing validated handler. Copy distinguishes remaining actions, automatic final-action dawn, legacy manual End Night and the final reckoning.
+- Deadline warnings compare the next night against existing engine availability and actual lease expiry; no NPC decisions, rights or campaign changes are predicted.
+- PASS: 20 focused Blood/encounter tests; targeted SQLite feeding/stale replay/pending-state regression; production build; desktop and low-Blood mobile visual checks.
+- Browser review used synthetic local fixtures only; source mechanics, signing, recovery and campaign state are unchanged. Evidence: .local/feed-choice-mobile.png.
+- Follow-up ordering check: 6 Blood tests and production build PASS; Feed remains last, with unchanged warnings and handler.
+- No commit, push or deployment. Cinematic branch remains untouched. Next: player review; long dialogue still uses the existing encounter scroll layout.
+
+## 2026-11-13 — Approved Narrative V2 implemented locally
+- Applied 207 dispositions: 142 original, 32 selected V1, 33 selected V2; final Marius, Night Three and Blood-defeat corrections incorporated.
+- Removed repeated negotiation introductions, reaction narration and ordinary chapter/discovery exposition; kept visible commitment terms and conditional final-demand warnings.
+- Post-final sanctuary copy now states remaining lease nights. No gameplay, policy, contract, signing, save, layout or cinematic changes.
+- PASS: 68 focused tests and production build; catalogue checks retain all original excerpts and selected replacement text.
+- Verification uses synthetic authoritative views and rendered markup, not live Testnet or browser walkthroughs. Earlier local Feed changes remain intact.
+- Implementation ledger and retained historical-state narrative cautions: docs/narrative-audit/NARRATIVE_REWRITE_IMPLEMENTATION.md.
+- Reviewed repository requirements; no architectural or hackathon requirement changes needed. Ready for deployment review, not deployed. No commit or push.
+
+## 2026-11-13 — Public stuck Marius campaign investigation
+- BLOCKED: visitor-53e191e8-ac11-4440-8cbc-702164237aef remains active at pending dawn index 8; no Quit/reclamation performed.
+- Marius grant and provisioning independently FINAL-success on FastNEAR/dRPC; own campaign keeper advancement has not been submitted.
+- Another campaign owns the shared keeper broadcast journal; UNKNOWN_TRANSACTION, usable nonce and unexpired block reference prevent safe terminal classification.
+- Current-campaign-only reconciliation plus actor-wide admission gate creates a cross-campaign recovery blockage. Other public players may be affected.
+- Finalized capacity 5, active 2, free slots 3; capacity availability does not imply gameplay readiness. Financial obligations and all database records preserved.
+- Evidence and minimum proposed correction: evidence/stuck-marius/REPORT.md. No source edits, transactions, funding, credential changes or deployment.
+- Next: review owner-aware shared-actor reconciliation correction and authorize any work affecting the blocking campaign; do not blindly retry or clear its journal.
+
+## 2026-11-13 — Shared actor recovery correction
+- Targeted backend correction committed/pushed as c7f14de90e574b09fc75df4a02a3bcf973475a90; narrative/UI changes excluded and preserved locally.
+- Actor-scoped durable recovery runs before signing and at startup/maintenance without loading an originating player session. Exact payload/key/nonce/block validation precedes replay; unknown outcomes remain blocked.
+- PASS: 66 focused tests; 179 full automated tests; working-tree and exact staged-release production builds; Git history/index/worktree security review (public block approvals classified, no real secrets).
+- Existing Render service deployment started; authoritative recovery and both authorized campaign closures still pending live verification.
+- No changes to contracts, credentials, funding, infrastructure or gameplay. See docs/SHARED_ACTOR_RECOVERY.md.
+
+## 2026-11-13 — Investigation payoff and personal finale (local)
+- Added provisional account finding and investigator interpretation, gated by committed research evidence; preserved publication and contract-backed authority boundaries.
+- Added route-specific closing correspondence, two free replies and browser-only reload memory before existing results; retained replay/settlement checks.
+- Dorian now selects existing petition/pass using public shelter and existing eligibility; no private observations, new contract actions or extra turns.
+- PASS: 185 full automated tests, two scoped real Sandbox routes, production build; preserved existing Narrative V2 and unrelated work.
+- Initial restricted HTTP/WSL access failed; authorized reruns passed. Updated an old SSR fixture for the new farewell stage without weakening replay assertions.
+- Browser visual review NOT VERIFIED: isolated preview navigation timed out. Rendered controls and reload states tested; no live Testnet or hosted checks.
+- Updated README, requirements, character/rule continuity and narrative implementation notes; details in docs/INVESTIGATION_FINALE.md.
+- No commit, push, deployment, public signing or funding. Next: restart local preview and player-review the finding and farewell.
+
+## 2026-11-13 — Circular encounter-flow repair (local; browser acceptance BLOCKED)
+- Stable content-version read history replaces night-based badges; read questions fold into review while unresolved offers remain available. Static legacy history is retained; uncertain legacy versions request review.
+- Consolidated Discovery/incident/choices and old wait routes; one final-demand scene has direct eligible responses. Negotiations show terms/commitment together; Feed is deduplicated.
+- State-aware Marius, Seraphine and investigator encounters derive availability and rights from existing rules; pending/error recovery uses the existing view path.
+- PASS: 191 full automated tests, production build, one seven-night real Sandbox scene/state integration with stale Feed rejection, reload, descendant withdrawal and final counter.
+- BLOCKED: fresh browser walkthrough/interactive branch acceptance. Isolated IAB preview timed out; native Chrome Computer Use approval denied. No bypass or public campaign.
+- Existing save/normal preview preserved; isolated test server stopped. Automated/SSR evidence does not establish browser acceptance or submission readiness.
+- Updated README, requirements, narrative continuity and docs/ENCOUNTER_FLOW_REPAIR.md. No commit, push, deployment, funding, credentials or contract changes.
+
+## 2026-11-13 — Opening correction and release preparation
+- Implemented stable prologue Continue/Skip controls; preserved artwork, four panels and existing text scroll.
+- Restored free Vesper ↔ court navigation with both questions/read history intact; no new action or state rules.
+- V3 prose is proposal-only in docs/narrative-audit/PROLOGUE_V3_PROPOSAL.md and excluded from release pending approval.
+- PASS: 192 full automated checks, 23 final focused checks, standard and Testnet production builds.
+- PASS: four desktop/tablet/mobile sizes, keyboard, both Vesper routes, real Sandbox startup/reload and seven-night browser campaign (29 transactions, 56 NPC turns, paid Unbound finale).
+- Fresh observed prologue 1.17 s; verified opening 12.18 s. Simulated error/pending UI checks are separate; startup code unchanged.
+- Audited main/origin (no unpushed commits) and all outstanding changes; no secrets found after reviewing public block signatures. Local fixtures and V3 remain excluded.
+- Render manual deployment/latest public acceptance remain pending; see docs/OPENING_CORRECTION_RELEASE.md. No contract, credential, funding or deployment-configuration changes.

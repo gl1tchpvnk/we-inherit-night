@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-11-13T09:46:04.982Z",
+  "network": "testnet",
+  "campaignId": "visitor-4abbbeae-11dc-407f-ade2-70afb2f9c584",
+  "results": [
+    {
+      "url": "https://test.rpc.fastnear.com",
+      "blockHeight": 277493487,
+      "blockHash": "9DZQ84SEpZ5sY2gkWDyBihBdcUKV5US9PsJSMsNYCQeQ",
+      "account": {
+        "amount": "10020308464902656700000000",
+        "block_hash": "9DZQ84SEpZ5sY2gkWDyBihBdcUKV5US9PsJSMsNYCQeQ",
+        "block_height": 277493487,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 589911
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "80000000000000000000000",
+        "pool": "990000000000000000000000",
+        "active": 2
+      },
+      "resources": {
+        "status": "active",
+        "prepaid": true,
+        "treasury": "40000000000000000000000",
+        "commitment": "",
+        "world_bytes": 1791,
+        "storage_usage": 589911,
+        "storage_price": "10000000000000000000",
+        "pool": "990000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "80000000000000000000000",
+        "active": 2
+      }
+    },
+    {
+      "url": "https://near-testnet.drpc.org",
+      "blockHeight": 277493488,
+      "blockHash": "4jFSXzZfayyVDJXtjtNzGKYo3ogTAhfYZ2nNsRwEq78P",
+      "account": {
+        "amount": "10020308464902656700000000",
+        "block_hash": "4jFSXzZfayyVDJXtjtNzGKYo3ogTAhfYZ2nNsRwEq78P",
+        "block_height": 277493488,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 589911
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "80000000000000000000000",
+        "pool": "990000000000000000000000",
+        "active": 2
+      },
+      "resources": {
+        "status": "active",
+        "prepaid": true,
+        "treasury": "40000000000000000000000",
+        "commitment": "",
+        "world_bytes": 1791,
+        "storage_usage": 589911,
+        "storage_price": "10000000000000000000",
+        "pool": "990000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "80000000000000000000000",
+        "active": 2
+      }
+    }
+  ]
+}

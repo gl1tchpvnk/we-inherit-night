@@ -1,0 +1,51 @@
+{
+  "mode": "real local Sandbox, UI commitments",
+  "nights": [
+    {
+      "kind": "investigate_title",
+      "night": 1,
+      "blood": 6,
+      "transactions": 11
+    },
+    {
+      "kind": "sanctuary_pact",
+      "night": 2,
+      "blood": 5,
+      "transactions": 16
+    },
+    {
+      "kind": "feed",
+      "night": 3,
+      "blood": 8,
+      "transactions": 18
+    },
+    {
+      "kind": "authorize_mirelle",
+      "night": 4,
+      "blood": 7,
+      "transactions": 21
+    },
+    {
+      "kind": "feed",
+      "night": 5,
+      "blood": 10,
+      "transactions": 24
+    },
+    {
+      "kind": "withdraw_library",
+      "night": 6,
+      "blood": 9,
+      "transactions": 26
+    },
+    {
+      "kind": "final_counter",
+      "night": 7,
+      "blood": 7,
+      "transactions": 29
+    }
+  ],
+  "routeB": "PASS",
+  "ending": "unbound",
+  "sanctuary": true,
+  "npcTurns": 56
+}

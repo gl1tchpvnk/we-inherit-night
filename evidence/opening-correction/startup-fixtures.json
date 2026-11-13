@@ -1,0 +1,8 @@
+{
+  "scope": "simulated HTTP responses to actual GameEntry, no chain execution",
+  "checks": [
+    "skip waits for confirmed result",
+    "reload resumes without reset",
+    "accurate failure returns to title; Continue recovers"
+  ]
+}

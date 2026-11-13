@@ -4,26 +4,57 @@ import type {GameAction,NpcName} from './game';
 import {AGENTS} from './agents.ts';
 import {addDirectedStory} from './story.ts';
 import {addCourtReactions} from './reactiveCourt.ts';
+import {repairCourtFlow} from './livingCourt.ts';
 
 export type SceneType='ENCOUNTER'|'NEGOTIATION'|'RECKONING'|'CAMPAIGN CONCLUSION'|'DECISION';
 export interface DialogueLine {speaker:NpcName|'narrator';text:string}
-export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[];secondary?:boolean}
+export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[];secondary?:boolean;reviewOnly?:boolean}
 export interface EncounterScene {
   id:string;type:SceneType;title:string;location:'crypt'|'library'|'lounge';
   portraits:NpcName[];lines:DialogueLine[];terms:string[];rights:string[];
   choices:SceneChoice[];compact?:boolean;outcome?:string;automatic?:boolean;completionLabel?:string;
   reactionLevel?:'minor'|'significant'|'major';
+  redirect?:string;topicId?:string;readVersion?:string;legacyStable?:boolean;
 }
-export interface SceneMemory {seen:string[];active:string|null;line:number;room?:string|null}
+export interface SceneMemory {seen:string[];active:string|null;line:number;room?:string|null;reads?:Record<string,string[]>}
 export const emptySceneMemory=():SceneMemory=>({seen:[],active:null,line:0});
 export function readSceneMemory(raw:string|null):SceneMemory {
-  try{const m=JSON.parse(raw??'null');if(!m||!Array.isArray(m.seen))return emptySceneMemory();return {...(m.room===null||['crypt','library','lounge'].includes(m.room)?{room:m.room}:{}),seen:m.seen.filter((id:unknown)=>typeof id==='string'&&id.length<160).slice(-120),active:typeof m.active==='string'&&m.active.length<160?m.active:null,line:Number.isInteger(m.line)?Math.max(0,Math.min(100,m.line)):0};}catch{return emptySceneMemory();}
+  try{const m=JSON.parse(raw??'null');if(!m||!Array.isArray(m.seen))return emptySceneMemory();const reads=Object.fromEntries(Object.entries(m.reads&&typeof m.reads==='object'?m.reads:{}).filter(([k,v])=>k.length<160&&Array.isArray(v)).slice(-256).map(([k,v])=>[k,(v as unknown[]).filter((x):x is string=>typeof x==='string'&&/^[a-f0-9]{8}$/.test(x)).slice(-16)]));return {...(m.room===null||['crypt','library','lounge'].includes(m.room)?{room:m.room}:{}),seen:m.seen.filter((id:unknown)=>typeof id==='string'&&id.length<160).slice(-512),reads,active:typeof m.active==='string'&&m.active.length<160?m.active:null,line:Number.isInteger(m.line)?Math.max(0,Math.min(100,m.line)):0};}catch{return emptySceneMemory();}
 }
 export function finishScene(memory:SceneMemory,id:string):SceneMemory {
-  return {...memory,seen:[...new Set([...memory.seen,id])].slice(-120),active:null,line:0};
+  return {...memory,seen:[...new Set([...memory.seen,id])].slice(-512),active:null,line:0};
+}
+export function resolveScene(scenes:EncounterScene[],id:string|null):EncounterScene|undefined{
+  let scene=scenes.find(s=>s.id===id);const visited=new Set<string>();
+  while(scene?.redirect&&!visited.has(scene.id)){visited.add(scene.id);scene=scenes.find(s=>s.id===scene!.redirect);}
+  return scene?.redirect?undefined:scene;
 }
 export function nextScene(scenes:EncounterScene[],memory:SceneMemory):EncounterScene|undefined {
-  return scenes.find(s=>s.id===memory.active)??scenes.find(s=>s.reactionLevel&&s.automatic&&!memory.seen.includes(s.id))??scenes.find(s=>s.automatic&&!memory.seen.includes(s.id));
+  return resolveScene(scenes,memory.active)??scenes.find(s=>!s.redirect&&s.reactionLevel&&s.automatic&&!memory.seen.includes(s.id))??scenes.find(s=>!s.redirect&&s.automatic&&!memory.seen.includes(s.id));
+}
+const stableTopic=(id:string)=>id.replace(/^(ask|personal|talk):\d+:/,'$1:');
+export function topicStatus(scene:EncounterScene|undefined,memory:SceneMemory):'Explored'|'Updated'|'New'|'Review needed'|null{
+  if(!scene?.topicId||!scene.readVersion)return null;
+  const versions=memory.reads?.[scene.topicId]??[];
+  if(versions.includes(scene.readVersion))return 'Explored';
+  const legacy=memory.seen.some(id=>stableTopic(id)===scene.topicId);
+  if(!versions.length&&legacy&&scene.legacyStable)return 'Explored';
+  if(!versions.length&&legacy)return 'Review needed';
+  return versions.length?'Updated':'New';
+}
+export function markSceneRead(memory:SceneMemory,scene:EncounterScene):SceneMemory{
+  if(!scene.topicId||!scene.readVersion||memory.reads?.[scene.topicId]?.includes(scene.readVersion))return memory;
+  return {...memory,reads:{...memory.reads,[scene.topicId]:[...(memory.reads?.[scene.topicId]??[]),scene.readVersion].slice(-16)}};
+}
+function stampTopics(scenes:EncounterScene[]){
+  for(const s of scenes){
+    if(s.redirect||! /^(ask:|personal:|talk:|purpose:|finding:|meaning:|character:|record:|action:|lease:)/.test(s.id)||/^action:(feed|rest)$/.test(s.id))continue;
+    s.topicId=stableTopic(s.id);
+    // Version only the information actually displayed, never night/resources/whole state.
+    let hash=2166136261;for(const char of JSON.stringify([s.title,s.lines,s.terms]))hash=Math.imul(hash^char.charCodeAt(0),16777619);
+    s.readVersion=(hash>>>0).toString(16).padStart(8,'0');
+    s.legacyStable=/^personal:\d+:(vesper|seraphine|marius|dorian|lucien|cassian|sabine)$/.test(s.id)||/^ask:\d+:(vesper|cassian)$/.test(s.id);
+  }
 }
 export const MAJOR_VAMPIRES:NpcName[]=['vesper','seraphine','marius','lucien'];
 export const ACTION_SPEAKER:Partial<Record<GameAction,NpcName>>={
@@ -98,7 +129,7 @@ export function buildEncounterScenes(r:Result):EncounterScene[]{
     const choices:SceneChoice[]=[];
     if(playing&&lease.status==='offered'&&r.availability?.accept.length===0)choices.push({id:'accept',label:'Accept · pay rent and commit one action',action:agreement?{action:'agreement_accept',agreement_id:agreement.id}:{action:'accept'}});
     if(playing&&agreement)choices.push({id:'reject',label:'Decline proposal · free, no transaction',action:{action:'agreement_reject',agreement_id:agreement.id}});
-    else if(playing&&lease.status==='offered'&&r.availability?.reject.length===0)choices.push({id:'reject',label:'Reject standing lease · signed, one action',action:{action:'reject'}});
+    else if(playing&&lease.status==='offered'&&r.availability?.reject.length===0)choices.push({id:'reject',label:c.politics?.library?'Reject standing lease · signed, no nightly action':'Reject standing lease · signed, one action',action:{action:'reject'}});
     scenes.push({id:'lease:0',type:'NEGOTIATION',title:'The Lounge agreement',location:'lounge',portraits:['seraphine'],lines:[line('seraphine','A place at my table, for the nights written here. Nothing more is concealed in the promise.')],terms:[...leaseTerms(r,0),'Acceptance costs one major action. Inspecting or leaving this scene is free.',...(c.politics?['The Lounge lease alone does not provide sanctuary or satisfy a campaign ending.']:[])],rights:authority(r,'lounge'),choices,outcome:c.agreements.find(a=>a.leaseId===0)?.result});
   }
   if(c.politics&&c.night===0&&c.status==='playing')scenes.push({...scenes.find(s=>s.id==='character:vesper')!,id:'ultimatum',title:'Three nights under my roof',choices:[{id:'lead-seraphine',label:'Seek Seraphine · speak freely',inspect:'character:seraphine'},{id:'lead-marius',label:'Seek Marius · speak freely',inspect:'character:marius'}],automatic:true});
@@ -115,6 +146,8 @@ export function buildEncounterScenes(r:Result):EncounterScene[]{
   if(c.status!=='playing')scenes.push({id:`conclusion:${c.ending??c.status}`,type:'CAMPAIGN CONCLUSION',title:c.ending==='unbound'?'The Unbound':c.ending==='favoured'?'The Favoured':c.status==='defeat'?'Failure':'Seven nights survived',location:c.ending==='unbound'?'library':'crypt',portraits:[c.ending==='unbound'?'seraphine':c.ending==='favoured'?(r.world.access.court?'marius':'lucien'):'vesper'],lines:[line('narrator',c.ending==='unbound'?'The Crypt door closes. It is no longer the only door that matters.':c.ending==='favoured'?'You endure beneath another’s protection. Survival has a patron.':'The last reckoning offers no shelter in words.'),line('narrator',c.reason)],terms:[c.reason,'Outcome computed by the campaign rules from verified rights and survival state; this illustration changes nothing.'],rights:authority(r,c.ending==='unbound'?'sanctuary':'court'),choices:[],automatic:true});
   addDirectedStory(r,scenes);
   if(c.politics?.library)addCourtReactions(r,scenes);
+  if(c.politics?.library)repairCourtFlow(r,scenes);
   if(r.pending||r.error)for(const s of scenes){s.automatic=false;s.choices=s.choices.filter(ch=>!ch.action);}
+  stampTopics(scenes);
   return scenes;
 }

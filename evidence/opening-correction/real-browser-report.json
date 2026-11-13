@@ -1,0 +1,7 @@
+{
+  "mode": "real local Sandbox",
+  "port": 5297,
+  "routes": "PASS",
+  "reload": "PASS",
+  "transactions": 10
+}

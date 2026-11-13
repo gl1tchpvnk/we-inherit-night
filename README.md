@@ -5,6 +5,11 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+Narrative V2: **IMPLEMENTED locally, not deployed**. Applied all 207 approved
+dispositions, preserving consequential terms and verified-outcome boundaries.
+PASS: 68 focused tests and production build. See the
+[implementation record and limitations](docs/narrative-audit/NARRATIVE_REWRITE_IMPLEMENTATION.md).
+
 Quit Campaign: **IMPLEMENTED and verified on public Testnet**. The Testnet game menu requires
 confirmation, immediately begins existing settlement/archive/reclaim, and returns
 to title only after verified reclamation. Pending closure resumes through Check
@@ -18,8 +23,8 @@ See [upgrade verification and configuration](docs/CAMPAIGN_CAPACITY.md).
 Current funded on-chain capacity: **5**, with a 1.15 Testnet NEAR gameplay pool.
 See [finalized funding and remaining reserves](docs/TESTNET_FUNDING.md).
 The [corrected runtime gas budget](docs/RUNTIME_GAS_FUNDING.md) verifies all eleven
-accounts and finite allowances; the existing hosted provisioning journal still
-needs safe reconciliation before gameplay verification resumes.
+accounts and finite allowances. [Hosted provisioning recovery](docs/PUBLIC_DEPLOYMENT.md)
+is verified: a fresh public New Game created a real Testnet campaign.
 Hosted five-player performance and public gameplay remain unverified.
 
 New Game startup is measured and optimized: a local benchmark improved from
@@ -322,3 +327,18 @@ One authority WASM now hosts campaign-addressed World state. The private registr
 ### Gameplay refinement — IMPLEMENTED locally, awaiting deployment
 Seven-night pacing, unified nightly choices, Exposure removal and the persistent finale are implemented locally. Normal replay waits for verified reclamation; Quit and Save and Return remain separate. See [verification and limitations](docs/GAMEPLAY_REFINEMENT.md). The current public build has not been updated by this pass.
 Blood visibility correction — IMPLEMENTED locally: persistent encounter Blood/hunger status and engine-derived pre-commitment fatal warnings, with unchanged survival rules. See the refinement verification above; not yet deployed.
+
+## Investigation and personal finale follow-up
+
+**IMPLEMENTED locally, not deployed:** a concrete Library-account payoff, free investigator interpretation, route-specific closing correspondence before results, and Dorian’s public-shelter-based petition/restraint choice. PASS: 185 automated tests, two scoped real Sandbox scenarios, production build. Browser visual review remains unverified. [Design, review steps and limitations](docs/INVESTIGATION_FINALE.md).
+
+## Encounter-flow repair
+
+**IMPLEMENTED locally; browser acceptance BLOCKED.** Stable topic-version exploration, one current nightly decision surface, coherent offers/final demand, state-aware conversations and deduplicated Feed. PASS: 191 automated tests, production build and a seven-night real Sandbox scene/state integration. Browser walkthrough was blocked by preview navigation/Computer Use access; submission readiness is not certified. [Causes, verification and limits](docs/ENCOUNTER_FLOW_REPAIR.md).
+
+### Opening correction — IMPLEMENTED locally
+Stable prologue controls and free Vesper/court returns are verified at desktop,
+tablet and phone sizes. A real Sandbox browser campaign reaches its paid Unbound
+ending; 192 automated tests and production builds pass. The proposed V3 prologue
+is not in runtime code. [Release audit and verification](docs/OPENING_CORRECTION_RELEASE.md)
+separate local acceptance from the still-required latest public deployment.

@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-13T09:12:40.332Z",
+  "network": "testnet",
+  "results": [
+    {
+      "url": "https://test.rpc.fastnear.com",
+      "blockHeight": 277490060,
+      "blockHash": "FAF2K9rE7qVbXqeMHWYPRfnMMF8RRtE1km1DtsvjW9Wm",
+      "account": {
+        "amount": "10030308464902656700000000",
+        "block_hash": "FAF2K9rE7qVbXqeMHWYPRfnMMF8RRtE1km1DtsvjW9Wm",
+        "block_height": 277490060,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 587182
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "40000000000000000000000",
+        "pool": "1040000000000000000000000",
+        "active": 1
+      },
+      "resources": null
+    },
+    {
+      "url": "https://near-testnet.drpc.org",
+      "blockHeight": 277490062,
+      "blockHash": "7SVUQefEDmjZt4PhwxJ7ddcc2xiU2VDQG8fuhx8cNgCZ",
+      "account": {
+        "amount": "10030308464902656700000000",
+        "block_hash": "7SVUQefEDmjZt4PhwxJ7ddcc2xiU2VDQG8fuhx8cNgCZ",
+        "block_height": 277490062,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 587182
+      },
+      "capacity": 5,
+      "totals": {
+        "liabilities": "10000000000000000000000",
+        "treasuries": "40000000000000000000000",
+        "pool": "1040000000000000000000000",
+        "active": 1
+      },
+      "resources": null
+    }
+  ]
+}

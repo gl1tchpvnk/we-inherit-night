@@ -1,0 +1,38 @@
+{
+  "states": [
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "night": 7,
+      "status": "concluded",
+      "revision": 7,
+      "pending": false
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "night": 2,
+      "status": "playing",
+      "revision": 2,
+      "pending": false
+    },
+    {
+      "id": "visitor-f4b04392-d292-4f9b-8c2b-f9c1d56199ad",
+      "night": 0,
+      "status": "playing",
+      "revision": 0,
+      "pending": false
+    }
+  ],
+  "archives": [
+    {
+      "id": "visitor-5457928e-f82e-4e75-b9b9-520324cd6318",
+      "commitment": "c835dcf138cb29707f26cd6f18e2b70ba9b2a69db39d6a268a12d3524253966f",
+      "complete": true
+    },
+    {
+      "id": "visitor-45473548-25f8-4b10-8f42-fb51eebe8571",
+      "commitment": "587d1e249a497fb6633803037202c7ddf11d2e5c0698d199e6a1cfa57d3d8bd2",
+      "complete": true
+    }
+  ],
+  "transactions": 41
+}

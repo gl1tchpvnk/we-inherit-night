@@ -1,0 +1,13 @@
+{
+  "scope": "real local Sandbox replacement and reload during initialization",
+  "prologueMs": 63,
+  "verifiedMetadataMs": 5467,
+  "confirmation": "PASS",
+  "reloadDuringInitialization": "PASS",
+  "finalizedBootstrap": true,
+  "commands": [
+    "view",
+    "reset",
+    "view"
+  ]
+}

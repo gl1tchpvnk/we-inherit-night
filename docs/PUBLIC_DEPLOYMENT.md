@@ -1,5 +1,10 @@
 # Public Render deployment — in progress
 
+**Stuck provisioning recovery PASS:** commit `5b5ef54` is deployed and one fresh
+public New Game created a real, independently FINAL-verified Testnet campaign.
+Complete seven-night public gameplay remains unverified. Historical checkpoints
+below explain the resolved blockers; see the final recovery result at the end.
+
 Public gameplay is **NOT YET VERIFIED**. GitHub preparation and security review
 precede the user-controlled Render payment and runtime-secret handoff.
 
@@ -135,6 +140,35 @@ and observed hosted memory/funding. Local tests and funding verification do not
 substitute for this hosted acceptance. No repeated broad regression suite is
 required unless a deployment defect changes shared code.
 
+## Hosted provisioning recovery — PASS
+
+- Deployed `5b5ef54c17557f3f81243c357d407df35c3335e2` to existing service;
+  successful Render deployment `dep-dbrb9drtqb8s73e2cb70`. One initial build stalled
+  at cloning and was canceled after 5m21s; one cache-cleared retry succeeded in
+  36.4s. No service/configuration/disk/credential change.
+- Public New Game created `visitor-5457928e-f82e-4e75-b9b9-520324cd6318` and opened
+  the first encounter, A BED BEFORE DAWN. No gameplay choice was committed.
+- New `open_campaign` transaction
+  [FLT7p9ifoVkN9bPE5QRuDgWZzW8NEGfGu7pvsYdHYpjQ](https://testnet.nearblocks.io/txns/FLT7p9ifoVkN9bPE5QRuDgWZzW8NEGfGu7pvsYdHYpjQ)
+  was independently FINAL-success with successful receipts on FastNEAR and dRPC.
+  Exact restricted public key, receiver, campaign argument, zero deposit, 50-Tgas
+  bound and fresh nonce 277474089000001 were verified.
+- SQLite now has one campaign/session/state, two transaction records and a done
+  provisioning job. The old attempt is rejected with its signed payload retained,
+  original record SHA-256 `0292963b6c649220bdd3dd296123e46cdcda9b3225782f9e5a9e115b4e779ffa`,
+  previous phase/job and independent finalized proof blocks 277476355/277476356.
+  Its nonce 277462237000001 was below 277474089000000; both providers proved
+  absence of its world and permanent tombstone before the service marked it terminal.
+- New campaign is active/prepaid with 0.04 NEAR treasury; the established 0.01
+  passage budget is an outstanding liability. Pool is 1.10 NEAR after allocation.
+  This was ordinary authorized provisioning, not a pool configuration/funding change.
+- PASS: 47 focused backend checks (one new regression), production build, secret
+  scans, hosted health 200, persisted evidence and independent chain verification.
+  No broad regression suite, seven-night walkthrough or extra campaign was run.
+
+[Public receipt and runtime evidence](../evidence/provisioning-reconciliation/hosted-success.json)
+and [browser confirmation](../evidence/provisioning-reconciliation/public-new-game.png).
+Stopped after the requested New Game verification. No recovery blocker remains.
 # Quit Campaign — local only
 
 Implemented locally; no deployment or live Testnet transaction was performed for
