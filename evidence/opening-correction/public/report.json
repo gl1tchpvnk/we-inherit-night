@@ -1,0 +1,59 @@
+{
+  "scope": "LIVE public Testnet, actual browser, no mocks",
+  "release": "1a818df14f8c78766470ab6ed8ab47b90980bb8f",
+  "nights": [
+    {
+      "action": "investigate_title",
+      "night": 1,
+      "blood": 6,
+      "transactions": 2
+    },
+    {
+      "action": "sanctuary_pact",
+      "night": 2,
+      "blood": 5,
+      "transactions": 7
+    },
+    {
+      "action": "feed",
+      "night": 3,
+      "blood": 8,
+      "transactions": 9
+    },
+    {
+      "action": "authorize_mirelle",
+      "night": 4,
+      "blood": 7,
+      "transactions": 12
+    },
+    {
+      "action": "feed",
+      "night": 5,
+      "blood": 10,
+      "transactions": 15
+    },
+    {
+      "action": "withdraw_library",
+      "night": 6,
+      "blood": 9,
+      "transactions": 17
+    },
+    {
+      "action": "final_counter",
+      "night": 7,
+      "blood": 7,
+      "transactions": 21
+    }
+  ],
+  "prologueMs": 203,
+  "readyMs": 5097,
+  "campaignId": "visitor-145e73dd-cd1b-467c-a93f-b2cc9fa62f71",
+  "midgameReload": "PASS",
+  "personalReplyReload": "PASS",
+  "archiveComplete": true,
+  "ending": "unbound",
+  "transactions": 21,
+  "replayId": "visitor-9b772b44-d84e-472d-8dbc-f7a638fe1585",
+  "replay": "PASS",
+  "testReplayClosed": "PASS"
+}

@@ -244,3 +244,23 @@ secret scans passed. The existing ignore rules already cover credential bundles,
 local configuration, SQLite, journals and private keys. No secrets were exported.
 Public-safe evidence: `evidence/quit-campaign/` (dual-provider snapshots/receipts,
 archive and final SQLite summary, deployed asset digest, and fresh-game screenshot).
+
+## Opening/V2 release — public acceptance PASS, 2026-11-13
+
+User-triggered manual deployment now serves the verified V2/opening implementation
+(`1a818df`, plus documentation `1020406`); public JS matches the Testnet production
+build byte-for-byte. No service configuration, credential, contract or funding
+change. Approved prologue V2 remains; V3 is unimplemented and excluded.
+
+A real public walletless browser campaign completed all seven nights, paid
+sanctuary, investigator publication/withdrawal, a final counter, personal reply,
+factual Unbound ending, reload and replay. Startup was 5.10 s; prologue 0.20 s.
+All 21 recorded transactions independently verified FINAL-success; replay creation
+also FINAL-success. Both completed and deliberately quit replay campaigns are
+independently verified reclaimed with matching archive commitments.
+
+[Detailed release/acceptance report](OPENING_CORRECTION_RELEASE.md) and
+[public-safe evidence](../evidence/opening-correction/public/). No active test
+campaign remains. This supersedes older public-gameplay-unverified checkpoints
+for the exercised route; hosted capacity/load and every alternative route are not
+claimed verified.

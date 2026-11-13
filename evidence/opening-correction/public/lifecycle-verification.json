@@ -1,0 +1,44 @@
+{
+  "provider": "https://near-testnet.drpc.org",
+  "checkedAt": "2026-11-13T22:44:42.035Z",
+  "campaigns": [
+    {
+      "id": "visitor-145e73dd-cd1b-467c-a93f-b2cc9fa62f71",
+      "finalBlock": 277573149,
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "91bdbd4e4f88d0c6f5fed6cdad54c792e03a2e1ed5b1ffe963ad93c931354299",
+        "world_bytes": 0,
+        "storage_usage": 588392,
+        "storage_price": "10000000000000000000",
+        "pool": "970000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "40000000000000000000000",
+        "active": 1
+      }
+    },
+    {
+      "id": "visitor-9b772b44-d84e-472d-8dbc-f7a638fe1585",
+      "finalBlock": 277573149,
+      "resources": {
+        "status": "reclaimed",
+        "prepaid": true,
+        "treasury": "0",
+        "commitment": "a1a2ac630350ae44aaece330cc3811e7de154c95ba9e581bf88569e92c8fba8c",
+        "world_bytes": 0,
+        "storage_usage": 588392,
+        "storage_price": "10000000000000000000",
+        "pool": "970000000000000000000000",
+        "liabilities": "10000000000000000000000",
+        "treasury_total": "40000000000000000000000",
+        "active": 1
+      }
+    }
+  ],
+  "replayCreation": {
+    "hash": "B9rvB9CoiDEtdTEQd3TopX67B7XUaHy1jrxioDBY9WEJ",
+    "status": "FINAL-success"
+  }
+}

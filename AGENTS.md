@@ -283,4 +283,4 @@ AI vampire NPCs are runtime game agents, distinct from Codex development agents.
 ## Opening continuity
 - Prologue controls remain outside the alternating artwork/text columns. Preserve artwork geometry, the existing text scroll, and confirmed-state entry gates; prose V3 remains proposal-only pending user approval.
 - Vesper's existing free questions must remain reachable from the opening court and return to it. Navigation cannot spend actions or repeat transactions.
-- Latest local Chromium/Sandbox browser evidence supersedes the earlier browser-access blocker for the exercised paid-sanctuary route; see docs/OPENING_CORRECTION_RELEASE.md. Public latest-release acceptance remains separate.
+- Latest local Chromium/Sandbox browser evidence supersedes the earlier browser-access blocker for the exercised paid-sanctuary route; see docs/OPENING_CORRECTION_RELEASE.md. Public latest-release acceptance also passed for the paid-sanctuary/Mirelle route, including reload, finale, replay and verified reclamation; do not generalize to untested hosted branches/load.

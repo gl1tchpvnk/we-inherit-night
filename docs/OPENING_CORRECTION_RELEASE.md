@@ -75,3 +75,50 @@ reset submission preserved the old campaign instead of manufacturing a new one.
 - **SUBMISSION-CRITICAL remaining action:** deploy the pushed main branch, then
   verify matching assets and one real public seven-night campaign/reload/replay.
   No further gameplay development is required by the local acceptance results.
+
+## Public deployment and acceptance — PASS (supersedes the gate above)
+
+The user triggered the existing manual Render deployment. At 2026-11-13 22:39 UTC,
+HTTPS health returned 200 and the served `index-BKnmvBXt.js` matched the verified
+Testnet build byte-for-byte (SHA-256
+`2b211b77002212b7d5ddcf590e994a9f6739a67b522c6a4e10064feb9e62a0c0`).
+The implementation is commit `1a818df14f8c78766470ab6ed8ab47b90980bb8f`;
+`main` was at documentation commit `10204066644cc617bc4a677208316db1a1751fc6`
+when deployment was triggered. The public assets establish deployed runtime parity;
+a Render dashboard deployment ID/commit metadata was not available in this session.
+
+**Live Testnet browser acceptance PASS**, using a fresh isolated browser session,
+actual public UI and existing funded game runtime, with no mocks or supplied wallet:
+
+- Fresh campaign `visitor-145e73dd-cd1b-467c-a93f-b2cc9fa62f71` opened in **5.10 s**;
+  its prologue appeared in **0.20 s**. Approved V2 dialogue and corrected navigation
+  were visible. No new V3 prose was published.
+- Title filing → paid sanctuary → Feed → authorize Mirelle → Feed → withdraw the
+  Library invitation → final counter. All seven commitments returned authoritative
+  confirmed results. There were 56 unique NPC turns and the final result was
+  **The Unbound**. Independent paid sanctuary survived Marius's withdrawal.
+- Midcampaign reload preserved the exact campaign, rights and transaction record.
+  Reload after an expressive personal reply resumed the reply; continuing showed
+  factual results. Chronicle review did not reopen commitments or advance the night.
+- Financial settlement/archive completed and enabled replay. Replay created a
+  different campaign, `visitor-9b772b44-d84e-472d-8dbc-f7a638fe1585`, at Night 1.
+  That verification campaign was then closed using the normal confirmed Quit UI.
+- Independent dRPC verification found all **21 recorded original-campaign
+  transactions FINAL-success**, with successful receipts, the correct contract and
+  campaign arguments, and zero attached deposits (existing prepaid payments).
+  Replay creation was independently FINAL-success too.
+- Finalized `campaign_resources` reads show **both campaigns reclaimed**, with
+  commitments matching their respective archived UI records. No active acceptance
+  campaign was left behind. Lifecycle calls are evidenced by finalized resource
+  records; they are not falsely counted as part of the 21 UI-recorded transactions.
+
+[Public-safe evidence](../evidence/opening-correction/public/) includes timings,
+action summaries, deployed asset digest, independently verified transaction hashes,
+finalized lifecycle records and screenshots. Session cookies/browser storage and
+raw runtime state remain ignored locally; no credentials were published.
+
+**Submission readiness:** no submission-critical defect remains from this scoped
+opening/release acceptance. Creative approval of V3 and abrupt local dev-process
+lock recovery remain valuable but deferrable. This is one complete public paid
+route, not a claim of exhaustive hosted branch/load testing or completion of the
+hackathon submission itself. No new feature pass is initiated.

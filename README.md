@@ -1,5 +1,7 @@
 # We Inherit Night
 
+Latest release: public walletless seven-night browser acceptance **PASS**, including paid sanctuary, NPC work, reload and replay. See [verified opening/V2 release](docs/OPENING_CORRECTION_RELEASE.md). Historical pass limitations below retain their original scope.
+
 A gothic dynasty game slice: buy independence from Seraphine, then survive your
 sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a final political demand, research-backed counterproposals and one bounded NPC passage purchase on local NEAR Sandbox. Autonomous deterministic NPCs; no LLM calls or public deployment.**
 
@@ -336,9 +338,9 @@ Blood visibility correction — IMPLEMENTED locally: persistent encounter Blood/
 
 **IMPLEMENTED locally; browser acceptance BLOCKED.** Stable topic-version exploration, one current nightly decision surface, coherent offers/final demand, state-aware conversations and deduplicated Feed. PASS: 191 automated tests, production build and a seven-night real Sandbox scene/state integration. Browser walkthrough was blocked by preview navigation/Computer Use access; submission readiness is not certified. [Causes, verification and limits](docs/ENCOUNTER_FLOW_REPAIR.md).
 
-### Opening correction — IMPLEMENTED locally
+### Opening correction — IMPLEMENTED; public acceptance PASS
 Stable prologue controls and free Vesper/court returns are verified at desktop,
 tablet and phone sizes. A real Sandbox browser campaign reaches its paid Unbound
 ending; 192 automated tests and production builds pass. The proposed V3 prologue
 is not in runtime code. [Release audit and verification](docs/OPENING_CORRECTION_RELEASE.md)
-separate local acceptance from the still-required latest public deployment.
+records the matching public deployment and real Testnet seven-night/reload/replay acceptance. Both acceptance campaigns were reclaimed; no live test session was left active.

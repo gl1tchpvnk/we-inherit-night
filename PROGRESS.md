@@ -616,3 +616,12 @@
 - Actual reload during initialization PASS: one reset, fresh verified metadata in 5.47 s, ten FINAL bootstrap transactions, zero NPC turns.
 - Public HTTPS health PASS, but served JS remains the previous build. Manual Render deployment requested; no authenticated deployment connection is available in this session.
 - Latest public seven-night/reload/replay acceptance NOT RUN; no new live Testnet campaign created. This remains submission-critical, separate from the passing local Sandbox browser run.
+
+## 2026-11-13 — Opening release public acceptance PASS
+- User triggered manual Render deployment; HTTPS health and exact verified production JS digest PASS. No configuration/credential/funding changes.
+- Public walletless startup 5.10 s; prologue 0.20 s. V2 text and corrected opening navigation present; V3 remains unimplemented/untracked.
+- Real Testnet browser completed seven nights: paid sanctuary, Mirelle publication, withdrawal and final counter → Unbound; 56 unique NPC turns.
+- Midgame reload, persisted personal reply, factual finale, archive-gated replay and confirmed Quit of the replay PASS.
+- Independently verified 21 original gameplay transactions FINAL-success plus replay creation; both campaign resource tombstones are reclaimed with matching archive commitments.
+- No acceptance campaign remains active. Public-safe evidence in evidence/opening-correction/public; private browser session/raw state remain ignored.
+- No submission-critical blocker identified in this scoped acceptance. V3 creative approval and abrupt local dev-process lock recovery remain deferrable; hosted load/all branches not exhaustively tested.

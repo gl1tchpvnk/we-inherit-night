@@ -1,0 +1,175 @@
+{
+  "scope": "independent dRPC verification of live Testnet transaction results",
+  "campaign": "visitor-145e73dd-cd1b-467c-a93f-b2cc9fa62f71",
+  "checkedAt": "2026-11-13T22:43:40.743Z",
+  "transactions": [
+    {
+      "hash": "B9GYguhaehsgKYnRo8JS3LbU6bD71ubmrMNfh8iGSUtw",
+      "signer": "provisioner.we-inherit-night.testnet",
+      "method": "open_campaign",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "Fe1jGwmYukuSALmbgTM9SEGj1wQZs4R1zM8zGUKJoUf1",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "BzPNba1UTx5diKaknvUSAwAcMk6XhjYSowf3dFdLHwMp",
+      "signer": "player.we-inherit-night.testnet",
+      "method": "accept_lease",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "7BBFUFX8XVGCjbboCMs85meM2FTkovfY72ba86pZPycx",
+      "signer": "seraphine.we-inherit-night.testnet",
+      "method": "claim_rent",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "3eWvitkc9cL2tTt5A2QPRKbU95ymFduaKf2kf3Sk3uiQ",
+      "signer": "marius.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "7aKzyggHUVmFhJgoXZrRpyGTex4Wdo6gYFQiuFJ68gjV",
+      "signer": "sabine.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "2oUUbiLYRcMRBJd5aAfjwQBamFeJEotvjEyzgNx8eiMx",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "AY6Kn4EzHKzytZsPFFYKFqE8CuizHqAQiaXGk99Sd6Kb",
+      "signer": "vesper.we-inherit-night.testnet",
+      "method": "revoke_grant",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "2iqfPgr8ioptFNGZcTHHvDWGHjtBWoE9eWbPGMu7ZPia",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "A9wuCbF9MibVaGf1KApDtjU6tV8WZ8yiZtJ4hx5htKtf",
+      "signer": "player.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "AoUmUC7gDYXqssznRNyWS3dzE7ui9fXW3YtqeNrvMYs8",
+      "signer": "mirelle.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "2T5uaJJUHzqjEeznrZdfTiJSNc1MHaKs7SHE1aYZmVbD",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "66pWf8YysVF1Q2sSWorYogrFuzfFVQ219VXo8HT156cz",
+      "signer": "mirelle.we-inherit-night.testnet",
+      "method": "enter_room",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "3JsktUXH2MkfYQWorb8uT2ibDzCqotvj7GmMG3QYBYQr",
+      "signer": "marius.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "8eCJpyg9r9nF7k261ebi9iKTrqKjhZ57FU1eSQZT1pLn",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "GmWx2TeDzP65W9zQb8zHFTfK9Ak3nBWQ96jyrRZ8kcyw",
+      "signer": "player.we-inherit-night.testnet",
+      "method": "revoke_grant",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "CW8tmTSWgshijnQPkaee9bj2ocSUtbr8FKUzPYR4gn9A",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "Dt2vDebcURdZfoVeMu2bfFXuW255PXv1FVStfEGWkjMU",
+      "signer": "player.we-inherit-night.testnet",
+      "method": "grant_access",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "E1UyoqPsbnLwsnYRPFagPZwZLdAXrHFm32rKR99wx1hD",
+      "signer": "marius.we-inherit-night.testnet",
+      "method": "revoke_grant",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "EzKPYKxui1jkSTm14poaUEruLj5umFgHWL6cqdVUmFKG",
+      "signer": "keeper.we-inherit-night.testnet",
+      "method": "advance_night",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    },
+    {
+      "hash": "GA6pBXaXSfSVGTTUDCvjdF7vsds2Y7mxjUgx37aByghF",
+      "signer": "cassian.we-inherit-night.testnet",
+      "method": "refund_passage_budget",
+      "finality": "FINAL",
+      "success": true,
+      "deposit": "0"
+    }
+  ]
+}
