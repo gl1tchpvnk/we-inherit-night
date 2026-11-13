@@ -1,0 +1,272 @@
+{
+  "providers": [
+    "https://test.rpc.fastnear.com",
+    "https://near-testnet.drpc.org"
+  ],
+  "primary": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "6eZKqc9vq4zaoL8TAvqH5B7kUWSJGmyRygQkoqfEbvau",
+        "id": "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb",
+        "outcome": {
+          "executor_id": "mirelle.we-inherit-night.testnet",
+          "gas_burnt": 305269957944,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "7Uipfvg644xEQvG98495RFWRAKgnUM8NzcVvaGtRYhWb"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30526995794400000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "3a5fUtJAfkekLjdM7azYy9oQd29PZmiDuKw6Do2Vkesb"
+          }
+        ]
+      },
+      {
+        "block_hash": "FGk2nokhX2pi9MUNNvuirEobAp2PewfKowNm6ZbC1iDd",
+        "id": "7Uipfvg644xEQvG98495RFWRAKgnUM8NzcVvaGtRYhWb",
+        "outcome": {
+          "executor_id": "mirelle.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "7weWKKssR1YndVUVhXFcLQKxuYS5uMmxAcKjFNxDWMkc"
+          },
+          {
+            "direction": "Right",
+            "hash": "HAbvVWUjB793a56yaYFwrZNy7SMAUSh8ucyyJpryZm69"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "125000000000000000000000",
+                  "method_names": [
+                    "enter_room",
+                    "grant_access"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM"
+          }
+        }
+      ],
+      "hash": "8dnWbtxL9W3Ef6wdPd1rzacRWWUSMeqiguDzUAsss9P9",
+      "nonce": 277434109000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr",
+      "receiver_id": "mirelle.we-inherit-night.testnet",
+      "signature": "ed25519:1NtrjL9RPpjDpNP21tLYu7FY38dEHgRL5koPCGToRAQDfYBZ3bju6RnL8dEh6pLWY1dF1d3cvxaYLXn1GEMtgRB",
+      "signer_id": "mirelle.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "6eZKqc9vq4zaoL8TAvqH5B7kUWSJGmyRygQkoqfEbvau",
+      "id": "8dnWbtxL9W3Ef6wdPd1rzacRWWUSMeqiguDzUAsss9P9",
+      "outcome": {
+        "executor_id": "mirelle.we-inherit-night.testnet",
+        "gas_burnt": 305269957944,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb"
+        ],
+        "status": {
+          "SuccessReceiptId": "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb"
+        },
+        "tokens_burnt": "30526995794400000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "EtCpaNdBkuWbTXxPWmuLiNRDN2BtAnTxoioq79thQ4qj"
+        },
+        {
+          "direction": "Right",
+          "hash": "DmGmu7bsAUTV2oEcxbNMJ4RuYi3zDZYUoXBaBAUkSEJr"
+        }
+      ]
+    }
+  },
+  "independent": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "6eZKqc9vq4zaoL8TAvqH5B7kUWSJGmyRygQkoqfEbvau",
+        "id": "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb",
+        "outcome": {
+          "executor_id": "mirelle.we-inherit-night.testnet",
+          "gas_burnt": 305269957944,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "7Uipfvg644xEQvG98495RFWRAKgnUM8NzcVvaGtRYhWb"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30526995794400000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "3a5fUtJAfkekLjdM7azYy9oQd29PZmiDuKw6Do2Vkesb"
+          }
+        ]
+      },
+      {
+        "block_hash": "FGk2nokhX2pi9MUNNvuirEobAp2PewfKowNm6ZbC1iDd",
+        "id": "7Uipfvg644xEQvG98495RFWRAKgnUM8NzcVvaGtRYhWb",
+        "outcome": {
+          "executor_id": "mirelle.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "7weWKKssR1YndVUVhXFcLQKxuYS5uMmxAcKjFNxDWMkc"
+          },
+          {
+            "direction": "Right",
+            "hash": "HAbvVWUjB793a56yaYFwrZNy7SMAUSh8ucyyJpryZm69"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "125000000000000000000000",
+                  "method_names": [
+                    "enter_room",
+                    "grant_access"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM"
+          }
+        }
+      ],
+      "hash": "8dnWbtxL9W3Ef6wdPd1rzacRWWUSMeqiguDzUAsss9P9",
+      "nonce": 277434109000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr",
+      "receiver_id": "mirelle.we-inherit-night.testnet",
+      "signature": "ed25519:1NtrjL9RPpjDpNP21tLYu7FY38dEHgRL5koPCGToRAQDfYBZ3bju6RnL8dEh6pLWY1dF1d3cvxaYLXn1GEMtgRB",
+      "signer_id": "mirelle.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "6eZKqc9vq4zaoL8TAvqH5B7kUWSJGmyRygQkoqfEbvau",
+      "id": "8dnWbtxL9W3Ef6wdPd1rzacRWWUSMeqiguDzUAsss9P9",
+      "outcome": {
+        "executor_id": "mirelle.we-inherit-night.testnet",
+        "gas_burnt": 305269957944,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb"
+        ],
+        "status": {
+          "SuccessReceiptId": "GhF4vi19ZwmBbwzGs9QgBaMrqnW4wzWrySLr54WtmPyb"
+        },
+        "tokens_burnt": "30526995794400000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "EtCpaNdBkuWbTXxPWmuLiNRDN2BtAnTxoioq79thQ4qj"
+        },
+        {
+          "direction": "Right",
+          "hash": "DmGmu7bsAUTV2oEcxbNMJ4RuYi3zDZYUoXBaBAUkSEJr"
+        }
+      ]
+    }
+  }
+}

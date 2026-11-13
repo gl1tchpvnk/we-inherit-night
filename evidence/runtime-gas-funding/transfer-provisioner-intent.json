@@ -1,0 +1,10 @@
+{
+  "actor": "win-funding-20261113-a.testnet",
+  "receiver": "provisioner.we-inherit-night.testnet",
+  "publicKey": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+  "nonce": 277468401000002,
+  "network": "testnet",
+  "transfer": "125000000000000000000000",
+  "runtimePublicKey": "ed25519:8QdPoPsxMoF6i4fpKHnmw3dTKnHMZiT4ESmxuoVuxGgF",
+  "allowance": null
+}

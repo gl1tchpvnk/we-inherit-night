@@ -1,0 +1,8 @@
+{
+  "actor": "seraphine.we-inherit-night.testnet",
+  "receiver": "seraphine.we-inherit-night.testnet",
+  "publicKey": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+  "hash": "83Vs3Hwk2tr2zsdKXFJjqi5ruUoydCv6JZHfCPaqCQhK",
+  "nonce": 277434067000009,
+  "signatureVerified": true
+}

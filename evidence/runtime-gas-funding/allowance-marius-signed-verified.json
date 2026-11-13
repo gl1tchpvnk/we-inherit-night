@@ -1,0 +1,8 @@
+{
+  "actor": "marius.we-inherit-night.testnet",
+  "receiver": "marius.we-inherit-night.testnet",
+  "publicKey": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+  "hash": "CNzFJoZ1t1WUn3CZ1xRqCgLzExGwPFuLbrKCCJf9iaLy",
+  "nonce": 277434081000004,
+  "signatureVerified": true
+}

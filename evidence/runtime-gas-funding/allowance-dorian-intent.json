@@ -1,0 +1,10 @@
+{
+  "actor": "dorian.we-inherit-night.testnet",
+  "receiver": "dorian.we-inherit-night.testnet",
+  "publicKey": "ed25519:81aDBUVCuJ4FLyaX8JxPfGKFgvRYRbA3UszgTKhvpTdw",
+  "nonce": 277434122000002,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:CyZzDYyZTWCCcktGdyorvQTdTai3PhCEA7kLawzbbYfu",
+  "allowance": "125000000000000000000000"
+}

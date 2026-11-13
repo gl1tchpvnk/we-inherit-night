@@ -1,0 +1,10 @@
+{
+  "actor": "vesper.we-inherit-night.testnet",
+  "receiver": "vesper.we-inherit-night.testnet",
+  "publicKey": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+  "nonce": 277434053000009,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:6f6KH1ub8739NakytBYzkubGX9RDWNNjeczdpdBMgiPj",
+  "allowance": "150000000000000000000000"
+}

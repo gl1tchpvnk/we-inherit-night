@@ -1,0 +1,10 @@
+{
+  "actor": "lucien.we-inherit-night.testnet",
+  "receiver": "lucien.we-inherit-night.testnet",
+  "publicKey": "ed25519:6oP1s5fkWLqPG1VKcxU6CLRQzXtCHNRBP8BaaYh324Bw",
+  "nonce": 277434095000002,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:8X8JpTLPgMVeM6jgiDfvnP4s4FD67EVHiaHrw79g9iNY",
+  "allowance": "250000000000000000000000"
+}

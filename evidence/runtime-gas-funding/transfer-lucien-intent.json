@@ -1,0 +1,10 @@
+{
+  "actor": "win-funding-20261113-a.testnet",
+  "receiver": "lucien.we-inherit-night.testnet",
+  "publicKey": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+  "nonce": 277468401000003,
+  "network": "testnet",
+  "transfer": "25000000000000000000000",
+  "runtimePublicKey": "ed25519:8X8JpTLPgMVeM6jgiDfvnP4s4FD67EVHiaHrw79g9iNY",
+  "allowance": null
+}

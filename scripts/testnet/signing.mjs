@@ -12,8 +12,8 @@ export const CONTRACT='night.we-inherit-night.testnet';
 export const RPC='https://test.rpc.fastnear.com';
 export const GAS='10000000000000';
 export const gasForMethod=method=>['claim_rent','refund_passage_budget','open_campaign'].includes(method)?'50000000000000':GAS;
-export async function rpc(method,params){
-  const response=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:'night',method,params}),signal:AbortSignal.timeout(60000)});
+export async function rpc(method,params,url=RPC){
+  const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:'night',method,params}),signal:AbortSignal.timeout(60000)});
   if(!response.ok)throw new Error('Testnet RPC unavailable; transaction status may be pending');
   return response.json();
 }

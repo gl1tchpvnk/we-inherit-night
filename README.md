@@ -11,6 +11,9 @@ configurable creation quotas. Existing state layouts and 32 MiB ceiling remain.
 See [upgrade verification and configuration](docs/CAMPAIGN_CAPACITY.md).
 Current funded on-chain capacity: **5**, with a 1.15 Testnet NEAR gameplay pool.
 See [finalized funding and remaining reserves](docs/TESTNET_FUNDING.md).
+The [corrected runtime gas budget](docs/RUNTIME_GAS_FUNDING.md) verifies all eleven
+accounts and finite allowances; the existing hosted provisioning journal still
+needs safe reconciliation before gameplay verification resumes.
 Hosted five-player performance and public gameplay remain unverified.
 
 New Game startup is measured and optimized: a local benchmark improved from

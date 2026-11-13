@@ -1,0 +1,10 @@
+{
+  "actor": "seraphine.we-inherit-night.testnet",
+  "receiver": "seraphine.we-inherit-night.testnet",
+  "publicKey": "ed25519:225AXVaWyiHXCeEesqk4G3TTa9soiefapGmww9kV4qSL",
+  "nonce": 277434067000009,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:5yFPoCyzWFr9LiF72XGf9JsQS3QR6cJ2hxX8CvQN5Sxy",
+  "allowance": "200000000000000000000000"
+}

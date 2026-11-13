@@ -1,0 +1,224 @@
+{
+  "providers": [
+    "https://test.rpc.fastnear.com",
+    "https://near-testnet.drpc.org"
+  ],
+  "primary": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "GVPQd8p3kjgeganPrvdFQeYTQwHmam84RJkG1j5gQ4SK",
+        "id": "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg",
+        "outcome": {
+          "executor_id": "lucien.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "72ewrNyfTuvEXUKQnCoFQNv1c7pJFHwBUAsRbHJD55oH"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "4run2HgXTahKDoXX81PBVuwvbyjEhri8dvBV6HbYGrd6"
+          },
+          {
+            "direction": "Left",
+            "hash": "262NRE1cQx3FpnS2hDZonhtMHeEBf6gaGX7udC8Ve1v2"
+          },
+          {
+            "direction": "Right",
+            "hash": "5uzviu23uG3Y6brBmp1urhC3N8YkWahgN9izNSKUoUUm"
+          }
+        ]
+      },
+      {
+        "block_hash": "vBa6rWaEBPZXXUBfu2MUdmt6fiaLbgUseewYqKCeZRe",
+        "id": "72ewrNyfTuvEXUKQnCoFQNv1c7pJFHwBUAsRbHJD55oH",
+        "outcome": {
+          "executor_id": "win-funding-20261113-a.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "E3sfd74HBeMHye1Br9WMkv3nC6C9LaK9G1gvqsLrXtup"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "25000000000000000000000"
+          }
+        }
+      ],
+      "hash": "5oqRjFMmtUTN542aXvictoyyZmbEf5oScdStpNfyJVw2",
+      "nonce": 277468401000003,
+      "priority_fee": 0,
+      "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+      "receiver_id": "lucien.we-inherit-night.testnet",
+      "signature": "ed25519:3wck51nSnBHGZc6HgnTfBGbBYtpx3shDqW4rioBeaC7ktJvW4p5qFZ6Z2orFfVayW6AM4X7CEk5qHhy1NkAAjkEA",
+      "signer_id": "win-funding-20261113-a.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "HndmbUry3hkQ6FmGpu5yBS7UV3uUat245PVheD9aFApy",
+      "id": "5oqRjFMmtUTN542aXvictoyyZmbEf5oScdStpNfyJVw2",
+      "outcome": {
+        "executor_id": "win-funding-20261113-a.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg"
+        ],
+        "status": {
+          "SuccessReceiptId": "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": []
+    }
+  },
+  "independent": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "GVPQd8p3kjgeganPrvdFQeYTQwHmam84RJkG1j5gQ4SK",
+        "id": "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg",
+        "outcome": {
+          "executor_id": "lucien.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "72ewrNyfTuvEXUKQnCoFQNv1c7pJFHwBUAsRbHJD55oH"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "4run2HgXTahKDoXX81PBVuwvbyjEhri8dvBV6HbYGrd6"
+          },
+          {
+            "direction": "Left",
+            "hash": "262NRE1cQx3FpnS2hDZonhtMHeEBf6gaGX7udC8Ve1v2"
+          },
+          {
+            "direction": "Right",
+            "hash": "5uzviu23uG3Y6brBmp1urhC3N8YkWahgN9izNSKUoUUm"
+          }
+        ]
+      },
+      {
+        "block_hash": "vBa6rWaEBPZXXUBfu2MUdmt6fiaLbgUseewYqKCeZRe",
+        "id": "72ewrNyfTuvEXUKQnCoFQNv1c7pJFHwBUAsRbHJD55oH",
+        "outcome": {
+          "executor_id": "win-funding-20261113-a.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "E3sfd74HBeMHye1Br9WMkv3nC6C9LaK9G1gvqsLrXtup"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "25000000000000000000000"
+          }
+        }
+      ],
+      "hash": "5oqRjFMmtUTN542aXvictoyyZmbEf5oScdStpNfyJVw2",
+      "nonce": 277468401000003,
+      "priority_fee": 0,
+      "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+      "receiver_id": "lucien.we-inherit-night.testnet",
+      "signature": "ed25519:3wck51nSnBHGZc6HgnTfBGbBYtpx3shDqW4rioBeaC7ktJvW4p5qFZ6Z2orFfVayW6AM4X7CEk5qHhy1NkAAjkEA",
+      "signer_id": "win-funding-20261113-a.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "HndmbUry3hkQ6FmGpu5yBS7UV3uUat245PVheD9aFApy",
+      "id": "5oqRjFMmtUTN542aXvictoyyZmbEf5oScdStpNfyJVw2",
+      "outcome": {
+        "executor_id": "win-funding-20261113-a.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg"
+        ],
+        "status": {
+          "SuccessReceiptId": "GQC86B1KP2DTRQ9SorpbYHyKURd7stHCZWwu553dyHg"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": []
+    }
+  }
+}

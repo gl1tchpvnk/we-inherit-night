@@ -1,0 +1,10 @@
+{
+  "actor": "cassian.we-inherit-night.testnet",
+  "receiver": "cassian.we-inherit-night.testnet",
+  "publicKey": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+  "nonce": 277434136000004,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2",
+  "allowance": "250000000000000000000000"
+}

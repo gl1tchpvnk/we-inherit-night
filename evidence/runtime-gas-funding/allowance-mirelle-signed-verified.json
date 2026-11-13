@@ -1,0 +1,8 @@
+{
+  "actor": "mirelle.we-inherit-night.testnet",
+  "receiver": "mirelle.we-inherit-night.testnet",
+  "publicKey": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr",
+  "hash": "8dnWbtxL9W3Ef6wdPd1rzacRWWUSMeqiguDzUAsss9P9",
+  "nonce": 277434109000002,
+  "signatureVerified": true
+}

@@ -1,0 +1,8 @@
+{
+  "actor": "sabine.we-inherit-night.testnet",
+  "receiver": "sabine.we-inherit-night.testnet",
+  "publicKey": "ed25519:6qSL5BNQ6DB2zwQHcV2XZjSUy6GgioVwBcWGy4VEpUk6",
+  "hash": "CyHVzPqH9RxdRZc1qadwGDhfypfSe8vQBUWjaqJ9Z3Ni",
+  "nonce": 277434149000002,
+  "signatureVerified": true
+}

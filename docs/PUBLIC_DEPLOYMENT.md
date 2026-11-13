@@ -63,6 +63,71 @@ Do not paste secrets into chat or use administrative keys on Render.
 
 ## Acceptance still required
 
+Hosted checkpoint (2026-11-13): the user approved the Starter/1 GB disk cost,
+entered restricted runtime secrets manually, and deployed commit
+`291ac80556d74017e596db050b70cb933f4e14b7`. Render deployment
+`dep-dbrao3d6e07s73b3f4ig` reports Live. The production build, Node 24.13.0
+startup and public HTTPS `/healthz` (200, `{"ok":true}`) passed at
+https://we-inherit-night.onrender.com. Successful guarded startup also confirms
+the required disk mount and restricted roster checks passed.
+
+PARTIAL: first walletless creation failed before inclusion. The durable journal
+retains `open_campaign` transaction
+`9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg` in broadcast phase.
+Rebroadcasting the identical bytes with inclusion checking returned
+`InvalidTxError.NotEnoughBalance`: provisioner balance
+0.0499579391840732 NEAR versus required upfront cost 0.0509193907729125 NEAR,
+a 0.0009614515888393 NEAR shortfall before storage/headroom. Its restricted
+allowance is also only 0.05 NEAR. Contract capacity remains 5 and funded registry
+state was unchanged. No replacement transaction, key change or funding transfer
+was made. Funding/allowance remediation and durable recovery must precede
+further gameplay acceptance; the service is not yet verified playable.
+
+Funding follow-up: [all eleven runtime accounts are now gas-funded and verified](RUNTIME_GAS_FUNDING.md).
+The existing pending provisioning journal still requires safe reconciliation;
+this funding-only pass did not resume gameplay or modify Render configuration.
+
+Read-only reconciliation follow-up: both Testnet providers confirm the original
+provisioning hash is unknown, the contract's entire storage is unchanged from
+before the attempt, and its only storage key is `STATE`. There are no campaigns,
+replay tombstones, liabilities or allocated campaign treasuries; pool remains
+1.15 NEAR and all five capacity slots are free. Render SQLite contains zero
+campaigns/sessions/states/archives and one transaction in `broadcast`, with its
+provision job still `pending`. The signed nonce is 277462237000001; current
+restricted-key nonce is 277474089000000. It was rejected before inclusion for
+insufficient balance, has not expired by block age, and is now permanently
+nonce-invalid. It never executed; UNKNOWN_TRANSACTION alone was not treated as
+proof. No cleanup transactions are necessary.
+
+**STOPPED — not ready for New Game:** existing `scenario.reconcile()` has no
+terminal transition for this independently proven non-executed, obsolete-nonce
+case; `ensureCapacity()` therefore keeps the pending job. Safe resolution needs
+an evidence-preserving terminal journal/job transition under exclusive runtime
+ownership, rather than deletion or blind resubmission. No application change,
+database mutation, replacement signing, deployment or funding was performed.
+The unchanged record SHA-256 and full independent chain checks are retained in
+`evidence/provisioning-reconciliation/read-only-verification.json`.
+
+Recovery correction prepared: provisioning-only recovery verifies the exact
+signed payload/hash, checks UNKNOWN_TRANSACTION on two independent providers,
+then pins finalized access-key and storage queries to each provider's block.
+Both must show a strictly newer nonce and no world or permanent lifecycle
+tombstone. Payments and other uncertain transactions retain existing recovery.
+The running service's exclusive writer and provisioning queue own one atomic
+SQLite transition, rechecking the old record/job and retaining payload, hash,
+prior job and full proof while marking it rejected. Fresh creation uses a new
+campaign ID and current nonce. No manual database edits or discarded evidence.
+Local verification: one focused regression plus existing affected backend tests,
+47/47 PASS; production Testnet frontend build PASS. Initial sandbox HTTP checks
+were denied by local network permissions; rerun outside the sandbox passed.
+Hosted verification of this correction remains pending deployment.
+
+On this Windows installation, the existing clipboard helper and encrypted vault
+resolve outside the app sandbox under
+`C:\Users\gauge\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\WeInheritNight\Render-night-testnet\`.
+Use that actual helper location from ordinary Windows PowerShell; do not move or
+regenerate the credentials to compensate for the app's redirected filesystem.
+
 Verified public HTTPS/startup, actual mounted-disk persistence and restart,
 isolated walletless sessions, real prepaid payments and NPC transactions,
 save/resume, seven-night completion, financial settlement/archive/reclaim/replay,

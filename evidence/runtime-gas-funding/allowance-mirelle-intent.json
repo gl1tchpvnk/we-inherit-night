@@ -1,0 +1,10 @@
+{
+  "actor": "mirelle.we-inherit-night.testnet",
+  "receiver": "mirelle.we-inherit-night.testnet",
+  "publicKey": "ed25519:2YYzptqRm17DL3FEtPJGi2Sjyc9kbEBdaAC2YFKYGMUr",
+  "nonce": 277434109000002,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:GHYrTdxHv3szJLLwUPQ1iEMDq3h5gN7P5CPD2VW8a7NM",
+  "allowance": "125000000000000000000000"
+}

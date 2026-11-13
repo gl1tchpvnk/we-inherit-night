@@ -1,0 +1,8 @@
+{
+  "actor": "cassian.we-inherit-night.testnet",
+  "receiver": "cassian.we-inherit-night.testnet",
+  "publicKey": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+  "hash": "J6h9zcqY1cZLKg6xZZnkgswUwgyMDqhr9i7R3w62YgkK",
+  "nonce": 277434136000004,
+  "signatureVerified": true
+}

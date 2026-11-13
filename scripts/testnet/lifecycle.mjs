@@ -1,12 +1,12 @@
 import {createHash,randomUUID} from 'node:crypto';
 import {servicePolicy} from './config.mjs';
-import {createTestnetScenario} from './scenario.mjs';
+import {createTestnetScenario,proveUnexecutedProvision} from './scenario.mjs';
 
 export const archivedSnapshot=record=>({...record.snapshot,...(record.snapshot.closure?{closure:{...record.snapshot.closure,complete:!!record.complete},pending:!record.complete,actions:[]}:{}),proof:'Archived campaign: verified historical state; on-chain world reclaimed',archiveCommitment:record.commitment});
 
 // Both paths use the same durable signing/finality adapter as gameplay. No
 // provisioning FullAccess credential or arbitrary method enters the service.
-export function campaignLifecycle(store,config,sign,createScenario=createTestnetScenario){
+export function campaignLifecycle(store,config,sign,createScenario=createTestnetScenario,proveProvision=proveUnexecutedProvision){
   const policy=servicePolicy(config);
   let provisionQueue=Promise.resolve();
   async function ensureCapacity(){
@@ -16,6 +16,13 @@ export function campaignLifecycle(store,config,sign,createScenario=createTestnet
       const now=Date.now();
       const row=store.db.prepare('SELECT value FROM service_state WHERE id=?').get('provision');
       let job=row?JSON.parse(row.value):null;
+      if(job?.phase==='pending'){
+        const entries=store.transactions(job.id);
+        if(entries.length===1&&entries[0].args?.campaign_id===job.id){
+          const proof=await proveProvision(entries[0],config.provisioning.actors.provisioner);
+          if(proof){store.rejectProvisioning(entries[0],job,proof);job={...job,phase:'rejected'};}
+        }
+      }
       if(['done','rejected'].includes(job?.phase)&&now-job.started<policy.creation.cooldownMs)throw new Error('Campaign creation cooling down');
       if(!job||['done','rejected'].includes(job.phase)){
         job={id:'visitor-'+randomUUID(),phase:'pending',started:now};

@@ -1,0 +1,8 @@
+{
+  "actor": "vesper.we-inherit-night.testnet",
+  "receiver": "vesper.we-inherit-night.testnet",
+  "publicKey": "ed25519:7SDc1pJ4Xu8J8NbEnbRTfLwYnkq9Udfy845kyAXfSEjo",
+  "hash": "CKr7cP8cSmNNizLeqomhWRuhrgefcidSebvCetmbZqQJ",
+  "nonce": 277434053000009,
+  "signatureVerified": true
+}

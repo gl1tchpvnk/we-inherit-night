@@ -1,0 +1,226 @@
+{
+  "providers": [
+    "https://test.rpc.fastnear.com",
+    "https://near-testnet.drpc.org"
+  ],
+  "primary": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "Bq78gr8PG1Ro9eEViGBHeCvkhTo98D5vprZyzuAaTucp",
+        "id": "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4",
+        "outcome": {
+          "executor_id": "provisioner.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "2vHX9MyvXaKN4Y7BZmzUxyXfCq7TPG29zjuycoJe1UPa"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "2zkp6fAJ3XdGpXp1sXffjxit5D4wgMMxRT7VviNEQumb"
+          }
+        ]
+      },
+      {
+        "block_hash": "3Wq6aG59jkfHJgpZbYJzPKkLGU35iHgfPW1222wAtcVQ",
+        "id": "2vHX9MyvXaKN4Y7BZmzUxyXfCq7TPG29zjuycoJe1UPa",
+        "outcome": {
+          "executor_id": "win-funding-20261113-a.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "5RCSo8j4wg7qGsi5uvzx8x37SC1v37mYn2roRLkkF33m"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "125000000000000000000000"
+          }
+        }
+      ],
+      "hash": "6Dk12gJ83kEXrdbSjhXYPdPRQeN3ArnndunH8RfVUApt",
+      "nonce": 277468401000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+      "receiver_id": "provisioner.we-inherit-night.testnet",
+      "signature": "ed25519:388EJdvSj23vrYgNZCrPjx5gp3rafsz4Dnn9e6XVG4NenQ6dZMP2aqdzwZDLsh5c7NTrYNNf3GYN2tY57He9Kgcm",
+      "signer_id": "win-funding-20261113-a.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "7v7yuvvfzunKZaEMgqZ1WoX86zErm6kB1fxJLFr4EKad",
+      "id": "6Dk12gJ83kEXrdbSjhXYPdPRQeN3ArnndunH8RfVUApt",
+      "outcome": {
+        "executor_id": "win-funding-20261113-a.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4"
+        ],
+        "status": {
+          "SuccessReceiptId": "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "3SmSP9ue2uWxZwLw1nGFBce6bPye5K5yZouXxPVkAm32"
+        },
+        {
+          "direction": "Right",
+          "hash": "DLh9PPHpwgsR3XuJCnTUjRN8efDGw54q2bvtG8qGa4Cu"
+        }
+      ]
+    }
+  },
+  "independent": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "Bq78gr8PG1Ro9eEViGBHeCvkhTo98D5vprZyzuAaTucp",
+        "id": "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4",
+        "outcome": {
+          "executor_id": "provisioner.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "2vHX9MyvXaKN4Y7BZmzUxyXfCq7TPG29zjuycoJe1UPa"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "2zkp6fAJ3XdGpXp1sXffjxit5D4wgMMxRT7VviNEQumb"
+          }
+        ]
+      },
+      {
+        "block_hash": "3Wq6aG59jkfHJgpZbYJzPKkLGU35iHgfPW1222wAtcVQ",
+        "id": "2vHX9MyvXaKN4Y7BZmzUxyXfCq7TPG29zjuycoJe1UPa",
+        "outcome": {
+          "executor_id": "win-funding-20261113-a.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "5RCSo8j4wg7qGsi5uvzx8x37SC1v37mYn2roRLkkF33m"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "125000000000000000000000"
+          }
+        }
+      ],
+      "hash": "6Dk12gJ83kEXrdbSjhXYPdPRQeN3ArnndunH8RfVUApt",
+      "nonce": 277468401000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+      "receiver_id": "provisioner.we-inherit-night.testnet",
+      "signature": "ed25519:388EJdvSj23vrYgNZCrPjx5gp3rafsz4Dnn9e6XVG4NenQ6dZMP2aqdzwZDLsh5c7NTrYNNf3GYN2tY57He9Kgcm",
+      "signer_id": "win-funding-20261113-a.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "7v7yuvvfzunKZaEMgqZ1WoX86zErm6kB1fxJLFr4EKad",
+      "id": "6Dk12gJ83kEXrdbSjhXYPdPRQeN3ArnndunH8RfVUApt",
+      "outcome": {
+        "executor_id": "win-funding-20261113-a.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4"
+        ],
+        "status": {
+          "SuccessReceiptId": "SabJ4mEaUcq9L6q2txhCCSSjgw6uk26DCFgioHEv1W4"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": [
+        {
+          "direction": "Left",
+          "hash": "3SmSP9ue2uWxZwLw1nGFBce6bPye5K5yZouXxPVkAm32"
+        },
+        {
+          "direction": "Right",
+          "hash": "DLh9PPHpwgsR3XuJCnTUjRN8efDGw54q2bvtG8qGa4Cu"
+        }
+      ]
+    }
+  }
+}

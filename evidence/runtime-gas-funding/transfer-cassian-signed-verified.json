@@ -1,0 +1,8 @@
+{
+  "actor": "win-funding-20261113-a.testnet",
+  "receiver": "cassian.we-inherit-night.testnet",
+  "publicKey": "ed25519:8LGovLE5dh9bVwn7BTCchJ9o1uWmKi4huA6A63B5kS3X",
+  "hash": "FkjZCeDZCu6Wngmb7dKAJdJzYXr8bUphhqvZyQafzE3W",
+  "nonce": 277468401000004,
+  "signatureVerified": true
+}

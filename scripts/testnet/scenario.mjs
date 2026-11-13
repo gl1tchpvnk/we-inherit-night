@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
+import near from 'near-api-js';
 import {CONTRACT,gasForMethod,rpc,result,verifySigned} from './signing.mjs';
 
 export const METHODS={
@@ -26,6 +27,38 @@ export async function verifyRuntimeRoster(actors,query=result){
 }
 function serialize(actor,work){const run=(queues.get(actor)??Promise.resolve()).then(work);const tail=run.catch(()=>{});queues.set(actor,tail);return run.finally(()=>{if(queues.get(actor)===tail)queues.delete(actor);});}
 const success=t=>'SuccessValue' in t.status&&t.receipts_outcome.every(r=>!('Failure' in r.outcome.status));
+// Only provisioning can use absence as proof: successful creation leaves a
+// permanent lifecycle tombstone even after reclamation. Never apply to payments.
+export async function proveUnexecutedProvision(entry,actor,inspect=rpc){
+  if(!['signed','broadcast'].includes(entry.phase)||entry.method!=='open_campaign'||entry.actor!==actor.accountId||entry.publicKey!==actor.publicKey||!entry.payload)return null;
+  const id=entry.args?.campaign_id;
+  if(!/^[a-zA-Z0-9_-]{1,64}$/.test(id)||Object.keys(entry.args).length!==1)return null;
+  const tx=near.transactions.SignedTransaction.decode(Buffer.from(entry.payload,'base64')).transaction;
+  const nonce=tx.nonce.toString(),blockHash=near.utils.serialize.base_encode(Buffer.from(tx.blockHash));
+  const checked=verifySigned(entry.payload,{...actor,nonce,blockHash,method:entry.method,args:entry.args});
+  if(checked.hash!==entry.hash)return null;
+  const evidence=[];
+  for(const url of ['https://test.rpc.fastnear.com','https://near-testnet.drpc.org']){
+    const status=await inspect('tx',{tx_hash:entry.hash,sender_account_id:entry.actor,wait_until:'NONE'},url);
+    if(status.error?.cause?.name!=='UNKNOWN_TRANSACTION')return null;
+    const block=await inspect('block',{finality:'final'},url);
+    if(!block.result?.header?.hash)throw new Error('Provisioning proof unavailable');
+    const block_id=block.result.header.hash;
+    const key=await inspect('query',{request_type:'view_access_key',account_id:actor.accountId,public_key:actor.publicKey,block_id},url);
+    if(!key.result)throw new Error('Provisioning key proof unavailable');
+    restrictedPermission('provisioner',key.result,'open_campaign');
+    if(!Number.isSafeInteger(key.result.nonce)||BigInt(key.result.nonce)<=BigInt(nonce))return null;
+    const absent=[];
+    for(const prefix of ['campaign:v1:','lifecycle:v2:campaign:v1:']){
+      const state=await inspect('query',{request_type:'view_state',account_id:CONTRACT,prefix_base64:Buffer.from(prefix+id).toString('base64'),block_id},url);
+      if(!Array.isArray(state.result?.values))throw new Error('Provisioning state proof unavailable');
+      if(state.result.values.length)return null;
+      absent.push(prefix+id);
+    }
+    evidence.push({url,blockHash:block_id,blockHeight:block.result.header.height,currentNonce:String(key.result.nonce),signedNonce:nonce,status:'UNKNOWN_TRANSACTION',absent});
+  }
+  return {kind:'obsolete-nonce-and-absent-world-and-tombstone',checkedAt:new Date().toISOString(),hash:entry.hash,evidence};
+}
 export function finalized(t,expected){
   if(t.final_execution_status!=='FINAL'||t.transaction.hash!==expected.hash||t.transaction.public_key!==expected.publicKey||t.transaction.signer_id!==expected.actor||t.transaction.receiver_id!==CONTRACT)throw new Error('Transaction identity/finality mismatch; recovery required');
   const call=t.transaction.actions[0]?.FunctionCall;

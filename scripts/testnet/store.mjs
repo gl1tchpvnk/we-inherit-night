@@ -78,6 +78,17 @@ export class Store {
   readJson=async id=>{const r=this.db.prepare('SELECT value FROM states WHERE id=?').get(id);return r?JSON.parse(r.value):null;};
   saveJson=async(id,value)=>{this.db.prepare('INSERT INTO states VALUES (?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(id,JSON.stringify(value));};
   journal(id,campaignId,value){this.db.prepare('INSERT INTO transactions VALUES (?,?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(id,campaignId,JSON.stringify(value));}
+  rejectProvisioning(entry,job,proof){
+    this.db.exec('BEGIN IMMEDIATE');
+    try{
+      const current=this.transactions(job.id);
+      if(current.length!==1||JSON.stringify(current[0])!==JSON.stringify(entry)||this.db.prepare('SELECT value FROM service_state WHERE id=?').get('provision')?.value!==JSON.stringify(job)||job.phase!=='pending')throw new Error('Provisioning changed during verification');
+      const original=this.db.prepare('SELECT value FROM transactions WHERE id=?').get(entry.id).value;
+      this.journal(entry.id,job.id,{...entry,phase:'rejected',reason:'Proven permanently non-executable provisioning',recovery:{...proof,job,previousPhase:entry.phase,originalRecordSha256:createHash('sha256').update(original).digest('hex')}});
+      this.db.prepare('UPDATE service_state SET value=? WHERE id=?').run(JSON.stringify({...job,phase:'rejected',transaction:entry.hash}),'provision');
+      this.db.exec('COMMIT');
+    }catch(error){this.db.exec('ROLLBACK');throw error;}
+  }
   transactions(id){return this.db.prepare('SELECT id,value FROM transactions WHERE campaign_id=? ORDER BY rowid').all(id).map(r=>({id:r.id,...JSON.parse(r.value)}));}
   pendingForActor(account){return !!this.db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.actor')=? AND json_extract(value,'$.phase') NOT IN ('final','rejected','unsubmitted') LIMIT 1").get(account);}
 

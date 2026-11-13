@@ -1,0 +1,304 @@
+{
+  "providers": [
+    "https://test.rpc.fastnear.com",
+    "https://near-testnet.drpc.org"
+  ],
+  "primary": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "EaqhpBWnUsZs938AgQfEkERXM7GYdmd2r8TLN9QiZv3G",
+        "id": "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA",
+        "outcome": {
+          "executor_id": "marius.we-inherit-night.testnet",
+          "gas_burnt": 305273808606,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "Hs3pPKKVARUAZZfRRcRDuMT7FihM283Hn61zBdD58Mkh"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30527380860600000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "7TvpL1WZpEQvRx1uAw7cC8syg9eJE4UQsq6HZgFFuKSv"
+          },
+          {
+            "direction": "Right",
+            "hash": "8u7y4tsjZJ5fTJ6ReXQuZ9AD2XnqyJmZFJz6W2xoLEpB"
+          },
+          {
+            "direction": "Right",
+            "hash": "7RUfarzN9HjFnDSegaRrjPqdgQMdNXbVcY98CV6TaxPo"
+          }
+        ]
+      },
+      {
+        "block_hash": "6aZZ17LkDPVTw1rrtxvTWLz5ZRgH6LGds62fXwFcCJyg",
+        "id": "Hs3pPKKVARUAZZfRRcRDuMT7FihM283Hn61zBdD58Mkh",
+        "outcome": {
+          "executor_id": "marius.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "D5jxpNDGdMxqMYfZCsfXZeELU3oSvzyPtD52Uw3zpnqT"
+          },
+          {
+            "direction": "Right",
+            "hash": "3Xa8Vb2RDLxdQEzwDnHfyT9pyvSQnxjyNFCSHwJ9NUXy"
+          },
+          {
+            "direction": "Right",
+            "hash": "EmfuPixh66QcG4TmiZLNvTfggMZRVs14NkHUxwAY1dgY"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "125000000000000000000000",
+                  "method_names": [
+                    "grant_access",
+                    "revoke_grant"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2"
+          }
+        }
+      ],
+      "hash": "CNzFJoZ1t1WUn3CZ1xRqCgLzExGwPFuLbrKCCJf9iaLy",
+      "nonce": 277434081000004,
+      "priority_fee": 0,
+      "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+      "receiver_id": "marius.we-inherit-night.testnet",
+      "signature": "ed25519:49WRxXffBebpVfsbjM8SQKVCZBUK4zHe7xgYsUwzoJ6WfE5N1meR9yKfSqy1W4M5GnyU66aUPxeUYbDtjgRaArkp",
+      "signer_id": "marius.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "EaqhpBWnUsZs938AgQfEkERXM7GYdmd2r8TLN9QiZv3G",
+      "id": "CNzFJoZ1t1WUn3CZ1xRqCgLzExGwPFuLbrKCCJf9iaLy",
+      "outcome": {
+        "executor_id": "marius.we-inherit-night.testnet",
+        "gas_burnt": 305273808606,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA"
+        ],
+        "status": {
+          "SuccessReceiptId": "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA"
+        },
+        "tokens_burnt": "30527380860600000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "EgM9UfnzohFaVbvoTCLAfowWfFQfKLeoM1zaQ8DGazXd"
+        },
+        {
+          "direction": "Right",
+          "hash": "8u7y4tsjZJ5fTJ6ReXQuZ9AD2XnqyJmZFJz6W2xoLEpB"
+        },
+        {
+          "direction": "Right",
+          "hash": "7RUfarzN9HjFnDSegaRrjPqdgQMdNXbVcY98CV6TaxPo"
+        }
+      ]
+    }
+  },
+  "independent": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "EaqhpBWnUsZs938AgQfEkERXM7GYdmd2r8TLN9QiZv3G",
+        "id": "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA",
+        "outcome": {
+          "executor_id": "marius.we-inherit-night.testnet",
+          "gas_burnt": 305273808606,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "Hs3pPKKVARUAZZfRRcRDuMT7FihM283Hn61zBdD58Mkh"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30527380860600000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "7TvpL1WZpEQvRx1uAw7cC8syg9eJE4UQsq6HZgFFuKSv"
+          },
+          {
+            "direction": "Right",
+            "hash": "8u7y4tsjZJ5fTJ6ReXQuZ9AD2XnqyJmZFJz6W2xoLEpB"
+          },
+          {
+            "direction": "Right",
+            "hash": "7RUfarzN9HjFnDSegaRrjPqdgQMdNXbVcY98CV6TaxPo"
+          }
+        ]
+      },
+      {
+        "block_hash": "6aZZ17LkDPVTw1rrtxvTWLz5ZRgH6LGds62fXwFcCJyg",
+        "id": "Hs3pPKKVARUAZZfRRcRDuMT7FihM283Hn61zBdD58Mkh",
+        "outcome": {
+          "executor_id": "marius.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "D5jxpNDGdMxqMYfZCsfXZeELU3oSvzyPtD52Uw3zpnqT"
+          },
+          {
+            "direction": "Right",
+            "hash": "3Xa8Vb2RDLxdQEzwDnHfyT9pyvSQnxjyNFCSHwJ9NUXy"
+          },
+          {
+            "direction": "Right",
+            "hash": "EmfuPixh66QcG4TmiZLNvTfggMZRVs14NkHUxwAY1dgY"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "125000000000000000000000",
+                  "method_names": [
+                    "grant_access",
+                    "revoke_grant"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:GPKAXQC5bkdTpfM1wccmvUQJ9wCeKZ239C6K3wyesgw2"
+          }
+        }
+      ],
+      "hash": "CNzFJoZ1t1WUn3CZ1xRqCgLzExGwPFuLbrKCCJf9iaLy",
+      "nonce": 277434081000004,
+      "priority_fee": 0,
+      "public_key": "ed25519:CE2tyLVnVM7VS7STxtmMnn9txLbSuuGD4LW1PjYRDCAr",
+      "receiver_id": "marius.we-inherit-night.testnet",
+      "signature": "ed25519:49WRxXffBebpVfsbjM8SQKVCZBUK4zHe7xgYsUwzoJ6WfE5N1meR9yKfSqy1W4M5GnyU66aUPxeUYbDtjgRaArkp",
+      "signer_id": "marius.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "EaqhpBWnUsZs938AgQfEkERXM7GYdmd2r8TLN9QiZv3G",
+      "id": "CNzFJoZ1t1WUn3CZ1xRqCgLzExGwPFuLbrKCCJf9iaLy",
+      "outcome": {
+        "executor_id": "marius.we-inherit-night.testnet",
+        "gas_burnt": 305273808606,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA"
+        ],
+        "status": {
+          "SuccessReceiptId": "AncxL5N2dhsWduEhg391fi2CMgZuJdrNiAmW2pp3T9eA"
+        },
+        "tokens_burnt": "30527380860600000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "EgM9UfnzohFaVbvoTCLAfowWfFQfKLeoM1zaQ8DGazXd"
+        },
+        {
+          "direction": "Right",
+          "hash": "8u7y4tsjZJ5fTJ6ReXQuZ9AD2XnqyJmZFJz6W2xoLEpB"
+        },
+        {
+          "direction": "Right",
+          "hash": "7RUfarzN9HjFnDSegaRrjPqdgQMdNXbVcY98CV6TaxPo"
+        }
+      ]
+    }
+  }
+}

@@ -7,7 +7,8 @@ import near from 'near-api-js';
 import {Store} from '../scripts/testnet/store.mjs';
 import {runtimeConfig,acquireWriter} from '../scripts/testnet/config.mjs';
 import {createEnvironmentSigner,CONTRACT,gasForMethod,verifySigned} from '../scripts/testnet/signing.mjs';
-import {createTestnetScenario,METHODS,verifyRuntimeRoster} from '../scripts/testnet/scenario.mjs';
+import {createTestnetScenario,METHODS,verifyRuntimeRoster,proveUnexecutedProvision} from '../scripts/testnet/scenario.mjs';
+import {campaignLifecycle} from '../scripts/testnet/lifecycle.mjs';
 import {publicSnapshot,createGameServer} from '../scripts/testnet/server.mjs';
 import {createCampaignSession} from '../scripts/sandbox/campaign.mjs';
 import {newCampaign} from '../src/game.ts';
@@ -32,6 +33,35 @@ function outcome(payload){
   return {final_execution_status:'FINAL',status:{SuccessValue:''},receipts_outcome:[],transaction:{hash:checked.hash,public_key:expected.publicKey,signer_id:tx.signerId,receiver_id:CONTRACT,actions:[{FunctionCall:{method_name:c.methodName,deposit:'0',gas:gasForMethod(c.methodName),args:Buffer.from(c.args).toString('base64')}}]}};
 }
 const query=async(_method,p)=>p.request_type==='view_access_key'?{permission:{FunctionCall:{receiver_id:CONTRACT,method_names:['revoke_grant'],allowance:'10000000000000000000000'}},nonce:1,block_hash:hash,block_height:1}:{result:[...Buffer.from(JSON.stringify({campaign_id:'one',night:0,next_nonce:0}))]};
+
+test('obsolete unfunded provisioning closes atomically only with independent absence proof, preserves evidence and permits one fresh intent',async()=>{
+ const f=await fixture(),s=signingFixture(),release=acquireWriter(join(f.dir,'game.sqlite'));
+ try{
+  assert.throws(()=>acquireWriter(join(f.dir,'game.sqlite')),/Another application/);
+  const job={id:'one',phase:'pending',started:0};
+  const signed=await s.sign({...s.actors.provisioner,nonce:2,blockHash:hash,method:'open_campaign',args:{campaign_id:'one'}});
+  f.store.journal('old','one',{actor:s.actors.provisioner.accountId,publicKey:s.actors.provisioner.publicKey,method:'open_campaign',args:{campaign_id:'one'},phase:'broadcast',...signed});
+  f.store.db.prepare('INSERT INTO service_state VALUES (?,?)').run('provision',JSON.stringify(job));
+  const entry=f.store.transactions('one')[0];let fault='',sends=0;
+  const inspect=async(method,p,url)=>{
+   assert.notEqual(method,'send_tx');
+   if(method==='tx')return fault==='known'?{result:{final_execution_status:'FINAL'}}:{error:{cause:{name:'UNKNOWN_TRANSACTION'}}};
+   if(method==='block')return {result:{header:{hash, height:10}}};
+   if(p.request_type==='view_access_key')return {result:{nonce:fault==='nonce'?2:100,permission:{FunctionCall:{receiver_id:CONTRACT,method_names:['open_campaign'],allowance:'1'}}}};
+   if(fault==='rpc'&&url.includes('drpc'))throw new Error('unavailable');
+   return {result:{values:fault==='tombstone'&&Buffer.from(p.prefix_base64,'base64').toString().startsWith('lifecycle:')?[{key:'retained'}]:[]}};
+  };
+  for(fault of ['known','nonce','tombstone'])assert.equal(await proveUnexecutedProvision(entry,s.actors.provisioner,inspect),null);
+  fault='rpc';await assert.rejects(proveUnexecutedProvision(entry,s.actors.provisioner,inspect),/unavailable/);
+  assert.deepEqual(f.store.transactions('one')[0],entry);fault='';
+  const q=async(method,p)=>p.request_type==='view_access_key'?{nonce:100,block_hash:hash,permission:{FunctionCall:{receiver_id:CONTRACT,method_names:['open_campaign'],allowance:'1'}}}:{result:[...Buffer.from(JSON.stringify(p.method_name==='campaign_resources'?{prepaid:true,status:'active'}:{campaign_id:JSON.parse(Buffer.from(p.args_base64,'base64')).campaign_id,night:0}))]};
+  const create=(binding,store,sign)=>createTestnetScenario(binding,store,sign,{query:q,send:async(method,p)=>{assert.equal(method,'send_tx');sends++;const tx=near.transactions.SignedTransaction.decode(Buffer.from(p.signed_tx_base64,'base64')).transaction;assert.equal(String(tx.nonce),'101');assert.notEqual(JSON.parse(Buffer.from(tx.actions[0].functionCall.args)).campaign_id,'one');return {result:outcome(p.signed_tx_base64)};}});
+  const life=campaignLifecycle(f.store,{provisioning:{contractId:CONTRACT,actors:s.actors}},s.sign,create,(e,a)=>proveUnexecutedProvision(e,a,inspect));
+  await life.ensureCapacity();await life.ensureCapacity();
+  const old=f.store.transactions('one')[0];assert.equal(old.phase,'rejected');assert.equal(old.payload,entry.payload);assert.equal(old.hash,entry.hash);assert.deepEqual(old.recovery.job,job);assert.equal(old.recovery.evidence.length,2);
+  assert.equal(sends,1);assert.equal(f.store.pendingForActor(s.actors.provisioner.accountId),false);assert.equal(f.store.db.prepare('SELECT count(*) n FROM campaigns').get().n,1);
+ }finally{release();await f.clean();}
+});
 
 test('Linux-compatible offline signer uses exact synthetic keys; malformed and excess credentials fail closed',async()=>{
   const {sign,actors,credentials}=signingFixture();

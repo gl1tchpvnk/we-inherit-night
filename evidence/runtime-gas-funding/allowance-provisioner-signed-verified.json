@@ -1,0 +1,8 @@
+{
+  "actor": "provisioner.we-inherit-night.testnet",
+  "receiver": "provisioner.we-inherit-night.testnet",
+  "publicKey": "ed25519:CPKB3yezj2baAgwkdqLoM544a3NTgbdz17p25UMB7WnK",
+  "hash": "7aAjFAmDQiFNW523Kr2m5GSZbAdZGZ71XcyeoHBuhjzT",
+  "nonce": 277455924000002,
+  "signatureVerified": true
+}

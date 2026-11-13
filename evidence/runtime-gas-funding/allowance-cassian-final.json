@@ -1,0 +1,274 @@
+{
+  "providers": [
+    "https://test.rpc.fastnear.com",
+    "https://near-testnet.drpc.org"
+  ],
+  "primary": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "8hHVmf9jeSmAgSkanHEc8a6iHmkRiPyCA213YZZtj6xh",
+        "id": "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw",
+        "outcome": {
+          "executor_id": "cassian.we-inherit-night.testnet",
+          "gas_burnt": 305329643205,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "3BydX5HBF8iFnJiQCxG7aQjm2MronZXrR7eSHD5qy9xy"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30532964320500000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "BnuEV8nP8gWxRxzq2ti3fcTVtHG655o1GK1dNeWBhjdL"
+          },
+          {
+            "direction": "Left",
+            "hash": "4uTkxeDsGM2u6MsxvUycKgvvihXbf6ft1tejH16iVSxc"
+          }
+        ]
+      },
+      {
+        "block_hash": "6j83K3euhU9pbbod1HzrtJtGchvoJsWMwZnYnv45B7sG",
+        "id": "3BydX5HBF8iFnJiQCxG7aQjm2MronZXrR7eSHD5qy9xy",
+        "outcome": {
+          "executor_id": "cassian.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "DHmtX6pBME7zp8jEhkAiLAAv1PRk2X48CVfeszpcg6YY"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "250000000000000000000000",
+                  "method_names": [
+                    "enter_room",
+                    "accept_funded_passage",
+                    "refund_passage_budget"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2"
+          }
+        }
+      ],
+      "hash": "J6h9zcqY1cZLKg6xZZnkgswUwgyMDqhr9i7R3w62YgkK",
+      "nonce": 277434136000004,
+      "priority_fee": 0,
+      "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+      "receiver_id": "cassian.we-inherit-night.testnet",
+      "signature": "ed25519:5La1GEYGyWdMxWt8oYoRZvQS4QS51GjsxbHKoNn7gLnXyRH5EiW8AcYVz5DfWGW19bs9gUkaWbP8YLajhjFqM3LG",
+      "signer_id": "cassian.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "8hHVmf9jeSmAgSkanHEc8a6iHmkRiPyCA213YZZtj6xh",
+      "id": "J6h9zcqY1cZLKg6xZZnkgswUwgyMDqhr9i7R3w62YgkK",
+      "outcome": {
+        "executor_id": "cassian.we-inherit-night.testnet",
+        "gas_burnt": 305329643205,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw"
+        ],
+        "status": {
+          "SuccessReceiptId": "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw"
+        },
+        "tokens_burnt": "30532964320500000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "8e9Ck6jaZEmFob656uaTs1y7pDnGbFRtf9brWM1msH8S"
+        },
+        {
+          "direction": "Right",
+          "hash": "DQW73jgYFrQAno4kbU4sqeVUyV778EU44L5Kn1egyYka"
+        }
+      ]
+    }
+  },
+  "independent": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "8hHVmf9jeSmAgSkanHEc8a6iHmkRiPyCA213YZZtj6xh",
+        "id": "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw",
+        "outcome": {
+          "executor_id": "cassian.we-inherit-night.testnet",
+          "gas_burnt": 305329643205,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "3BydX5HBF8iFnJiQCxG7aQjm2MronZXrR7eSHD5qy9xy"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "30532964320500000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "BnuEV8nP8gWxRxzq2ti3fcTVtHG655o1GK1dNeWBhjdL"
+          },
+          {
+            "direction": "Left",
+            "hash": "4uTkxeDsGM2u6MsxvUycKgvvihXbf6ft1tejH16iVSxc"
+          }
+        ]
+      },
+      {
+        "block_hash": "6j83K3euhU9pbbod1HzrtJtGchvoJsWMwZnYnv45B7sG",
+        "id": "3BydX5HBF8iFnJiQCxG7aQjm2MronZXrR7eSHD5qy9xy",
+        "outcome": {
+          "executor_id": "cassian.we-inherit-night.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "DHmtX6pBME7zp8jEhkAiLAAv1PRk2X48CVfeszpcg6YY"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "DeleteKey": {
+            "public_key": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": {
+                "FunctionCall": {
+                  "allowance": "250000000000000000000000",
+                  "method_names": [
+                    "enter_room",
+                    "accept_funded_passage",
+                    "refund_passage_budget"
+                  ],
+                  "receiver_id": "night.we-inherit-night.testnet"
+                }
+              }
+            },
+            "public_key": "ed25519:7QiXrex5MbxoPsYm5mfeYbvCx8CcgzL52XZzoZobH8N2"
+          }
+        }
+      ],
+      "hash": "J6h9zcqY1cZLKg6xZZnkgswUwgyMDqhr9i7R3w62YgkK",
+      "nonce": 277434136000004,
+      "priority_fee": 0,
+      "public_key": "ed25519:BDa7xnpxT72tDZVPp3udwz3MPoy56uodBqXB7sjWsoGx",
+      "receiver_id": "cassian.we-inherit-night.testnet",
+      "signature": "ed25519:5La1GEYGyWdMxWt8oYoRZvQS4QS51GjsxbHKoNn7gLnXyRH5EiW8AcYVz5DfWGW19bs9gUkaWbP8YLajhjFqM3LG",
+      "signer_id": "cassian.we-inherit-night.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "8hHVmf9jeSmAgSkanHEc8a6iHmkRiPyCA213YZZtj6xh",
+      "id": "J6h9zcqY1cZLKg6xZZnkgswUwgyMDqhr9i7R3w62YgkK",
+      "outcome": {
+        "executor_id": "cassian.we-inherit-night.testnet",
+        "gas_burnt": 305329643205,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw"
+        ],
+        "status": {
+          "SuccessReceiptId": "HYYr9KjpTufEnFMkRMYkkVoCvdHLuDu4YLeThZf8WAjw"
+        },
+        "tokens_burnt": "30532964320500000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "8e9Ck6jaZEmFob656uaTs1y7pDnGbFRtf9brWM1msH8S"
+        },
+        {
+          "direction": "Right",
+          "hash": "DQW73jgYFrQAno4kbU4sqeVUyV778EU44L5Kn1egyYka"
+        }
+      ]
+    }
+  }
+}

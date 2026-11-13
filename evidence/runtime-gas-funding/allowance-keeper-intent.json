@@ -1,0 +1,10 @@
+{
+  "actor": "keeper.we-inherit-night.testnet",
+  "receiver": "keeper.we-inherit-night.testnet",
+  "publicKey": "ed25519:3CKR8uJWvKjbECXMxXimoE61XRMmoc2Yusz1hYPxyPzB",
+  "nonce": 277434024000003,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:7fJGW1whUCPU8aZQvkT7zdB7RCFSFf8sm2ztfjuGXXNU",
+  "allowance": "225000000000000000000000"
+}

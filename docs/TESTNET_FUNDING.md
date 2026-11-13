@@ -1,5 +1,11 @@
 # Five-campaign Testnet funding — verified
 
+**Superseding runtime gas review:** [Runtime gas funding](RUNTIME_GAS_FUNDING.md)
+corrects the upfront gas-purchase assumption below. All eleven finite allowances
+were increased and three actor balances topped up by 0.20 NEAR total. Remaining
+reserve is 15.79982145395 NEAR. Contract pool/capacity were not changed. The
+original transactions and balances below remain historical evidence.
+
 **PASS: funding and on-chain capacity 5.** All seven transactions were independently
 verified FINAL-success through FastNEAR and dRPC. No contract code change,
 redeployment, gameplay transaction, Render work, service creation or Git push.

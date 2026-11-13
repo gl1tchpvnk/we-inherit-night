@@ -429,3 +429,36 @@
 - Dependency audit: 13 low transitive elliptic findings, no moderate/high/critical; no unrelated dependency updates. Existing regression evidence reused.
 - Render sign-in completed by user; Blueprint setup awaits reviewed repository push and explicit payment/manual-secret steps. No service or secret upload yet.
 - Evidence/docs: evidence/public-deployment and docs/PUBLIC_DEPLOYMENT.md. Public gameplay acceptance remains NOT VERIFIED.
+
+## Public deployment — hosted checkpoint
+- User approved paid Starter/1 GB disk and manually entered runtime credentials; deployed commit 291ac80.
+- PASS: Render build/Node 24 guarded startup, Live status, public HTTPS health 200 and title page.
+- PARTIAL: first campaign provisioning blocked by provisioner account gas backing; balance 0.0499579391840732 NEAR versus required 0.0509193907729125 NEAR. Restricted allowance remains 0.05 NEAR.
+- Exact signed transaction remains durably journaled; identical-byte submission diagnosed NotEnoughBalance. No replacement intent, funding or key mutation performed.
+- Read-only chain check: capacity 5 and funded contract state unchanged. Seven-night hosted gameplay, restart persistence and performance remain unverified.
+- Next: approve bounded Testnet provisioner funding/allowance remediation, reconcile the recorded intent, then resume hosted acceptance. Details in docs/PUBLIC_DEPLOYMENT.md.
+
+## Runtime gas funding — PASS
+- Reviewed all eleven accounts against five-game call envelopes, actual protocol-88 upfront purchase price, storage, fees and operating headroom.
+- Corrected earlier budget omission: receipt gas buys at 1e9 yocto/gas while observed block burn price is 1e8; gas and allowance refunds are distinct from upfront solvency.
+- Transferred 0.20 Testnet NEAR from existing reserve A: provisioner 0.125, Lucien 0.025, Cassian 0.05; no other balance shortfalls.
+- Increased eleven finite FunctionCall allowances to 0.125–0.25 NEAR with atomic same-public-key replacement; exact receiver/methods and all administrative permissions preserved.
+- PASS: fourteen transactions and receipts FINAL-success through FastNEAR and dRPC; exact fee/balance reconciliation and independent post-operation account/key checks.
+- PASS: contract balance/code/state/pool/capacity/access keys unchanged. Remaining reserves 15.79982145395 NEAR. No new accounts, faucet, secret exports or Render changes.
+- Evidence/docs: evidence/runtime-gas-funding, docs/RUNTIME_GAS_FUNDING.md; funding/key/deployment status references updated. No builds/regressions needed for this operational-only pass.
+- Stopped after funding verification. Old provisioning hash remains unknown; nonce-advanced pending journal requires safe reconciliation in a later authorized gameplay pass. No gameplay, commit or push.
+
+## Provisioning reconciliation — BLOCKED
+- Inspected Render SQLite in a read-only transaction: zero campaigns, sessions, history, states, archives or activity records; one broadcast transaction and one pending provision job.
+- Both Testnet RPC providers: no campaign/world/tombstone storage; zero liabilities/allocated treasuries; unchanged pool 1.15 NEAR; capacity 5 with all five slots available.
+- Original signed nonce 277462237000001 is below current key nonce 277474089000000. Transaction never executed (pre-inclusion balance rejection and unchanged full state), is not yet age-expired, and can no longer execute.
+- No campaigns exist to settle/archive/reclaim. Original signed record and database history retained unchanged; record digest and finalized read-only evidence saved.
+- STOPPED at existing backend recovery limitation: no terminal transition for proven non-execution plus obsolete nonce; pending job blocks New Game. Safe evidence-preserving journal/job reconciliation under exclusive ownership is required.
+- No resubmission, replacement transaction, DB mutation, funding, contract/app changes, deployment, commit or push. See docs/PUBLIC_DEPLOYMENT.md and evidence/provisioning-reconciliation/read-only-verification.json.
+
+## Stuck provisioning correction — local verification
+- Added provisioning-only terminal recovery requiring exact signed identity, two independent UNKNOWN_TRANSACTION checks, finalized newer nonce and absent world/permanent tombstone.
+- Atomic SQLite journal/job transition runs inside existing exclusive service writer/provision queue, preserves signed bytes and proof, and allows a fresh campaign identity/current nonce.
+- Other uncertain transactions and payments remain blocked/reconciled by existing rules; no schema, contract, gameplay, funding or credential changes.
+- PASS: one focused regression including fail-closed uncertainty/tombstone/provider cases and fresh nonce, 47 affected backend checks total; production Testnet frontend build.
+- Next: secret scan, push reviewed correction, deploy existing Render service, verify one fresh New Game and independent FINAL receipt. No broad suite requested or run.

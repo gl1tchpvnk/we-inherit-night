@@ -1,0 +1,10 @@
+{
+  "actor": "sabine.we-inherit-night.testnet",
+  "receiver": "sabine.we-inherit-night.testnet",
+  "publicKey": "ed25519:6qSL5BNQ6DB2zwQHcV2XZjSUy6GgioVwBcWGy4VEpUk6",
+  "nonce": 277434149000002,
+  "network": "testnet",
+  "transfer": null,
+  "runtimePublicKey": "ed25519:4hEvFx5QpHBGeW3y2cyeM4A6bojnvkHjm8BA9qyi4xXa",
+  "allowance": "125000000000000000000000"
+}

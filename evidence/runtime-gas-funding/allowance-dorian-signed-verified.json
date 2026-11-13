@@ -1,0 +1,8 @@
+{
+  "actor": "dorian.we-inherit-night.testnet",
+  "receiver": "dorian.we-inherit-night.testnet",
+  "publicKey": "ed25519:81aDBUVCuJ4FLyaX8JxPfGKFgvRYRbA3UszgTKhvpTdw",
+  "hash": "EU1RjPujF724QGhn9BJBp1jnaXUuf7zC1ptyBx99K1Qu",
+  "nonce": 277434122000002,
+  "signatureVerified": true
+}

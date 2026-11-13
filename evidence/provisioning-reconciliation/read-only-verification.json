@@ -1,0 +1,174 @@
+{
+  "checkedAt": "2026-11-13T06:42:45.362Z",
+  "network": "testnet",
+  "sqliteReadOnlyInventory": {
+    "counts": {
+      "campaigns": 0,
+      "sessions": 0,
+      "session_history": 0,
+      "states": 0,
+      "transactions": 1,
+      "archives": 0,
+      "campaign_activity": 0
+    },
+    "provision": {
+      "id": "visitor-5eac0ece-5ecc-46d6-a590-82e4a98be21c",
+      "phase": "pending",
+      "started": 1794550894025
+    },
+    "transaction": {
+      "id": "4db2c813af177a8b844a9c26d2661da55dfad2a5805f31a1c798b25af5d030a4",
+      "phase": "broadcast",
+      "hash": "9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg",
+      "nonce": "277462237000001",
+      "blockHash": "GFZQcu4toMALLPh5ZENrmaRKhxXGuv1FM7V4Y3AEseKb",
+      "recordSha256": "0292963b6c649220bdd3dd296123e46cdcda9b3225782f9e5a9e115b4e779ffa"
+    }
+  },
+  "providers": [
+    {
+      "url": "https://test.rpc.fastnear.com",
+      "blockHeight": 277474875,
+      "blockHash": "6pgkcjRFn5hQNcme8gukajiDwZfbKff9oWxvqt84Mrbu",
+      "state": {
+        "block_hash": "6pgkcjRFn5hQNcme8gukajiDwZfbKff9oWxvqt84Mrbu",
+        "block_height": 277474875,
+        "values": [
+          {
+            "key": "U1RBVEU=",
+            "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAS3p76n4XzAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQFAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+          }
+        ]
+      },
+      "account": {
+        "amount": "10090308464902656700000000",
+        "block_hash": "6pgkcjRFn5hQNcme8gukajiDwZfbKff9oWxvqt84Mrbu",
+        "block_height": 277474875,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 584636
+      },
+      "key": {
+        "block_hash": "6pgkcjRFn5hQNcme8gukajiDwZfbKff9oWxvqt84Mrbu",
+        "block_height": 277474875,
+        "nonce": 277474089000000,
+        "permission": {
+          "FunctionCall": {
+            "allowance": "150000000000000000000000",
+            "method_names": [
+              "open_campaign"
+            ],
+            "receiver_id": "night.we-inherit-night.testnet"
+          }
+        }
+      },
+      "balances": {
+        "liabilities": "0",
+        "campaignTreasuries": "0",
+        "pool": "1150000000000000000000000",
+        "active": 0,
+        "capacity": 5
+      },
+      "storageKeys": [
+        "STATE"
+      ],
+      "tx": {
+        "http": 200,
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "requested_transaction_hash": "9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg"
+            },
+            "name": "UNKNOWN_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "Transaction 9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg doesn't exist"
+        },
+        "id": "readonly-reconciliation"
+      },
+      "originalBlockHeight": 277472739,
+      "validityBlocks": 86400,
+      "expiredByBlockAge": false,
+      "nonceInvalid": true
+    },
+    {
+      "url": "https://near-testnet.drpc.org",
+      "blockHeight": 277474877,
+      "blockHash": "7ZmD1PSp7qSwkUogFkwY6LRxp4PtoxGC7nUa8fwUytMK",
+      "state": {
+        "block_hash": "7ZmD1PSp7qSwkUogFkwY6LRxp4PtoxGC7nUa8fwUytMK",
+        "block_height": 277474877,
+        "values": [
+          {
+            "key": "U1RBVEU=",
+            "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAS3p76n4XzAAAAAAAAAAAAAAEkAAAAcHJvdmlzaW9uZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0CgAAAB8AAAB2ZXNwZXIud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHBsYXllci53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAa2VlcGVyLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCIAAABzZXJhcGhpbmUud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAG1hcml1cy53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQfAAAAbHVjaWVuLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldCAAAABtaXJlbGxlLndlLWluaGVyaXQtbmlnaHQudGVzdG5ldB8AAABkb3JpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0IAAAAGNhc3NpYW4ud2UtaW5oZXJpdC1uaWdodC50ZXN0bmV0HwAAAHNhYmluZS53ZS1pbmhlcml0LW5pZ2h0LnRlc3RuZXQFAAAACgAAAAAAAAAAAADJ6iaDZ3gIAAAAAAAAAAAAAAAAAAA="
+          }
+        ]
+      },
+      "account": {
+        "amount": "10090308464902656700000000",
+        "block_hash": "7ZmD1PSp7qSwkUogFkwY6LRxp4PtoxGC7nUa8fwUytMK",
+        "block_height": 277474877,
+        "code_hash": "BqvWZg8ztTnwk6xSWBBURScjhbCcZ4LfpYWwJkSNSTM9",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 584636
+      },
+      "key": {
+        "block_hash": "7ZmD1PSp7qSwkUogFkwY6LRxp4PtoxGC7nUa8fwUytMK",
+        "block_height": 277474877,
+        "nonce": 277474089000000,
+        "permission": {
+          "FunctionCall": {
+            "allowance": "150000000000000000000000",
+            "method_names": [
+              "open_campaign"
+            ],
+            "receiver_id": "night.we-inherit-night.testnet"
+          }
+        }
+      },
+      "balances": {
+        "liabilities": "0",
+        "campaignTreasuries": "0",
+        "pool": "1150000000000000000000000",
+        "active": 0,
+        "capacity": 5
+      },
+      "storageKeys": [
+        "STATE"
+      ],
+      "tx": {
+        "http": 200,
+        "id": "readonly-reconciliation",
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "requested_transaction_hash": "9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg"
+            },
+            "name": "UNKNOWN_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "Transaction 9Dc5Gtrux5zwbAYZ56bdotq8kv4Rk7579SZwu2VykXLg doesn't exist"
+        }
+      },
+      "originalBlockHeight": 277472739,
+      "validityBlocks": 86400,
+      "expiredByBlockAge": false,
+      "nonceInvalid": true
+    }
+  ],
+  "classification": "Never executed: original pre-inclusion insufficient-balance rejection; now permanently nonce-invalid after same-key allowance replacement. UNKNOWN_TRANSACTION alone was not used as proof.",
+  "campaigns": [],
+  "obligations": [],
+  "availableCapacity": 5,
+  "contractStateUnchangedSinceBeforeAttempt": true,
+  "remainingBlocker": "SQLite transaction remains broadcast and provision job pending. Existing reconcile has no terminal transition for independently proven non-inclusion plus obsolete nonce. No journal mutation, resubmission or replacement signing performed."
+}

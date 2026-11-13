@@ -2,11 +2,11 @@
 
 Receiver for every new key: `night.we-inherit-night.testnet`. Network: **Testnet only**.
 
-Current funding follow-up: the same keeper key now has **0.10 NEAR** allowance
-and Seraphine's has **0.075 NEAR**; the other nine retain **0.05 NEAR**. Receiver,
+Current funding follow-up: all eleven same-key finite allowances now range from
+**0.125 to 0.25 NEAR**, based on the corrected five-campaign gas budget. Receiver,
 method restrictions, public/private keypairs and Render secret configuration are
-unchanged. See [finalized allowance changes](TESTNET_FUNDING.md). The installation
-record below describes the original allowances.
+unchanged. See [current allowances and FINAL receipts](RUNTIME_GAS_FUNDING.md).
+The installation record below describes the original allowances.
 
 Eleven independent Ed25519 keypairs were generated for the existing immutable
 roster. Each installed public key has **FunctionCall permissions only**, the exact
