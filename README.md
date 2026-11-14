@@ -7,6 +7,8 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+Investigation continuity and encounter hierarchy: **IMPLEMENTED locally**. Current-authority dialogue, shared finding reads, primary/optional/review grouping, secondary Feed, final-demand emphasis and character finale polish. See [verification and limits](docs/INVESTIGATION_CONTINUITY.md).
+
 Narrative V2: **IMPLEMENTED locally, not deployed**. Applied all 207 approved
 dispositions, preserving consequential terms and verified-outcome boundaries.
 PASS: 68 focused tests and production build. See the

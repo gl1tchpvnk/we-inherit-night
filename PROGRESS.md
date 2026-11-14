@@ -683,3 +683,14 @@
 - Prior unchanged implementation evidence remains recorded above: 212 automated regressions and 11 room/navigation browser fixture scenarios; earlier scoped Sandbox balance/recovery checks are in docs/BLOOD_BALANCE.md.
 - No contract, backend, infrastructure, environment or funding changes included. Superseded unapproved PROLOGUE_V3_PROPOSAL.md remains local and excluded.
 - Render auto-deploy is off; deployment and public smoke verification require the existing manual deployment workflow after push. No new live campaign or repeated infrastructure acceptance in this verification step.
+
+## 2026-11-13 — Investigation continuity and encounter hierarchy
+- Corrected current Mirelle/Dorian/Cassian research dialogue after revocation, ineffective access, publication and closure; preserved legitimate reauthorization and independent research.
+- Shared completed-finding read identity across reaction/question routes; retained old history, meaningful Updated states and distinct perspectives.
+- Added contextual proposal wording without changing costs, eligibility or outcomes; historical offers are labelled as earlier proposals.
+- Grouped primary commitments, optional dialogue and reviewed topics; moved Feed to secondary access with existing costs and visible low-Blood status.
+- Emphasized the final demand and all consequential responses; confirmed reactions lead with character dialogue and retain visible precision/inspectable evidence.
+- Strengthened existing character finales while preserving remembered callbacks, finite/revocable rights and factual epilogues.
+- PASS: 30 focused checks, full 217-test regression suite, production build, whitespace check and seven desktop/mobile browser fixture scenarios.
+- NOT RUN: new Sandbox/live Testnet, deployment or full-campaign walkthrough; no execution, contract or NPC-policy changes. No commit/push/deploy.
+- Reviewed repository/project/hackathon requirements; no mechanical or external-rule changes needed. Details and limitations: docs/INVESTIGATION_CONTINUITY.md.

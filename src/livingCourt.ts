@@ -6,7 +6,7 @@ import {ACTIONS,type NpcName,type GameAction} from './game.ts';
 
 import type {EncounterScene,SceneChoice,DialogueLine} from './encounters';
 
-import {libraryRoot,effectiveGrant} from './library.ts';
+import {libraryRoot,effectiveGrant,libraryReasons} from './library.ts';
 import {INVESTIGATION_QUESTION,completedInvestigator,investigationFinding} from './courtPayoff.ts';
 import {petitionHasShelter} from './agents.ts';
 
@@ -457,6 +457,55 @@ function reckoningLines(r:Result,night:number):DialogueLine[]{
 
 
 
+// Presentation only: confirmed publication and effective invitations, never scene/read memory.
+export function investigationState(r:Result,actor:'mirelle'|'dorian'):'not-started'|'active'|'completed'|'interrupted'|'unavailable'{
+  const c=r.campaign!,d=c.politics!.library!,w=r.world;
+  if(completedInvestigator(r)===actor)return 'completed';
+  if(d.result!=='open'||c.status!=='playing')return 'unavailable';
+  const root=libraryRoot(c,w);
+  if(d.chosen===actor&&root&&effectiveGrant(w,root)&&w.access.library)return 'active';
+  if(w.grants.some(g=>g.property_id==='library'&&g.grantor===c.politics!.accounts.player&&g.grantee===c.politics!.accounts[actor]&&(g.revoked||!effectiveGrant(w,g))))return 'interrupted';
+  return c.night>=6||!w.access.library||root?'unavailable':'not-started';
+}
+function currentInvestigationDialogue(r:Result,scenes:EncounterScene[]):void{
+  const c=r.campaign!,p=c.politics!,d=p.library!,n=c.night,w=r.world;
+  const get=(id:string)=>scenes.find(s=>s.id===id);
+  const say=(id:string,actor:NpcName,text:string,title?:string)=>{const s=get(id);if(s){s.lines=[{speaker:actor,text}];if(title)s.title=title;}};
+  for(const actor of ['mirelle','dorian'] as const){
+    const state=investigationState(r,actor),patron=actor==='mirelle'?'Marius':'Lucien',helper=actor==='mirelle'?'Cassian':'Lucien';
+    const reasons=libraryReasons(c,`authorize_${actor}`,w);
+    const stopped=state==='interrupted'?'I have stopped. My Library invitation no longer permits the work. The unfinished investigation has stopped.':d.result!=='open'?'The account is already published. There is no competing investigation left to conduct.':c.status!=='playing'?'This campaign has ended. No further investigation can be conducted.':n>=6?'There is no time left to begin another investigation.':'I do not currently have the authority to conduct this investigation.';
+    if(state==='interrupted'||state==='unavailable'){
+      const next=state==='interrupted'&&!reasons.length?' A fresh authorization is still possible; this conversation does not grant it.':'';
+      say(`character:${actor}`,actor,stopped+next);
+      say(`ask:${n}:${actor}`,actor,stopped+next+' Published work, if any, cannot be redirected by changing an invitation.','Where does your investigation stand?');
+      say(`personal:${n}:${actor}`,actor,actor==='mirelle'?`Cassian’s research access depends on my Library invitation. Without effective permission, neither of us can finish this work. His separate arrangements remain separate.`:'I objected to whom Mirelle wanted to benefit, not to some secret crime. That disagreement does not give me permission to conduct the work.');
+      say(`purpose:${actor}`,actor,`The proposed account concerned whether service to a patron requires surrendering control of the Library. ${stopped}`);
+    }else if(state==='completed'){
+      say(`ask:${n}:${actor}`,actor,investigationFinding(actor),'What did our work establish?');
+      const old=get(`ask:${n}:${actor}`);if(old){old.redirect=`finding:${actor}`;old.choices=[];}
+      if(actor==='mirelle')say(`personal:${n}:${actor}`,actor,'Cassian helped finish the account under my invitation. That work is already published. Keeping or withdrawing our keys now changes access, not what was delivered.');
+    }else{
+      if(state==='not-started')say(`ask:${n}:${actor}`,actor,`With your authorization, I would examine the Library invitations and the obligations outside them. The account would benefit ${patron}; it would not transfer your title. No investigation has begun.`, 'What would your investigation establish?');
+      if(actor==='mirelle')say(`personal:${n}:${actor}`,actor,state==='active'?'Cassian is impatient to be useful. His research access depends on my invitation. If you withdraw it, his dependent access ends and unfinished work stops.':'Cassian is impatient to be useful. If you authorize me, I can invite him to help. Until then, neither of us has permission from this proposal.');
+      const purpose=get(`purpose:${actor}`);if(purpose&&state==='not-started')purpose.lines=[{speaker:actor,text:INVESTIGATION_QUESTION.replace('We will','With authorization, we would')}];
+    }
+    const ask=get(`ask:${n}:${actor}`),parent=get(`character:${actor}`);
+    const question=parent?.choices.find(ch=>ch.inspect===ask?.id);if(question&&ask)question.label=ask.title;
+    // Retired generic question routes must land in current information, not an old pitch.
+    const legacy=get(`talk:${n}:${actor}:question`);if(legacy){legacy.redirect=actor==='mirelle'?'record:library':`ask:${n}:${actor}`;legacy.choices=[];}
+    const proposal=get(`action:authorize_${actor}`);
+    if(proposal?.choices.some(ch=>ch.action)){
+      if(state==='interrupted')proposal.lines=[{speaker:actor,text:`The earlier work stopped when permission ended. This would be a fresh authorization for me to invite ${helper}; nothing resumes merely because we discuss it.`}];
+      if(actor==='mirelle'&&p.serviceFulfilled)proposal.terms.push('Your service is already fulfilled. This investigation can still publish the Library account for Marius; it is not another service obligation. Any protection remains a separate confirmed grant.');
+      if(actor==='dorian'&&w.access.passage)proposal.terms.push('You already have passage access. This work does not replace its current terms; any lasting protection requires Lucien’s separate confirmed grant.');
+    }
+  }
+  const mirelle=investigationState(r,'mirelle');
+  if(mirelle==='completed')say('character:cassian','cassian','The Library account is finished. My invitation and the work I helped deliver are different things. Taking back one cannot undo the other.');
+  else if(mirelle==='interrupted')say('character:cassian','cassian','Mirelle’s investigation has stopped. I cannot continue it through her withdrawn or ineffective invitation. My separate arrangements are another matter.');
+  else if(mirelle==='unavailable'&&d.chosen==='mirelle')say('character:cassian','cassian','There is no unfinished Library work I can promise to complete now. My other arrangements keep their own terms.');
+}
 // Consolidate existing projections and links; all executable choices come from availability.
 export function repairCourtFlow(r:Result,scenes:EncounterScene[]):void{
   const c=r.campaign!,p=c.politics!,n=c.night,w=r.world,d=p.library!;
@@ -475,7 +524,7 @@ export function repairCourtFlow(r:Result,scenes:EncounterScene[]):void{
     const kind=s.id.slice(7) as GameAction,a=available(kind);
     s.title=DISCUSS_LABELS[kind]??s.title;
     if(a&&!a.allowed){
-      s.rights.push(...s.lines.map(l=>l.text),...s.terms);
+      s.rights.push(...s.lines.map(l=>`Earlier proposal, not a current instruction: ${l.text}`),...s.terms);
       s.lines=[{speaker:s.portraits[0]??'narrator',text:'This commitment is not available in the current situation.'}];
       s.terms=[...a.reasons];
       s.choices=s.choices.filter(ch=>!ch.action);
@@ -520,7 +569,7 @@ export function repairCourtFlow(r:Result,scenes:EncounterScene[]):void{
   }
   const demand=get('final-demand');
   if(demand&&c.status==='playing'&&!p.finalCourt?.response){
-    demand.type='NEGOTIATION';
+    demand.type='NEGOTIATION';demand.presentation='confrontation';
     demand.terms=['Marius answers before dawn. Advice is free; leaving this screen does not answer his demand.'];
     demand.choices=[];
     for(const kind of ['final_accept','final_refuse','final_counter'] as const){
@@ -537,9 +586,11 @@ export function repairCourtFlow(r:Result,scenes:EncounterScene[]):void{
       decision.redirect=demand.id;decision.choices=[];decision.automatic=false;
     }
     demand.choices.push(link('character:seraphine','Ask Seraphine about independent shelter'),link('character:sabine','Ask Sabine about separate rights'));
+    demand.choices=demand.choices.map(ch=>({...ch,secondary:!ch.action}));
     demand.automatic=true;
     if(marius){marius.redirect=demand.id;marius.choices=[];}
   }else for(const kind of ['final_accept','final_refuse','final_counter']){const old=get(`action:${kind}`);if(old){old.redirect='character:marius';old.choices=[];}}
+  currentInvestigationDialogue(r,scenes);
   // Never execute a stale, reconstructed or ended commitment from presentation.
   for(const s of scenes)s.choices=s.choices.filter(ch=>!ch.action||c.status==='playing'&&!r.pending&&!r.error&&(ch.action.action!=='game'||can(ch.action.choice!)));
 }

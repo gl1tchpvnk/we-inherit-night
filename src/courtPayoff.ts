@@ -49,10 +49,10 @@ export function personalFinale(r:Result,relationships:RelationshipMemory={}):Per
   const finalReply=finalRelationshipResponse(r,relationships);
   if(p.finalCourt?.result)account.push(finalReply&&actor!=='marius'?`Marius:\n${finalReply.text}${finalReply.factual?`\n\n${finalReply.factual}`:''}`:p.finalCourt.result==='accepted'?'Marius’s final answer is already recorded. This conversation does not renegotiate it.':'Marius’s final refusal is recorded. It did not cancel an independent sanctuary agreement.');
   const opening=!survived
-    ?actor==='vesper'?'You were my descendant before this chronicle began. That is still part of its record, even where the account of your survival ends.': 'The work reached its patron. You did not survive. I will not call those the same kind of success.'
-    :actor==='seraphine'?'You paid for shelter, not my approval. Whatever use you made of your Library, you did not have to become mine to keep our bargain.'
-    :actor==='lucien'?'You made room for an answer from outside the House. My protection stands. Tell me whether you consider that a beginning or simply another dependence.'
-    :actor==='marius'?'You have a place under my protection. The question of your Library was never the same as the question of your service. How will you describe the place you have secured?'
+    ?actor==='vesper'?'I made you one of us. That was not enough to keep you here. I will not pretend that the things you still owned could answer what you needed.': 'The work reached its patron. You did not survive. I can name what we accomplished, but I will not use it to make this loss smaller.'
+    :actor==='seraphine'?'You reached this dawn on terms neither Marius nor Vesper could shorten. You paid for shelter, not my approval. Our bargain held through the recorded ending. Its term is still a term, not forever. You did not have to become mine to reach that dawn.'
+    :actor==='lucien'?'You made room for an answer from outside the House. Now you have reached this dawn under my protection. I can withdraw that promise; I will not dress it up as freedom. But you found someone else to turn to. That choice was yours.'
+    :actor==='marius'?'You are still here. Whatever else you call our arrangement, do not call surviving it nothing. You have a place under my protection; your Library remains your own. My protection is still mine to withdraw. I would rather you stay knowing that than mistake dependence for safety beyond my reach.'
     :'The chronicle has its outcome. You may still choose the words with which you close it.';
   const responses=!survived?[
     {id:'remember',label:'Remember what I tried to keep.',reply:'Then let the record name your choices, not reduce you to the last thing that failed.'},

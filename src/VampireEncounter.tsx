@@ -34,9 +34,11 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
   const status=(c:SceneChoice)=>{if(c.action||c.reply||c.id==='unanswered'||isNavigation(c))return null;const state=topicStatus(resolveScene(scenes,c.inspect??null),readMemory);return c.reviewOnly&&state!=='Explored'?null:state;};
   const isReview=(c:SceneChoice)=>c.reviewOnly||!!c.inspect&&/^(ask:|personal:|talk:|purpose:|meaning:|finding:)/.test(c.inspect)&&status(c)==='Explored';
   const primary=choices.filter(c=>!isReview(c)),review=choices.filter(isReview);
+  const optional=primary.filter(c=>!c.secondary&&!!c.inspect&&/^(ask:|personal:|talk:|purpose:|finding:|meaning:|character:|record:)/.test(c.inspect));
+  const mainChoices=primary.filter(c=>!c.secondary&&!optional.includes(c));
   const hasFeed=scene.id==='action:feed'||choices.some(c=>c.inspect==='action:feed'||c.action?.action==='game'&&c.action.choice==='feed');
   const leave=()=>onBack?onBack():onCastle?onCastle():onComplete();
-  const renderChoice=(choice:SceneChoice)=><div key={choice.id} className="story-choice">{choice.summary&&<div className="choice-consequences">{choice.summary.map((text,i)=><p key={i}>{text}</p>)}</div>}{result&&choice.action&&bloodWarning(result,choice.action)&&<p className="blood-warning" role="status">{bloodWarning(result,choice.action)}</p>}<button type="button" className={choice.action?'binding-choice':''} disabled={busy||!!result?.pending||!!result?.error&&!!choice.action} onClick={()=>onChoice(choice)}>{choice.label}{status(choice)&&<small>{status(choice)}</small>}</button></div>;
+  const renderChoice=(choice:SceneChoice)=><div key={choice.id} className="story-choice">{choice.summary&&<div className="choice-consequences">{choice.summary.map((text,i)=><p key={i}>{text}</p>)}</div>}{result&&choice.action&&bloodWarning(result,choice.action)&&<p className="blood-warning" role="status">{bloodWarning(result,choice.action)}</p>}<button type="button" className={choice.action?'binding-choice':''} disabled={busy||!!result?.pending||!!result?.error&&!!choice.action} onClick={()=>onChoice(choice)}>{choice.label}{status(choice)&&<small>{status(choice)==='Explored'?'Reviewed':status(choice)}</small>}</button></div>;
   const speech=<>{(scene.type==='NEGOTIATION'?scene.lines:[spoken]).filter(Boolean).map((line,i)=><div key={`${scene.id}:${index}:${i}`} className="spoken-line" aria-live="polite" aria-atomic="true"><p className="eyebrow">{line.speaker==='narrator'?'The chronicle':line.speaker==='player'?'YOU':AGENTS[line.speaker].name}</p><blockquote>{line.text}</blockquote></div>)}</>;
   useEffect(()=>{
     const previous=document.activeElement as HTMLElement|null;
@@ -44,7 +46,7 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
     return ()=>{dialog.current?.close();previous?.focus();};
   },[]);
   useEffect(()=>{heading.current?.focus();},[scene.id]);
-  return <dialog ref={dialog} data-actor={currentActor} data-kind={scene.type} className={`vampire-scene scene-${scene.location}${scene.portraits.length===0?' scene-overview':''}${scene.compact?' living-encounter':''}`} aria-labelledby="encounter-title" onCancel={event=>{event.preventDefault();if(!busy){if(scene.introduction)onComplete();else leave();}}}>
+  return <dialog ref={dialog} data-actor={currentActor} data-kind={scene.type} className={`vampire-scene ${scene.presentation??''} scene-${scene.location}${scene.portraits.length===0?' scene-overview':''}${scene.compact?' living-encounter':''}`} aria-labelledby="encounter-title" onCancel={event=>{event.preventDefault();if(!busy){if(scene.introduction)onComplete();else leave();}}}>
     {result&&<BloodStatus result={result}/>}
     <div className={`scene-stage${entry.current.review?' scene-review':''}`} key={scene.id}>
       <div className="scene-background" aria-hidden="true"><RoomArt room={scene.location}/></div>
@@ -57,21 +59,23 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
         {entry.current.review?<details><summary>Review introduction</summary>{speech}</details>:speech}
         {!reading&&scene.terms.length>0&&<section className="scene-terms" aria-label="Before you decide">{scene.terms.map((term,i)=><p key={i}>{term}</p>)}</section>}
 
-        {scene.rights.length>0&&<details className="scene-rights"><summary>Inspect terms</summary><ul>{scene.rights.map((right,i)=><li key={i}>{right}</li>)}</ul></details>}
+        {scene.rights.length>0&&<details className="scene-rights"><summary>{scene.reactionLevel?'Inspect recorded consequence':'Inspect terms'}</summary><ul>{scene.rights.map((right,i)=><li key={i}>{right}</li>)}</ul></details>}
         {scene.outcome&&<p className="scene-outcome">{scene.outcome}</p>}
         <p role="status" className="scene-feedback">{busy?'Your decision is being resolved…':feedback}</p>
         {onRefresh&&(result?.pending||result?.error)&&<button type="button" disabled={refreshBusy} onClick={onRefresh}>Check confirmed outcome</button>}
         <div className="scene-choices">
           {reading?<button type="button" disabled={busy} onClick={()=>{onLine(index+1);heading.current?.focus();}}>Continue</button>:<>
-            {scene.introduction&&<button disabled={busy||!!result?.error} onClick={onComplete}>Continue</button>}{primary.filter(c=>!c.secondary).map(renderChoice)}
-            {primary.some(c=>c.secondary)&&<details className="other-choices"><summary>Also tonight: {primary.filter(c=>c.secondary).map(c=>c.label).join(' · ')}</summary>{primary.filter(c=>c.secondary).map(renderChoice)}</details>}
+            {scene.introduction&&<button disabled={busy||!!result?.error} onClick={onComplete}>Continue</button>}{mainChoices.map(renderChoice)}
+            {optional.length>0&&<section className="optional-dialogue" aria-label="Optional conversation"><p className="eyebrow">Optional conversation</p>{optional.map(renderChoice)}</section>}
+            {primary.some(c=>c.secondary)&&<details className="other-choices"><summary>{scene.presentation==='confrontation'?'Advice, feeding and other choices':<>Also tonight: {primary.filter(c=>c.secondary).map(c=>c.label).join(' · ')}</>}</summary>{primary.filter(c=>c.secondary).map(renderChoice)}</details>}
             {review.length>0&&<details className="other-choices"><summary>Review conversation</summary>{review.map(renderChoice)}</details>}
             {scene.type==='RECKONING'&&<button type="button" disabled={busy} onClick={onSkipReckoning}>{finishLabel}</button>}
           </>}
-          {!scene.introduction&&!hasFeed&&onFeed&&result?.campaign?.status==='playing'&&<div className="story-choice encounter-feed" data-hungry={result.campaign.resources.blood<=3}><button type="button" aria-describedby="encounter-feed-cost" disabled={busy||!encounterFeed(result)} onClick={onFeed}>Feed · +4 Blood · 1 action</button><p id="encounter-feed-cost">{encounterFeedText(result)}</p></div>}
+
         </div>
       </div>
     </div>
+          {!scene.introduction&&!hasFeed&&onFeed&&result?.campaign?.status==='playing'&&<details className="encounter-feed" data-hungry={result.campaign.resources.blood<=3}><summary>Feed · +4 Blood · 1 action</summary><button type="button" aria-describedby="encounter-feed-cost" disabled={busy||!encounterFeed(result)} onClick={onFeed}>Feed · +4 Blood · 1 action</button><p id="encounter-feed-cost">{encounterFeedText(result)}</p></details>}
     <nav className="encounter-navigation" aria-label="Encounter navigation">{scene.introduction?<button disabled={busy||!!result?.error} onClick={onComplete}>Skip introduction</button>:<>
       <div>{onBack&&<button type="button" disabled={busy} onClick={onBack}>← {backLabel??'Back to conversation'}</button>}</div>
       <div>{onTonight&&<button type="button" disabled={busy||tonightCurrent} onClick={onTonight}>Tonight’s choices</button>}<button type="button" disabled={busy} onClick={onCastle??onComplete}>{scene.exchange||scene.id.includes(':relationship:')?'Return to court':'Castle map'}</button></div>

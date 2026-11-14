@@ -202,3 +202,28 @@ button:hover:not(:disabled) small{color:inherit}
 
 .scene-stage.scene-review,.scene-review .scene-portraits img,.scene-review .spoken-line{animation:none}
 .spoken-line blockquote{white-space:pre-line}
+
+/* Secondary survival access stays outside the dramatic choice column. */
+.vampire-scene>.encounter-feed{position:relative;margin:0 24px 100px;padding:10px 14px;border-top:1px solid var(--line);font:14px/1.5 system-ui}
+.encounter-feed summary{cursor:pointer;min-height:44px;display:list-item;padding:10px 0}
+.encounter-feed[data-hungry=true] summary{color:#ffb6b6;font-weight:700}
+.confrontation .scene-topline{color:var(--muted)}
+.confrontation h2{border-left:4px solid var(--blood);padding-left:18px}
+.confrontation .spoken-line blockquote{font-size:clamp(22px,2.4vw,34px);line-height:1.4}
+.confrontation .scene-terms{font:14px/1.55 system-ui;color:var(--muted)}
+.confrontation .scene-choices>.story-choice{border:1px solid var(--muted);margin:18px 0;padding:14px;background:#080808}
+.confrontation .binding-choice{font-weight:700;font-size:20px;border-left:3px solid var(--blood);background:var(--paper);color:var(--ink)}
+.confrontation .binding-choice:hover,.confrontation .binding-choice:focus-visible{background:var(--blood);color:var(--paper)}
+.confrontation .choice-consequences{font:14px/1.55 system-ui;color:var(--paper)}
+.confrontation .other-choices{margin-top:26px;font-size:14px}
+.consequence h2{border-bottom:3px solid var(--blood);padding-bottom:16px}
+.consequence .scene-outcome{font:13px/1.5 system-ui;color:var(--muted)}
+.scene-choices .binding-choice{border-left:3px solid var(--blood);font-weight:700}
+.optional-dialogue{border-top:1px solid var(--line);margin-top:22px;padding-top:14px}
+.optional-dialogue .story-choice button{font-size:16px;font-weight:400}
+.optional-dialogue>.eyebrow{color:var(--muted);font-size:12px}
+.scene-choices .other-choices{font-size:14px;color:var(--muted)}
+.scene-choices .other-choices button{font-size:16px;font-weight:400}
+.encounter-navigation button{color:var(--muted);font-weight:400}
+.encounter-navigation button:hover,.encounter-navigation button:focus-visible{color:var(--paper)}
+@media(max-width:640px){.vampire-scene>.encounter-feed{margin:0 14px 156px}.confrontation .binding-choice{font-size:17px}.confrontation .scene-choices>.story-choice{padding:10px}}

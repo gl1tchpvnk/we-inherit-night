@@ -14,6 +14,7 @@ export interface EncounterScene {
   id:string;type:SceneType;title:string;location:'crypt'|'library'|'lounge';
   portraits:NpcName[];lines:DialogueLine[];terms:string[];rights:string[];
   introduction?:'library'|'lounge';choices:SceneChoice[];compact?:boolean;outcome?:string;automatic?:boolean;completionLabel?:string;
+  presentation?:'confrontation'|'consequence';
   reactionLevel?:'minor'|'significant'|'major';
   exchange?:RelationshipExchange;callback?:string;redirect?:string;topicId?:string;readVersion?:string;legacyStable?:boolean;
 }
@@ -41,7 +42,7 @@ export function resolveScene(scenes:EncounterScene[],id:string|null):EncounterSc
 export function nextScene(scenes:EncounterScene[],memory:SceneMemory):EncounterScene|undefined {
   return resolveScene(scenes,memory.active)??scenes.find(s=>!s.redirect&&s.reactionLevel&&s.automatic&&!memory.seen.includes(s.id))??scenes.find(s=>!s.redirect&&s.automatic&&!memory.seen.includes(s.id));
 }
-const stableTopic=(id:string)=>id.replace(/^(ask|personal|talk):\d+:/,'$1:');
+const stableTopic=(id:string)=>id.replace(/^reaction:npc:\d+:(mirelle|dorian):archive_research$/,'finding:$1').replace(/^(ask|personal|talk):\d+:/,'$1:');
 export function topicStatus(scene:EncounterScene|undefined,memory:SceneMemory):'Explored'|'Updated'|'New'|'Review needed'|null{
   if(!scene?.topicId||!scene.readVersion)return null;
   const versions=memory.reads?.[scene.topicId]??[];
@@ -57,12 +58,15 @@ export function markSceneRead(memory:SceneMemory,scene:EncounterScene):SceneMemo
 }
 function stampTopics(scenes:EncounterScene[]){
   for(const s of scenes){
-    if(s.redirect||! /^(ask:|personal:|talk:|purpose:|finding:|meaning:|character:|record:|action:|lease:)/.test(s.id)||/^action:(feed|rest)$/.test(s.id))continue;
-    s.topicId=stableTopic(s.id);
+    if(s.redirect||! /^(reaction:|ask:|personal:|talk:|purpose:|finding:|meaning:|character:|record:|action:|lease:)/.test(s.id)||/^action:(feed|rest)$/.test(s.id))continue;
+    const findingActor=/^reaction:npc:\d+:(mirelle|dorian):archive_research$/.exec(s.id)?.[1];
+    const finding=findingActor?scenes.find(scene=>scene.id===`finding:${findingActor}`&&JSON.stringify(scene.lines)===JSON.stringify(s.lines)):undefined;
+    if(s.id.startsWith('reaction:')&&!finding)continue;
+    s.topicId=finding?stableTopic(finding.id):stableTopic(s.id);
     // Version only the information actually displayed, never night/resources/whole state.
-    let hash=2166136261;for(const char of JSON.stringify([s.title,s.lines,s.terms]))hash=Math.imul(hash^char.charCodeAt(0),16777619);
+    let hash=2166136261;for(const char of JSON.stringify(finding?[finding.title,finding.lines,finding.terms]:[s.title,s.lines,s.terms]))hash=Math.imul(hash^char.charCodeAt(0),16777619);
     s.readVersion=(hash>>>0).toString(16).padStart(8,'0');
-    s.legacyStable=/^personal:\d+:(vesper|seraphine|marius|dorian|lucien|cassian|sabine)$/.test(s.id)||/^ask:\d+:(vesper|cassian)$/.test(s.id);
+    s.legacyStable=s.topicId.startsWith('finding:')||/^personal:\d+:(vesper|seraphine|marius|dorian|lucien|cassian|sabine)$/.test(s.id)||/^ask:\d+:(vesper|cassian)$/.test(s.id);
     // Same marriage question, now paragraph-formatted: retain its established read key/version.
     if(s.id==='ask:relationship:S-Q2'){
       s.topicId='personal:seraphine';s.legacyStable=true;
