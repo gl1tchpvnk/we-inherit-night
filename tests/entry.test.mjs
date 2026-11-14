@@ -79,7 +79,7 @@ test('title and prologue SSR provide accessible real controls, no settings or ga
   const intro=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},onAdvance(){}}));assert.match(intro,/Skip intro/);assert.match(intro,/Dialogue is free/);
   for(let line=0;line<PROLOGUE.length;line++){
    const panel=renderToStaticMarkup(createElement(Prologue,{progress:{line,done:false},onAdvance(){}}));
-   assert.match(panel,/<\/section><div class="controls prologue-controls" aria-label="Prologue navigation">/,'navigation is outside the panel-specific swapping text column');
+   assert.match(panel,/<div class="controls prologue-controls" aria-label="Prologue navigation">[\s\S]*<\/div><\/section>/,'navigation is integrated inside the narrative frame');
    assert.equal((panel.match(/>Continue<\/button>/g)??[]).length,1);
    assert.equal((panel.match(/>Skip intro<\/button>/g)??[]).length,1);
   }

@@ -694,3 +694,110 @@
 - PASS: 30 focused checks, full 217-test regression suite, production build, whitespace check and seven desktop/mobile browser fixture scenarios.
 - NOT RUN: new Sandbox/live Testnet, deployment or full-campaign walkthrough; no execution, contract or NPC-policy changes. No commit/push/deploy.
 - Reviewed repository/project/hackathon requirements; no mechanical or external-rule changes needed. Details and limitations: docs/INVESTIGATION_CONTINUITY.md.
+
+## 2026-11-13 — Cinematic Seraphine reference, Stage 1
+- Implemented scoped scene composition with supplied portrait and existing provisional Lounge art; no generated assets or new dependencies.
+- Added authored paragraph beats, Previous/history, reviewed skipping and direct question-to-decision return using browser-only scene memory.
+- Preserved exact prose, visible terms, available choices, existing handlers and confirmed-outcome gates; no engine, backend or contract changes.
+- PASS: 35 focused tests, 8 narrative tests, final 220/220 full regression, production build and whitespace review.
+- PASS: six Chromium fixture scenarios at desktop, phone and short landscape sizes; mocked failure/pending/success, keyboard, reload and free-path checks.
+- Before/after screenshots: .local/cinematic-evidence; report and screen audit: docs/CINEMATIC_STAGE1.md.
+- Initial restricted-localhost test failures and obsolete all-dialogue SSR expectation resolved; no authority/security tests weakened.
+- NOT RUN: new Sandbox/Testnet/hosted or full seven-night browser acceptance; existing unchanged-system evidence remains separate.
+- Reviewed AGENTS, project, hackathon and progress docs; updated README, project requirements and visual scope. No external rule change.
+- Stage 2 NOT STARTED. Await visual approval; flattened art/provisional room and natural mobile scrolling remain limitations. No commit/push/deploy.
+
+## 2026-11-13 — Stage 1 screenshot correction
+- Diagnosed the delivered dialogue image's black block as premature screenshot capture during image decoding.
+- Local capture harness now awaits scene image decoding and two paint frames; refreshed desktop/mobile screenshots.
+- PASS: inspected corrected desktop capture; portrait is complete without application/style changes.
+- Runtime tests/build NOT RUN again: screenshot tooling/documentation only; prior 220-test/build evidence unchanged.
+- Stage 2 still awaits visual approval; no commit, push or deployment. Updated Stage 1 evidence notes.
+
+## 2026-11-13 — Cinematic Stage 1B refinement
+- Verified corrected baseline in Chromium after decoding/paint; no screenshot-artifact CSS workaround.
+- Raised/narrowed dialogue panel, tightened nameplate and clarified decision spacing without restructuring.
+- Unselected commitment uses a crimson edge/marker; hover/keyboard focus supplies fill. Continue is neutral.
+- Mobile overlap increased modestly without face coverage; short-landscape panel stays below HUD and scrolls internally.
+- PASS: 43 targeted tests, final 220/220 regressions, production build, six browser scenarios and whitespace review.
+- Captured/inspected requested desktop, portrait and short-landscape views; evidence in .local/cinematic-stage1b.
+- CSS-only application changes; existing dialogue, read memory, handlers, gameplay and art unchanged.
+- Reviewed project/hackathon/agent/progress docs; updated presentation scope and docs/CINEMATIC_STAGE1.md. No external rules changed.
+- NOT RUN: live Testnet/Sandbox/hosted/full-campaign repeats. Flat portrait/provisional Lounge remain limitations.
+- Ready as Stage 2 reference, pending separate authorization. No Stage 2, commit, push or deployment.
+
+## 2026-11-13 — Cinematic Stage 2 shared character extension
+- Extended approved Stage 1B renderer to compatible conversations, proposals, remembered replies, confrontations and individual reactions for all eight vampires.
+- Structural scene eligibility replaces the Seraphine ID list; existing multi-speaker indices and source text remain unchanged.
+- Added correct speaker/environment labels; preserved recorded-consequence disclosures and original validated handlers.
+- Isolated legacy Marius/Dorian layout rules; reused supplied portraits and provisional environments without new assets/dependencies.
+- Intentionally excluded strategy, aggregate reckonings, room introductions/records, campaign management and finales.
+- PASS: 35 focused tests, 221/221 full regression, production build, 24 local Chrome fixture scenarios and whitespace review.
+- Inspected desktop/mobile art and choices across characters plus reactions/confrontation; evidence .local/cinematic-stage2, report docs/CINEMATIC_STAGE2.md.
+- No gameplay regression found; live Testnet/Sandbox/hosted/full-campaign repeats NOT RUN for presentation-only changes.
+- Reviewed agent/project/hackathon/progress requirements; updated README, project/visual scope and Stage 2 report. No external-rule change.
+- No commit, push or deployment. Flattened portraits/provisional rooms and long-panel scrolling remain limitations; no further refinement pass begun.
+
+## 2026-11-13 — Cinematic location-label correction
+- Removed persistent room headings and provisional artwork badges from cinematic encounters across all eight characters.
+- Preserved names, speaker labels, images, authored location references and all scene/authority data; tightened indicator spacing.
+- Retained asset provenance in VISUAL_CANON.md; updated Stage 2 report and removed obsolete badge CSS.
+- PASS: 18 targeted tests, 221 regressions, production build, three browser fixtures/six desktop/mobile states and whitespace review.
+- Reviewed agent/project/hackathon/README/progress docs; no mechanical or external-rule updates required.
+- No gameplay/contract/transaction changes, live-network tests, commit, push or deployment.
+
+
+## 2026-11-13 — Nightly choice hierarchy and narrative controls
+- Grouped existing strategic entries before Nightly actions: Feed, then secondary Wait; retained availability, costs, summaries and original handlers.
+- Removed Action HUD counters; playable encounters/room introductions retain Night, Blood and survival text, including while scrolling.
+- Confined Feed shortcuts to strategic choices; preserved explicit feeding confirmation, dialogue memory and footer destinations.
+- Verified existing pre-night entry boundary and narrative Continue/Skip without editing approved prose or progression.
+- PASS: 35 targeted tests, 221/221 regression tests, production build, 10 mocked Chrome scenarios at desktop/mobile/short-landscape sizes.
+- Captured/inspected matching before/after views; docs/NIGHTLY_CHOICE_UI.md links evidence and records scope. Updated README.
+- Reviewed required project/agent/hackathon docs; no mechanical or external requirements changed. Prior unrelated working changes preserved.
+- NOT RUN: live Testnet/Sandbox/hosted/full-campaign repeats. No commit, push or deploy. Existing art limitations and natural list scrolling remain.
+- Next: user review of this focused correction; no further redesign started.
+
+
+## 2026-11-13 — Opening presentation consistency
+- CSS-only application change: proportionally fitted title composition, integrated prologue/arrival panels, responsive artwork and separate narrative controls.
+- Preserved original painted-label title interactions; removed the extra visible controls at user direction.
+- All four approved panels, first-dawn text, entry state and persistence/handlers remain unchanged.
+- PASS: 23 targeted tests, 221/221 full regression, production build and seven local mocked-browser scenarios.
+- Five viewport sequences checked exact text, scrolling, ratio, keyboard focus and narrative-only transition; two scenarios checked confirmation/cancel, reload and skipping.
+- Playable Night 1 screenshots match baseline byte-for-byte at all five sizes. No gameplay or encounter changes.
+- Updated README and docs/OPENING_PRESENTATION.md with before/after evidence; reviewed required project/agent/hackathon documents.
+- Known limitation: flattened title labels remain small on narrow phones; natural letterboxing and internal prose scrolling are intentional.
+- NOT RUN: live network/transaction suites. No commit, push or deployment. Next: user review; no further redesign begun.
+
+
+## 2026-11-13 — Prologue final layout refinement
+- Measured longest-panel overflow (41px at 1366×768, 151px at 1100×720) before editing.
+- Reclaimed footer/margin/padding space, modestly widened the panel and tightened visual paragraph/heading spacing without reducing font sizes.
+- Integrated existing Continue beneath prose and secondary Skip at upper-right; only prose scrolls when needed.
+- Preserved exact authored text, four panels, artwork, state/handlers and Before First Dawn narrative.
+- PASS: all panels fit at 1672×941, 1366×768, 1100×720 and tablet 820×1180; mobile/short landscape scroll remains reachable.
+- PASS: 23 targeted tests, 221 regressions, build; six browser sequences plus two Skip/reload cases. Playable Night 1 captures unchanged at all six sizes.
+- Updated SSR placement assertion, README, opening report and AGENTS continuity to match the explicit navigation instruction; reviewed project/hackathon requirements.
+- No gameplay, transaction or authoritative persistence changes. No commit, push or deploy. Next: user review; no further refinement started.
+
+
+## 2026-11-13 — Crypt introduction to Vesper cinematic transition
+- Added entry-only 350/250/600ms whole-interface fade using GameEntry state and scoped CSS; no dependency or gameplay component changes.
+- Mounted the encounter behind black, awaited image decode/paint and suppressed duplicate entrance animation for its keyed first stage.
+- Guarded rapid clicks/keyboard input; reduced motion bypasses fade; input handlers/timers clean up on completion/unmount.
+- Preserved existing arrival marker semantics, late initialization gate and failed-initialization recovery; no new authoritative state or requests.
+- PASS: 19 targeted tests, 221/221 full regression, production build and eight local mocked Chrome scenarios including mobile, stalled assets, failures and mid-fade reload.
+- Normal measured transition ~1.21s. Slow decoding can extend hold to 3s before revealing existing UI; no permanent black/input trap.
+- Updated README and opening report; reviewed AGENTS/project/hackathon requirements. No narrative, costs, contracts or NPC changes.
+- No live Testnet/Sandbox suite, commit, push or deployment. Next: user review; no broader transitions introduced.
+
+
+## 2026-11-13 — Staged first-Vesper cinematic reveal
+- Replaced whole-interface reveal with entry-only 600/500/900/500/400ms darkness/environment/character/dialogue phases (~2.92s observed).
+- Reused existing independent encounter layers; first keyed environment framing remains stable, with no component refactor, art change or new dependency.
+- Preserved readiness bound, duplicate-input guard, reduced-motion bypass, failure recovery and arrival save semantics.
+- Hidden-tab return and live reduced-motion changes finish safely; reload before/after the black handoff preserves the existing destinations.
+- PASS: 19 focused tests, 221 full regressions, production build, ten mocked browser scenarios and inspected desktop/mobile phase captures.
+- Updated README and opening evidence report; reviewed required continuity/project/hackathon docs. No gameplay, narrative, contract or NPC change.
+- Limitations: flattened portrait surroundings crossfade with Vesper; slow art may extend black hold to 3s. No commit, push or deploy; no other cinematics introduced.

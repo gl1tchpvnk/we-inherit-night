@@ -7,6 +7,8 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+Cinematic character interactions: **IMPLEMENTED locally through Stage 2**. Approved Seraphine Stage 1B presentation extended through the shared renderer to compatible conversations, negotiations, remembered replies and individual reactions for all eight vampires. Strategic screens and finales remain separate. [Scope, screenshots and verification](docs/CINEMATIC_STAGE2.md).
+
 Investigation continuity and encounter hierarchy: **IMPLEMENTED locally**. Current-authority dialogue, shared finding reads, primary/optional/review grouping, secondary Feed, final-demand emphasis and character finale polish. See [verification and limits](docs/INVESTIGATION_CONTINUITY.md).
 
 Narrative V2: **IMPLEMENTED locally, not deployed**. Applied all 207 approved
@@ -365,3 +367,15 @@ User-supplied Marius/Seraphine offer questions, single-choice personal replies, 
 
 ### Static castle and room introductions — IMPLEMENTED locally
 The castle illustration is a noninteractive visual hub. Existing records/conversations carry room information; Lounge and Library interiors introduce their first relevant encounter once per campaign. The approved narrative first day now shows the Crypt interior. Navigation/reload remain presentation-only; hosted labels identify Testnet correctly. PASS: 212 automated tests, production build and 11 local browser fixture scenarios. [Wording, audit disposition and evidence](docs/ROOM_INTRODUCTIONS.md). Not deployed.
+
+
+### Nightly choice hierarchy — IMPLEMENTED locally
+Political opportunities precede Feed and secondary Wait for Dawn; Night/Blood replace the redundant action HUD counter. Narrative entry and character dialogue conceal gameplay Feed, with normal availability restored in Tonight’s choices. Existing commands and narrative remain unchanged. PASS: 35 targeted tests, 221 regressions, frontend build and 10 mocked browser scenarios. [Screenshot pairs and verification](docs/NIGHTLY_CHOICE_UI.md). Not deployed.
+
+
+### Opening presentation consistency — IMPLEMENTED locally
+The intact title artwork scales proportionally with its existing painted-label controls. The four approved prologue panels and Before the First Dawn use integrated narrative panels, Continue beneath the prose and secondary Skip at the upper-right. No prose or progression changes. PASS: 23 targeted tests, 221 regressions, build, seven browser fixture scenarios; playable Night 1 screenshots unchanged at five sizes. [Before/after evidence and limitations](docs/OPENING_PRESENTATION.md). Not deployed.
+
+
+### Crypt-to-Vesper fade — IMPLEMENTED locally
+The introductory Crypt departure uses a staged 600ms fade-out, 500ms black hold, 900ms environment reveal, 500ms Vesper reveal and 400ms dialogue/control reveal. Reduced motion bypasses it; image readiness is bounded and interrupted tabs recover safely. Gameplay, prose and ordinary dialogue transitions are unchanged. PASS: 19 targeted tests, 221 regressions, build and ten mocked browser scenarios. [Verification and slow-asset limitation](docs/OPENING_PRESENTATION.md). Not deployed.

@@ -1,4 +1,4 @@
-import {useEffect,useRef,useState,type ReactNode} from 'react';
+import {useEffect,useLayoutEffect,useRef,useState,type ReactNode} from 'react';
 import {adapter,playableTestnet,type Result} from './chain';
 import {Portrait,RoomArt} from './visuals';
 import {PROLOGUE,FIRST_NIGHT_PRELUDE,runtimeDescription,initializationDescription,readIntro,advanceIntro,requiresReplacementConfirmation,loadEntryCampaign,type IntroProgress,type SaveStatus} from './entry';
@@ -15,12 +15,86 @@ export function Prologue({progress,onAdvance,waiting=false,arrival=false}:{progr
   const heading=useRef<HTMLHeadingElement>(null),passage=arrival?FIRST_NIGHT_PRELUDE:PROLOGUE[progress.line];
   useEffect(()=>{heading.current?.focus();},[progress.line,arrival]);
   useEffect(()=>{if(performance.getEntriesByName('night:entry-start').length)requestAnimationFrame(()=>requestAnimationFrame(()=>{const measure=performance.measure('night:prologue-visible','night:entry-start');if(import.meta.env.DEV)console.info('[startup-prologue]',Math.round(measure.duration*10)/10);}));},[]);
-  return <main className={`prologue panel-${progress.line}`} key={arrival?'arrival':progress.line}>{arrival?<figure className="portrait environment-portrait"><RoomArt room="crypt"/><figcaption>PROVISIONAL GENERATED INTERIOR · APPROVAL PENDING</figcaption></figure>:<Portrait actor={passage.actor}/>}<section><p className="eyebrow">{arrival?'Before Night One':`Prologue · ${progress.line+1} / ${PROLOGUE.length}`}</p><h1 ref={heading} tabIndex={-1}>{passage.title}</h1><p className="prologue-text" aria-live="polite">{passage.text}</p><small>Dialogue is free. These controls make no political commitment.</small>{waiting&&<p role="status">{initializationDescription(adapter.mode,playableTestnet)}</p>}</section><div className="controls prologue-controls" aria-label="Prologue navigation"><button disabled={waiting&&(arrival?progress.arrivalDone:progress.done)} onClick={()=>onAdvance(false)}>Continue</button><button disabled={waiting&&(arrival?progress.arrivalDone:progress.done)} onClick={()=>onAdvance(true)}>{arrival?'Skip scene':'Skip intro'}</button></div></main>;
+  return <main className={`prologue panel-${progress.line}`} key={arrival?'arrival':progress.line}>{arrival?<figure className="portrait environment-portrait"><RoomArt room="crypt"/><figcaption>PROVISIONAL GENERATED INTERIOR · APPROVAL PENDING</figcaption></figure>:<Portrait actor={passage.actor}/>}<section><p className="eyebrow">{arrival?'Before Night One':`Prologue · ${progress.line+1} / ${PROLOGUE.length}`}</p><h1 ref={heading} tabIndex={-1}>{passage.title}</h1><p className="prologue-text" tabIndex={0} aria-live="polite">{passage.text.split('\n\n').map((paragraph,i)=><span className="prologue-paragraph" key={i}>{i>0?'\n\n':''}{paragraph}</span>)}</p><small>Dialogue is free. These controls make no political commitment.</small>{waiting&&<p role="status">{initializationDescription(adapter.mode,playableTestnet)}</p>}<div className="controls prologue-controls" aria-label="Prologue navigation"><button disabled={waiting&&(arrival?progress.arrivalDone:progress.done)} onClick={()=>onAdvance(false)}>Continue</button><button disabled={waiting&&(arrival?progress.arrivalDone:progress.done)} onClick={()=>onAdvance(true)}>{arrival?'Skip scene':'Skip intro'}</button></div></section></main>;
 }
 export function GameEntry({children}:{children:(result:Result,onTitle:()=>void)=>ReactNode}){
   const [save,setSave]=useState<SaveStatus|null>(null),[result,setResult]=useState<Result|null>(null),[intro,setIntro]=useState<IntroProgress|null>(null);
   const [busy,setBusy]=useState(false),[error,setError]=useState(''),[confirm,setConfirm]=useState(false);
   const lock=useRef(false),opening=useRef(false),pendingIntro=useRef<IntroProgress|null>(null);
+  const [departingCrypt,setDepartingCrypt]=useState(false);
+  const [cryptFade,setCryptFade]=useState<'out'|'hold'|'environment'|'character'|'dialogue'|null>(null);
+  const cryptLocked=useRef(false);
+  function finishCrypt(){
+    if(!intro)return;
+    const next={...intro,arrivalDone:true};pendingIntro.current=next;setIntro(next);
+    if(result?.campaign)store(result.campaign.id,next);
+  }
+  function leaveCrypt(){
+    if(cryptLocked.current)return;
+    cryptLocked.current=true;setDepartingCrypt(true);
+    // Preserve the existing pending-entry marker while verified initialization finishes.
+    if(!result)finishCrypt();
+  }
+  useEffect(()=>{
+    if(!departingCrypt||!result||cryptFade)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches||document.hidden||result.error||result.pending){
+      finishCrypt();setDepartingCrypt(false);cryptLocked.current=false;
+    }else setCryptFade('out');
+  },[departingCrypt,result,cryptFade]);
+  useEffect(()=>{
+    if(!departingCrypt||!result)return;
+    // Native modal dialogs escape ancestor inertness; capture also blocks their keyboard input.
+    const block=(event:Event)=>{event.preventDefault();event.stopImmediatePropagation();};
+    const events=['click','pointerdown','keydown','keyup'] as const;
+    const motion=matchMedia('(prefers-reduced-motion: reduce)');
+    const revealImmediately=()=>{
+      finishCrypt();setDepartingCrypt(false);setCryptFade(null);cryptLocked.current=false;
+    };
+    let wasHidden=false;
+    const visibility=()=>{if(document.hidden)wasHidden=true;else if(wasHidden)revealImmediately();};
+    const reducedMotion=()=>{if(motion.matches)revealImmediately();};
+    for(const event of events)document.addEventListener(event,block,true);
+    document.addEventListener('visibilitychange',visibility);motion.addEventListener('change',reducedMotion);
+    return ()=>{
+      for(const event of events)document.removeEventListener(event,block,true);
+      document.removeEventListener('visibilitychange',visibility);motion.removeEventListener('change',reducedMotion);
+    };
+  },[departingCrypt,!!result]);
+  useLayoutEffect(()=>{
+    if(!cryptFade)return;
+    document.documentElement.dataset.cryptFade=cryptFade;
+    let cancelled=false;
+    const timers:number[]=[];
+    const delay=(ms:number)=>new Promise<void>(resolve=>{timers.push(window.setTimeout(resolve,ms));});
+    const frame=()=>new Promise<void>(resolve=>requestAnimationFrame(()=>resolve()));
+    async function run(){
+      if(cryptFade==='out'){
+        await delay(600);if(cancelled)return;
+        finishCrypt();setCryptFade('hold');
+      }else if(cryptFade==='hold'){
+        const ready=(async()=>{
+          await frame();await frame();if(cancelled)return;
+          // This keyed stage is replaced on the next scene; do not restart its entrance animation after our fade.
+          document.querySelector('dialog[open] .scene-stage')?.setAttribute('data-crypt-entered','');
+          await Promise.allSettled([...document.querySelectorAll<HTMLImageElement>('dialog[open] img')].map(img=>img.decode()));
+          await frame();await frame();
+        })();
+        // Slow/broken assets cannot permanently hide the existing recovery interface.
+        await Promise.all([delay(500),Promise.race([ready,delay(3000)])]);
+        if(!cancelled)setCryptFade('environment');
+      }else if(cryptFade==='environment'){
+        await delay(900);if(!cancelled)setCryptFade('character');
+      }else if(cryptFade==='character'){
+        await delay(500);if(!cancelled)setCryptFade('dialogue');
+      }else{
+        await delay(400);if(cancelled)return;
+        setDepartingCrypt(false);setCryptFade(null);cryptLocked.current=false;
+      }
+    }
+    void run();
+    return ()=>{cancelled=true;timers.forEach(clearTimeout);delete document.documentElement.dataset.cryptFade;};
+  },[cryptFade]);
+
   useEffect(()=>{if(result&&opening.current){opening.current=false;performance.mark('night:entry-committed');performance.measure('night:entry-render','night:state-ready','night:entry-committed');requestAnimationFrame(()=>requestAnimationFrame(()=>{performance.mark('night:entry-painted');performance.measure('night:entry-total','night:entry-start','night:entry-painted');if(import.meta.env.DEV)console.info('[startup]',JSON.stringify(performance.getEntriesByType('measure').filter(e=>e.name.startsWith('night:')).map(e=>({name:e.name,ms:Math.round(e.duration*10)/10}))));}));}},[result]);
   async function check(){
     if(adapter.mode!=='sandbox'&&!playableTestnet){setSave({exists:false,valid:false});return;}
@@ -48,11 +122,11 @@ export function GameEntry({children}:{children:(result:Result,onTitle:()=>void)=
         else{try{progress=readIntro(localStorage.getItem(`night-intro:v1:${next.campaign.id}`));if(next.campaign.night>0&&progress){progress={...progress,done:true,arrivalDone:true};store(next.campaign.id,progress);}}catch{}}
       }
       setIntro(progress);setResult(next);setConfirm(false);
-    }catch(e){setIntro(null);pendingIntro.current=null;setError(String(e));void check();}
+    }catch(e){setIntro(null);pendingIntro.current=null;setDepartingCrypt(false);setCryptFade(null);cryptLocked.current=false;setError(String(e));void check();}
     finally{lock.current=false;setBusy(false);}
   }
   if(intro&&!intro.done)return <Prologue progress={intro} waiting={!result} onAdvance={skip=>{const next=advanceIntro(intro,skip);pendingIntro.current=next;setIntro(next);if(result?.campaign)store(result.campaign.id,next);}}/>;
-  if(intro&&(intro.arrivalDone===false||intro.arrivalDone===true&&!result))return <Prologue progress={intro} arrival waiting={!result} onAdvance={()=>{const next={...intro,arrivalDone:true};pendingIntro.current=next;setIntro(next);if(result?.campaign)store(result.campaign.id,next);}}/>;
+  if(intro&&(intro.arrivalDone===false||intro.arrivalDone===true&&!result||departingCrypt&&(cryptFade===null||cryptFade==='out')))return <Prologue progress={intro} arrival waiting={!result} onAdvance={leaveCrypt}/>;
   if(!result)return <TitleScreen save={save} busy={busy} error={error} confirm={confirm} onNew={()=>requiresReplacementConfirmation(save)?setConfirm(true):void open(true)} onContinue={()=>void open(false)} onCancel={()=>setConfirm(false)} onConfirm={()=>void open(true)}/>;
   return children(result,()=>{setResult(null);setIntro(null);setConfirm(false);setError('');setSave(null);void check();});
 }

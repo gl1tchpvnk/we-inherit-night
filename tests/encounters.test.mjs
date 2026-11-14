@@ -79,8 +79,17 @@ test('React scene renders native accessible controls, escaped dialogue and alway
  const focused=fixture();focused.campaign.politics.library={chosen:null,authorizedNight:null,result:'open',challenged:false};
  const opening=buildEncounterScenes(focused).find(s=>s.id==='ultimatum');
  const props={scene:opening,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
- const first=renderToStaticMarkup(createElement(VampireEncounter,props));assert.match(first,/>Continue</);assert.doesNotMatch(first,/Find out who|Finish \/ skip|What changes/);
- const last=renderToStaticMarkup(createElement(VampireEncounter,{...props,lineIndex:1}));assert.match(last,/Find out who might help/);assert.doesNotMatch(last,/>Continue</);assert.equal((last.match(/>Castle map</g)||[]).length,1);
+ const first=renderToStaticMarkup(createElement(VampireEncounter,props));assert.match(first,/>Continue(?: |<)/);assert.doesNotMatch(first,/Find out who|Finish \/ skip|What changes/);
+ const last=renderToStaticMarkup(createElement(VampireEncounter,{...props,lineIndex:1}));assert.match(last,/Find out who might help/);assert.doesNotMatch(last,/>Continue(?: |<)/);assert.equal((last.match(/>Castle map</g)||[]).length,1);
+ for(const actor of ['marius','seraphine','vesper','lucien','mirelle','dorian','cassian','sabine']){
+  const character=buildEncounterScenes(focused).find(s=>s.id===`character:${actor}`);
+  const rendered=renderToStaticMarkup(createElement(VampireEncounter,{...props,scene:character}));
+  const topline=rendered.match(/<div class="scene-topline">([\s\S]*?)<\/div>/)?.[1];
+  assert(topline);assert.doesNotMatch(topline,/Crimson Lounge|Forbidden Library|Ancestral Crypt/);
+  assert.doesNotMatch(rendered,/cinematic-art-note|provisional generated study/);
+  assert(rendered.includes(`/art/${character.location}-provisional.png`));
+  assert(rendered.includes(`portrait-${actor}`));assert(rendered.includes(character.title));
+ }
  const busy=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:true,feedback:'',onLine:()=>{},onChoice:()=>{},onComplete:()=>{},onSkipReckoning:()=>{}}));assert.match(busy,/disabled/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });

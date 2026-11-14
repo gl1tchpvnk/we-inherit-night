@@ -18,11 +18,10 @@
 
 /* The supplied cover is the composition, not a background to redesign.
 
-   Invisible native controls align to its painted buttons; all pixels remain intact. */
+   Native controls align to the existing painted labels; all artwork pixels remain intact. */
 
-.game-entry{position:relative;width:100%;height:100dvh;overflow:hidden;background:#000;--cover-width:min(100vw,177.58dvh);--cover-height:min(56.31vw,100dvh)}
+.game-entry{position:relative;width:100%;background:#000}
 
-.cover-art,.entry-copy{position:absolute;width:var(--cover-width);height:var(--cover-height);left:50%;top:50%;transform:translate(-50%,-50%)}
 
 .cover-art{background:url('/art/landing-reference.png') center/100% 100% no-repeat}
 
@@ -50,15 +49,31 @@
 
 /* Shared unaltered portrait assets. No filters, stretching or simulated depth. */
 
-.portrait{margin:0;position:relative;overflow:hidden;background:var(--ink);min-width:0}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}.portrait.compact{width:56px;height:70px;flex:0 0 56px}.portrait-seraphine img{object-position:55% 35%}.portrait-mirelle img,.portrait-sabine img{object-position:55% 30%}.portrait-cassian img,.portrait-dorian img{object-position:60% 30%}.bloodline-selected .portrait{float:left;margin:0 18px 10px 0}.prologue{position:relative;height:100dvh;display:grid;grid-template-columns:60% 40%;overflow:hidden}.prologue>.portrait{height:100%;clip-path:polygon(0 0,100% 0,93% 100%,0 100%)}.prologue section{align-self:center;padding:5vw 5vw 120px;max-height:100%;overflow:auto}.prologue h1{font-size:clamp(2.5rem,4.8vw,5rem)}.prologue-text{white-space:pre-line;font-size:clamp(1.2rem,1.8vw,1.7rem);line-height:1.6}.prologue .prologue-controls{position:absolute;z-index:2;right:5vw;bottom:24px;display:flex;flex-wrap:nowrap;gap:12px;margin:0;padding:8px;background:var(--ink)}.prologue-controls button{min-width:112px}.prologue .controls button:first-child{background:var(--paper);color:var(--ink)}.panel-1{grid-template-columns:40% 60%}.panel-1>.portrait{order:2;clip-path:polygon(7% 0,100% 0,100% 100%,0 100%)}.panel-1 section{order:1}.panel-3>.portrait img{object-position:50% 15%}
+.portrait{margin:0;position:relative;overflow:hidden;background:var(--ink);min-width:0}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}.portrait.compact{width:56px;height:70px;flex:0 0 56px}.portrait-seraphine img{object-position:55% 35%}.portrait-mirelle img,.portrait-sabine img{object-position:55% 30%}.portrait-cassian img,.portrait-dorian img{object-position:60% 30%}.bloodline-selected .portrait{float:left;margin:0 18px 10px 0}.prologue{position:relative;height:100dvh;display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr);overflow:hidden;background:var(--ink)}
+.prologue>.portrait{grid-area:1/1;width:65%;height:100%;clip-path:none}
+.prologue>section{grid-area:1/1;position:relative;z-index:1;display:flex;flex-direction:column;justify-self:end;align-self:center;width:50%;max-height:calc(100% - 32px);min-height:0;margin:16px 2vw 16px 0;padding:20px 26px;overflow:hidden;background:#050505f5;border:1px solid #b8b3aa;border-top:3px solid var(--blood);box-shadow:0 0 0 5px #050505b8}
+.prologue>section>.eyebrow{flex-shrink:0;padding-right:110px;margin-bottom:14px;min-height:17px}
+.prologue h1{flex-shrink:0;font-size:clamp(26px,2.5vw,40px);line-height:1.15;letter-spacing:.06em;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--blood);overflow-wrap:break-word}
+.prologue-text{white-space:normal;font-size:clamp(18px,1.35vw,23px);line-height:1.4;margin:0 0 12px;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.prologue-paragraph{display:block;white-space:normal}.prologue-paragraph+.prologue-paragraph{margin-top:.7em}
+.prologue-text:focus-visible{outline:1px solid var(--muted);outline-offset:3px}
+.prologue>section>small{flex-shrink:0;display:block;font:11px/1.5 system-ui;color:var(--muted)}
+.prologue .prologue-controls{flex-shrink:0;display:flex;justify-content:flex-end;margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--line)}
+.prologue-controls button{min-width:112px;min-height:44px;padding:10px 20px}
+.prologue .controls button:first-child{background:transparent;color:var(--paper);border:1px solid var(--muted);font-size:18px;text-transform:uppercase;letter-spacing:.04em}
+.prologue .controls button:last-child{position:absolute;top:5px;right:14px;min-width:0;padding:10px 12px;font:11px system-ui;color:var(--muted)}
+.prologue .controls button:hover:not(:disabled){background:#242020;color:var(--paper)}
+.prologue.panel-1>.portrait{justify-self:end}
+.prologue.panel-1>section{justify-self:start;margin:16px 0 16px 2vw}
+.prologue.panel-3>.portrait img{object-position:50% 15%}
 
 /* Encounter page: black gutters are integrated into the portrait composition. */
 
-.vampire-scene{padding:0;margin:auto;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;background:var(--ink);color:var(--paper);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}.vampire-scene::backdrop{background:#000e}.scene-stage{position:relative;min-height:100%;display:grid;grid-template-columns:44% 56%;align-items:start;isolation:isolate}.scene-background{display:none}.scene-background .room-art{height:100%;width:100%}.scene-portraits{position:sticky;top:0;height:100dvh;min-width:0;overflow:hidden;display:flex}.scene-portraits .portrait{height:100%;width:100%;clip-path:polygon(0 0,100% 0,95% 100%,0 100%)}.scene-portraits.paired .portrait{width:50%}.scene-script{padding:20px clamp(24px,3vw,44px);min-width:0;min-height:0;background:var(--ink);display:flex;flex-direction:column}.scene-script>*{flex-shrink:0}.scene-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;font:10px/1.5 system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.scene-topline>span{max-width:14em}.scene-topline button{font:10px/1.5 system-ui;max-width:19em;padding:8px 0}.scene-script h2{margin:16px 0;font-size:clamp(1.8rem,3vw,2.8rem);overflow-wrap:break-word}.spoken-line .eyebrow{color:var(--paper);margin-bottom:14px}.spoken-line blockquote{margin:0 0 18px;font-size:clamp(1.2rem,1.7vw,1.65rem);line-height:1.5;font-style:italic}.spoken-line small{display:block;margin-bottom:12px}.scene-terms{margin:10px 0}.scene-terms h3{font:11px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}.scene-terms ul{list-style:none;padding:0;margin:0}.scene-terms li{font:14px/1.5 system-ui;margin:6px 0}.scene-rights{margin:0}.scene-rights li{font:13px/1.65 system-ui;overflow-wrap:anywhere}.scene-feedback{font:12px/1.5 system-ui;margin:8px 0}.scene-feedback:empty{display:none}.scene-outcome{font-size:1.2rem}.scene-choices{display:grid;gap:3px;margin-top:8px}.scene-choices button{width:100%;padding:12px 14px;font-size:16px}.scene-choices button::before{content:'›';margin-right:12px}.scene-choices>button{font-size:13px;color:var(--muted)}.scene-choices small{float:right}.story-choice{padding:3px 0}.choice-consequences{font:13px/1.5 system-ui;color:var(--muted);padding:0 14px}.choice-consequences p{margin:6px 0}.vampire-scene[data-actor=marius] .scene-stage{grid-template-columns:56% 44%}.vampire-scene[data-actor=marius] .scene-portraits{order:2}.vampire-scene[data-actor=marius] .scene-script{order:1}.vampire-scene[data-actor=marius] .portrait{clip-path:polygon(5% 0,100% 0,100% 100%,0 100%)}.vampire-scene[data-actor=dorian] .scene-stage{grid-template-columns:44% 56%}.vampire-scene[data-actor=dorian] .portrait img{object-position:75% 50%}.vampire-scene[data-actor=vesper] .portrait img{object-position:50% 22%}.chapter-folio{font-size:clamp(2.5rem,6vw,6rem);line-height:1;text-transform:uppercase;letter-spacing:-.05em;margin:14px 0 25px}.chapter-folio span{display:block;font:11px system-ui;letter-spacing:.25em;margin-top:12px;color:var(--muted)}.vampire-scene[data-kind=RECKONING] .scene-script h2{font-size:1.5rem;color:var(--muted)}.vampire-scene[data-kind=RECKONING] .chapter-folio{animation:crimson 700ms both}.vampire-scene[data-kind='CAMPAIGN CONCLUSION'] h2{font-size:clamp(3rem,5vw,6rem)}.environment-portrait .room-art{width:100%;height:100%;object-fit:cover}.scene-overview .scene-script h2{font-size:clamp(2rem,3.5vw,3.8rem)}
+.vampire-scene{padding:0;margin:auto;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;background:var(--ink);color:var(--paper);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}.vampire-scene::backdrop{background:#000e}.scene-stage{position:relative;min-height:100%;display:grid;grid-template-columns:44% 56%;align-items:start;isolation:isolate}.scene-background{display:none}.scene-background .room-art{height:100%;width:100%}.scene-portraits{position:sticky;top:0;height:100dvh;min-width:0;overflow:hidden;display:flex}.scene-portraits .portrait{height:100%;width:100%;clip-path:polygon(0 0,100% 0,95% 100%,0 100%)}.scene-portraits.paired .portrait{width:50%}.scene-script{padding:20px clamp(24px,3vw,44px);min-width:0;min-height:0;background:var(--ink);display:flex;flex-direction:column}.scene-script>*{flex-shrink:0}.scene-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;font:10px/1.5 system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.scene-topline>span{max-width:14em}.scene-topline button{font:10px/1.5 system-ui;max-width:19em;padding:8px 0}.scene-script h2{margin:16px 0;font-size:clamp(1.8rem,3vw,2.8rem);overflow-wrap:break-word}.spoken-line .eyebrow{color:var(--paper);margin-bottom:14px}.spoken-line blockquote{margin:0 0 18px;font-size:clamp(1.2rem,1.7vw,1.65rem);line-height:1.5;font-style:italic}.spoken-line small{display:block;margin-bottom:12px}.scene-terms{margin:10px 0}.scene-terms h3{font:11px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}.scene-terms ul{list-style:none;padding:0;margin:0}.scene-terms li{font:14px/1.5 system-ui;margin:6px 0}.scene-rights{margin:0}.scene-rights li{font:13px/1.65 system-ui;overflow-wrap:anywhere}.scene-feedback{font:12px/1.5 system-ui;margin:8px 0}.scene-feedback:empty{display:none}.scene-outcome{font-size:1.2rem}.scene-choices{display:grid;gap:3px;margin-top:8px}.scene-choices button{width:100%;padding:12px 14px;font-size:16px}.scene-choices button::before{content:'›';margin-right:12px}.scene-choices>button{font-size:13px;color:var(--muted)}.scene-choices small{float:right}.story-choice{padding:3px 0}.choice-consequences{font:13px/1.5 system-ui;color:var(--muted);padding:0 14px}.choice-consequences p{margin:6px 0}.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-stage{grid-template-columns:56% 44%}.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-portraits{order:2}.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-script{order:1}.vampire-scene:not(.cinematic-scene)[data-actor=marius] .portrait{clip-path:polygon(5% 0,100% 0,100% 100%,0 100%)}.vampire-scene:not(.cinematic-scene)[data-actor=dorian] .scene-stage{grid-template-columns:44% 56%}.vampire-scene:not(.cinematic-scene)[data-actor=dorian] .portrait img{object-position:75% 50%}.vampire-scene[data-actor=vesper] .portrait img{object-position:50% 22%}.chapter-folio{font-size:clamp(2.5rem,6vw,6rem);line-height:1;text-transform:uppercase;letter-spacing:-.05em;margin:14px 0 25px}.chapter-folio span{display:block;font:11px system-ui;letter-spacing:.25em;margin-top:12px;color:var(--muted)}.vampire-scene[data-kind=RECKONING] .scene-script h2{font-size:1.5rem;color:var(--muted)}.vampire-scene[data-kind=RECKONING] .chapter-folio{animation:crimson 700ms both}.vampire-scene[data-kind='CAMPAIGN CONCLUSION'] h2{font-size:clamp(3rem,5vw,6rem)}.environment-portrait .room-art{width:100%;height:100%;object-fit:cover}.scene-overview .scene-script h2{font-size:clamp(2rem,3.5vw,3.8rem)}
 
 /* Exploration: one castle, navigation anchored to the illustration. */
 
-.game-shell{height:100dvh;display:flex;flex-direction:column;padding:16px 3vw;overflow:hidden;background:var(--ink)}.game-hud{display:flex;align-items:center;gap:20px;font:12px system-ui;flex-wrap:wrap}.game-hud>button:first-child{margin-right:auto}.game-hud button{font:11px system-ui;padding:10px}.game-hud span{white-space:nowrap}.story-nav{display:flex;gap:10px;margin-top:8px}.story-nav button{font-size:14px}.inspection-nav{position:absolute;right:3vw;top:70px;display:flex;gap:6px}.inspection-nav button{font:10px system-ui;padding:12px 8px}.scene-status{font:12px/1.4 system-ui;min-height:17px;margin:10px 0;color:var(--muted)}.castle-view{flex:1;min-height:0;display:grid;grid-template-columns:68% 32%;gap:0}.castle-architecture{position:relative;min-height:0;display:flex;align-items:center;overflow:hidden;background:#000}.castle-architecture h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.castle-map{position:relative;width:100%;aspect-ratio:1672/941}.castle-map>img{display:block;width:100%;height:auto}.scene-guidance{padding:30px 0 20px 32px;min-height:0;overflow:auto}.scene-guidance h2{font-size:clamp(1.8rem,2.8vw,3rem)}.scene-guidance h3{font:11px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;margin-top:30px}.scene-guidance>p:not(.eyebrow){font-size:17px}.scene-guidance>button,.scene-guidance details button{display:block;width:100%;padding:12px 0}.scene-guidance>button::before{content:'› ';color:var(--blood)}
+.game-shell{height:100dvh;display:flex;flex-direction:column;padding:16px 3vw;overflow:hidden;background:var(--ink)}.game-hud{display:flex;align-items:center;gap:20px;font:12px system-ui;flex-wrap:wrap}.game-hud>button:first-child{margin-right:auto}.game-hud button{font:11px system-ui;padding:10px}.game-hud span{white-space:nowrap}.story-nav{display:flex;gap:10px;margin-top:8px}.story-nav button{font-size:14px}.inspection-nav{position:absolute;right:3vw;top:70px;display:flex;gap:6px}.inspection-nav button{font:10px system-ui;padding:12px 8px}.scene-status{font:12px/1.4 system-ui;min-height:17px;margin:10px 0;color:var(--muted)}.castle-view{flex:1;min-height:0;display:grid;grid-template-columns:68% 32%;gap:0}.castle-architecture{position:relative;min-height:0;display:flex;align-items:center;overflow:hidden;background:#000}.castle-architecture h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.castle-map{position:relative;width:100%;aspect-ratio:1671/941}.castle-map>img{display:block;width:100%;height:auto}.scene-guidance{padding:30px 0 20px 32px;min-height:0;overflow:auto}.scene-guidance h2{font-size:clamp(1.8rem,2.8vw,3rem)}.scene-guidance h3{font:11px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.16em;margin-top:30px}.scene-guidance>p:not(.eyebrow){font-size:17px}.scene-guidance>button,.scene-guidance details button{display:block;width:100%;padding:12px 0}.scene-guidance>button::before{content:'› ';color:var(--blood)}
 
 /* Temporary interior plates: distinct scale and framing, explicitly not final art. */
 
@@ -74,7 +89,7 @@
 
  .entry-copy .notice{padding:22px}.entry-copy .notice h2{font-size:2rem}
 
- .prologue,.panel-1{height:100dvh;grid-template-columns:1fr;grid-template-rows:42dvh minmax(0,1fr)}.prologue>.portrait,.panel-1>.portrait{order:0;clip-path:none}.prologue section,.panel-1 section{order:1;padding:24px 24px 112px;align-self:start}.prologue h1{font-size:2.5rem}.prologue-text{font-size:18px}.prologue .prologue-controls{right:16px;left:16px;bottom:16px;margin:0}.prologue-controls button{flex:1;min-width:0}.prologue>.portrait img{object-position:50% 25%}
+
 
 
 
@@ -137,13 +152,13 @@ button:hover:not(:disabled) small{color:inherit}
 
 /* One encounter scroll flow; compact art leaves room for the decision on phones. */
 @media(max-width:640px){
- .scene-stage,.vampire-scene[data-actor=marius] .scene-stage,.vampire-scene[data-actor=dorian] .scene-stage{display:flex;flex-direction:column;min-height:100%;height:auto}
- .scene-portraits,.vampire-scene[data-actor=marius] .scene-portraits{position:relative;top:auto;order:0;flex:none;width:100%;height:26dvh;min-height:0;aspect-ratio:auto}
- .scene-portraits .portrait,.vampire-scene[data-actor=marius] .portrait{clip-path:none}
+ .scene-stage,.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-stage,.vampire-scene:not(.cinematic-scene)[data-actor=dorian] .scene-stage{display:flex;flex-direction:column;min-height:100%;height:auto}
+ .scene-portraits,.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-portraits{position:relative;top:auto;order:0;flex:none;width:100%;height:26dvh;min-height:0;aspect-ratio:auto}
+ .scene-portraits .portrait,.vampire-scene:not(.cinematic-scene)[data-actor=marius] .portrait{clip-path:none}
  .scene-portraits .portrait img{object-fit:cover;object-position:50% 25%}
  .scene-portraits .portrait-marius img{object-position:50% 22%}
  .scene-portraits .portrait-dorian img{object-position:60% 25%}
- .scene-script,.vampire-scene[data-actor=marius] .scene-script{order:1;width:100%;flex:none;padding:12px 18px 20px;overflow:visible}
+ .scene-script,.vampire-scene:not(.cinematic-scene)[data-actor=marius] .scene-script{order:1;width:100%;flex:none;padding:12px 18px 20px;overflow:visible}
  .scene-topline{gap:10px;font-size:9px}
  .scene-topline button{min-height:44px;font-size:10px}
  .scene-script h2,.scene-overview .scene-script h2,.vampire-scene[data-kind='CAMPAIGN CONCLUSION'] h2{font-size:1.65rem;line-height:1.12;margin:10px 0 12px}
@@ -158,10 +173,29 @@ button:hover:not(:disabled) small{color:inherit}
  .chapter-folio span{margin-top:4px}
 }
 
-/* The title note follows the intact artwork, never its confirmation overlay. */
-.game-entry{height:auto;min-height:100dvh;overflow:auto;padding-top:var(--cover-height);--cover-width:min(100vw,177.58dvh);--cover-height:min(56.31vw,100dvh)}
-.cover-art,.entry-copy{top:0;transform:translateX(-50%)}
-.expiration-note{position:relative;margin:16px auto 24px;padding:0 20px;width:min(100%,650px);font:14px/1.6 system-ui;color:var(--muted);text-align:center}
+/* Fit the intact cover and its note together; never stretch or crop the painted title. */
+.game-entry{height:auto;min-height:100dvh;display:grid;align-content:center;overflow:visible;padding:0;--title-note-space:0px;--cover-width:min(100vw,calc((100dvh - var(--title-note-space))*1671/941));--cover-height:auto}
+.game-entry:has(.expiration-note){--title-note-space:120px}
+.cover-art,.entry-copy{position:relative;grid-area:1/1;justify-self:center;left:auto;top:auto;transform:none;width:var(--cover-width);height:auto;aspect-ratio:1671/941}
+.cover-art{background-size:contain}
+.expiration-note{position:relative;grid-column:1;margin:16px auto 24px;padding:0 20px;width:min(100%,650px);font:14px/1.6 system-ui;color:var(--muted);text-align:center}
+.game-entry .entry-copy .notice{position:fixed;top:50%;left:50%;max-height:90dvh;overflow:auto}
+@media(max-width:900px) and (min-height:600px){
+ .prologue{grid-template-rows:36dvh minmax(0,1fr)}
+ .prologue>.portrait,.prologue.panel-1>.portrait{grid-area:1/1;width:100%;justify-self:stretch}
+ .prologue>.portrait img{object-position:50% 25%}
+ .prologue>section,.prologue.panel-1>section{grid-area:2/1;width:auto;align-self:stretch;justify-self:stretch;max-height:none;margin:-30px 16px 12px;padding:20px;box-shadow:none}
+ .prologue h1{font-size:26px;margin-bottom:16px;padding-bottom:12px}
+ .prologue-text{font-size:18px}
+ .prologue .controls button:first-child{min-width:140px}
+ .prologue .controls button:last-child{right:8px}
+}
+@media(max-height:599px){
+ .prologue>section,.prologue.panel-1>section{max-height:calc(100% - 24px);margin-top:12px;margin-bottom:12px;padding:16px 20px}
+ .prologue h1{font-size:24px}
+ .prologue-text{font-size:17px}
+ .prologue .prologue-controls{padding-top:8px;margin-top:8px}
+}
 .expiration-note strong{display:block;color:var(--paper);font-weight:500;margin-bottom:4px}
 .expiration-note p{margin:0}
 .scene-terms p{font:15px/1.6 system-ui;margin:8px 0;color:var(--paper)}
@@ -227,3 +261,113 @@ button:hover:not(:disabled) small{color:inherit}
 .encounter-navigation button{color:var(--muted);font-weight:400}
 .encounter-navigation button:hover,.encounter-navigation button:focus-visible{color:var(--paper)}
 @media(max-width:640px){.vampire-scene>.encounter-feed{margin:0 14px 156px}.confrontation .binding-choice{font-size:17px}.confrontation .scene-choices>.story-choice{padding:10px}}
+/* Stage 1 cinematic composition: opt-in sanctuary conversation, shared rendering. */
+.cinematic-scene[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
+.cinematic-hud{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;padding:8px 3vw;border-bottom:1px solid var(--line);background:#050505;font-size:22px;text-transform:uppercase;letter-spacing:.1em;z-index:5}
+.cinematic-hud .blood-status{border:0;background:none;padding:0;justify-content:flex-end;max-width:370px;letter-spacing:0;text-transform:none}
+.cinematic-hud .blood-status strong{font:22px Georgia,serif;text-transform:uppercase;letter-spacing:.05em}
+.cinematic-hud .blood-status small{width:100%;text-align:right}
+.cinematic-scene .scene-stage{display:block;min-height:0;height:100%;animation:none}
+.cinematic-scene .scene-background{display:block;position:absolute;inset:0 0 0 48%;z-index:-2;opacity:.7}
+.cinematic-scene .scene-background img{object-fit:cover;object-position:50% 35%}
+.cinematic-scene .scene-portraits{position:absolute;inset:0 auto 0 0;width:62%;height:100%;mask-image:linear-gradient(to right,#000 78%,transparent 100%)}
+.cinematic-scene .scene-portraits .portrait{clip-path:none;margin:0}
+.cinematic-scene .scene-portraits img{object-fit:cover;object-position:55% 25%;animation:none}
+.cinematic-scene .scene-script{position:relative;left:50%;top:50%;transform:translateY(-50%);width:47%;max-height:calc(100% - 48px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:24px 28px;background:#050505f5;border:1px solid #b8b3aa;box-shadow:0 0 0 5px #050505b8;}
+.cinematic-scene[data-reading=true] .scene-script{top:auto;position:absolute;bottom:19%;transform:none;border-top:3px solid var(--blood);width:45%;left:52%;padding:24px 30px}
+.cinematic-scene .scene-topline{justify-content:flex-end;font-size:10px;letter-spacing:.16em;margin-bottom:8px}
+.cinematic-scene .scene-topline>span{max-width:none}
+.cinematic-scene .scene-script h2{font-size:clamp(22px,2vw,32px);letter-spacing:.12em;line-height:1.2;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--blood)}
+.cinematic-scene .spoken-line{animation:none}
+.cinematic-scene .spoken-line>.eyebrow{font-size:10px;margin-bottom:10px}
+.cinematic-scene .spoken-line>.eyebrow[hidden]{display:none}
+.cinematic-scene .spoken-line blockquote{font-size:clamp(23px,2.15vw,36px);line-height:1.45;margin:0 0 16px}
+.cinematic-scene:not([data-reading=true]) .spoken-line blockquote{font-size:clamp(21px,1.8vw,29px)}
+.dialogue-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font:11px system-ui;color:var(--muted);border-bottom:1px solid var(--line);margin-bottom:12px}
+.dialogue-tools button{font:12px system-ui;padding:8px 0;color:var(--muted)}
+.dialogue-tools details{padding:0;flex:1;text-align:right}
+.dialogue-tools summary{font-size:10px;letter-spacing:.05em}
+.dialogue-tools details[open]{flex-basis:100%;text-align:left}
+.dialogue-tools details p{white-space:pre-line;font:16px/1.55 Georgia,serif;color:var(--paper);padding:12px 0;border-top:1px solid var(--line)}
+.dialogue-tools details strong{display:block;font:10px system-ui;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.cinematic-scene .scene-terms{margin:4px 0 16px;border-left:1px solid var(--line);padding-left:12px}
+.cinematic-scene .scene-terms p{font:13px/1.5 system-ui;margin:0 0 6px}
+.cinematic-scene .scene-rights{order:6;border-top:1px solid var(--line);margin-top:12px}
+.cinematic-scene .scene-rights summary{padding:12px 0}
+.cinematic-scene .scene-choices{gap:12px;margin:0}
+.cinematic-scene .story-choice{padding:0}
+.cinematic-scene .scene-choices button{border:1px solid #89857e;font-size:18px;line-height:1.3;padding:12px 16px;min-height:48px}
+.cinematic-scene .scene-choices button::before{content:'◇';margin-right:12px}
+.cinematic-scene .scene-choices .binding-choice{border-color:var(--line);border-left:3px solid var(--blood);background:#050505;color:var(--paper)}
+.cinematic-scene .scene-choices .binding-choice::before{color:#ed6575}
+.cinematic-scene .scene-choices button:hover:not(:disabled),.cinematic-scene .scene-choices button:focus-visible{background:var(--paper);color:var(--ink)}
+.cinematic-scene .scene-choices .binding-choice:hover:not(:disabled),.cinematic-scene .scene-choices .binding-choice:focus-visible{background:#65000d;color:var(--paper);border-color:var(--blood)}
+.cinematic-scene .optional-dialogue{margin:0;padding:0;border:0;display:grid;gap:8px}
+.cinematic-scene .optional-dialogue>.eyebrow{font-size:9px;letter-spacing:.12em;margin:4px 0 0}
+.cinematic-scene .scene-choices small{font:10px system-ui;padding:5px 0 0 8px}
+.cinematic-scene .scene-choices .cinematic-continue{justify-self:end;width:auto;min-width:180px;background:#050505;border-color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.cinematic-scene .scene-choices .cinematic-continue::before,.cinematic-scene .scene-choices .cinematic-leave::before{content:none}
+.cinematic-continue span{margin-left:30px}
+.cinematic-scene .scene-choices .cinematic-leave{font-size:15px;color:var(--muted);border-color:var(--line)}
+.cinematic-scene .encounter-navigation{position:relative;min-height:58px;padding:6px 3vw;background:#050505;border-color:var(--line)}
+.cinematic-scene .encounter-navigation button{font:12px system-ui}
+.cinematic-scene>.encounter-feed{position:absolute;z-index:4;bottom:68px;left:24px;max-width:40%;margin:0;padding:0 12px;background:#050505ed;border:1px solid var(--line)}
+.cinematic-scene>.encounter-feed summary{font-size:10px}
+@media(min-width:761px) and (max-height:600px){
+ .cinematic-scene[data-reading=true] .scene-script{bottom:24px}
+}
+@media(max-width:760px){
+ .cinematic-scene[open]{display:block;overflow-y:auto}
+ .cinematic-hud{position:sticky;top:0;padding:8px 16px;min-height:64px;gap:8px;font-size:16px;flex-wrap:wrap}
+ .cinematic-hud .blood-status{display:contents}
+ .cinematic-hud .blood-status strong{font-size:16px}
+ .cinematic-hud .blood-status small{font-size:10px;text-align:left;width:auto}
+ .cinematic-hud .blood-status span:empty{display:none}
+ .cinematic-scene .scene-stage{height:auto;min-height:0;padding:0 12px 12px}
+ .cinematic-scene .scene-background{inset:0;opacity:.35}
+ .cinematic-scene .scene-portraits{position:relative;width:calc(100% + 24px);margin-left:-12px;height:34dvh;min-height:210px;max-height:340px;mask-image:linear-gradient(#000 85%,transparent)}
+ .cinematic-scene .scene-portraits img{object-position:50% 23%}
+ .cinematic-scene .scene-script,.cinematic-scene[data-reading=true] .scene-script{position:relative;inset:auto;transform:none;width:100%;max-height:none;overflow:visible;padding:18px;scrollbar-gutter:auto;margin-top:-38px;box-shadow:none;border-color:#89857e}
+ .cinematic-scene .scene-script h2{font-size:21px;letter-spacing:.08em;margin-bottom:16px}
+ .cinematic-scene .spoken-line blockquote,.cinematic-scene:not([data-reading=true]) .spoken-line blockquote{font-size:21px;line-height:1.45}
+ .cinematic-scene .scene-choices button{font-size:16px}
+ .cinematic-scene .scene-terms p{font-size:13px}
+ .cinematic-scene>.encounter-feed{position:relative;inset:auto;max-width:none;margin:12px 16px}
+ .cinematic-scene .encounter-navigation{position:relative;min-height:58px;padding:8px;flex-wrap:wrap}
+ .cinematic-scene .encounter-navigation>div:first-child:not(:empty){width:auto}
+}
+@media(prefers-reduced-motion:reduce){.cinematic-scene *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Shared character presentation: legacy page cuts do not apply inside the cinematic scene. */
+.cinematic-scene[data-actor=marius] .portrait img{object-position:50% 22%}
+.cinematic-scene[data-actor=dorian] .portrait img{object-position:65% 25%}
+.cinematic-scene.confrontation .scene-choices>.story-choice{border:0;margin:0;padding:0;background:none}
+.cinematic-scene .choice-consequences{padding:0 0 4px;color:var(--paper)}
+.cinematic-scene.confrontation h2{border-left:0;padding-left:0}
+
+/* Nightly utilities follow political opportunities without endorsing ending the night. */
+.nightly-actions{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.nightly-actions>.eyebrow{margin:0 0 12px}
+.nightly-actions .nightly-wait{background:transparent;border:1px solid var(--line);color:var(--paper)}
+.nightly-actions .nightly-wait:hover{background:#242020;border-color:var(--paper)}
+.nightly-actions button:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.nightly-actions .encounter-feed{margin-bottom:14px}
+
+.vampire-scene:not(.cinematic-scene)>.cinematic-hud{position:sticky;top:0}
+
+/* Entry-only staging; native modal layers are animated directly. */
+@keyframes crypt-fade-out{from{opacity:1}to{opacity:0}}
+@keyframes crypt-layer-in{from{opacity:0}}
+html[data-crypt-fade] :is(.prologue,.vampire-scene,.game-shell){pointer-events:none}
+html[data-crypt-fade] :is(.prologue,.vampire-scene) *{animation:none!important;transition:none!important}
+html[data-crypt-fade=out] .prologue{animation:crypt-fade-out 600ms cubic-bezier(.4,0,.2,1) both!important}
+html[data-crypt-fade=hold] :is(.prologue,.vampire-scene,.game-shell){opacity:0!important;animation:none!important}
+.scene-stage[data-crypt-entered],.scene-stage[data-crypt-entered] *{animation:none!important}
+/* Keep the environment's framing stable as the existing flattened portrait fades over it. */
+.scene-stage[data-crypt-entered]>.scene-background{inset:0}
+html[data-crypt-fade=environment] .vampire-scene .scene-background{animation:crypt-layer-in 900ms ease-out both!important}
+html[data-crypt-fade=environment] .vampire-scene .scene-portraits{opacity:0}
+html[data-crypt-fade=character] .vampire-scene .scene-portraits{animation:crypt-layer-in 500ms ease-in-out both!important}
+html:is([data-crypt-fade=environment],[data-crypt-fade=character]) .vampire-scene :is(.scene-script,.cinematic-hud,.encounter-navigation){opacity:0}
+html[data-crypt-fade=dialogue] .vampire-scene :is(.scene-script,.cinematic-hud,.encounter-navigation){animation:crypt-layer-in 400ms ease-out both!important}
+@media(prefers-reduced-motion:reduce){html[data-crypt-fade] :is(.prologue,.vampire-scene,.game-shell,.scene-background,.scene-portraits,.scene-script,.cinematic-hud,.encounter-navigation){animation:none!important;opacity:1!important}}

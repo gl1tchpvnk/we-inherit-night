@@ -37,7 +37,7 @@ test('wait, rest, cap, free questions and legacy turns use actual action timing'
  assert.match(hungerText(1),/Feed/);assert.match(hungerText(3),/Hunger/);assert.equal(hungerText(8),'');
 });
 
-test('encounters show Blood and fatal warnings before commitment; feeding stays primary',async()=>{
+test('encounters show Blood and fatal warnings before commitment; feeding stays outside dialogue',async()=>{
  const {build}=await import('vite'),{mkdtemp,writeFile,rm}=await import('node:fs/promises'),{resolve,join}=await import('node:path'),{pathToFileURL}=await import('node:url');
  const {createElement}=await import('react'),{renderToStaticMarkup}=await import('react-dom/server'),{buildEncounterScenes}=await import('../src/encounters.ts'),{availableActions}=await import('../src/game.ts');
  const dir=await mkdtemp(resolve('.local/blood-ssr-'));
@@ -47,12 +47,12 @@ test('encounters show Blood and fatal warnings before commitment; feeding stays 
   const {VampireEncounter}=await import(pathToFileURL(file).href),r=fixture(2);r.actions=availableActions(r.campaign,r.world);
   const scenes=buildEncounterScenes(r),scene=scenes.find(s=>s.id==='action:investigate_title');
   const html=renderToStaticMarkup(createElement(VampireEncounter,{result:r,scene,lineIndex:scene.lines.length-1,busy:false,feedback:'',onFeed(){},onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}}));
-  assert.doesNotMatch(html,/Your action/);assert.match(html,/class="scene-choices">[\s\S]*encounter-feed/);assert.match(html,/Feed .*4 Blood .*1 action/);
+  assert.doesNotMatch(html,/Your action/);assert.doesNotMatch(html,/encounter-feed|<button[^>]*>Feed/);
   assert.match(html,/Blood 2\/12/);assert.match(html,/Hunger is closing in/);assert.match(html,/Fatal: this leaves 1 Blood/);
   assert(html.indexOf('Fatal:')<html.indexOf('class="binding-choice"'));
   for(const blocked of [{...r,pending:true},{...r,campaign:{...r.campaign,actionsLeft:0}}]){
    const disabled=renderToStaticMarkup(createElement(VampireEncounter,{result:blocked,scene,lineIndex:0,busy:false,feedback:'',onFeed(){},onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}}));
-   assert.match(disabled,/disabled="">Feed/);
+   assert.doesNotMatch(disabled,/<button[^>]*>Feed/);
   }
 
   const feed=scenes.find(s=>s.id==='decision:0').choices.find(c=>c.inspect==='action:feed');assert.equal(feed.secondary,false);assert.match(feed.label,/Review feeding.*4 Blood/);

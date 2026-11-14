@@ -1,3 +1,4 @@
+import {dialogueBeats} from '../src/scenePresentation.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
@@ -190,12 +191,16 @@ test('visible negotiation and reaction markup keeps terms once and the matching 
   const r=fixture(1);r.campaign.politics.titleFiled=true;
   const offer=scene(r,'action:sanctuary_pact');
   const render=(s,index)=>renderToStaticMarkup(createElement(VampireEncounter,{scene:s,lineIndex:index,busy:false,feedback:'',result:r,onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}}));
-  const markup=render(offer,0);
-  assert.equal(markup.split(offer.lines[0].text).length-1,1);
+  const beats=dialogueBeats(offer),opening=render(offer,0);
+  assert.doesNotMatch(opening,/binding-choice|Before you decide/);
+  const markup=render(offer,beats.length-1);
+  assert.equal(markup.match(/<blockquote>([\s\S]*?)<\/blockquote>/)?.[1],beats.at(-1).text);
+  for(const term of offer.terms)assert.equal(markup.split(term.replaceAll('&','&amp;').replaceAll("'",'&#x27;')).length-1,1);
   assert.match(markup,/Before you decide/);assert.match(markup,/nonrefundable/);assert.match(markup,/Accept sanctuary/);
   r.world.leases[1].status='accepted';r.world.leases[1].end_night=8;r.world.access.sanctuary=true;
-  const reaction=scene(r,'reaction:lease:1:accepted'),last=reaction.lines.at(-1).text;
-  assert.equal(render(reaction,reaction.lines.length-1).split(last).length-1,1);
+  const reaction=scene(r,'reaction:lease:1:accepted');
+  assert.equal(render(reaction,dialogueBeats(reaction).length-1).match(/<blockquote>([\s\S]*?)<\/blockquote>/)?.[1],dialogueBeats(reaction).at(-1).text);
+  assert.equal(dialogueBeats(reaction).map(b=>b.text).join('\n\n'),reaction.lines.map(l=>l.text).join('\n\n'));
   assert.ok(reaction.terms.every(t=>!reaction.lines.some(l=>l.text===t)));
  }finally{await rm(dir,{recursive:true,force:true});}
 });

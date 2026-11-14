@@ -6,7 +6,7 @@ Pass 2I. Presentation never establishes rights, publishes research, or computes 
 - `public/art/landing-reference.png`: supplied Landing.png, unchanged. Cover lettering and castle define the world. Transparent native buttons align with its painted buttons and provide keyboard focus and accessible New Game/Continue names. Preserve all original artwork, lettering and placement.
 - `public/art/castle-cutaway.png`: current creator-supplied castle, copied unchanged. Navigation uses this interior cutaway, never the landing image. Only the existing Lounge, Library and Crypt are interactive; other illustrated spaces add no locations.
 - `public/art/*-current.png`: current creator-supplied portraits for Seraphine, Vesper, Marius, Dorian, Mirelle, Cassian, Lucien, Sabine and Player. Previous approved files remain retained. No recolouring, mirroring or redrawing. Finished portraits have no artwork-credit or placeholder badges.
-- The three `*-provisional.png` room interiors remain labelled generated studies awaiting creator approval.
+- `public/art/crypt-provisional.png`, `public/art/library-provisional.png` and `public/art/lounge-provisional.png` are generated environmental studies awaiting creator approval. Their provenance remains documented here; cinematic character encounters omit player-facing artwork badges and persistent location headings. Other room/intro presentations are unchanged.
 
 ## Ink, type and framing
 Black #050505, paper #f5f1e8, crimson #c70019, muted paper #b8b3aa. Solid black shadows; no coloured lighting, ornamental gradients or glow. Crimson identifies a commitment or consequential recorded change, never implies authority itself.
@@ -30,3 +30,31 @@ The encounter layout correction supersedes Pass 3C’s full 4:3 mobile portraits
 
 ## Replacement convention
 Replace only the relevant source in `PORTRAIT_ASSETS` or `ROOM_ASSETS` when approved artwork arrives. Keep actor IDs, scene IDs, policies and saved data unchanged. Supply separate interior/castle art with clean negative space, no painted UI. Never call procedural plates or symbolic figures finished artwork. Future layered art may enable parallax; flattened references do not.
+
+## Cinematic Stage 1 / 1B — local, direction approved
+
+The supplied Seraphine mockups supersede the earlier unboxed-choice/single-scroll
+layout prescription only for the sanctuary conversation and its two optional
+questions. Reuse the unchanged current portrait and provisional Lounge interior;
+keep its provisional label. An inset bordered panel and restrained crimson
+commitment frame are permitted. Desktop uses internal panel scrolling; phones
+use a portrait above naturally scrolling dialogue. Other scenes retain their
+existing composition pending Stage 2 approval. See docs/CINEMATIC_STAGE1.md.
+
+Stage 1B keeps unselected commitments on black with a crimson edge/marker; fill
+indicates hover or keyboard focus, not a recommended political choice. Dialogue
+sits slightly higher and narrower on desktop; short landscape retains a safe
+HUD inset. Mobile overlap is modest, with no face coverage or new masks.
+
+## Cinematic Stage 2 continuity
+
+The approved Stage 1B composition now applies to compatible character ENCOUNTER
+and NEGOTIATION scenes, including personal exchanges, individual reactions and
+final-demand. Legacy Marius/Dorian page cuts apply only outside cinematic scenes.
+Marius/Dorian portrait positions preserve faces; no artwork is altered. Named
+speaker labels remain explicit for player/narrator exchanges. Strategic surfaces,
+aggregate reckonings and finales remain distinct. See docs/CINEMATIC_STAGE2.md.
+
+Cinematic label correction: character names/speaker labels and artwork remain;
+location headings and provisional-art badges are omitted in character panels.
+Authored location references, room introductions, terms and scene data remain intact.

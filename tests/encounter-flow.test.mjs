@@ -112,9 +112,13 @@ test('rendered offers expose commitment immediately, deduplicate Feed and collap
   const r=fixture(3),scenes=all(r),props={result:r,scenes,lineIndex:0,busy:false,feedback:'',onFeed(){},onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
   const render=(s,memory=readSceneMemory(null))=>renderToStaticMarkup(createElement(VampireEncounter,{...props,scene:s,memory}));
   for(const id of ['action:feed','decision:3','action:authorize_mirelle','character:marius']){
-   const html=render(resolveScene(scenes,id));assert.equal((html.match(/<button[^>]*>(?:Feed|Review feeding)[^<]*/g)??[]).length,1,id);
+   const html=render(resolveScene(scenes,id));assert.equal((html.match(/<button[^>]*>(?:Feed|Review feeding)[^<]*/g)??[]).length,['action:feed','decision:3'].includes(id)?1:0,id);
    assert.doesNotMatch(html,/>Feed[^<]*<small>Explored/);
   }
+  const strategic=render(resolveScene(scenes,'decision:3'));
+  assert.match(strategic,/aria-label="Nightly actions"/);
+  assert(strategic.indexOf('Review feeding')<strategic.indexOf('class="nightly-wait"'));
+  assert.doesNotMatch(strategic,/Action \d|<div class="scene-topline"><span>Crimson Lounge/);
   const proposal=resolveScene(scenes,'action:authorize_mirelle'),html=render(proposal);
   assert.match(html,/Authorize Mirelle · tonight’s action/);assert.doesNotMatch(html,/>Continue</);
   assert.match(html,/Publication cannot be recalled/);

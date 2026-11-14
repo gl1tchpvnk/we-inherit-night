@@ -4,6 +4,7 @@ import type {Action,Result} from './chain';
 import {AGENTS} from './agents';
 import {bloodWarning,hungerText,encounterFeed,encounterFeedText} from './blood';
 import {Portrait,RoomArt} from './visuals';
+import {cinematicEncounter,dialogueBeats,strategicEncounter,nightlyChoiceKind} from './scenePresentation';
 import {buildEncounterScenes,roomIntroduction,finishRoomIntroduction,resumeEncounterMemory,finishScene,visitScene,leaveEncounters,nextScene,readSceneMemory,resolveScene,topicStatus,markSceneRead,type SceneMemory,type EncounterScene,type SceneChoice} from './encounters';
 
 export function BloodStatus({result}:{result:Result}){
@@ -19,63 +20,85 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
   onLine:(index:number)=>void;onChoice:(choice:SceneChoice)=>void;onComplete:()=>void;onSkipReckoning:()=>void;
 }){
   const dialog=useRef<HTMLDialogElement>(null),heading=useRef<HTMLHeadingElement>(null);
-  const index=Math.min(lineIndex,scene.lines.length-1),spoken=scene.lines[index];
+  const strategic=strategicEncounter(scene);
+  const cinematic=cinematicEncounter(scene),beats=dialogueBeats(scene);
+  const sceneKey=`${scene.id}:${scene.readVersion}`;
+  const readMemory=memory??{seen,active:null,line:0};
+  const entry=useRef({key:'',review:false,replay:false,furthest:0});
+  if(entry.current.key!==sceneKey)entry.current={key:sceneKey,replay:false,furthest:0,review:(cinematic||scene.id.startsWith('character:')||['action:petition_marius','action:sanctuary_pact'].includes(scene.id))&&topicStatus(scene,readMemory)==='Explored'};
+  const reviewing=cinematic&&entry.current.review&&!entry.current.replay;
+  const index=reviewing?beats.length-1:Math.min(lineIndex,beats.length-1),spoken=beats[index];
+  entry.current.furthest=Math.max(entry.current.furthest,index);
+  const hasReviewed=entry.current.review||topicStatus(scene,readMemory)==='Explored';
   const currentActor=spoken?.speaker!=='narrator'&&spoken?.speaker!=='player'?spoken?.speaker:scene.portraits[0];
-  const displayedPortraits=scene.type==='RECKONING'&&currentActor?[currentActor]:scene.portraits;
+  const displayedPortraits=(cinematic||scene.type==='RECKONING')&&currentActor?[currentActor]:scene.portraits;
   const chapter=/^(reckoning|incident):/.test(scene.id)?Number(scene.id.split(':')[1])+1:null;
   const finishLabel=scene.completionLabel??'Continue';
-  const reading=scene.type!=='NEGOTIATION'&&index<scene.lines.length-1;
-  const readMemory=memory??{seen,active:null,line:0};
-  const entry=useRef({key:'',review:false});
-  if(entry.current.key!==`${scene.id}:${scene.readVersion}`)entry.current={key:`${scene.id}:${scene.readVersion}`,review:(scene.id.startsWith('character:')||['action:petition_marius','action:sanctuary_pact'].includes(scene.id))&&topicStatus(scene,readMemory)==='Explored'};
+  const reading=(cinematic||scene.type!=='NEGOTIATION')&&index<beats.length-1;
+  const advance=(next:number)=>{entry.current.replay=true;onLine(next);heading.current?.focus();};
   const back=scene.choices.find(c=>c.inspect?.startsWith('decision:')&&/Consider|Compare|Return/.test(c.label));
   const choices=scene.choices.filter(c=>c!==back&&!(onBack&&c.inspect?.startsWith('character:')&&/^(There is something|Return to our conversation|Back to conversation|Ask another)/.test(c.label)));
   const isNavigation=(c:SceneChoice)=>/^(Return|Back|There is something|Consider|Compare|Continue|I am ready)/.test(c.label);
   const status=(c:SceneChoice)=>{if(c.action||c.reply||c.id==='unanswered'||isNavigation(c))return null;const state=topicStatus(resolveScene(scenes,c.inspect??null),readMemory);return c.reviewOnly&&state!=='Explored'?null:state;};
   const isReview=(c:SceneChoice)=>c.reviewOnly||!!c.inspect&&/^(ask:|personal:|talk:|purpose:|meaning:|finding:)/.test(c.inspect)&&status(c)==='Explored';
-  const primary=choices.filter(c=>!isReview(c)),review=choices.filter(isReview);
+  const nightly=strategic?choices.filter(c=>nightlyChoiceKind(c)):[];
+  const presented=choices.filter(c=>!(strategic||cinematic)||!nightlyChoiceKind(c));
+  const primary=presented.filter(c=>!isReview(c)),review=presented.filter(isReview);
   const optional=primary.filter(c=>!c.secondary&&!!c.inspect&&/^(ask:|personal:|talk:|purpose:|finding:|meaning:|character:|record:)/.test(c.inspect));
   const mainChoices=primary.filter(c=>!c.secondary&&!optional.includes(c));
   const hasFeed=scene.id==='action:feed'||choices.some(c=>c.inspect==='action:feed'||c.action?.action==='game'&&c.action.choice==='feed');
   const leave=()=>onBack?onBack():onCastle?onCastle():onComplete();
-  const renderChoice=(choice:SceneChoice)=><div key={choice.id} className="story-choice">{choice.summary&&<div className="choice-consequences">{choice.summary.map((text,i)=><p key={i}>{text}</p>)}</div>}{result&&choice.action&&bloodWarning(result,choice.action)&&<p className="blood-warning" role="status">{bloodWarning(result,choice.action)}</p>}<button type="button" className={choice.action?'binding-choice':''} disabled={busy||!!result?.pending||!!result?.error&&!!choice.action} onClick={()=>onChoice(choice)}>{choice.label}{status(choice)&&<small>{status(choice)==='Explored'?'Reviewed':status(choice)}</small>}</button></div>;
-  const speech=<>{(scene.type==='NEGOTIATION'?scene.lines:[spoken]).filter(Boolean).map((line,i)=><div key={`${scene.id}:${index}:${i}`} className="spoken-line" aria-live="polite" aria-atomic="true"><p className="eyebrow">{line.speaker==='narrator'?'The chronicle':line.speaker==='player'?'YOU':AGENTS[line.speaker].name}</p><blockquote>{line.text}</blockquote></div>)}</>;
+  const renderChoice=(choice:SceneChoice)=><div key={choice.id} className="story-choice">{strategic&&nightlyChoiceKind(choice)==='feed'&&result&&<p className="choice-consequences">{encounterFeedText(result)}</p>}{choice.summary&&<div className="choice-consequences">{choice.summary.map((text,i)=><p key={i}>{text}</p>)}</div>}{result&&choice.action&&bloodWarning(result,choice.action)&&<p className="blood-warning" role="status">{bloodWarning(result,choice.action)}</p>}<button type="button" className={strategic&&nightlyChoiceKind(choice)==='wait'?'nightly-wait':choice.action?'binding-choice':''} disabled={busy||!!result?.pending||!!result?.error&&!!choice.action} onClick={()=>onChoice(choice)}>{choice.label}{(status(choice)||strategic&&(choice.secondary||optional.includes(choice)))&&<small>{strategic&&(choice.secondary||optional.includes(choice))?(status(choice)?'Optional · ':'Optional'):''}{status(choice)==='Explored'?'Reviewed':status(choice)}</small>}</button></div>;
+  const speech=<>{(!cinematic&&scene.type==='NEGOTIATION'?scene.lines:[spoken]).filter(Boolean).map((line,i)=><div key={`${scene.id}:${index}:${i}`} className="spoken-line" aria-live="polite" aria-atomic="true"><p className="eyebrow" hidden={cinematic&&line.speaker!=='narrator'&&line.speaker!=='player'&&scene.title===AGENTS[line.speaker].name}>{line.speaker==='narrator'?'The chronicle':line.speaker==='player'?'YOU':AGENTS[line.speaker].name}</p><blockquote>{line.text}</blockquote></div>)}</>;
   useEffect(()=>{
     const previous=document.activeElement as HTMLElement|null;
     dialog.current?.showModal();heading.current?.focus();
     return ()=>{dialog.current?.close();previous?.focus();};
   },[]);
   useEffect(()=>{heading.current?.focus();},[scene.id]);
-  return <dialog ref={dialog} data-actor={currentActor} data-kind={scene.type} className={`vampire-scene ${scene.presentation??''} scene-${scene.location}${scene.portraits.length===0?' scene-overview':''}${scene.compact?' living-encounter':''}`} aria-labelledby="encounter-title" onCancel={event=>{event.preventDefault();if(!busy){if(scene.introduction)onComplete();else leave();}}}>
-    {result&&<BloodStatus result={result}/>}
+  return <dialog ref={dialog} data-actor={currentActor} data-kind={scene.type} data-reading={reading} className={`vampire-scene ${cinematic?'cinematic-scene ':''}${scene.presentation??''} scene-${scene.location}${scene.portraits.length===0?' scene-overview':''}${scene.compact?' living-encounter':''}`} aria-labelledby="encounter-title" onCancel={event=>{event.preventDefault();if(!busy){if(scene.introduction)onComplete();else leave();}}}>
+    {result?.campaign?.status==='playing'&&<header className="cinematic-hud"><span>Night {Math.min(7,result.campaign.night+1)} <small>of 7</small></span><BloodStatus result={result}/></header>}
     <div className={`scene-stage${entry.current.review?' scene-review':''}`} key={scene.id}>
       <div className="scene-background" aria-hidden="true"><RoomArt room={scene.location}/></div>
       <div className={`scene-portraits ${displayedPortraits.length>1?'paired':''}`}>{displayedPortraits.length?displayedPortraits.map(actor=><Portrait actor={actor} key={actor}/>):<figure className="portrait environment-portrait"><RoomArt room={scene.location}/><figcaption>PROVISIONAL GENERATED INTERIOR · APPROVAL PENDING</figcaption></figure>}</div>
       <div className="scene-script">
         {chapter!==null&&<p className="chapter-folio">Night {['I','II','III','IV','V','VI','VII'][chapter-1]??chapter} <span>{scene.type==='RECKONING'?'The reckoning':'A new chapter'}</span></p>}
-        <div className="scene-topline"><span>{scene.location==='crypt'?'Ancestral Crypt':scene.location==='library'?'Forbidden Library':'Crimson Lounge'}</span></div>
+        <div className="scene-topline">{!cinematic&&!strategic&&<span>{scene.location==='crypt'?'Ancestral Crypt':scene.location==='library'?'Forbidden Library':'Crimson Lounge'}</span>}{cinematic&&<span className="cinematic-folio">{reading?'Conversation':'Your response'}</span>}</div>
         {scene.reactionLevel&&<p className="eyebrow">{scene.reactionLevel==='major'?'The balance has shifted':'Word from the court'}</p>}
         <h2 id="encounter-title" tabIndex={-1} ref={heading}>{scene.title}</h2>
-        {entry.current.review?<details><summary>Review introduction</summary>{speech}</details>:speech}
+        {!cinematic&&entry.current.review?<details><summary>Review introduction</summary>{speech}</details>:speech}
+        {cinematic&&<div className="dialogue-tools">
+          <button type="button" disabled={busy||index===0} onClick={()=>advance(index-1)}>Previous</button>
+          <span>{index+1} / {beats.length}</span>
+          {reading&&hasReviewed&&<button type="button" disabled={busy} onClick={()=>advance(beats.length-1)}>Skip reviewed dialogue</button>}
+          <details key={sceneKey}><summary>Dialogue history</summary>{beats.slice(0,hasReviewed?beats.length:entry.current.furthest+1).map((line,i)=><p key={i}><strong>{line.speaker==='narrator'?'The chronicle':line.speaker==='player'?'You':AGENTS[line.speaker].name}</strong>{line.text}</p>)}</details>
+        </div>}
         {!reading&&scene.terms.length>0&&<section className="scene-terms" aria-label="Before you decide">{scene.terms.map((term,i)=><p key={i}>{term}</p>)}</section>}
 
-        {scene.rights.length>0&&<details className="scene-rights"><summary>{scene.reactionLevel?'Inspect recorded consequence':'Inspect terms'}</summary><ul>{scene.rights.map((right,i)=><li key={i}>{right}</li>)}</ul></details>}
+        {(!cinematic||!reading)&&scene.rights.length>0&&<details className="scene-rights"><summary>{scene.reactionLevel?'Inspect recorded consequence':cinematic?'Inspect agreement terms':'Inspect terms'}</summary><ul>{scene.rights.map((right,i)=><li key={i}>{right}</li>)}</ul></details>}
         {scene.outcome&&<p className="scene-outcome">{scene.outcome}</p>}
         <p role="status" className="scene-feedback">{busy?'Your decision is being resolved…':feedback}</p>
         {onRefresh&&(result?.pending||result?.error)&&<button type="button" disabled={refreshBusy} onClick={onRefresh}>Check confirmed outcome</button>}
         <div className="scene-choices">
-          {reading?<button type="button" disabled={busy} onClick={()=>{onLine(index+1);heading.current?.focus();}}>Continue</button>:<>
-            {scene.introduction&&<button disabled={busy||!!result?.error} onClick={onComplete}>Continue</button>}{mainChoices.map(renderChoice)}
-            {optional.length>0&&<section className="optional-dialogue" aria-label="Optional conversation"><p className="eyebrow">Optional conversation</p>{optional.map(renderChoice)}</section>}
-            {primary.some(c=>c.secondary)&&<details className="other-choices"><summary>{scene.presentation==='confrontation'?'Advice, feeding and other choices':<>Also tonight: {primary.filter(c=>c.secondary).map(c=>c.label).join(' · ')}</>}</summary>{primary.filter(c=>c.secondary).map(renderChoice)}</details>}
+          {reading?<button type="button" className={cinematic?'cinematic-continue':undefined} disabled={busy} onClick={()=>advance(index+1)}>Continue{cinematic&&<> <span aria-hidden="true">→</span></>}</button>:<>
+            {scene.introduction&&<button disabled={busy||!!result?.error} onClick={onComplete}>Continue</button>}{strategic?primary.map(renderChoice):!cinematic&&mainChoices.map(renderChoice)}
+            {!strategic&&optional.length>0&&<section className="optional-dialogue" aria-label="Optional conversation"><p className="eyebrow">Optional conversation</p>{optional.map(renderChoice)}</section>}
+            {cinematic&&!strategic&&mainChoices.map(renderChoice)}
+            {cinematic&&!onBack&&['character:seraphine','action:sanctuary_pact'].includes(scene.id)&&!scene.exchange&&<button className="cinematic-leave" type="button" disabled={busy} onClick={leave}>Leave without committing</button>}
+            {!strategic&&primary.some(c=>c.secondary)&&<details className="other-choices"><summary>{scene.presentation==='confrontation'?'Advice, feeding and other choices':<>Also tonight: {primary.filter(c=>c.secondary).map(c=>c.label).join(' · ')}</>}</summary>{primary.filter(c=>c.secondary).map(renderChoice)}</details>}
             {review.length>0&&<details className="other-choices"><summary>Review conversation</summary>{review.map(renderChoice)}</details>}
-            {scene.type==='RECKONING'&&<button type="button" disabled={busy} onClick={onSkipReckoning}>{finishLabel}</button>}
+            {strategic&&(nightly.length>0||!hasFeed&&onFeed&&result?.campaign?.status==='playing')&&<section className="nightly-actions" aria-label="Nightly actions"><p className="eyebrow">Nightly actions</p>
+              {nightly.filter(c=>nightlyChoiceKind(c)==='feed').map(renderChoice)}
+              {!hasFeed&&onFeed&&result?.campaign?.status==='playing'&&<details className="encounter-feed" data-hungry={result.campaign.resources.blood<=3}><summary>Feed · +4 Blood · 1 action</summary><button type="button" aria-describedby="encounter-feed-cost" disabled={busy||!encounterFeed(result)} onClick={onFeed}>Feed · +4 Blood · 1 action</button><p id="encounter-feed-cost">{encounterFeedText(result)}</p></details>}
+              {nightly.filter(c=>nightlyChoiceKind(c)==='wait').map(renderChoice)}
+            </section>}
+            {scene.type==='RECKONING' &&<button type="button" disabled={busy} onClick={onSkipReckoning}>{finishLabel}</button>}
           </>}
 
         </div>
       </div>
     </div>
-          {!scene.introduction&&!hasFeed&&onFeed&&result?.campaign?.status==='playing'&&<details className="encounter-feed" data-hungry={result.campaign.resources.blood<=3}><summary>Feed · +4 Blood · 1 action</summary><button type="button" aria-describedby="encounter-feed-cost" disabled={busy||!encounterFeed(result)} onClick={onFeed}>Feed · +4 Blood · 1 action</button><p id="encounter-feed-cost">{encounterFeedText(result)}</p></details>}
+
     <nav className="encounter-navigation" aria-label="Encounter navigation">{scene.introduction?<button disabled={busy||!!result?.error} onClick={onComplete}>Skip introduction</button>:<>
       <div>{onBack&&<button type="button" disabled={busy} onClick={onBack}>← {backLabel??'Back to conversation'}</button>}</div>
       <div>{onTonight&&<button type="button" disabled={busy||tonightCurrent} onClick={onTonight}>Tonight’s choices</button>}<button type="button" disabled={busy} onClick={onCastle??onComplete}>{scene.exchange||scene.id.includes(':relationship:')?'Return to court':'Castle map'}</button></div>
@@ -95,7 +118,7 @@ export function EncounterDirector({result,busy,request,onAction,children,room,on
   const scene=intro??intended;
   useEffect(()=>{if(intro&&intended&&!memory.roomIntroduction)setMemory(m=>({...m,active:intended.id,line:0,roomIntroduction:{room:intro.introduction!,destination:intended.id}}));},[intro?.id,intended?.id,memory.roomIntroduction]);
   const visibleLine=memory.active===scene?.id?memory.line:0;
-  useEffect(()=>{if(scene&&!busy&&!result.pending&&!result.error&&(scene.type==='NEGOTIATION'||visibleLine>=scene.lines.length-1))setMemory(m=>markSceneRead(m,scene));},[scene,visibleLine,busy,result.pending,result.error]);
+  useEffect(()=>{if(scene&&!busy&&!result.pending&&!result.error&&(!cinematicEncounter(scene)&&scene.type==='NEGOTIATION'||visibleLine>=dialogueBeats(scene).length-1))setMemory(m=>markSceneRead(m,scene));},[scene,visibleLine,busy,result.pending,result.error]);
   useEffect(()=>{try{localStorage.setItem(storageKey,JSON.stringify({...memory,...(room!==undefined?{room}:{})}));}catch{/* Presentation remains usable when storage is unavailable. */}},[storageKey,memory,room]);
   useEffect(()=>{if(request&&!committing.current&&!busy&&!result.pending){setMemory(m=>({...m,active:request.id,line:0,trail:[],roomIntroduction:undefined}));setFeedback('');onRequestHandled?.(request.serial);}},[request]);
   function complete(){if(scene?.introduction){if(!committing.current&&!busy&&!result.pending&&!result.error){const next=finishRoomIntroduction(memory.roomIntroduction?memory:{...memory,roomIntroduction:{room:scene.introduction,destination:intended!.id}});try{localStorage.setItem(storageKey,JSON.stringify(next));}catch{}setMemory(next);}return;}if(scene&&!committing.current&&!busy&&!result.pending){setMemory(m=>finishScene(leaveRelationship(m,scene),scene.id));setFeedback('');}}

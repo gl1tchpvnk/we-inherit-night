@@ -331,3 +331,16 @@ Blood balance (2026-11-13, implemented locally): starting Blood 8; petition_mari
 Optional relationships (2026-11-13, local): exact approved Marius/Seraphine questions and personal replies are free narrative metadata. Acquisition-order reactions require confirmed history and both protections effective. Replies never modify NPC policies, rights, costs, eligibility or endings; sanctuary remains compatible with Marius. Existing saves default to no declared position. See docs/OPTIONAL_RELATIONSHIPS.md.
 
 Static-hub update (2026-11-13, local): the castle artwork has no entry hotspots or room overlays. Existing decisions, conversations and records provide navigation. Room introductions are browser-only, once per campaign; direct proposals/records trigger them without room entry. The Crypt first-day narration remains before Night One and gated by verified initialization. No room rights or gameplay functionality were removed. See docs/ROOM_INTRODUCTIONS.md.
+
+## Cinematic Stage 1 presentation scope
+
+Seraphine's sanctuary offer and its two optional questions now use an opt-in
+cinematic inset panel, authored paragraph beats and reviewed-dialogue navigation.
+The overall Stage 1 direction is approved; Stage 1B refines only spacing, choice
+emphasis and mobile overlap. Stage 2 is now authorized and implemented locally for compatible character scenes; gameplay, authored text and authoritative systems are unchanged.
+See docs/CINEMATIC_STAGE1.md for the screen inventory, evidence and limitations.
+
+Stage 2 preserves the approved shared renderer across all eight vampires. Keep
+strategic/aggregate nightly scenes, room records/introductions and finales outside
+its eligibility. Preserve authored multi-speaker indices and original handlers.
+See docs/CINEMATIC_STAGE2.md for conversion scope and local evidence.
