@@ -1,0 +1,21 @@
+# Opening and conversation follow-up — local only
+
+## Changes and review
+- Encounter navigation formerly mixed a top-right return with dialogue choices and did not maintain a contextual return trail. `VampireEncounter.tsx` now has a fixed bottom region: contextual Back, Tonight’s choices, Castle map. `encounters.ts` persists a bounded browser-only trail; destinations resolve against current scenes. The map exit clears the room selection through `main.tsx`. Pending execution guards remain in force. No navigation submits an action.
+- Four approved `entry.ts` panels remain verbatim. A separate short Vesper feeding/Crypt scene follows them, with Continue and Skip scene. `GameEntry.tsx` stores its completion separately from campaign state and waits for verified initialization. Existing completed intro saves are not forced through it. Neither route executes Feed, Rest, reckoning or NPC turns.
+- Sanctuary acceptance and optional-question summaries use the requested plain-language term. Exact seven-night duration and calculated exclusive expiry remain in Inspect Terms. The normal earliest eligible acceptance is contract night 1: expiry 8, after final reckoning 7. A shorter/earlier fixture receives a truthful fallback summary rather than an unsupported promise.
+- Both audited defects still existed. Dorian’s `petitionHasShelter` treated an indefinite court grant as lasting fallback. It now requires independent sanctuary/passage beyond the final reckoning; conditional court grants are conservatively excluded without exposing private service state. The player-facing warning can use their recorded outstanding obligation. Switching eligibility and Marius’s revocation remain unchanged.
+- Seraphine’s optional question used an unconditional deadline invitation. Opening, question, answer and offer link now distinguish an open offer, closed unaccepted offer (including status `offered` past contract deadline), active accepted lease and expired accepted lease.
+
+## Verification
+- PASS: 197 automated tests, including focused policy, scene navigation, intro persistence, lease-summary boundaries and all four Seraphine offer states. Two obsolete copy assertions initially failed; updated assertions retain cost/risk checks and explicitly check duration/expiry in Inspect Terms. Final suite: zero failures.
+- PASS: TypeScript check and Vite production build.
+- PASS: three disposable real NEAR Sandbox integration scenarios in `tests/sandbox/court-payoff.test.mjs`: independent paid sanctuary permits Dorian’s petition; temporary passage does not; Marius-only Night Four/Five/Six switching remains executable but is not recommended and loses protection before Dorian completes.
+- PASS: actual headless Chromium against local preview, with simulated API responses from a previously verified initial Sandbox snapshot. Complete all four panels plus scene, and skip both: only the initial `view` request, Night 1 (internal 0), Blood 8, one action, unchanged transaction list. Free Vesper question/back, Tonight’s choices, Marius proposal and Castle map navigation also tested. Footer stayed on-screen at 1440×900, 820×1180, 390×844 and 320×568. Desktop/mobile screenshots inspected. Evidence is ignored local output under `.local/current-targeted-evidence`.
+- NOT RUN: live Testnet/public deployment acceptance and another full seven-night browser campaign. No contract, signing, funding, deadlines, costs or balance changes; no commit/push/deploy.
+
+## Local review
+Start a fresh local campaign: read or skip the four approved panels, then read or skip “Before the first dawn.” Inspect the bottom navigation from a character question or proposal. Open Seraphine’s sanctuary offer and expand Inspect Terms for exact expiry. Existing saves retain their gameplay and already-completed introduction.
+
+## Limitations
+Dorian intentionally cannot certify Marius-only shelter even if private service is fulfilled; independent shelter remains supported. Browser state-equivalence checks use simulated API responses, not new on-chain execution. The scoped Sandbox cases supply separate real contract evidence. No submission-blocking defect was found in this scope; publication remains excluded by instruction.

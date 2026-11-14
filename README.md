@@ -344,3 +344,22 @@ tablet and phone sizes. A real Sandbox browser campaign reaches its paid Unbound
 ending; 192 automated tests and production builds pass. The proposed V3 prologue
 is not in runtime code. [Release audit and verification](docs/OPENING_CORRECTION_RELEASE.md)
 records the matching public deployment and real Testnet seven-night/reload/replay acceptance. Both acceptance campaigns were reclaimed; no live test session was left active.
+
+### Approved prologue — IMPLEMENTED locally
+The user-supplied four-panel opening replaces the earlier runtime narration,
+verbatim, with readable paragraph breaks and the original artwork/controls.
+[Approved text and canon](docs/narrative-audit/PROLOGUE_APPROVED.md).
+The earlier V3 proposal is superseded; no secret motive or revelation mechanic
+has been added. This local text update is not yet part of the verified public build.
+
+### Opening and conversation follow-up — IMPLEMENTED locally
+Approved four-panel prose remains intact, followed by a separate skippable first-feeding/Crypt narration with no game effects. Encounter navigation uses a persistent bottom strip. Sanctuary summaries retain exact expiry in Inspect Terms; expired offers and Dorian’s conditional-shelter safeguard now reflect recorded state. No public release in this task. See [verification and review steps](docs/OPENING_NAVIGATION_FOLLOWUP.md).
+
+### Focused Blood balance — IMPLEMENTED locally
+Starting Blood stays 8. Accepting Marius’s appointment, authorizing either investigator, and commissioning temporary passage each cost 1 Blood per successful commitment. Sanctuary acceptance stays 0 Blood; other costs and upkeep are unchanged. PASS: 198 automated tests, production build, four real Sandbox survival routes including failure/recovery checks. [Route evidence and limitations](docs/BLOOD_BALANCE.md). Not published.
+
+### Optional remembered relationships — IMPLEMENTED locally
+User-supplied Marius/Seraphine offer questions, single-choice personal replies, confirmed-order dual-arrangement reactions and later callbacks use campaign-scoped browser memory only. Commitments, costs and endings are unchanged. PASS: 207 automated tests, production build, 16 focused desktop/mobile browser scenarios using simulated API fixtures. [Branches, evidence guards and verification](docs/OPTIONAL_RELATIONSHIPS.md). Not published.
+
+### Static castle and room introductions — IMPLEMENTED locally
+The castle illustration is a noninteractive visual hub. Existing records/conversations carry room information; Lounge and Library interiors introduce their first relevant encounter once per campaign. The approved narrative first day now shows the Crypt interior. Navigation/reload remain presentation-only; hosted labels identify Testnet correctly. PASS: 212 automated tests, production build and 11 local browser fixture scenarios. [Wording, audit disposition and evidence](docs/ROOM_INTRODUCTIONS.md). Not deployed.

@@ -3,8 +3,8 @@ import type {Authority,Campaign,NpcName} from './game';
 // Pass 2H provisional political assignments. Rights always come from the ledger.
 export interface LibraryDispute {chosen:'mirelle'|'dorian'|null;authorizedNight:number|null;result:'open'|'mirelle'|'dorian';challenged:boolean}
 export const LIBRARY_ACTIONS={
-  authorize_mirelle:{label:'Give Mirelle Library access',description:'Let Mirelle bring Cassian to investigate. Her findings can satisfy Marius’s service and earn institutional protection. You may revoke your permission and its dependent grants.',blood:0,property:'library'},
-  authorize_dorian:{label:'Give Dorian Library access',description:'Let Dorian bring Lucien into your Library. His findings can earn Lucien’s lasting protection. Both gain access under your authority; published findings cannot be recalled.',blood:0,property:'library'},
+  authorize_mirelle:{label:'Give Mirelle Library access',description:'Cost 1 Blood. Let Mirelle bring Cassian to investigate. Her findings can satisfy Marius’s service and earn institutional protection. You may revoke your permission and its dependent grants.',blood:1,property:'library'},
+  authorize_dorian:{label:'Give Dorian Library access',description:'Cost 1 Blood. Let Dorian bring Lucien into your Library. His findings can earn Lucien’s lasting protection. Both gain access under your authority; published findings cannot be recalled.',blood:1,property:'library'},
   withdraw_library:{label:'Withdraw your Library permission',description:'Remove the access you granted and its dependent permissions. Unfinished research stops. Published findings and unrelated patron protection remain.',blood:0,property:'library'}
 } as const;
 export type LibraryAction=keyof typeof LIBRARY_ACTIONS;

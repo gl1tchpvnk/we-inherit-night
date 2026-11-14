@@ -11,6 +11,7 @@ Older saves retain version-2 behavior and do not acquire rights during migration
 
 | Rule | Status | Enforcement |
 |---|---|---|
+| Appointment, Mirelle authorization, Dorian authorization and temporary passage commission each cost 1 Blood per successful commitment; starting Blood remains 8 | IMPLEMENTED locally | Existing ACTIONS validation/playerAction and persisted commitment recovery; sanctuary acceptance stays 0 Blood |
 | One major action/night, seven nights; internal playtest limit 1–3, no UI/API override | IMPLEMENTED | game.ts newCampaign; default 1 |
 | Last major action automatically enters persisted reckoning; explicit Pass also advances | IMPLEMENTED | campaign.mjs automatic marker, existing journal/nonce/postconditions |
 | Exploration, records, rights/terms, character information and bloodline/expiry inquiries free | IMPLEMENTED | actionAvailability/enter/view; title filing remains consequential |

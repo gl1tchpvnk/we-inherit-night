@@ -92,3 +92,19 @@ test('encounter feeding copy follows action count, automatic dawn and actual off
  assert.match(encounterFeedText(legacy),/you choose when to end the night/);
  assert.equal(playerAction(legacy.campaign,'feed',legacy.world).resources.blood,12);
 });
+
+ test('four commitments cost exactly one Blood through validation, execution and warnings',async()=>{
+ const {actionAvailability,ACTIONS}=await import('../src/game.ts');
+ for(const kind of ['petition_marius','authorize_mirelle','authorize_dorian','broker_passage']){
+  const r=fixture(8);r.campaign.politics.accounts.player='player';r.campaign.politics.archiveLead=true;
+  if(kind.startsWith('authorize'))r.campaign.night=r.world.night=3;
+  const before=structuredClone(r);assert.equal(actionAvailability(r.campaign,kind,r.world).cost.blood,1);
+  const next=playerAction(r.campaign,kind,r.world);assert.equal(next.resources.blood,7);assert.equal(next.actionsLeft,0);assert.deepEqual(r,before);
+  assert.throws(()=>playerAction(next,kind,r.world),/No major actions/);assert.equal(next.resources.blood,7);
+  r.campaign.resources.blood=0;assert.equal(actionAvailability(r.campaign,kind,r.world).allowed,false);assert.throws(()=>playerAction(r.campaign,kind,r.world),/Insufficient Blood/);assert.equal(r.campaign.resources.blood,0);
+  r.campaign.resources.blood=1;assert.match(bloodWarning(r,{action:'game',choice:kind}),/last Blood/);
+  r.campaign.resources.blood=2;assert.match(bloodWarning(r,{action:'game',choice:kind}),/Even sheltered upkeep/);
+ }
+ assert.equal(newCampaign('unchanged').resources.blood,8);
+ for(const kind of ['sanctuary_pact','withdraw_library','final_refuse','feed','rest'])assert.equal(ACTIONS[kind].blood,0);
+ });

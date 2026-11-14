@@ -100,3 +100,16 @@ test('rendered farewell, resumed reply, results and pending gate retain usable c
   r.pending=true;assert.match(render({done:true}),/Check confirmed outcome/);assert.doesNotMatch(render({}),/You paid for shelter/);
  }finally{globalThis.localStorage=original;await rm(dir,{recursive:true,force:true});}
 });
+
+test('Dorian never treats conditional Marius protection as a reliable switching fallback',()=>{
+ const {c,w}=petitionFixture();c.politics.appointment='player';c.politics.serviceFulfilled=false;
+ w.grants.push({id:11,property_id:'court',scope:'enter',grantor:'marius',grantee:'player',expiry_night:null,revoked:false});w.grant_validity.push(true);
+ const observation=observeAgent('dorian','dorian',c,w);
+ assert.deepEqual(Object.keys(observation.politics),['seed']);assert.equal('serviceFulfilled' in observation.publicState,false);
+ assert(observation.available.some(p=>p.kind==='archive_challenge'),'risky choice remains validated');
+ assert.equal(selectNpcAction(observation).kind,'pass');
+ c.politics.serviceFulfilled=true;assert.equal(selectNpcAction(observeAgent('dorian','dorian',c,w)).kind,'pass','policy cannot infer private service state');
+ w.leases.push({property_id:'sanctuary',buyer:'player',status:'accepted',end_night:8});
+ assert.equal(selectNpcAction(observeAgent('dorian','dorian',c,w)).kind,'archive_challenge','independent paid fallback supports recommendation');
+ w.leases[0].end_night=7;assert.equal(selectNpcAction(observeAgent('dorian','dorian',c,w)).kind,'pass','exclusive expiry at final reckoning is not beyond it');
+});

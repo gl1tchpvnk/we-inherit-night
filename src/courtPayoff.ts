@@ -1,3 +1,4 @@
+import {relationshipFinale,finalRelationshipResponse,type RelationshipMemory} from './relationshipDialogue.ts';
 import type {Result} from './chain';
 import type {NpcName} from './game';
 import {effectiveGrant} from './library.ts';
@@ -22,7 +23,7 @@ export interface PersonalFinale {
   responses:{id:string;label:string;reply:string}[];
 }
 
-export function personalFinale(r:Result):PersonalFinale|null{
+export function personalFinale(r:Result,relationships:RelationshipMemory={}):PersonalFinale|null{
   const c=r.campaign,p=c?.politics,w=r.world;
   if(!c||c.status==='playing'||!p?.library||r.pending||r.error||['quit','abandoned'].includes(r.closure?.reason??''))return null;
   const completed=completedInvestigator(r);
@@ -45,7 +46,8 @@ export function personalFinale(r:Result):PersonalFinale|null{
   }else account.push('No completed investigation is confirmed. This farewell credits no patron reward for unfinished work.');
   for(const patron of ['marius','lucien'] as const)if(protectedBy(patron))account.push(`${patron==='marius'?'Marius':'Lucien'}’s separate protection remains effective in the recorded outcome. It does not depend on an investigator keeping your key.`);
   if(paid)account.push(paid.end_night!==null&&paid.end_night>w.night?'Your paid sanctuary still has time remaining. Neither this reply nor another patron’s displeasure cancels its accepted term.':'Your paid sanctuary agreement is recorded; this farewell does not extend its term.');
-  if(p.finalCourt?.result)account.push(p.finalCourt.result==='accepted'?'Marius’s final answer is already recorded. This conversation does not renegotiate it.':'Marius’s final refusal is recorded. It did not cancel an independent sanctuary agreement.');
+  const finalReply=finalRelationshipResponse(r,relationships);
+  if(p.finalCourt?.result)account.push(finalReply&&actor!=='marius'?`Marius:\n${finalReply.text}${finalReply.factual?`\n\n${finalReply.factual}`:''}`:p.finalCourt.result==='accepted'?'Marius’s final answer is already recorded. This conversation does not renegotiate it.':'Marius’s final refusal is recorded. It did not cancel an independent sanctuary agreement.');
   const opening=!survived
     ?actor==='vesper'?'You were my descendant before this chronicle began. That is still part of its record, even where the account of your survival ends.': 'The work reached its patron. You did not survive. I will not call those the same kind of success.'
     :actor==='seraphine'?'You paid for shelter, not my approval. Whatever use you made of your Library, you did not have to become mine to keep our bargain.'
@@ -59,7 +61,7 @@ export function personalFinale(r:Result):PersonalFinale|null{
     {id:'own',label:'What remains mine matters most.',reply:actor==='seraphine'?'Then keep the distinction. You bought time from me. What you do with it is yours.':actor==='lucien'?'Good. Accepting my help need not mean mistaking it for ownership of you.': 'Then distinguish what you have earned from what you have entrusted to me. Neither needs a flattering name.'},
     {id:'help',label:'I did not reach this dawn alone.',reply:actor==='seraphine'?'No. But gratitude need not become another payment. Our price was already agreed.':actor==='lucien'?(completed==='dorian'?'No. Dorian did his part, and I made my choice. You can acknowledge both without promising me everything.':'No. I made my promise. Acknowledging it need not mean promising me everything in return.'):'No. A place in the House is made of obligations kept by more than one person. Your part belongs in that account.'}
   ];
-  return {actor,title:survived?'Before you close the chronicle':'Words at the close',opening,account,responses};
+  return {actor,title:survived?'Before you close the chronicle':'Words at the close',opening:actor==='seraphine'?(relationshipFinale(r,relationships)??opening):actor==='marius'?(finalReply?.text??opening):opening,account,responses};
 }
 
 export function readFinaleMemory(raw:string|null):{response:string|null;done:boolean}{

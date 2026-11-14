@@ -7,3 +7,9 @@ export function expiryDescription(end:number|null,current:number):string {
   if(end>=7)return 'lasts through the final night';
   return `ends at the start of Night ${end+1}`;
 }
+
+export function sanctuaryOfferSummary(night:number,duration:number):string {
+  return night+duration>7
+    ? 'Accepting this offer secures your sanctuary from tonight until after the final reckoning. This is temporary shelter, not ownership.'
+    : `Accepting this offer secures ${duration} nights of sanctuary from tonight; it does not extend beyond the final reckoning. This is temporary shelter, not ownership.`;
+}

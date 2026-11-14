@@ -239,7 +239,7 @@ Measured results and limits: docs/STARTUP_PERFORMANCE.md.
 
 Pass 2H authority gameplay is IMPLEMENTED for new Living Court campaigns: player Library grants/revocation, derived NPC access, finite research, independent patron rewards, and concise encounters. Old saves retain their original mechanics. Lounge access is an actual invitation, not a required useless tenancy. New NPC-funded earning/purchase mechanics are DEFERRED by explicit user choice to keep Rust and restricted signing unchanged. Existing 0.02 NEAR sanctuary remains real. See docs/PASS2H.md; this is a partial economic redesign, not completion of the original earning requirement.
 
-Pass 2I presentation is IMPLEMENTED; final-art acceptance is PARTIAL. The cover, four-panel prologue, character compositions, existing rooms, reckoning, ancestry/rights inspection and endings share a graphic-novel design system. Generated room studies await approval; all eight NPCs and the player now use current creator-supplied portraits. The supplied interior castle cutaway replaces the landing artwork for room navigation. Gameplay, deterministic agents, chain execution and persistence are unchanged. Browser evidence, seven-night run and remaining accessibility limits: docs/PASS2I.md.
+Pass 2I presentation is IMPLEMENTED; final-art acceptance is PARTIAL. The cover, four-panel prologue, character compositions, existing rooms, reckoning, ancestry/rights inspection and endings share a graphic-novel design system. Generated room studies await approval; all eight NPCs and the player now use current creator-supplied portraits. The supplied interior castle cutaway replaces the landing artwork; the later static-hub update removes its room interactions. Gameplay, deterministic agents, chain execution and persistence are unchanged. Browser evidence, seven-night run and remaining accessibility limits: docs/PASS2I.md.
 
 Pass 3A narrative is IMPLEMENTED across all seven nights of Living Court: distinct provisional voices, state-dependent room conversations, explicit fictional commitments, confirmed consequences and last-night research choices. Existing simulation, save schema and ending predicates remain unchanged; concealment is again reachable through survival choices. Two complete browser routes and automated results are in docs/PASS3A.md, alongside remaining narrative weaknesses. This pass does not implement council voting, Pass 3B/3C, live AI or public deployment.
 
@@ -314,3 +314,20 @@ changing artwork or initialization authority. Both Vesper questions remain freel
 reachable from the opening court. V3 prologue writing is proposal-only; approved
 V2 prose remains the release text. See docs/OPENING_CORRECTION_RELEASE.md for
 local verification and the separate GitHub/Render/public-acceptance status.
+
+## Approved prologue canon — 2026-11-13
+The user-supplied four-panel narration is now implemented verbatim in src/entry.ts,
+superseding the earlier unapproved V3 proposal. Vesper deliberately gave the player
+independent Library ownership; her motives remain unknown. House Volari has a
+centuries-long political history and independent founding authorities. This is
+backstory only, with no new transfer action, state change, or implemented mystery
+revelation. See docs/narrative-audit/PROLOGUE_APPROVED.md. Existing gameplay and
+seven-night survival remain unchanged; this update is local pending publication.
+
+Opening follow-up: a separate skippable feeding/first-day narration follows the approved four panels, before playable Night One. Completion/skip changes only browser intro memory. Starting Blood, actions, deadlines and rights remain unchanged. Dorian’s recommendation excludes conditional court grants without expanding private observations; intentional switching remains available. Sanctuary dialogue follows contract-night offer/lease state. See docs/OPENING_NAVIGATION_FOLLOWUP.md.
+
+Blood balance (2026-11-13, implemented locally): starting Blood 8; petition_marius, authorize_mirelle, authorize_dorian and broker_passage each cost exactly 1 Blood per successful commitment through existing validation/journaling. Sanctuary acceptance remains 0 Blood. No extra transactions, new methods, retroactive save deductions or other balance changes. See docs/BLOOD_BALANCE.md.
+
+Optional relationships (2026-11-13, local): exact approved Marius/Seraphine questions and personal replies are free narrative metadata. Acquisition-order reactions require confirmed history and both protections effective. Replies never modify NPC policies, rights, costs, eligibility or endings; sanctuary remains compatible with Marius. Existing saves default to no declared position. See docs/OPTIONAL_RELATIONSHIPS.md.
+
+Static-hub update (2026-11-13, local): the castle artwork has no entry hotspots or room overlays. Existing decisions, conversations and records provide navigation. Room introductions are browser-only, once per campaign; direct proposals/records trigger them without room entry. The Crypt first-day narration remains before Night One and gated by verified initialization. No room rights or gameplay functionality were removed. See docs/ROOM_INTRODUCTIONS.md.

@@ -625,3 +625,61 @@
 - Independently verified 21 original gameplay transactions FINAL-success plus replay creation; both campaign resource tombstones are reclaimed with matching archive commitments.
 - No acceptance campaign remains active. Public-safe evidence in evidence/opening-correction/public; private browser session/raw state remain ignored.
 - No submission-critical blocker identified in this scoped acceptance. V3 creative approval and abrupt local dev-process lock recovery remain deferrable; hosted load/all branches not exhaustively tested.
+
+## 2026-11-13 — User-approved prologue implemented locally
+- Replaced all four src/entry.ts narration strings verbatim with the user's approved text and compatible approved titles; portrait order remains Vesper/Marius/Seraphine/Vesper.
+- Preserved paragraph breaks via pre-line text presentation. Existing artwork geometry, transitions, fixed controls, scrolling and intro/save progression remain unchanged.
+- Documented explicit new backstory canon in VAMPIRE_AGENTS.md, requirements and docs/narrative-audit/PROLOGUE_APPROVED.md; marked the earlier proposal superseded.
+- Vesper's motive remains unknown; no revelation, contract transfer, initialization, grant, economic or gameplay-state change was introduced.
+- PASS: 16 focused entry/narrative checks, all 192 automated tests, production TypeScript/Vite build, diff whitespace check.
+- PASS: actual headless Chromium, all four panels at 1440×900, 820×1180, 390×844 and 320×568; fixed Continue/Skip, keyboard and all longer text reachable in the existing scroll area. Local UI only, no chain calls.
+- No repeated seven-night campaign or live Testnet actions needed for this text-only change. Public build remains the previously verified release; no commit/push/deploy in this task.
+
+## 2026-11-13 — Targeted opening, navigation and investigator safeguards
+- Kept approved four-panel prologue intact; added separate skippable first-feeding/first-day narration before Night One, browser memory only.
+- Added persistent bottom encounter navigation with contextual Back, Tonight’s choices and Castle map; preserved artwork and pending-action guards.
+- Replaced sanctuary summary and retained exact duration/expiry in Inspect Terms; corrected all four Seraphine offer states using contract night.
+- Reproduced unsafe Marius-only investigator switching; removed its recommendation without blocking intentional risk or exposing private policy state.
+- PASS: all 197 automated tests, production build, three real scoped Sandbox scenarios (including risky Night Four/Five/Six route).
+- PASS: local Chromium simulated-API complete/skip equivalence and free navigation; stable footer at desktop/tablet/two mobile sizes. No new chain call from narration/navigation.
+- Reviewed requirements, AGENTS, character canon and submission docs; updated relevant local feature documentation. No live Testnet, commit, push or deploy.
+- Limitation: conservative policy cannot certify Marius-only shelter from private fulfilled service; browser fixtures are separate from real Sandbox evidence. See docs/OPENING_NAVIGATION_FOLLOWUP.md. Scoped task complete.
+
+## 2026-11-13 — Focused one-Blood commitment balance
+- Set appointment, Mirelle authorization, Dorian authorization and temporary passage commission to 1 Blood in existing action definitions; updated descriptions and confirmation terms.
+- Existing authoritative validation, journal recovery, dynamic commitment labels and survival warnings consume the same prices; no new deduction path or transactions.
+- Preserved starting Blood 8, sanctuary 0 Blood, every other cost/rule, local narrative/navigation work and existing saves without retroactive charges.
+- PASS: 24 focused checks, all 198 automated tests, TypeScript/Vite production build and whitespace review.
+- PASS: four real disposable Sandbox seven-night routes: sanctuary 11 Blood, Marius 10, Lucien 11, combined 6; no tested route impossible.
+- PASS: injected failure spends no Blood; real grant with lost response recovers once after reload; stale commands/repeated reload do not duplicate cost or transaction.
+- NOT RUN: browser balance walkthrough and live Testnet; no commit/push/deploy. Reviewed project/submission/agent docs; updated rules, requirements, README and docs/BLOOD_BALANCE.md.
+- Scoped task complete. Combined route now reaches Night Five at 1 Blood and needs feeding; no other balance was silently changed.
+
+## 2026-11-13 — Optional dialogue and remembered relationships
+- Implemented supplied Marius/Seraphine offer prose and independent questions on existing decision surfaces; preserved explicit commitment handlers, disclosures and Blood prices.
+- Added browser-only, campaign-scoped single-choice replies saved before acknowledgement, unanswered dismissal, review and callback memory; no gameplay/NPC/chain effects.
+- Added both confirmed acquisition-order reactions with appointment/research variants, current-protection guards and urgent-demand priority.
+- Added exact service, final-decision, Seraphine greeting and personal-finale callbacks in existing slots; factual ending and replay remain unchanged.
+- Preserved old-save neutrality, unchanged question read history (including the existing marriage question), prologue and narrative first day.
+- PASS: all 207 automated tests, production build, whitespace review; 14 desktop/mobile browser fixture scenarios plus two action-entry checks.
+- Browser checks verified exact text, keyboard, reply reload, no free-path gameplay requests, explicit commitment boundary, no repeated opening, and readable scrolling with approved portraits.
+- Missing/ambiguous/equal-night acquisition history intentionally omits order-dependent dialogue; withdrawn/expired rights suppress it. No invented alternative text.
+- NOT RUN: new Sandbox/live Testnet/public/full-campaign acceptance; no relevant contract changes. No commit/push/deploy. Documentation: docs/OPTIONAL_RELATIONSHIPS.md.
+
+## 2026-11-13 — Static castle, room introductions and audit follow-up
+- Removed castle hotspots/overlays and room-entry UI; retained artwork, definitions, permissions and existing action/record routes.
+- Added explicit one-time Lounge/Library encounter introductions with persisted destination and Continue/Skip; no functional Feed or game commands.
+- Reused approved feeding/first-day prose with Crypt interior; preserved initialization gates and prevented historical bridge replay in resumed midgame saves.
+- Library guidance and Rights inspection reach existing room records directly; old saved room views recover to current records.
+- A/B already corrected: verified Dorian’s conservative shelter safeguard/risky manual options and Seraphine’s contract-night offer states; no duplicate implementation.
+- D already corrected for Living Court; generic fallback now Continue. Consumed navigation requests prevent stale remount replay; runtime descriptions distinguish Testnet and Sandbox.
+- PASS: 37 focused tests, all 212 automated regressions, production build, whitespace check; 11 actual desktop/mobile browser scenarios using mocked APIs only.
+- Browser confirmed full/skip opening equality, pending-start gate, intro destination/reload, late dialogue, static artwork, old-save recovery and Relationships/menu return; no extra gameplay request.
+- NOT RUN: new Sandbox/live Testnet/public/full-campaign acceptance; no contract/engine/policy change or deployment. Final wording and limitations: docs/ROOM_INTRODUCTIONS.md.
+
+## 2026-11-13 — Incremental release verification
+- Reviewed approved prologue, narrative Crypt bridge, room introductions, static castle, navigation/audit corrections, Blood prices and optional relationships for release on main.
+- PASS: 100 focused frontend/gameplay regressions and production build using existing Render Testnet frontend settings; whitespace and release-file credential-pattern checks.
+- Prior unchanged implementation evidence remains recorded above: 212 automated regressions and 11 room/navigation browser fixture scenarios; earlier scoped Sandbox balance/recovery checks are in docs/BLOOD_BALANCE.md.
+- No contract, backend, infrastructure, environment or funding changes included. Superseded unapproved PROLOGUE_V3_PROPOSAL.md remains local and excluded.
+- Render auto-deploy is off; deployment and public smoke verification require the existing manual deployment workflow after push. No new live campaign or repeated infrastructure acceptance in this verification step.

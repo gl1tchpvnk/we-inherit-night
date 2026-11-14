@@ -1,5 +1,9 @@
 # Vampire agents — canon and behaviour register
 
+## Approved opening canon — 2026-11-13
+
+Vesper created the player and deliberately transferred the Library outright, independently and without stated conditions. Her motives remain unknown; sire authority cannot revoke the title. House Volari has centuries of political history, with Marius and Seraphine as independent founding authorities. The third-reckoning Crypt withdrawal remains prospective. These backstory facts require no new grant, transaction or initialization change. No secret motive or implemented revelation is established. See docs/narrative-audit/PROLOGUE_APPROVED.md.
+
 ## Pass 2C current additions and overrides
 
 **CANON (user Pass 2C):** Lucien is external to House Volari. Marius and Seraphine
@@ -194,3 +198,6 @@ Exact proposal eligibility and terms live in finalCourt.ts and are validated thr
 
 ## Investigation/finale follow-up — PROVISIONAL
 Dorian now refrains from an otherwise eligible rival petition unless public leases/effective grants establish shelter through the final reckoning. Temporary passage alone is not sufficient for this two-commitment switching proposal. Existing deadline/live-rival filters and journaled-petition recovery remain. This is a deterministic selection between petition and pass; no private resource observation or new bargaining power. Investigation interpretations and final expressive replies are authored presentation, not autonomous dialogue or affinity changes. See docs/INVESTIGATION_FINALE.md.
+
+## Approved optional relationship dialogue — 2026-11-13
+The supplied Marius/Seraphine preferences, boundaries and acknowledgements are authored conversation only, remembered in campaign-scoped browser metadata. They establish no enforceable allegiance, loyalty meter, hidden penalty or new NPC policy. Paid sanctuary and Marius’s protection remain compatible. Order-dependent dialogue requires confirmed acquisition history and current effective protections. See docs/OPTIONAL_RELATIONSHIPS.md.

@@ -83,7 +83,7 @@ test('title and prologue SSR provide accessible real controls, no settings or ga
    assert.equal((panel.match(/>Continue<\/button>/g)??[]).length,1);
    assert.equal((panel.match(/>Skip intro<\/button>/g)??[]).length,1);
   }
-  const waiting=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},waiting:true,onAdvance(){}}));assert.match(waiting,/Establishing verified local rights/);assert.doesNotMatch(waiting,/<button disabled/);
+  const waiting=renderToStaticMarkup(createElement(Prologue,{progress:{line:0,done:false},waiting:true,onAdvance(){}}));assert.match(waiting,/Establishing verified Sandbox rights/);assert.doesNotMatch(waiting,/<button disabled/);
   const skipped=renderToStaticMarkup(createElement(Prologue,{progress:{line:3,done:true},waiting:true,onAdvance(){assert.fail('render must not commit');}}));assert.match(skipped,/<button disabled="">Continue/);assert.match(skipped,/<button disabled="">Skip intro/);
   const entry=renderToStaticMarkup(createElement(GameEntry,{children(){assert.fail('gameplay cannot render on title');}}));assert.match(entry,/Checking for a saved campaign/);
  }finally{await rm(dir,{recursive:true,force:true});}
@@ -123,3 +123,20 @@ test('public title note and persistent finale render accessible copy and safe re
   const ready=renderToStaticMarkup(createElement(CampaignFinale,{...props,result:{...result,archiveComplete:true}}));assert.match(ready,/<button class="binding-choice">Begin Another Campaign/);assert.doesNotMatch(ready,/Check settlement/);
  }finally{globalThis.localStorage=originalStorage;await rm(dir,{recursive:true,force:true});}
 });
+
+test('prologue and separate first-day scene remain browser-only with legacy completion preserved',async()=>{
+ const {FIRST_NIGHT_PRELUDE}=await import('../src/entry.ts');assert.equal(PROLOGUE.length,4);
+ assert.match(FIRST_NIGHT_PRELUDE.text,/guides your first feeding/);assert.match(FIRST_NIGHT_PRELUDE.text,/Night One begins/);
+ assert.equal(PROLOGUE[0].text.startsWith('Vesper gave you two things.'),true);
+ let completed={line:0,done:false,arrivalDone:false};while(!completed.done)completed=advanceIntro(completed);
+ const skipped=advanceIntro({line:0,done:false,arrivalDone:false},true);
+ assert.equal(completed.arrivalDone,false);assert.equal(skipped.arrivalDone,false);
+ for(const p of [completed,skipped])assert.equal(readIntro(JSON.stringify({...p,arrivalDone:true})).arrivalDone,true);
+ assert.deepEqual(readIntro('{"line":3,"done":true}'),{line:3,done:true},'already completed old saves do not acquire a new mandatory scene');
+});
+
+ test('sanctuary summary promises beyond the final reckoning only when its actual term does',async()=>{
+ const {sanctuaryOfferSummary}=await import('../src/leaseNarrative.ts');
+ assert.match(sanctuaryOfferSummary(1,7),/until after the final reckoning/);
+ assert.match(sanctuaryOfferSummary(0,7),/does not extend beyond the final reckoning/);
+ });

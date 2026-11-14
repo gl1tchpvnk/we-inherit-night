@@ -97,7 +97,7 @@ for(const method of ['grant_access','enter_room'])test(`Living Court: lost ${met
 test('Living Court scenes offer bounded conversations, direct commitments and free inspection',async()=>{
  const f=await fixture('living-scenes',true);try{
   const before=structuredClone(f.current().campaign),scenes=buildEncounterScenes(f.current());
-  for(const s of scenes.filter(s=>s.id.startsWith('character:')))assert.ok(s.choices.length<=3);
+  for(const s of scenes.filter(s=>s.id.startsWith('character:')))assert.ok(s.choices.length<=(['character:marius','character:seraphine'].includes(s.id)?5:3));
   assert.ok(!scenes.find(s=>s.id==='character:seraphine').choices.some(ch=>ch.inspect==='lease:0'));
   assert.ok(scenes.find(s=>s.id==='action:sanctuary_pact').rights.some(t=>t.includes('accept_lease')));
   assert.deepEqual(f.current().campaign,before);

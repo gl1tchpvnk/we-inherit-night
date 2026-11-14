@@ -1,4 +1,4 @@
-import {expiryDescription} from './leaseNarrative.ts';
+import {expiryDescription,sanctuaryOfferSummary} from './leaseNarrative.ts';
 import {finalDemand,mariusProtection,counterAccepted,FINAL_ACTIONS,isFinalAction} from './finalCourt.ts';
 import type {Result} from './chain';
 
@@ -154,7 +154,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
   const action=(kind:GameAction,label=ROLEPLAY_LABELS[kind]??ACTIONS[kind].label)=>inspect(`action:${kind}`,label);
 
-  const make=(id:string,title:string,speaker:DialogueLine['speaker'],text:string,choices:SceneChoice[],terms:string[]=[]):EncounterScene=>({id,title,type:'ENCOUNTER',location:speaker==='vesper'?'crypt':['mirelle','cassian','dorian'].includes(speaker)?'library':'lounge',portraits:speaker==='narrator'?[]:[speaker],lines:[{speaker,text}],choices,terms,rights:[],compact:true});
+  const make=(id:string,title:string,speaker:DialogueLine['speaker'],text:string,choices:SceneChoice[],terms:string[]=[]):EncounterScene=>({id,title,type:'ENCOUNTER',location:speaker==='vesper'?'crypt':['mirelle','cassian','dorian'].includes(speaker)?'library':'lounge',portraits:speaker==='narrator'||speaker==='player'?[]:[speaker],lines:[{speaker,text}],choices,terms,rights:[],compact:true});
 
   const assistant=root&&w.grants.find(g=>g.parent_grant_id===root.id&&effectiveGrant(w,g));
 
@@ -164,7 +164,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
     vesper:{opening:w.access.crypt?(n===2?'Tonight. You have had time to ask everyone else what they think of me. I trust you have also found a bed.':n<2?`I made you one of us. I did not promise you a place beside me forever. You have ${3-n} more nights in my Crypt. Then you must find another roof.`:'The Crypt still admits you. Do not take that as a new promise from me.'):'You are still my descendant. You are no longer sheltered here. I see no reason to confuse the two.',question:'Does being your descendant count for nothing?',answer:'It makes you my descendant. It does not oblige me to house you forever. Nor does it entitle me to your Library. Tradition has limits; that is why it survives.',personal:'Are you trying to make me fail?',reply:'If I wanted you unprepared, I would have said nothing. Do not turn a warning into a promise that I will relent.'},
 
-    seraphine:{opening:w.access.sanctuary?'You paid for a refuge. You have one. You may stop thanking me whenever it becomes tiresome.':n>=3?'The offer is closed. I can still listen, but listening will not put a roof over your head.':p.titleFiled?'Your Library really is your own. Good. Now we can discuss a bargain between people with something to lose.':'Marius likes to know where everyone belongs. I prefer to know whether they can keep a bargain. You need a place to sleep. I have one.',question:'What is the catch?',answer:'Seven nights of sanctuary, paid in advance: 0.02 NEAR. No refund, no ownership. I cannot take it back once you accept, but it ends. Bring your Library claim or the dossier before Night Four.',personal:'And Marius is content with that?',reply:'Ask him. We founded this House together; we did not become the same person. My rights were mine before our marriage. They still are.',offer:allowed('sanctuary_pact')?'sanctuary_pact':n<2&&allowed('investigate_title')?'investigate_title':undefined},
+    seraphine:{opening:w.access.sanctuary?'You paid for a refuge. You have one. You may stop thanking me whenever it becomes tiresome.':n>=3?'The offer is closed. I can still listen, but listening will not put a roof over your head.':p.titleFiled?'Your Library really is your own. Good. Now we can discuss a bargain between people with something to lose.':'Marius likes to know where everyone belongs. I prefer to know whether they can keep a bargain. You need a place to sleep. I have one.',question:'What is the catch?',answer:'We must read the current offer before discussing a bargain.',personal:'And Marius is content with that?',reply:'Ask him. We founded this House together; we did not become the same person. My rights were mine before our marriage. They still are.',offer:allowed('sanctuary_pact')?'sanctuary_pact':n<2&&allowed('investigate_title')?'investigate_title':undefined},
 
     marius:{opening:p.serviceFulfilled&&mariusProtection(c,w)?'The work is finished. I said I would protect you, and I am doing so. We need not make a ceremony of it.':p.serviceFulfilled?'The work is finished. That does not replace a promise actually made: we must still settle whether my protection stands.':mariusProtection(c,w)?'You have my protection. I still expect the work you undertook. A useful arrangement should be useful to both of us.':p.appointment==='cassian'?'Cassian took the appointment. I will not offer you his place as though he had done nothing.':n<3?'Vesper has made your position uncertain. I can offer a place with duties you can fulfil, rather than favour you must keep guessing at. There is one appointment. Consider whether you want it.':'There is no empty appointment waiting for you. Mirelle’s completed work could still give me reason to offer protection.',question:'What work, exactly?',answer:d.result==='mirelle'?'Mirelle completed the Library investigation. That satisfies the service I required; you need not perform it again.':p.serviceFulfilled?'Your obligation is fulfilled. My protection remains mine to withdraw, not Vesper’s.':'Service to the House, completed on Night Four or Five. It costs you that night and 1 Blood. Leave it unfinished and I withdraw my protection at the sixth reckoning. Mirelle’s completed investigation can satisfy it instead.',personal:'Why should I choose you over Seraphine?',reply:'That is your decision. She can make a bargain I cannot cancel. I can offer a place in the institution I administer. Neither is the same as inheriting it.',offer:allowed('fulfil_service')?'fulfil_service':allowed('petition_marius')?'petition_marius':undefined},
 
@@ -187,12 +187,24 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
     if(!mariusRight)voices.marius.opening='The current record does not show my protection standing. Your service and your arrangements elsewhere must be considered separately.';
     if(p.finalCourt?.result){voices.marius.opening=p.finalCourt.result==='accepted'?(mariusRight?'My answer is recorded. Our final arrangement stands on its accepted terms.':'My final answer is recorded, but no effective protection from me remains in the current view.'):'My protection was withdrawn at the final reckoning. Your separate arrangements were not mine to cancel.';voices.marius.question='What did the final answer settle?';voices.marius.answer=p.finalCourt.response==='counter'?'The limited invitation you issued has its own term, even if I rejected your proposal. My answer did not transfer your Library or cancel independent shelter.':'The final response is settled. Conversation cannot repeat it or change a separate patron’s rights.';}
   }
-  if(paidSanctuary&&w.access.sanctuary){
-    voices.seraphine.question='What remains of our bargain?';
-    voices.seraphine.answer=`Your paid sanctuary ${expiryDescription(paidSanctuary.end_night,w.night)}. You owe no new acceptance. The price bought that term, not ownership; neither my displeasure nor Marius’s can shorten it.`;
-  }else if(w.access.court||w.access.passage||w.access.sanctuary){
-    voices.seraphine.opening=n<3?'You already have shelter under another arrangement. Mine would be a separate bargain: a fixed term, paid in advance, beyond a patron’s change of mind.': 'Your other protection stands. My early offer is closed; it need not be reopened for that protection to remain yours.';
-  }else if(paidSanctuary){voices.seraphine.opening='Our paid term is in the record, but it is not an effective refuge now. I will not offer the old bargain as though its deadline had never passed.';voices.seraphine.question='Where does our old bargain stand?';voices.seraphine.answer=`The accepted sanctuary ${expiryDescription(paidSanctuary.end_night,w.night)}. Check the shelter that is effective now; this conversation does not renew it.`;}
+  const sanctuaryLease=w.leases.find(l=>l.property_id==='sanctuary'&&l.buyer===p.accounts.player);
+  const sanctuaryOffered=!!sanctuaryLease&&sanctuaryLease.status==='offered'&&w.night<sanctuaryLease.offer_expiry_night;
+  if(paidSanctuary){
+    const active=paidSanctuary.end_night!==null&&w.night<paidSanctuary.end_night&&w.access.sanctuary;
+    voices.seraphine.opening=active?'You paid for a refuge. You have one. You may stop thanking me whenever it becomes tiresome.':'Our paid term is in the record, but it is not an effective refuge now. I will not offer the old bargain as though its deadline had never passed.';
+    voices.seraphine.question=active?'What remains of our bargain?':'Where does our old bargain stand?';
+    voices.seraphine.answer=active?`Your paid sanctuary ${expiryDescription(paidSanctuary.end_night,w.night)}. You owe no new acceptance. The price bought that term, not ownership; neither my displeasure nor Marius’s can shorten it.`:`The accepted sanctuary ${expiryDescription(paidSanctuary.end_night,w.night)}. Check the shelter that is effective now; this conversation does not renew it.`;
+    voices.seraphine.offer=undefined;
+  }else if(!sanctuaryOffered){
+    voices.seraphine.opening=w.access.court||w.access.passage||w.access.sanctuary?'Your other protection stands. My offer is closed; it need not be reopened for that protection to remain yours.':'The offer is closed. I can still listen, but listening will not put a roof over your head.';
+    voices.seraphine.question='Can our old offer still help me?';
+    voices.seraphine.answer='That offer was not accepted before it closed. Bringing a claim now cannot reopen it. Your Library remains yours; any other effective protection keeps its own terms.';
+    voices.seraphine.offer=undefined;
+  }else{
+    voices.seraphine.opening=p.titleFiled?'Your Library really is your own. Good. Now we can discuss a bargain between people with something to lose.':'Marius likes to know where everyone belongs. I prefer to know whether they can keep a bargain. You need a place to sleep. I have one.';
+    if(w.access.court||w.access.passage||w.access.sanctuary)voices.seraphine.opening='You already have shelter under another arrangement. Mine would be a separate bargain: a fixed term, paid in advance, beyond a patron’s change of mind.';
+    voices.seraphine.answer=`${sanctuaryOfferSummary(w.night,sanctuaryLease!.duration_nights)} The rent is paid in advance and nonrefundable. Bring your Library claim or the dossier while this offer is still open; filing and acceptance are separate commitments.`;
+  }
   if(permanentPassage){voices.lucien.question='What could end your protection?';voices.lucien.answer='My grant has no scheduled end. I can withdraw my own promise; Dorian cannot withdraw it by losing his Library key. You have a patron, not an irrevocable covenant.';}
   for(const actor of ['mirelle','dorian'] as const){
     if(d.chosen===actor&&root&&d.result==='open'){
@@ -205,19 +217,19 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
     investigate_title:['It is already your Library. Let us make that claim the reason Seraphine hears you.','This takes tonight’s action and 1 Blood. Accept sanctuary separately by the end of Night Three.'],
 
-    sanctuary_pact:['Marius can decide you have ceased to be useful. Vesper can decide you have stayed long enough. Pay me, and neither decision shortens your sanctuary. Mine cannot either. I find a price agreed in advance saves a great deal of injured feeling.','One nightly action. Pay 0.02 NEAR from the prepaid campaign treasury, nonrefundable, plus network gas. Seven nights of sanctuary from acceptance; no ownership. An accepted lease cannot be cancelled by Seraphine, Marius or Vesper. Accept before Night Four.'],
+    sanctuary_pact:['Marius can decide you have ceased to be useful. Vesper can decide you have stayed long enough. Pay me, and neither decision shortens your sanctuary. Mine cannot either. I find a price agreed in advance saves a great deal of injured feeling.','One nightly action. Pay 0.02 NEAR from the prepaid campaign treasury, nonrefundable, plus network gas. An accepted lease cannot be cancelled by Seraphine, Marius or Vesper. Accept before Night Four.'],
 
-    petition_marius:['Take the appointment. Do the work. You need not plead with me each evening for what you have undertaken to earn. But understand this before you accept: I will expect the obligation fulfilled.','This takes tonight’s action. Finish service on Night Four or Five, directly or through Mirelle’s completed work. Otherwise Marius withdraws his protection at the sixth reckoning. Protection requires his confirmed grant at reckoning and remains revocable.'],
+    petition_marius:['Take the appointment. Do the work. You need not plead with me each evening for what you have undertaken to earn. But understand this before you accept: I will expect the obligation fulfilled.','This takes tonight’s action and 1 Blood. Finish service on Night Four or Five, directly or through Mirelle’s completed work. Otherwise Marius withdraws his protection at the sixth reckoning. Protection requires his confirmed grant at reckoning and remains revocable.'],
 
     fulfil_service:['You undertook the work. Finish it. I value an obligation honoured more than an apology well delivered.','This takes tonight’s action and 1 Blood. Completes your outstanding service. Marius’s protection remains revocable.'],
 
-    authorize_mirelle:['Give me permission to bring Cassian in. Let us finish, and Marius receives the account. If you mean to stop us, do it before I publish. I will not pretend the work can be unread.','One nightly action. Give Mirelle delegable Library entry without expiry; she can invite Cassian. You may revoke her permission and its dependent access. Research needs a later reckoning. Publication cannot be recalled and closes Dorian’s route. The completed account satisfies Marius’s service; his protection still requires his own confirmed grant.'],
+    authorize_mirelle:['Give me permission to bring Cassian in. Let us finish, and Marius receives the account. If you mean to stop us, do it before I publish. I will not pretend the work can be unread.','One nightly action and 1 Blood. Give Mirelle delegable Library entry without expiry; she can invite Cassian. You may revoke her permission and its dependent access. Research needs a later reckoning. Publication cannot be recalled and closes Dorian’s route. The completed account satisfies Marius’s service; his protection still requires his own confirmed grant.'],
 
-    authorize_dorian:['Let me invite Lucien. We finish the account; he gets the benefit. You need not pretend this is neutral. Neither will I.','One nightly action. Give Dorian delegable Library entry without expiry; he can invite Lucien. You may revoke that permission and its dependent access. Research needs a later reckoning. Publication cannot be recalled and closes Mirelle’s route. Lucien’s lasting protection requires his own confirmed grant.'],
+    authorize_dorian:['Let me invite Lucien. We finish the account; he gets the benefit. You need not pretend this is neutral. Neither will I.','One nightly action and 1 Blood. Give Dorian delegable Library entry without expiry; he can invite Lucien. You may revoke that permission and its dependent access. Research needs a later reckoning. Publication cannot be recalled and closes Mirelle’s route. Lucien’s lasting protection requires his own confirmed grant.'],
 
     withdraw_library:['Ask for my key, and my assistant loses this invitation too. If our work is unfinished, it stops here.','This takes tonight’s action. Published findings, your Library ownership, sanctuary and separate patron protection remain.'],
 
-    broker_passage:['Until Night Six, if I grant it. Not forever. You look disappointed. Would a longer promise make you safer if I could not honour it?','This takes tonight’s action. For lasting protection on this route, begin Dorian’s research on Night Four and allow it to finish on Night Five. Lucien must confirm passage at reckoning; this request alone grants no shelter.'],
+    broker_passage:['Until Night Six, if I grant it. Not forever. You look disappointed. Would a longer promise make you safer if I could not honour it?','This takes tonight’s action and 1 Blood. For lasting protection on this route, begin Dorian’s research on Night Four and allow it to finish on Night Five. Lucien must confirm passage at reckoning; this request alone grants no shelter.'],
 
     feed:['Hunting restores 4 Blood, up to 12. Tonight’s upkeep still applies.','This takes tonight’s action. Hunting grants no political protection.'],
 
@@ -264,7 +276,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
 
       if(kind.startsWith('authorize_')&&n===5)s.terms.push('This is the last start that can finish by Night Seven. Stopping the work tomorrow forfeits its reward.');
 
-      if(kind==='sanctuary_pact'){const lease=w.leases.find(l=>l.property_id==='sanctuary');if(lease)s.terms.push(`Shelter ends at the start of Night ${w.night+lease.duration_nights+1} if accepted now; it must still be active after the seventh reckoning.`);}
+      if(kind==='sanctuary_pact'&&sanctuaryLease){s.terms.push(sanctuaryOfferSummary(w.night,sanctuaryLease.duration_nights));s.rights.push(`Exact duration: ${sanctuaryLease.duration_nights} nights from acceptance. Calculated expiry if accepted now: contract night ${w.night+sanctuaryLease.duration_nights} (start of Night ${w.night+sanctuaryLease.duration_nights+1}); expiry is exclusive.`);}
 
       if(demoted.has(kind))s.choices=[];
 
@@ -321,7 +333,7 @@ export function livingCourt(r:Result,scenes:EncounterScene[]):void{
         scenes.push(make(`meaning:${actor}`,'Whom the work served',actor,actor==='mirelle'?'I wanted Marius to recognise work delivered, rather than keep asking you to prove your usefulness. Cassian helped me finish it. Whether you keep either of us welcome is a different answer.':'I wanted Lucien to have a reason to deal with you directly. It would be a poor escape from one patron if I made myself the keeper of every conversation with the next.',[inspect(`character:${actor}`,'Return to our conversation')]));
       }
     }
-    if(actor==='dorian'&&d.result==='open'&&d.chosen==='mirelle'&&root&&effectiveGrant(w,root)&&n<=4&&!d.challenged&&!petitionHasShelter(w,n))s.lines=[{speaker:actor,text:'Changing investigators takes two commitments before the work can finish. I see no lasting shelter in your recorded arrangements. I will not press you to spend those nights on my petition. You may still inspect the choices available to you.'}];
+    if(actor==='dorian'&&d.result==='open'&&d.chosen==='mirelle'&&root&&effectiveGrant(w,root)&&n<=4&&!d.challenged&&!petitionHasShelter(w,n))s.lines=[{speaker:actor,text:'Changing investigators takes two commitments before the work can finish. I cannot treat Marius’s conditional protection as a reliable fallback, and I see no independent shelter lasting beyond the final reckoning. I will not press you to spend those nights on my petition. You may still inspect the choices available to you.'}];
 
     const back=[inspect(`character:${actor}`,'There is something else I want to ask'),...(v.offer?[action(v.offer)]:[])];
 
@@ -484,6 +496,10 @@ export function repairCourtFlow(r:Result,scenes:EncounterScene[]):void{
       proposal.lines=proposal.lines.filter(l=>l.text!==INVESTIGATION_QUESTION);
       proposal.choices.splice(Math.max(0,proposal.choices.length-1),0,link(purpose.id,'Ask what the account will establish'));
     }
+  }
+  if(!p.serviceFulfilled&&mariusProtection(c,w)&&!petitionHasShelter(w,n)&&d.result==='open'){
+    const warning='Marius’s service is still outstanding. If you withdraw Mirelle on Night Five and authorize Dorian on Night Six, Marius withdraws protection at that reckoning, before Dorian can finish. Without independent shelter, this route can end your campaign. Switching remains your choice.';
+    for(const id of ['character:dorian','action:withdraw_library','action:authorize_dorian'])get(id)?.terms.push(warning);
   }
   const marius=get('character:marius');
   if(marius&&(p.appointment==='player'||p.serviceFulfilled||mariusProtection(c,w)||p.finalCourt?.result)){

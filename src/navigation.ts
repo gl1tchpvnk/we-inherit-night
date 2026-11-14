@@ -24,15 +24,15 @@ export function navigationGuidance(result:Result):{situation:string;leads:Lead[]
  if(c.politics?.library){
    leads.push({label:'Review tonight’s situation and choices',scene:`decision:${c.night}`});
    if(c.resources.blood<=3&&allowed.has('feed'))leads.unshift({label:'Hunt before dawn',scene:'action:feed'});
-   else leads.push({label:c.night<3?'Read your Library claim':'Revisit the Library dispute',room:'library'});
+   else leads.push({label:c.night<3?'Read your Library claim':'Revisit the Library dispute',scene:'record:library'});
    return {situation:chapterSituation(result),leads};
  }
 
  if(allowed.has('fulfil_service'))leads.push({label:'Fulfil Marius’s obligation',scene:'action:fulfil_service'});
  if(allowed.has('sanctuary_pact'))leads.push({label:'Negotiate Seraphine’s sanctuary',actor:'seraphine'});
- if(allowed.has('investigate_title')&&result.world.access.library)leads.push({label:'Library · investigate your title',room:'library'});
+ if(allowed.has('investigate_title')&&result.world.access.library)leads.push({label:'Library · investigate your title',scene:'record:library'});
  if(allowed.has('petition_marius'))leads.push({label:'Discuss Marius’s appointment',actor:'marius'});
- if(!c.politics?.library&&allowed.has('secure_dossier')&&result.world.access.library)leads.push({label:'Library · contested dossier',room:'library'});
+ if(!c.politics?.library&&allowed.has('secure_dossier')&&result.world.access.library)leads.push({label:'Library · contested dossier',scene:'record:library'});
  if(allowed.has('broker_passage')&&(!c.politics?.library||!result.world.access.sanctuary&&!result.world.access.court))leads.push({label:'Contact Lucien about passage',actor:'lucien'});
  if(!c.politics?.library&&c.agreements.some(a=>a.status==='pending'))leads.push({label:'Inspect Seraphine’s pending offer',scene:'lease:0'});
  if((c.resources.blood<=4||c.politics?.library&&c.night===2)&&allowed.has('feed'))leads.unshift({label:'Attend to your Blood',scene:'action:feed'});

@@ -80,7 +80,7 @@ test('React scene renders native accessible controls, escaped dialogue and alway
  const opening=buildEncounterScenes(focused).find(s=>s.id==='ultimatum');
  const props={scene:opening,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){},onComplete(){},onSkipReckoning(){}};
  const first=renderToStaticMarkup(createElement(VampireEncounter,props));assert.match(first,/>Continue</);assert.doesNotMatch(first,/Find out who|Finish \/ skip|What changes/);
- const last=renderToStaticMarkup(createElement(VampireEncounter,{...props,lineIndex:1}));assert.match(last,/Find out who might help/);assert.doesNotMatch(last,/>Continue</);assert.equal((last.match(/Return to the castle/g)||[]).length,1);
+ const last=renderToStaticMarkup(createElement(VampireEncounter,{...props,lineIndex:1}));assert.match(last,/Find out who might help/);assert.doesNotMatch(last,/>Continue</);assert.equal((last.match(/>Castle map</g)||[]).length,1);
  const busy=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:true,feedback:'',onLine:()=>{},onChoice:()=>{},onComplete:()=>{},onSkipReckoning:()=>{}}));assert.match(busy,/disabled/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });

@@ -56,7 +56,8 @@ test('Night Seven can stop pending research or keep it running; publication chan
 test('material risks remain visible; failed or pending actions never acquire narrative commitments',()=>{
  const r=fixture(1);r.campaign.politics.titleFiled=true;r.campaign.resources.exposure=8;r.actions=availableActions(r.campaign,r.world);
  let scenes=buildEncounterScenes(r),terms=[...scenes.find(s=>s.id==='action:sanctuary_pact').terms,...scenes.find(s=>s.id==='action:sanctuary_pact').lines.map(l=>l.text)].join(' ');
- for(const text of ['0.02 NEAR','nonrefundable','gas','Seven nights','One nightly action','Night Four'])assert.ok(terms.includes(text),text);
+ for(const text of ['0.02 NEAR','nonrefundable','gas','until after the final reckoning','This is temporary shelter, not ownership.','One nightly action','Night Four'])assert.ok(terms.includes(text),text);
+ assert.match(scenes.find(s=>s.id==='action:sanctuary_pact').rights.join(' '),/Exact duration: 7 nights.*Calculated expiry.*contract night 8/);
  assert.doesNotMatch(scenes.find(s=>s.id==='action:feed').terms.join(' '),/Exposure/);
  r.pending=true;scenes=buildEncounterScenes(r);assert.ok(scenes.every(s=>!s.automatic&&s.choices.every(c=>!c.action)));
 });

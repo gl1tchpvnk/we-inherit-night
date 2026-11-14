@@ -1,0 +1,29 @@
+# Optional dialogue and remembered relationships — IMPLEMENTED locally
+
+## Branch map
+- Available appointment: exact Marius pitch, M-Q1 and conditional M-Q2; the existing appointment commitment is on the same decision surface. Available sanctuary: one state-selected opening plus the shared exact offer, S-Q1 and S-Q2, with the existing commitment and precise terms. Costs/eligibility/handlers are unchanged.
+- Confirmed effective protection: existing result/reckoning acknowledgements replaced with the supplied words; optional M-P1/M-P2 (or research/no-appointment M-P2B) and S-P1/S-P2 use free reply metadata. The ordinary character conversation provides review access, without a new mandatory result screen.
+- Confirmed acquisition order: M-D when Marius protected first, S-D when sanctuary came first; appointment/research variants and service conditions select only applicable text. The next voluntary conversation with the first protector replaces its greeting once. Current protection is revalidated. Unanswered exits dismiss, while interruption/reload does not.
+- Callbacks: later fulfilled service after M-D1; confirmed final acceptance after M-D3; actual final withdrawal after M-D2; priority-ordered Seraphine greetings; conditional Seraphine personal finale. Final responses replace existing finale opening/final-demand summary slots as applicable, rather than adding a new finale screen. Factual results, terms, reply choices, settlement and replay are preserved.
+
+## Files and boundaries
+- `src/relationshipDialogue.ts`: supplied strings, constrained presentation projection, reply parsing/selection and callback predicates. No chain/game action execution or NPC policy imports.
+- `src/encounters.ts`: optional campaign-scoped relationship fields in existing browser scene memory; projection before topic stamping. S-Q2 retains the old marriage-question read key/version despite paragraph formatting.
+- `src/VampireEncounter.tsx`: player speaker label, persist-before-acknowledgement replies, free dismissal, direct back/court exits, and collapsed read offer openings from either entry point. Storage failure keeps the answer unselected and reports a retry/exit option.
+- `src/courtPayoff.ts`, `src/CampaignFinale.tsx`: read the same narrative memory for existing finale slots. `src/livingCourt.ts`: exclude the player label from NPC portrait typing. `src/style.css`: preserve paragraph breaks and suppress animation on a reviewed conversation; no portrait resizing, smaller text or new scroll containers.
+- `tests/relationship-dialogue.test.mjs`: nine focused regressions. Existing encounter-flow, narrative-V2 and politics assertions updated for the requested exact prose and consolidated decision surface; authority and cost checks remain.
+- README, requirements, character register and PROGRESS updated. Prior local prologue, first-feeding/Crypt, Blood-balance and navigation work is preserved.
+
+Personal choices are not gameplay promises, agreements, affinity, rights or NPC knowledge. They change only browser read/reply/dismissal/callback metadata under `night-scenes:v1:<campaign id>`. Selected alternatives cannot be replaced; old saves declare no position. No action costs, eligibility, counterproposal rules, survival or ending computation changed.
+
+## Evidence and conservative exclusions
+Acquisition order uses one confirmed Marius grant-origin journal entry and the accepted sanctuary lease’s recorded start (`end_night - duration_nights`), not the current clock or access flags alone. Missing/ambiguous origin history or equal recorded nights suppress the order-dependent exchange. A withdrawn/expired arrangement suppresses it. Urgent final-demand routing/advice keeps priority; optional reactions do not force a visit or block a decision. These are deliberate evidence guards, not invented replacement dialogue. No supplied eligible branch was otherwise omitted.
+
+## Verification
+- PASS: all 207 automated tests; TypeScript check and Vite production build; whitespace review.
+- PASS: nine new focused tests cover both orders/origins, exact offer/question strings, all personal alternatives, single-choice persistence, dismissal/interruption, old saves, explored-topic continuity, current protection, pending/error suppression, service/final callbacks, and urgent-demand priority. Fixtures remain unchanged after narrative projection/selection; free choices contain no gameplay actions.
+- PASS: 14 actual headless Chromium scenarios on local preview at 1440×900 and 390×844, plus two mobile action-entry return checks. Offer, question, personal reply and dual-arrangement screens were checked with keyboard selection, reload during an answer, exact rendered strings, collapsed openings, locked alternatives and reachable navigation. Desktop/mobile screenshots inspected after portrait loading. A duplicate Back control found in the first pass was fixed; “Leave this unanswered” has no explored badge. Initial image-readiness checks were rerun with bounded decoding/stable screenshots.
+- Browser API responses were simulated authoritative-view fixtures: free dialogue/replies/navigation issued only entry/reload `view` requests, no gameplay request. Only explicit existing commitment clicks issued their expected `game` request, which the fixture intentionally rejected. No real campaign was modified by those browser tests.
+- NOT RUN: new Sandbox integration, live Testnet, public acceptance or another full seven-night walkthrough. This pass changes presentation/browser memory only; existing regression authority/payment/recovery tests remain intact. No commit, push, deploy, credentials or funding changes.
+
+Ignored local evidence: `.local/relationship-browser/report.json`, `action-entry-report.json`, screenshots, `.local/relationships-regression.log`, `.local/relationships-focused.log`.

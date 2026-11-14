@@ -60,7 +60,7 @@ test('proposal inspection is free; authoritative eligibility retires stale and i
 });
 
 test('Marius follows current service, protection and settled demand without retiring valid independent research',()=>{
- const r=fixture();assert.ok(scene(r,'character:marius').choices.some(c=>c.inspect==='action:petition_marius'));
+ const r=fixture();assert.ok(scene(r,'character:marius').choices.some(c=>c.action?.choice==='petition_marius'));
  r.campaign.night=r.world.night=3;r.campaign.politics.appointment='player';const g=grant(r,'court','marius','player');
  assert.match(scene(r,'ask:3:marius').title,/outstanding/);
  assert.equal(scene(r,'character:marius').choices.find(c=>c.inspect==='personal:3:marius').reviewOnly,true);
@@ -78,7 +78,7 @@ test('Marius follows current service, protection and settled demand without reti
 
 test('shelter-aware alternatives and expired sanctuary never assert paid refuge from unrelated access',()=>{
  const r=fixture(1);grant(r,'court','marius','player');
- assert.match(scene(r,'character:seraphine').lines[0].text,/already have shelter/);
+ assert.match(scene(r,'character:seraphine').lines[0].text,/Marius has made room for you/);
  r.campaign.politics.titleFiled=true;assert.ok(scene(r,'action:sanctuary_pact').choices.some(c=>c.action));
  r.world.leases[0].status='accepted';r.world.leases[0].end_night=8;r.world.access.sanctuary=true;
  assert.match(scene(r,'ask:1:seraphine').title,/remains/);
@@ -142,4 +142,27 @@ test('Vesper opening information remains reachable in both orders without consum
  assert.deepEqual(r,before,'all navigation is browser memory only');
  assert.ok(resolveScene(scenes,'decision:0').choices.some(c=>c.inspect==='character:marius'));
  assert.ok(resolveScene(scenes,'decision:0').choices.some(c=>c.inspect==='character:seraphine'));
+});
+
+test('Seraphine questions follow the contract offer deadline and accepted lease, not just offered status',()=>{
+ const r=fixture(1);r.campaign.politics.titleFiled=true;
+ const text=id=>{const s=scene(r,id);return [s.title,...s.lines.map(l=>l.text),...s.terms].join(' ');};
+ assert.match(text('ask:1:seraphine'),/until after the final reckoning/);
+ r.world.night=3; // intentionally differs from campaign night: deadline is contract authority
+ assert.equal(r.world.leases[0].status,'offered');
+ assert.match(text('character:seraphine'),/offer is closed/);assert.match(text('ask:1:seraphine'),/cannot reopen/);
+ assert.doesNotMatch(text('ask:1:seraphine'),/Bring your Library|before Night Four/);
+ r.world.leases[0].status='accepted';r.world.leases[0].end_night=8;r.world.access.sanctuary=true;
+ assert.match(text('character:seraphine'),/paid for a refuge/);assert.match(text('ask:1:seraphine'),/owe no new acceptance/);
+ r.world.night=8;r.world.access.court=true; // other protection cannot conceal this lease's expiry
+ assert.match(text('character:seraphine'),/not an effective refuge/);assert.match(text('ask:1:seraphine'),/has expired/);
+ assert.doesNotMatch(text('ask:1:seraphine'),/Bring your Library/);
+});
+
+test('navigation history and castle exit are presentation only and survive reload',async()=>{
+ const {visitScene,leaveEncounters}=await import('../src/encounters.ts');const r=fixture(),before=structuredClone(r),scenes=all(r);
+ let m=visitScene(readSceneMemory(null),'decision:0','character:vesper');m=visitScene(m,'character:vesper','ask:0:vesper');
+ m=readSceneMemory(JSON.stringify(m));assert.deepEqual(m.trail,['decision:0','character:vesper']);
+ m=visitScene(m,'ask:0:vesper','character:vesper');assert.deepEqual(m.trail,['decision:0']);
+ m=leaveEncounters(m,scenes,'character:vesper');assert.equal(nextScene(scenes,m),undefined);assert.deepEqual(m.trail,[]);assert.deepEqual(r,before);
 });

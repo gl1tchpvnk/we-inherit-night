@@ -71,12 +71,13 @@ export const selectNpcAction:NpcSelector=o=>{
 };
 
 // Public Library ownership identifies the player; no private resources or decisions.
-// A switch costs two commitments. Temporary passage alone is not a stable fallback.
+// A switch costs two commitments. Public grants cannot establish fulfilled private service.
+// Conservatively exclude conditional court protection; never infer safety from no expiry.
 export function petitionHasShelter(w:AgentObservation['publicState'],night:number):boolean{
   const player=w.properties.find(p=>p.id==='library')?.owner;
-  if(!player)return false;
-  return w.leases.some(l=>l.property_id==='sanctuary'&&l.buyer===player&&l.status==='accepted'&&l.end_night!==null&&l.end_night>=7)
-    ||w.grants.some((g,i)=>['court','passage'].includes(g.property_id)&&g.grantee===player&&g.scope==='enter'&&!g.revoked&&w.grant_validity?.[i]===true&&(g.expiry_night===null||g.expiry_night>=7)&&night<7);
+  if(!player||night>=7)return false;
+  return w.leases.some(l=>l.property_id==='sanctuary'&&l.buyer===player&&l.status==='accepted'&&l.end_night!==null&&l.end_night>7)
+    ||w.grants.some((g,i)=>g.property_id==='passage'&&g.grantee===player&&g.scope==='enter'&&!g.revoked&&w.grant_validity?.[i]===true&&(g.expiry_night===null||g.expiry_night>7)&&night<7);
 }
 
 // Each policy pursues its own legitimate opportunities. Availability is computed

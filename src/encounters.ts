@@ -1,3 +1,4 @@
+import {applyRelationshipDialogue,readRelationships,type RelationshipMemory,type RelationshipExchange,type RelationshipReply} from './relationshipDialogue.ts';
 import {expiryDescription} from './leaseNarrative.ts';
 import type {Action,Result} from './chain';
 import type {GameAction,NpcName} from './game';
@@ -7,22 +8,30 @@ import {addCourtReactions} from './reactiveCourt.ts';
 import {repairCourtFlow} from './livingCourt.ts';
 
 export type SceneType='ENCOUNTER'|'NEGOTIATION'|'RECKONING'|'CAMPAIGN CONCLUSION'|'DECISION';
-export interface DialogueLine {speaker:NpcName|'narrator';text:string}
-export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[];secondary?:boolean;reviewOnly?:boolean}
+export interface DialogueLine {speaker:NpcName|'narrator'|'player';text:string}
+export interface SceneChoice {id:string;label:string;action?:Action;inspect?:string;summary?:string[];secondary?:boolean;reviewOnly?:boolean;reply?:RelationshipReply}
 export interface EncounterScene {
   id:string;type:SceneType;title:string;location:'crypt'|'library'|'lounge';
   portraits:NpcName[];lines:DialogueLine[];terms:string[];rights:string[];
-  choices:SceneChoice[];compact?:boolean;outcome?:string;automatic?:boolean;completionLabel?:string;
+  introduction?:'library'|'lounge';choices:SceneChoice[];compact?:boolean;outcome?:string;automatic?:boolean;completionLabel?:string;
   reactionLevel?:'minor'|'significant'|'major';
-  redirect?:string;topicId?:string;readVersion?:string;legacyStable?:boolean;
+  exchange?:RelationshipExchange;callback?:string;redirect?:string;topicId?:string;readVersion?:string;legacyStable?:boolean;
 }
-export interface SceneMemory {seen:string[];active:string|null;line:number;room?:string|null;reads?:Record<string,string[]>}
+export interface SceneMemory {seen:string[];active:string|null;line:number;relationships?:RelationshipMemory;introducedRooms?:('library'|'lounge')[];roomIntroduction?:{room:'library'|'lounge';destination:string};trail?:string[];room?:string|null;reads?:Record<string,string[]>}
 export const emptySceneMemory=():SceneMemory=>({seen:[],active:null,line:0});
 export function readSceneMemory(raw:string|null):SceneMemory {
-  try{const m=JSON.parse(raw??'null');if(!m||!Array.isArray(m.seen))return emptySceneMemory();const reads=Object.fromEntries(Object.entries(m.reads&&typeof m.reads==='object'?m.reads:{}).filter(([k,v])=>k.length<160&&Array.isArray(v)).slice(-256).map(([k,v])=>[k,(v as unknown[]).filter((x):x is string=>typeof x==='string'&&/^[a-f0-9]{8}$/.test(x)).slice(-16)]));return {...(m.room===null||['crypt','library','lounge'].includes(m.room)?{room:m.room}:{}),seen:m.seen.filter((id:unknown)=>typeof id==='string'&&id.length<160).slice(-512),reads,active:typeof m.active==='string'&&m.active.length<160?m.active:null,line:Number.isInteger(m.line)?Math.max(0,Math.min(100,m.line)):0};}catch{return emptySceneMemory();}
+  try{const m=JSON.parse(raw??'null');if(!m||!Array.isArray(m.seen))return emptySceneMemory();const reads=Object.fromEntries(Object.entries(m.reads&&typeof m.reads==='object'?m.reads:{}).filter(([k,v])=>k.length<160&&Array.isArray(v)).slice(-256).map(([k,v])=>[k,(v as unknown[]).filter((x):x is string=>typeof x==='string'&&/^[a-f0-9]{8}$/.test(x)).slice(-16)]));return {introducedRooms:Array.isArray(m.introducedRooms)?m.introducedRooms.filter((id:unknown)=>id==='library'||id==='lounge'):[],...(m.roomIntroduction&&['library','lounge'].includes(m.roomIntroduction.room)&&typeof m.roomIntroduction.destination==='string'&&m.roomIntroduction.destination.length<160?{roomIntroduction:{room:m.roomIntroduction.room,destination:m.roomIntroduction.destination}}:{}),relationships:readRelationships(m.relationships),...(m.room===null||['crypt','library','lounge'].includes(m.room)?{room:m.room}:{}),trail:Array.isArray(m.trail)?m.trail.filter((id:unknown)=>typeof id==='string'&&id.length<160).slice(-16):[],seen:m.seen.filter((id:unknown)=>typeof id==='string'&&id.length<160).slice(-512),reads,active:typeof m.active==='string'&&m.active.length<160?m.active:null,line:Number.isInteger(m.line)?Math.max(0,Math.min(100,m.line)):0};}catch{return emptySceneMemory();}
 }
 export function finishScene(memory:SceneMemory,id:string):SceneMemory {
   return {...memory,seen:[...new Set([...memory.seen,id])].slice(-512),active:null,line:0};
+}
+// Browser navigation only: destinations are resolved against freshly projected scenes.
+export function visitScene(memory:SceneMemory,current:string,target:string):SceneMemory {
+  const trail=memory.trail??[];
+  return {...finishScene(memory,current),active:target,trail:trail.at(-1)===target?trail.slice(0,-1):[...trail,current].slice(-16)};
+}
+export function leaveEncounters(memory:SceneMemory,scenes:EncounterScene[],current:string):SceneMemory {
+  return {...finishScene(memory,current),trail:[],seen:[...new Set([...memory.seen,current,...scenes.filter(s=>s.automatic).map(s=>s.id)])].slice(-512)};
 }
 export function resolveScene(scenes:EncounterScene[],id:string|null):EncounterScene|undefined{
   let scene=scenes.find(s=>s.id===id);const visited=new Set<string>();
@@ -54,6 +63,13 @@ function stampTopics(scenes:EncounterScene[]){
     let hash=2166136261;for(const char of JSON.stringify([s.title,s.lines,s.terms]))hash=Math.imul(hash^char.charCodeAt(0),16777619);
     s.readVersion=(hash>>>0).toString(16).padStart(8,'0');
     s.legacyStable=/^personal:\d+:(vesper|seraphine|marius|dorian|lucien|cassian|sabine)$/.test(s.id)||/^ask:\d+:(vesper|cassian)$/.test(s.id);
+    // Same marriage question, now paragraph-formatted: retain its established read key/version.
+    if(s.id==='ask:relationship:S-Q2'){
+      s.topicId='personal:seraphine';s.legacyStable=true;
+      let prior=2166136261;for(const char of JSON.stringify([s.title,s.lines.map(l=>({...l,text:l.text.replace(/\s+/g,' ')})),s.terms]))prior=Math.imul(prior^char.charCodeAt(0),16777619);
+      s.readVersion=(prior>>>0).toString(16).padStart(8,'0');
+    }
+
   }
 }
 export const MAJOR_VAMPIRES:NpcName[]=['vesper','seraphine','marius','lucien'];
@@ -105,7 +121,7 @@ const eventText:Record<string,string>={
 };
 
 // Pure presentation projection. Never writes campaign state, rolls randomness or calls a signer.
-export function buildEncounterScenes(r:Result):EncounterScene[]{
+export function buildEncounterScenes(r:Result,relationships:RelationshipMemory={}):EncounterScene[]{
   const c=r.campaign;if(!c)return [];
   const scenes:EncounterScene[]=[];
   for(const actor of Object.keys(c.npcs) as NpcName[]){
@@ -148,6 +164,34 @@ export function buildEncounterScenes(r:Result):EncounterScene[]{
   if(c.politics?.library)addCourtReactions(r,scenes);
   if(c.politics?.library)repairCourtFlow(r,scenes);
   if(r.pending||r.error)for(const s of scenes){s.automatic=false;s.choices=s.choices.filter(ch=>!ch.action);}
+  applyRelationshipDialogue(r,scenes,relationships);
   stampTopics(scenes);
   return scenes;
+}
+
+// Explicit narrative triggers, not the room/location metadata used for artwork.
+export function introductoryRoom(id:string):'library'|'lounge'|null{
+ if(/^(character:seraphine|action:(sanctuary_pact|learn_seraphine|discuss_exchange)|lease:[01])$/.test(id)||/^(ask|personal|talk):\d+:seraphine$/.test(id)||/^(ask|personal):relationship:S-/.test(id))return 'lounge';
+ if(/^(character:(mirelle|dorian)|record:library|action:(investigate_title|authorize_mirelle|authorize_dorian|withdraw_library|secure_dossier))$/.test(id)||/^(ask|personal|talk):\d+:(mirelle|dorian)$/.test(id)||/^(purpose|finding|meaning):(mirelle|dorian)$/.test(id)||/^reaction:npc:\d+:(mirelle|dorian):archive_(assist|research|challenge)$/.test(id))return 'library';
+ return null;
+}
+export const ROOM_INTRODUCTIONS={
+ lounge:{title:'The Crimson Lounge',text:'Low light gathers around the tables. Here, a quiet conversation can carry further than a raised voice. There is room to listen before you answer.'},
+ library:{title:'The Forbidden Library',text:'Shelves rise into the dimness. Beyond these walls, the court measures what each invitation permits. Here, you decide whom to admit. Ownership gives you that choice; it does not keep out the dawn.'}
+} as const;
+export function roomIntroduction(scenes:EncounterScene[],memory:SceneMemory,r:Result):EncounterScene|undefined{
+ if(r.pending||r.error||r.campaign?.status!=='playing')return;
+ const target=resolveScene(scenes,memory.roomIntroduction?.destination??null)??nextScene(scenes,memory);
+ if(!target)return;
+ const room=memory.roomIntroduction?.room??introductoryRoom(target.id);
+ if(!room||memory.introducedRooms?.includes(room))return;
+ return {id:`room-introduction:${room}`,introduction:room,type:'NEGOTIATION',title:ROOM_INTRODUCTIONS[room].title,location:room,portraits:[],lines:[{speaker:'narrator',text:ROOM_INTRODUCTIONS[room].text}],terms:[],rights:[],choices:[],completionLabel:'Continue'};
+}
+export function finishRoomIntroduction(memory:SceneMemory):SceneMemory{
+ const pending=memory.roomIntroduction;if(!pending)return memory;
+ return {...memory,active:pending.destination,line:0,roomIntroduction:undefined,introducedRooms:[...new Set([...(memory.introducedRooms??[]),pending.room])]};
+}
+export function resumeEncounterMemory(memory:SceneMemory):SceneMemory{
+ // Old room views become free current records, never a room-entry command.
+ return !memory.active&&!memory.roomIntroduction&&memory.room?{...memory,active:`record:${memory.room}`,room:null,line:0}:memory;
 }

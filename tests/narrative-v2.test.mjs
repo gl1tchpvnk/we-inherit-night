@@ -75,8 +75,9 @@ test('Vesper warning precedes revocation; only confirmed withdrawal produces the
 test('sanctuary separates a proposal, paid acceptance and rejection, and retains all binding terms',()=>{
  const r=fixture(1);r.campaign.politics.titleFiled=true;
  const offer=scene(r,'action:sanctuary_pact'),intro=scene(r,'character:seraphine').lines[0].text;
- assert.ok(!offer.lines[0].text.includes(intro));assert.equal(offer.lines.length,1);
- for(const pattern of [/one nightly action/i,/0\.02 NEAR/,/nonrefundable/,/gas/,/Seven nights/,/no ownership/,/cannot be cancelled/,/Night Four/,/Shelter ends/])assert.match(offer.terms.join(' '),pattern);
+ assert.equal(offer.lines[0].text,intro,'offer and conversation use the same decision surface');assert.equal(offer.lines.length,1);
+ for(const pattern of [/one nightly action/i,/0\.02 NEAR/,/nonrefundable/,/gas/,/temporary shelter, not ownership/,/cannot be cancelled/,/Night Four/,/until after the final reckoning/])assert.match(offer.terms.join(' '),pattern);
+ assert.match(offer.rights.join(' '),/Exact duration: 7 nights/);assert.match(offer.rights.join(' '),/contract night 8 \(start of Night 9\)/);
  assert.deepEqual(offer.choices.find(c=>c.action).action,{action:'game',choice:'sanctuary_pact'});
  assert.ok(!scenes(r).some(s=>s.id==='reaction:lease:1:accepted'));
  for(const blocked of [{pending:true},{error:'unresolved'}]){
@@ -84,7 +85,7 @@ test('sanctuary separates a proposal, paid acceptance and rejection, and retains
   assert.ok(!scenes(view).some(s=>s.id==='reaction:lease:1:accepted'));
  }
  r.world.leases[1].status='accepted';r.world.leases[1].end_night=8;r.world.leases[1].escrow_yocto='20000000000000000000000';r.world.access.sanctuary=true;
- assert.match(words(scene(r,'reaction:lease:1:accepted')),/was accepted/);
+ assert.match(words(scene(r,'reaction:lease:1:accepted')),/It is settled/ );
  assert.match(scene(r,'character:seraphine').lines[0].text,/You paid for a refuge/);
  r.world.leases[1].status='rejected';r.world.access.sanctuary=false;
  assert.match(words(scene(r,'reaction:lease:1:rejected')),/rejected/);

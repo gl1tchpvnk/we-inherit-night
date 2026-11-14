@@ -26,11 +26,11 @@ export function newPolitics(id:string):Politics {
   return {accounts:{},seed,appointment:'open',dossier:'open',titleFiled:false,archiveLead:false,serviceFulfilled:false,passageRequested:false,encounters:[]};
 }
 export const POLITICAL_ACTIONS={
-  petition_marius:{label:'Serve Marius — accept an appointment',description:'Claim the finite administrative service. Marius may grant revocable protection at reckoning. Fulfil the obligation during Nights 4–5 or lose it.',blood:0},
+  petition_marius:{label:'Serve Marius — accept an appointment',description:'Cost 1 Blood. Claim the finite administrative service. Marius may grant revocable protection at reckoning. Fulfil the obligation during Nights 4–5 or lose it.',blood:1},
   sanctuary_pact:{label:'Accept Seraphine’s sanctuary covenant',description:'Requires a filed title or secured dossier. Pay 0.02 Sandbox NEAR for seven nights of non-revocable sanctuary access; no ownership. Offer closes after Night 3.',blood:0},
   fulfil_service:{label:'Fulfil the administrative obligation',description:'Requires Marius’s protection, Nights 4–5. Cost 1 Blood and this night’s opportunity; retains the revocable patron relationship.',blood:1},
   secure_dossier:{label:'Secure the contested archive dossier',description:'Cost 1 Blood. Requires Mirelle’s public lead; compete with Dorian. Opens sanctuary negotiations but grants no right.',blood:1,property:'library'},
-  broker_passage:{label:'Commission Lucien’s escape passage',description:'Requires Mirelle’s lead. Lucien may delegate temporary protection until Night 6; this is a bridge, not an ending.',blood:0}
+  broker_passage:{label:'Commission Lucien’s escape passage',description:'Cost 1 Blood. Requires Mirelle’s lead. Lucien may delegate temporary protection until Night 6; this is a bridge, not an ending.',blood:1}
 } as const;
 export type PoliticalAction=keyof typeof POLITICAL_ACTIONS;
 export function politicalReasons(s:Campaign,kind:string,w:Authority):string[]{

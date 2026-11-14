@@ -28,7 +28,7 @@ test('room reload shares existing scene memory and falls back with explanation a
 });
 test('context actions and bounded guidance derive from current availability, not invented contacts or authority',()=>{
  const r=fixture();assert.ok(roomActions(r,'library').some(a=>a.kind==='investigate_title'));assert.ok(!roomActions(r,'library').some(a=>a.kind==='rest'));
- const guidance=navigationGuidance(r);assert.ok(guidance.leads.length<=3);assert.ok(guidance.leads.some(l=>l.room==='library'));assert.ok(guidance.leads.some(l=>l.actor==='marius'));
+ const guidance=navigationGuidance(r);assert.ok(guidance.leads.length<=3);assert.ok(guidance.leads.some(l=>l.scene==='record:library'));assert.ok(guidance.leads.some(l=>l.actor==='marius'));
  for(const a of r.actions)a.allowed=false;r.campaign.status='defeat';assert.equal(navigationGuidance(r).leads.length,0);
 });
 test('resource decisions have inspectable costs and existing commands; free inspection emits no command',()=>{
@@ -51,6 +51,6 @@ test('encounter director mounts either a scene or exploration; overlays render n
  r.campaign.night=1;const politics=r.campaign.politics;delete r.campaign.politics;html=renderToStaticMarkup(createElement(EncounterDirector,{result:r,busy:false,request:null,onAction:async()=>r,children:createElement('div',null,'EXPLORATION ONLY')}));assert.match(html,/EXPLORATION ONLY/);assert.doesNotMatch(html,/<dialog/);r.campaign.politics=politics;
  const overlay=renderToStaticMarkup(createElement(InspectionOverlay,{kind:'Rights',result:r,debug:'',onClose(){},onScene(){},onAction(){calls++;}}));assert.match(overlay,/<dialog/);assert.match(overlay,/Close inspection/);assert.match(overlay,/<details/);
  r.campaign.night=2;r.campaign.agentHistory=[{night:1,actor:'vesper',kind:'pass',execution:'local'}];const scene=buildEncounterScenes(r).find(s=>s.type==='RECKONING');
- const htmlScene=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){calls++;},onComplete(){},onSkipReckoning(){}}));assert.match(htmlScene,/Continue to next night/);assert.equal(calls,0);
+ const htmlScene=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:false,feedback:'',onLine(){},onChoice(){calls++;},onComplete(){},onSkipReckoning(){}}));assert.match(htmlScene,/>Continue</);assert.equal(calls,0);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
