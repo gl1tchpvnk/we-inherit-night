@@ -1,5 +1,5 @@
 import {chooseRelationship,leaveRelationship} from './relationshipDialogue';
-import {useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
+import {useEffect,useLayoutEffect,useMemo,useRef,useState,type ReactNode} from 'react';
 import type {Action,Result} from './chain';
 import {AGENTS} from './agents';
 import {bloodWarning,hungerText,encounterFeed,encounterFeedText} from './blood';
@@ -32,6 +32,7 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
   const hasReviewed=entry.current.review||topicStatus(scene,readMemory)==='Explored';
   const currentActor=spoken?.speaker!=='narrator'&&spoken?.speaker!=='player'?spoken?.speaker:scene.portraits[0];
   const displayedPortraits=(cinematic||scene.type==='RECKONING')&&currentActor?[currentActor]:scene.portraits;
+  const npcActivity=scene.id.startsWith('reaction:npc:')&&scene.activity?scene.activity.replace(/^Night \d+ reckoning · /,''):null;
   const chapter=/^(reckoning|incident):/.test(scene.id)?Number(scene.id.split(':')[1])+1:null;
   const finishLabel=scene.completionLabel??'Continue';
   const reading=(cinematic||scene.type!=='NEGOTIATION')&&index<beats.length-1;
@@ -64,7 +65,7 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
       <div className="scene-script">
         {chapter!==null&&<p className="chapter-folio">Night {['I','II','III','IV','V','VI','VII'][chapter-1]??chapter} <span>{scene.type==='RECKONING'?'The reckoning':'A new chapter'}</span></p>}
         <div className="scene-topline">{!cinematic&&!strategic&&<span>{scene.location==='crypt'?'Ancestral Crypt':scene.location==='library'?'Forbidden Library':'Crimson Lounge'}</span>}{cinematic&&<span className="cinematic-folio">{reading?'Conversation':'Your response'}</span>}</div>
-        {scene.reactionLevel&&<p className="eyebrow">{scene.reactionLevel==='major'?'The balance has shifted':'Word from the court'}</p>}
+        {npcActivity?<div className="npc-development"><p className="eyebrow">AND WHILE YOU SLEPT…</p><p className="npc-activity-caption">{npcActivity}</p></div>:scene.reactionLevel&&<p className="eyebrow">{scene.activity??(scene.reactionLevel==='major'?'The balance has shifted':'Word from the court')}</p>}
         <h2 id="encounter-title" tabIndex={-1} ref={heading}>{scene.title}</h2>
         {!cinematic&&entry.current.review?<details><summary>Review introduction</summary>{speech}</details>:speech}
         {cinematic&&<div className="dialogue-tools">
@@ -76,7 +77,7 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
         {!reading&&scene.terms.length>0&&<section className="scene-terms" aria-label="Before you decide">{scene.terms.map((term,i)=><p key={i}>{term}</p>)}</section>}
 
         {(!cinematic||!reading)&&scene.rights.length>0&&<details className="scene-rights"><summary>{scene.reactionLevel?'Inspect recorded consequence':cinematic?'Inspect agreement terms':'Inspect terms'}</summary><ul>{scene.rights.map((right,i)=><li key={i}>{right}</li>)}</ul></details>}
-        {scene.outcome&&<p className="scene-outcome">{scene.outcome}</p>}
+        {scene.outcome&&!scene.activity&&<p className="scene-outcome">{scene.outcome}</p>}
         <p role="status" className="scene-feedback">{busy?'Your decision is being resolved…':feedback}</p>
         {onRefresh&&(result?.pending||result?.error)&&<button type="button" disabled={refreshBusy} onClick={onRefresh}>Check confirmed outcome</button>}
         <div className="scene-choices">
@@ -106,12 +107,45 @@ export function VampireEncounter({scene,lineIndex,busy,feedback,result,onFeed,on
   </dialog>;
 }
 
+// A transient top-layer cover; it never writes campaign or scene memory.
+function NightTransition({night,covered,onCovered,onDone}:{night:number;covered:boolean;onCovered:()=>void;onDone:()=>void}){
+  const dialog=useRef<HTMLDialogElement>(null);
+  useEffect(()=>{if(covered&&dialog.current?.open){dialog.current.close();dialog.current.showModal();}},[covered]);
+  useEffect(()=>{
+    const cover=dialog.current!;cover.showModal();
+    let finished=false,releaseTimer:number|undefined;
+    const timers:number[]=[];
+    const finish=()=>{if(finished)return;finished=true;onCovered();onDone();};
+    const skip=(event:Event)=>{
+      event.preventDefault();event.stopImmediatePropagation();
+      if(!finished){finished=true;timers.forEach(clearTimeout);onCovered();cover.classList.add('night-transition-skipped');}
+      // Absorb the click/key release belonging to the skip, never pass it to a choice.
+      clearTimeout(releaseTimer);
+      if(event.type!=='keydown')releaseTimer=window.setTimeout(onDone,150);
+    };
+    const inputs=['click','keydown','keyup'] as const;
+    for(const input of inputs)document.addEventListener(input,skip,true);
+    const release=()=>{onCovered();onDone();};window.addEventListener('blur',release);
+    const motion=matchMedia('(prefers-reduced-motion: reduce)');
+    const reduced=()=>{if(motion.matches)finish();};motion.addEventListener('change',reduced);
+    timers.push(window.setTimeout(onCovered,350),window.setTimeout(finish,3100));
+    return ()=>{
+      timers.forEach(clearTimeout);clearTimeout(releaseTimer);for(const input of inputs)document.removeEventListener(input,skip,true);
+      motion.removeEventListener('change',reduced);window.removeEventListener('blur',release);cover.close();
+      requestAnimationFrame(()=>document.getElementById('encounter-title')?.focus());
+    };
+  },[]);
+  return <dialog ref={dialog} className="night-transition" aria-label={`Night ${['I','II','III','IV','V','VI','VII'][night]}`}><p className="night-ambitions">Beyond your sight, the other vampires pursue their own ambitions.</p><p className="night-title">NIGHT {['I','II','III','IV','V','VI','VII'][night]}</p></dialog>;
+}
+
 export function EncounterDirector({result,busy,request,onAction,children,room,onCastleMap,onRequestHandled}:{result:Result;busy:boolean;children?:ReactNode;room?:string|null;onCastleMap?:()=>void;onRequestHandled?:(serial:number)=>void;request:{id:string;serial:number}|null;onAction:(action:Action)=>Promise<Result|null>}){
   const campaign=result.campaign!;
   const storageKey=`night-scenes:v1:${campaign.id}`;
   const [memory,setMemory]=useState(()=>{try{return resumeEncounterMemory(readSceneMemory(localStorage.getItem(storageKey)));}catch{return readSceneMemory(null);}});
   const [feedback,setFeedback]=useState('');
   const committing=useRef(false);
+  const observedNight=useRef(campaign.night),queuedNight=useRef<number|null>(null),previousView=useRef<ReactNode>(null);
+  const [nightTransition,setNightTransition]=useState<number|null>(null),[nightCovered,setNightCovered]=useState(false);
   const scenes=useMemo(()=>buildEncounterScenes(result,memory.relationships),[result,memory.relationships]);
   const intended=resolveScene(scenes,memory.roomIntroduction?.destination??null)??nextScene(scenes,memory);
   const intro=roomIntroduction(scenes,memory,result);
@@ -157,11 +191,25 @@ export function EncounterDirector({result,busy,request,onAction,children,room,on
   function goBack(){if(!scene||!previous||committing.current||busy||result.pending)return;setMemory(m=>({...finishScene(leaveRelationship(m,scene),scene.id),active:previous.id,trail:(m.trail??[]).slice(0,-1)}));setFeedback('');}
   function goTonight(){if(!scene||committing.current||busy||result.pending)return;setMemory(m=>({...finishScene(leaveRelationship(m,scene),scene.id),active:`decision:${campaign.night}`,trail:[]}));setFeedback('');}
   function goCastle(){if(!scene||committing.current||busy||result.pending)return;setMemory(m=>leaveEncounters(leaveRelationship(m,scene),scenes,scene.id));onCastleMap?.();setFeedback('');}
-  if(!scene)return children??null;
-  return <VampireEncounter result={result} scene={scene} scenes={scenes} memory={memory} seen={memory.seen} lineIndex={visibleLine} busy={busy||!!result.pending} feedback={feedback}
+  useLayoutEffect(()=>{
+    if(!busy&&!result.pending&&!result.error&&!result.closure){
+      if(campaign.night>observedNight.current){
+        queuedNight.current=campaign.status==='playing'&&campaign.night<=6?campaign.night:null;
+        observedNight.current=campaign.night;
+      }
+      const reckoning=scene?.type==='RECKONING'||scenes.some(s=>s.type==='RECKONING'&&s.automatic&&!memory.seen.includes(s.id));
+      if(queuedNight.current!==null&&!reckoning&&nightTransition===null){
+        const night=queuedNight.current;queuedNight.current=null;
+        if(!matchMedia('(prefers-reduced-motion: reduce)').matches){setNightCovered(false);setNightTransition(night);return;}
+      }
+    }
+    if(nightTransition===null)previousView.current=view;
+  });
+  const view=scene?<VampireEncounter result={result} scene={scene} scenes={scenes} memory={memory} seen={memory.seen} lineIndex={visibleLine} busy={busy||!!result.pending} feedback={feedback}
     onFeed={()=>void choose({id:'player:feed',label:'Feed'})} onLine={line=>setMemory(m=>({...m,active:scene.id,line}))} onChoice={choice=>void choose(choice)} onComplete={complete}
     onBack={previous&&previous.id!==scene.id?goBack:scene.id.startsWith('personal:relationship:')||scene.id.startsWith('ask:relationship:')?()=>{const target=scenes.find(s=>s.id===`character:${scene.portraits[0]}`);if(target&&!busy&&!result.pending)setMemory(m=>({...finishScene(leaveRelationship(m,scene),scene.id),active:target.id,trail:[]}));}:undefined} backLabel={scene.id.includes(':relationship:')||previous?.id.startsWith('character:')?'Back to conversation':'Back'}
     onTonight={campaign.status==='playing'?goTonight:undefined} tonightCurrent={resolveScene(scenes,`decision:${campaign.night}`)?.id===scene.id} onCastle={goCastle}
     refreshBusy={busy} onRefresh={()=>void refresh()}
-    onSkipReckoning={()=>{if(!committing.current&&!busy&&!result.pending)setMemory(m=>({...m,active:campaign.politics?.library&&campaign.status==='playing'?`decision:${campaign.night}`:null,line:0,seen:[...new Set([...m.seen,...scenes.filter(s=>s.type==='RECKONING').map(s=>s.id)])]}));}}/>;
+    onSkipReckoning={()=>{if(!committing.current&&!busy&&!result.pending)setMemory(m=>({...m,active:campaign.politics?.library&&campaign.status==='playing'?`decision:${campaign.night}`:null,line:0,seen:[...new Set([...m.seen,...scenes.filter(s=>s.type==='RECKONING').map(s=>s.id)])]}));}}/>:children??null;
+  return <>{nightTransition!==null&&!nightCovered?previousView.current:view}{nightTransition!==null&&<NightTransition night={nightTransition} covered={nightCovered} onCovered={()=>setNightCovered(true)} onDone={()=>setNightTransition(null)}/>}</>;
 }

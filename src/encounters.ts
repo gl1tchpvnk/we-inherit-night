@@ -15,7 +15,7 @@ export interface EncounterScene {
   portraits:NpcName[];lines:DialogueLine[];terms:string[];rights:string[];
   introduction?:'library'|'lounge';choices:SceneChoice[];compact?:boolean;outcome?:string;automatic?:boolean;completionLabel?:string;
   presentation?:'confrontation'|'consequence';
-  reactionLevel?:'minor'|'significant'|'major';
+  reactionLevel?:'minor'|'significant'|'major';activity?:string;
   exchange?:RelationshipExchange;callback?:string;redirect?:string;topicId?:string;readVersion?:string;legacyStable?:boolean;
 }
 export interface SceneMemory {seen:string[];active:string|null;line:number;relationships?:RelationshipMemory;introducedRooms?:('library'|'lounge')[];roomIntroduction?:{room:'library'|'lounge';destination:string};trail?:string[];room?:string|null;reads?:Record<string,string[]>}

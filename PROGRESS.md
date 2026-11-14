@@ -801,3 +801,32 @@
 - PASS: 19 focused tests, 221 full regressions, production build, ten mocked browser scenarios and inspected desktop/mobile phase captures.
 - Updated README and opening evidence report; reviewed required continuity/project/hackathon docs. No gameplay, narrative, contract or NPC change.
 - Limitations: flattened portrait surroundings crossfade with Vesper; slow art may extend black hold to 3s. No commit, push or deploy; no other cinematics introduced.
+
+## 2026-11-13 — NPC visibility correction
+- IMPLEMENTED locally: factual actor/action/night captions replace generic headings in existing confirmed court reactions.
+- Fixed minor-only NPC activity disappearing from the automatic transition; existing research/major/significant priorities remain.
+- Scheduled enforcement and agreed payments retain factual terms; no motives, pass summaries, new screens or generated dialogue.
+- Existing public history, scene IDs and browser read memory reused; no decisions, execution, response schema or persistence changes.
+- PASS: 33 targeted tests, production build and nine mocked Chromium cases at desktop/390px/320px widths; reload deduplication and view-only requests verified.
+- Layout comparison reduced script height by 22–39px; inspected desktop/mobile captures. Existing mobile scrolling remains.
+- Reviewed required docs; updated README and docs/NPC_VISIBILITY.md. No contract/Sandbox/Testnet run, broad regression, commit, push or deploy.
+- Limit: only one leading reaction per night; other actions remain in Chronicle. Recorded passes cannot establish strategic motives. Next: user review of local presentation.
+
+
+## Playable-night cinematic transition — local completion
+- Reused confirmed result updates and existing director reckoning completion; no backend or lifecycle changes needed.
+- Added a transient top-layer 350/1000/350ms NIGHT II–VII cover, holding the outgoing view until black and revealing the normal next view.
+- Added safe click/tap/key skip, held-key release protection, reduced-motion bypass and component-local observation with no persistence changes.
+- PASS: six playable boundaries, reduced motion, no Night VIII, pending confirmation gating and mid-card reload in nine mocked-browser scenarios.
+- PASS: 27 focused tests, 223 current working-tree regressions and production build; inspected desktop/mobile cards.
+- Updated README and nightly UI report; reviewed required docs. Unrelated concurrent source/test/document edits preserved.
+- No gameplay, contract, NPC policy or authoritative state changes; no live transaction suite, commit, push or deployment.
+
+## Night transition and NPC reckoning text — local completion
+- Added the exact ambitions sentence before existing NIGHT II–VII cards; total sequence 3.1 seconds with existing skip and reduced-motion handling.
+- Actual NPC developments now show AND WHILE YOU SLEPT… above their factual action caption; underlying activity records remain unchanged.
+- Preserved dialogue, ordering, handlers, gameplay, NPC policy and persistence; no new screens or dependencies.
+- PASS: 33 targeted tests, 223 full regressions, production build and four mocked browser cases (desktop/mobile, skip, reduced motion).
+- Inspected desktop/mobile sentence and reaction captures; no horizontal overflow or extra action requests.
+- Updated README and presentation reports; required docs reviewed. Prior lifecycle/reload evidence remains applicable.
+- Live transaction suites NOT RUN; no commit, push or deployment. Next: user review; no known new limitation.

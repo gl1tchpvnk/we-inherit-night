@@ -90,6 +90,16 @@ test('React scene renders native accessible controls, escaped dialogue and alway
   assert(rendered.includes(`/art/${character.location}-provisional.png`));
   assert(rendered.includes(`portrait-${actor}`));assert(rendered.includes(character.title));
  }
+ const activityState=fixture();activityState.campaign.night=activityState.world.night=1;activityState.campaign.politics.library={chosen:null,authorizedNight:null,result:'open',challenged:false};
+ activityState.campaign.agentHistory=[{night:0,actor:'mirelle',kind:'publish',execution:'local'}];
+ const activityScene=buildEncounterScenes(activityState).find(s=>s.id==='reaction:npc:0:mirelle:publish');
+ assert(activityScene);const originalActivity=activityScene.activity;
+ const reactionHtml=renderToStaticMarkup(createElement(VampireEncounter,{...props,scene:activityScene}));
+ assert.match(reactionHtml,/AND WHILE YOU SLEPT…/);
+ assert.match(reactionHtml,/<p class="npc-activity-caption">Mirelle published the archive lead\.<\/p>/);
+ assert.doesNotMatch(reactionHtml,/Night 1 reckoning ·/);assert.equal(activityScene.activity,originalActivity);
+ const playerReaction=renderToStaticMarkup(createElement(VampireEncounter,{...props,scene:{...activityScene,id:'reaction:player:example',activity:undefined}}));
+ assert.doesNotMatch(playerReaction,/AND WHILE YOU SLEPT/);assert.doesNotMatch(first,/AND WHILE YOU SLEPT/);
  const busy=renderToStaticMarkup(createElement(VampireEncounter,{scene,lineIndex:0,busy:true,feedback:'',onLine:()=>{},onChoice:()=>{},onComplete:()=>{},onSkipReckoning:()=>{}}));assert.match(busy,/disabled/);
  }finally{await rm(dir,{recursive:true,force:true});}
 });

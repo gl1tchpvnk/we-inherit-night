@@ -7,6 +7,8 @@ sire's retaliation. **Pass 3D: seven chapters of character-driven bargains, a fi
 
 ## Feature status
 
+NPC activity attribution: **IMPLEMENTED locally, not deployed**. Existing court reactions name the recorded actor/action/night; scheduled consequences retain their terms. Minor-only NPC activity now reaches the existing director. No AI, mechanics or persistence changes. [Audit and verification](docs/NPC_VISIBILITY.md).
+
 Cinematic character interactions: **IMPLEMENTED locally through Stage 2**. Approved Seraphine Stage 1B presentation extended through the shared renderer to compatible conversations, negotiations, remembered replies and individual reactions for all eight vampires. Strategic screens and finales remain separate. [Scope, screenshots and verification](docs/CINEMATIC_STAGE2.md).
 
 Investigation continuity and encounter hierarchy: **IMPLEMENTED locally**. Current-authority dialogue, shared finding reads, primary/optional/review grouping, secondary Feed, final-demand emphasis and character finale polish. See [verification and limits](docs/INVESTIGATION_CONTINUITY.md).
@@ -379,3 +381,7 @@ The intact title artwork scales proportionally with its existing painted-label c
 
 ### Crypt-to-Vesper fade — IMPLEMENTED locally
 The introductory Crypt departure uses a staged 600ms fade-out, 500ms black hold, 900ms environment reveal, 500ms Vesper reveal and 400ms dialogue/control reveal. Reduced motion bypasses it; image readiness is bounded and interrupted tabs recover safely. Gameplay, prose and ordinary dialogue transitions are unchanged. PASS: 19 targeted tests, 221 regressions, build and ten mocked browser scenarios. [Verification and slow-asset limitation](docs/OPENING_PRESENTATION.md). Not deployed.
+
+
+### Playable-night transition — IMPLEMENTED locally
+After confirmed progression and completed reckoning, a black-and-white transition displays “Beyond your sight, the other vampires pursue their own ambitions.” before NIGHT II–VII (3.1 seconds total). Click/tap/key skips safely; reduced motion bypasses it and reload does not replay it. Actual NPC developments use “AND WHILE YOU SLEPT…” above their factual action caption. No new persistence or gameplay behavior. PASS: 33 targeted tests, 223 current regressions, build and four focused text/browser fixtures; prior boundary/recovery verification remains applicable. [Verification](docs/NIGHTLY_CHOICE_UI.md). Not deployed.

@@ -1,4 +1,5 @@
 import {expiryDescription} from './leaseNarrative.ts';
+import {AGENTS,type NpcAction} from './agents.ts';
 import {cassianPassage} from './finalCourt.ts';
 import type {Result} from './chain';
 
@@ -12,6 +13,7 @@ import {completedInvestigator,investigationFinding} from './courtPayoff.ts';
 
 
 export interface CourtReaction {
+  activity?:string;
 
   id:string;night:number;actor:NpcName;room:'crypt'|'library'|'lounge';
 
@@ -20,6 +22,28 @@ export interface CourtReaction {
   follow?:string;
 
 }
+
+// Factual captions for completed NPC turns, not inferred motives or new dialogue.
+// Scheduled enforcement and existing bargains are deliberately named as such.
+const activityText:Partial<Record<NpcAction,string>>={
+  revoke:'enforced the Crypt ultimatum',
+  dismiss:'withdrew protection for unmet service',
+  final_answer:'resolved the final demand under its terms',
+  collect:'collected agreed Lounge rent',
+  collect_sanctuary:'collected agreed sanctuary rent',
+  offer:'proposed the standing Lounge lease',
+  appoint:'issued the agreed court protection',
+  open_passage:'opened the agreed temporary passage',
+  publish:'published the archive lead',
+  sponsor:'delegated court access to Cassian',
+  archive_assist:'delegated Library access to an assistant',
+  archive_research:'completed the authorized investigation',
+  archive_challenge:'petitioned to replace Mirelle’s investigation',
+  archive_protect:'granted protection after the completed research',
+  passage_offer:'offered Cassian a paid passage',
+  passage_buy:'bought Lucien’s passage',
+  passage_collect:'collected Cassian’s agreed passage rent'
+};
 
 
 
@@ -43,7 +67,8 @@ export function courtReactions(r:Result):CourtReaction[]{
 
     const id=`reaction:npc:${e.night}:${e.actor}:${e.kind}`;
 
-    const base={id,night:e.night,actor:e.actor,evidence:`Completed journal: Night ${e.night+1}, ${e.actor}, ${e.kind}, ${e.execution}.`};
+    const activity=e.kind==='compete'?(e.actor==='cassian'?'claimed the vacant appointment':'claimed the available dossier'):activityText[e.kind];
+    const base={id,night:e.night,actor:e.actor,...(activity?{activity:`Night ${e.night+1} reckoning · ${AGENTS[e.actor].name} ${activity}.`}:{}),evidence:`Completed journal: Night ${e.night+1}, ${e.actor}, ${e.kind}, ${e.execution}.`};
 
     const grant=r.world.grants.find(g=>g.property_id==='crypt'&&g.grantor===p.accounts.vesper&&g.grantee===p.accounts.player&&g.revoked);
 
@@ -182,7 +207,7 @@ export function addCourtReactions(r:Result,scenes:EncounterScene[]):void{
 
   const c=r.campaign!,latest=updates.filter(u=>u.night===c.night-1);
 
-  const automatic=latest.find(u=>u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor)??latest.filter(u=>u.level==='major').at(-1)??latest.filter(u=>u.level==='significant'&&u.id.startsWith('reaction:npc:')).at(-1)??latest.find(u=>u.level==='significant');
+  const automatic=latest.find(u=>u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor)??latest.filter(u=>u.level==='major').at(-1)??latest.filter(u=>u.level==='significant'&&u.id.startsWith('reaction:npc:')).at(-1)??latest.find(u=>u.level==='significant')??latest.find(u=>u.id.startsWith('reaction:npc:'));
 
   for(const u of updates){
 
@@ -198,12 +223,12 @@ export function addCourtReactions(r:Result,scenes:EncounterScene[]):void{
     const reply=reactionReply(u,r);
     const finding=u.id.endsWith(':archive_research')&&completedInvestigator(r)===u.actor;
 
-    scenes.push({id:u.id,type:'ENCOUNTER',title:u.title,location:u.room,portraits:[u.actor],presentation:u.id.endsWith(':final_answer')?'consequence':undefined,lines:finding?[{speaker:u.actor,text:investigationFinding(u.actor as 'mirelle'|'dorian')}]:reply?[{speaker:u.actor,text:reply}]:[{speaker:'narrator',text:u.text}],terms:[reply?`${u.text} ${politicalRelationship(r,u.actor)}`:politicalRelationship(r,u.actor)],rights:[u.evidence,'Recorded correspondence and consequences; this scene establishes no physical NPC location.'],choices,compact:true,outcome:u.night>=0?`Recorded on Night ${u.night+1}. Present rights are shown separately.`:'Earlier correspondence; the exact night is not recorded.',reactionLevel:u.level,automatic:u.id===automatic?.id});
+    scenes.push({id:u.id,type:'ENCOUNTER',title:u.title,location:u.room,portraits:[u.actor],activity:u.activity,presentation:u.id.endsWith(':final_answer')?'consequence':undefined,lines:finding?[{speaker:u.actor,text:investigationFinding(u.actor as 'mirelle'|'dorian')}]:reply?[{speaker:u.actor,text:reply}]:[{speaker:'narrator',text:u.text}],terms:[reply?`${u.text} ${politicalRelationship(r,u.actor)}`:politicalRelationship(r,u.actor)],rights:[u.evidence,'Recorded correspondence and consequences; this scene establishes no physical NPC location.'],choices,compact:true,outcome:u.night>=0?`Recorded on Night ${u.night+1}. Present rights are shown separately.`:'Earlier correspondence; the exact night is not recorded.',reactionLevel:u.level,automatic:u.id===automatic?.id});
   }
 
   // A single consequence leads the new chapter; the full reckoning remains in history.
 
-  if(latest.length){const recap=scenes.find(s=>s.id===`reckoning:${c.night-1}`);if(recap)recap.automatic=false;}
+  if(automatic){const recap=scenes.find(s=>s.id===`reckoning:${c.night-1}`);if(recap)recap.automatic=false;}
 
   if(c.politics?.library)for(const actor of ['mirelle','dorian'] as const){
 

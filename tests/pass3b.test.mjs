@@ -20,6 +20,51 @@ test('reaction prerequisites exclude pending, failed and absent decisions',()=>{
  r.campaign.agentHistory[0].execution='confirmed';assert.equal(courtReactions(r).length,1);
  r.pending=true;assert.deepEqual(courtReactions(r),[]);r.pending=false;r.error='uncertain';assert.deepEqual(courtReactions(r),[]);
 });
+
+test('recorded activity names the acting vampire without turning conditions or passes into initiatives',()=>{
+ const r=fixture();invite(r);
+ r.campaign.agentHistory=[
+  {night:2,actor:'vesper',kind:'revoke',execution:'confirmed'},
+  {night:3,actor:'mirelle',kind:'archive_assist',execution:'confirmed'},
+  {night:3,actor:'dorian',kind:'archive_challenge',execution:'local'},
+  {night:3,actor:'marius',kind:'dismiss',execution:'confirmed'},
+  {night:3,actor:'lucien',kind:'pass',execution:'local'},
+  {night:3,actor:'cassian',kind:'compete',execution:'pending'}
+ ];
+ r.world.grants.push({id:0,property_id:'crypt',grantor:'vesper',grantee:'player',revoked:true});
+ const before=structuredClone(r),updates=courtReactions(r),activity=updates.filter(u=>u.activity);
+ assert.deepEqual(activity.map(u=>u.actor).sort(),['dorian','marius','mirelle','vesper']);
+ assert.match(activity.find(u=>u.actor==='vesper').activity,/Night 3 reckoning.*Lady Vesper enforced the Crypt ultimatum/);
+ assert.match(activity.find(u=>u.actor==='mirelle').activity,/Mirelle delegated Library access/);
+ assert.match(activity.find(u=>u.actor==='dorian').activity,/Dorian petitioned.*Mirelle/);
+ assert.match(activity.find(u=>u.actor==='marius').activity,/Marius Volari withdrew protection for unmet service/);
+ assert.ok(updates.filter(u=>!u.id.startsWith('reaction:npc:')).every(u=>!u.activity));
+ assert.doesNotMatch(JSON.stringify(activity.map(u=>u.activity)),/chose|decided|wanted|thought|AI/);
+ const scenes=buildEncounterScenes(r);
+ for(const u of activity)assert.equal(scenes.find(s=>s.id===u.id).activity,u.activity);
+ assert.deepEqual(r,before);
+ r.pending=true;assert.deepEqual(courtReactions(r),[]);
+});
+
+test('minor-only NPC activity reaches the existing director once, in stable reaction order',()=>{
+ const r=fixture();r.campaign.agentHistory=[
+  {night:3,actor:'cassian',kind:'compete',execution:'local'},
+  {night:3,actor:'sabine',kind:'sponsor',execution:'confirmed'},
+  {night:3,actor:'dorian',kind:'pass',execution:'local'}
+ ];
+ const scenes=buildEncounterScenes(r),first=nextScene(scenes,readSceneMemory(null));
+ assert.equal(first.id,'reaction:npc:3:cassian:compete');
+ assert.match(first.activity,/Cassian claimed the vacant appointment/);
+ assert.equal(scenes.filter(s=>s.reactionLevel&&s.automatic).length,1);
+ assert.equal(scenes.find(s=>s.id==='reckoning:3').automatic,false);
+ const memory=readSceneMemory(JSON.stringify(finishScene(readSceneMemory(null),first.id)));
+ assert.notEqual(nextScene(buildEncounterScenes(r),memory)?.id,first.id);
+ assert.ok(scenes.some(s=>s.id==='reaction:npc:3:sabine:sponsor'));
+ assert.equal(scenes.some(s=>s.id.endsWith('dorian:pass')),false);
+ for(const s of scenes)for(const ch of s.choices)if(ch.inspect)assert.ok(scenes.some(t=>t.id===ch.inspect));
+ r.campaign.agentHistory.push({night:3,actor:'dorian',kind:'archive_challenge',execution:'local'});
+ assert.equal(nextScene(buildEncounterScenes(r),readSceneMemory(null)).id,'reaction:npc:3:dorian:archive_challenge','Existing significant-reaction priority is preserved');
+});
 test('stable event scenes are bounded, read-only and do not replay after completion/reload',()=>{
  const r=fixture();invite(r);r.campaign.agentHistory=[{night:3,actor:'mirelle',kind:'archive_assist',execution:'confirmed'},{night:3,actor:'dorian',kind:'archive_challenge',execution:'local'}];
  const before=structuredClone(r),scenes=buildEncounterScenes(r),reaction=nextScene(scenes,readSceneMemory(null));

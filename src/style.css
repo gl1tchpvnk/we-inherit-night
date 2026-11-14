@@ -371,3 +371,18 @@ html[data-crypt-fade=character] .vampire-scene .scene-portraits{animation:crypt-
 html:is([data-crypt-fade=environment],[data-crypt-fade=character]) .vampire-scene :is(.scene-script,.cinematic-hud,.encounter-navigation){opacity:0}
 html[data-crypt-fade=dialogue] .vampire-scene :is(.scene-script,.cinematic-hud,.encounter-navigation){animation:crypt-layer-in 400ms ease-out both!important}
 @media(prefers-reduced-motion:reduce){html[data-crypt-fade] :is(.prologue,.vampire-scene,.game-shell,.scene-background,.scene-portraits,.scene-script,.cinematic-hud,.encounter-navigation){animation:none!important;opacity:1!important}}
+
+/* Confirmed playable-night boundary, after the existing reckoning presentation. */
+@keyframes night-cover{0%{opacity:0}11.29%,88.71%{opacity:1}100%{opacity:0}}
+@keyframes night-title{0%,56.45%{opacity:0}56.46%,100%{opacity:1}}
+@keyframes night-ambitions{0%,11.29%{opacity:0}16.13%,50%{opacity:1}56.45%,100%{opacity:0}}
+.night-transition{position:fixed;inset:0;margin:0;padding:24px;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;background:#000;color:var(--paper);overflow:hidden;animation:night-cover 3100ms ease-in-out both}
+.night-transition[open]{display:grid;place-items:center}
+.night-transition::backdrop{background:transparent}
+.night-transition p{grid-area:1/1;margin:0;font:clamp(40px,8vw,104px)/1.2 var(--display);letter-spacing:.12em;text-align:center;animation:night-title 3100ms linear both}
+.night-transition.night-transition-skipped{animation:none;opacity:0}
+@media(prefers-reduced-motion:reduce){.night-transition,.night-transition p{animation:none!important}}
+
+.night-transition .night-ambitions{max-width:34ch;font:italic clamp(20px,2.6vw,36px)/1.5 var(--display);letter-spacing:0;animation:night-ambitions 3100ms ease-in-out both}
+.npc-development .eyebrow{margin-bottom:8px}
+.npc-activity-caption{font:italic 16px/1.5 var(--display);margin:0 0 16px;color:var(--paper)}
